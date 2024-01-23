@@ -200,7 +200,7 @@ const InputForm = () => {
   return (
     <div className='md:w-[70%] lg:w-[50%] lg:h-[90%] h-full'>
       <p className='text-4xl sm:text-5xl font-bold tracking-wide mt-12'>SCHEDULE AN</p>
-      <p className='text-4xl sm:text-5xl font-bold text-red-400 tracking-wide sm:mt-4'>APPOINTMENT</p>
+      <p className='text-4xl sm:text-5xl font-bold text-[#a376ff] tracking-wide sm:mt-4'>APPOINTMENT</p>
       <p className='font-semibold text-gray-700 text-lg mt-6'>Can we know more about you?</p>
       <div className='w-full mt-2 flex flex-col sm:flex-row'>
         <input
@@ -241,7 +241,7 @@ const InputForm = () => {
       <div className='mt-6 flex flex-col sm:flex-row'>
         <TimeZoneSelector onTimeZoneChange={setSelectedTimeZone} />
         <button
-          className='bg-red-600 font-bold px-3 py-2 rounded-[6px] w-[100%] sm:w-[45%]  sm:ml-[5%]  text-white hover:bg-red-500 mt-4 sm:mt-0'
+          className='bg-[#a376ff] font-bold px-3 py-2 rounded-[6px] w-[100%] sm:w-[45%]  sm:ml-[5%]  text-white hover:bg-[#a986f0] mt-4 sm:mt-0'
           onClick={handleBooking}
         >
           Book now
