@@ -12,7 +12,7 @@ interface PaymentContextProps {
 const PaymentContext = createContext<PaymentContextProps | undefined>(undefined);
 
 // Create a custom hook to use the context
-export const usePaymentContext = () => {
+export const UsePaymentContext = () => {
   const context = useContext(PaymentContext);
   if (!context) {
     throw new Error('usePaymentContext must be used within a PaymentProvider');

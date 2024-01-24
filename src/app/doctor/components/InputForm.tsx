@@ -5,12 +5,12 @@ import TimeZoneSelector from './TimeZoneSelector';
 import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
-import { usePaymentContext } from '@/components/contexts/checkContext';
+import { UsePaymentContext } from '@/components/contexts/checkContext';
 
 const CREATE_STRIPE_SESSION = gql`
-mutation CreateStripeCheckoutSession($productName: String!, $productPrice: String!, $productImage: String!) {
-  createStripeCheckoutSession(productName: $productName, productPrice: $productPrice, productImage: $productImage)
-}
+  mutation CreateStripeCheckoutSession($productName: String!, $productPrice: String!, $productImage: String!) {
+    createStripeCheckoutSession(productName: $productName, productPrice: $productPrice, productImage: $productImage)
+  }
 `;
 
 const CREATE_STRIPE_CLIENT_SECRET = gql`
@@ -48,7 +48,7 @@ const InputForm = () => {
   const [selectedTimeZone, setSelectedTimeZone] = useState('');
   const router = useRouter();
 
-  const { clientId, setClientId, paymentIntent, setPaymentIntent } = usePaymentContext();
+  const { clientId, setClientId, paymentIntent, setPaymentIntent } = UsePaymentContext();
 
 
   if (stripeSessionData) {
@@ -219,7 +219,7 @@ const InputForm = () => {
         />
       </div>
       <p className='mt-4 font-light text-gray-600 text-sm'>*Notifications & alerts for appointments will be sent to this email.</p>
-      <p className='font-semibold text-gray-700 text-lg mt-10'>What's your preferred appointment?</p>
+      <p className='font-semibold text-gray-700 text-lg mt-10'>Whats your preferred appointment?</p>
       <div className='mt-4 flex flex-col sm:flex-row'>
         <DatePickerDemo onDateChange={setSelectedDate} />
         <select

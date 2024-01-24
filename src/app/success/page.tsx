@@ -1,9 +1,9 @@
 "use client"
-import { usePaymentContext } from '@/components/contexts/checkContext';
+import { UsePaymentContext } from '@/components/contexts/checkContext';
 import React from 'react'
 
 const page = () => {
-    const { clientId, setClientId, paymentIntent, setPaymentIntent } = usePaymentContext();
+    const { clientId, setClientId, paymentIntent, setPaymentIntent } = UsePaymentContext();
     console.log(clientId)
 
     console.log("payment intent",paymentIntent)

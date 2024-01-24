@@ -39,14 +39,13 @@ const Navbar = () => {
         };
     }, []);
 
-  useEffect(() => {
+    useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (sidebarRef.current && !(sidebarRef.current as any).contains(event.target)) {
                 // Click outside the sidebar, close it
                 setShowSidebar(false);
             }
         };
-
         document.addEventListener('mousedown', handleClickOutside);
 
         return () => {
