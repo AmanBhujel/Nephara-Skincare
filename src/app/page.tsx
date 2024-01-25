@@ -7,6 +7,7 @@ import Feedback from "@/components/Feedback";
 import WhatWeBelieve from "@/components/WhatWeBelieve";
 import Logo from '../assets/logo.png';
 import Image from "next/image";
+import Link from "next/link";
 
 const Home = () => {
 
@@ -15,6 +16,11 @@ const Home = () => {
       <div className='w-full h-auto flex flex-col  justify-center items-center  '>
         <Navbar />
         <HeroSection />
+        {/* <div className="w-full h-40"> */}
+          {/* <Link href={'http://localhost:8080/join?room=roomtest&name=test'}>
+            <button className="bg-red-400">Join appointment</button>
+          </Link> */}
+        {/* </div> */}
         <WhoWeAre />
         <Services />
         <WhatWeBelieve />
@@ -26,7 +32,7 @@ const Home = () => {
             </div>
             <div className="mt-10">
               <h6 className="font-bold sm:text-lg xl:text-xl">Navigate</h6>
-              <ul  className="mt-3 gap-y-1 flex flex-col text-sm xl:text-base">
+              <ul className="mt-3 gap-y-1 flex flex-col text-sm xl:text-base">
                 <li className="cursor-pointer hover:underline">Home</li>
                 <li className="cursor-pointer hover:underline">Blogs</li>
                 <li className="cursor-pointer hover:underline">Appointments</li>

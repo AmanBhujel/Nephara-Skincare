@@ -7,6 +7,7 @@ import { FaBars } from 'react-icons/fa6';
 import { IoHomeOutline, IoSettingsOutline } from "react-icons/io5";
 import { FaMicroblog, FaQuestion, FaRegUser } from "react-icons/fa";
 import { FaUserDoctor } from "react-icons/fa6";
+import Link from 'next/link';
 
 const Navbar = () => {
     const [windowWidth, setWindowWidth] = useState(0);
@@ -73,8 +74,12 @@ const Navbar = () => {
                 {/* Login/Signup Buttons */}
                 {windowWidth >= 1024 && (
                     <div className="hidden lg:flex items-center justify-center ml-[10%]">
-                        <button className="border-none text-lg font-semibold hover:underline hover:underline-offset-6">Log in</button>
-                        <button className="bg-[#19191b] lg:py-2 xl:py-3 lg:px-6 xl:px-8 font-medium text-lg text-white rounded-[7px] ml-6">Sign up</button>
+                        <Link href={"/auth"}>
+                            <button className="border-none text-lg font-semibold hover:underline hover:underline-offset-6">Log in</button>
+                        </Link>
+                        <Link href={"/auth"}>
+                            <button className="bg-[#19191b] lg:py-2 xl:py-3 lg:px-6 xl:px-8 font-medium text-lg text-white rounded-[7px] ml-6">Sign up</button>
+                        </Link>
                     </div>
                 )}
 
@@ -106,7 +111,9 @@ const Navbar = () => {
                         {/* ---------login CTA------------- */}
                         <div className='flex items-center justify-center w-full flex-col mt-[15%]'>
                             <p className="text-sm font-medium text-black  mb-2 ">Get Started Today:</p>
-                            <button className="bg-[#a376ff] py-3 px-10 font-medium text-lg text-white rounded-[7px]">Register/ Login</button>
+                            <Link href={"/auth"}>
+                                <button className="bg-[#a376ff] py-3 px-10 font-medium text-lg text-white rounded-[7px]">Register/ Login</button>
+                            </Link>
                         </div>
 
                     </div>
