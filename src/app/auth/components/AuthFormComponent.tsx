@@ -1,3 +1,8 @@
+import ToastMessage from "@/components/utils/ToastMessage";
+import { setCookie } from "@/components/utils/Cookie";
+import { gql, useMutation } from "@apollo/client";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 
@@ -13,31 +18,65 @@ const validateEmail = (email: string): boolean => {
 const validatePassword = (password: string): boolean => {
     return password.length >= 8;
 };
+const SIGNUP_USER = gql`
+mutation SignupUser($email: String!, $password: String!) {
+    signupUser(email: $email, password: $password) {
+      message,token,status
+    }
+
+  }
+`
+const LOGIN_USER = gql`
+ mutation LoginUser($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password) {
+      token,message,status
+    }
+  }
+`
 
 export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
+    const [signupUser, { data: signupUserData, loading: signupUserLoading, error: signupUserError }] = useMutation(SIGNUP_USER);
     const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [nameError, setNameError] = useState<string | null>(null);
     const [emailError, setEmailError] = useState<string | null>(null);
     const [passwordError, setPasswordError] = useState<string | null>(null);
+    const router = useRouter()
 
-    const handleSignup = () => {
-        setNameError(null);
-        setEmailError(null);
-        setPasswordError(null);
+    const handleSignup = async () => {
+        try {
+            setNameError(null);
+            setEmailError(null);
+            setPasswordError(null);
 
-        if (name.trim() === "") {
-            setNameError("Name cannot be empty");
-            return;
-        }
-        if (!validateEmail(email)) {
-            setEmailError("Invalid email format");
-            return;
-        }
-        if (!validatePassword(password)) {
-            setPasswordError("Password must be at least 8 characters");
-            return;
+            if (name.trim() === "") {
+                setNameError("Name cannot be empty");
+                return;
+            }
+            if (!validateEmail(email)) {
+                setEmailError("Invalid email format");
+                return;
+            }
+            if (!validatePassword(password)) {
+                setPasswordError("Password must be at least 8 characters");
+                return;
+            }
+            const signupResponse = await signupUser({
+                variables: {
+                    "email": email,
+                    "password": password
+                }
+            });
+            const { status, message, token } = signupResponse.data.signupUser;
+            ToastMessage(status, message);
+            if (token) {
+                setCookie(3600, "token", `Bearer ${token}`)
+                router.push('/')
+            }
+        } catch (error) {
+            console.log(error)
+            ToastMessage('error', 'Internal Server Error')
         }
     };
 
@@ -127,21 +166,39 @@ export const Signin: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
     const [password, setPassword] = useState<string>("");
     const [emailError, setEmailError] = useState<string | null>(null);
     const [passwordError, setPasswordError] = useState<string | null>(null);
+    const [loginUser, { data: loginUserData, loading: loginUserLoading, error: loginUserError }] = useMutation(LOGIN_USER);
+    const router = useRouter();
 
-    const handleSignin = () => {
-        setEmailError(null);
-        setPasswordError(null);
+    const handleSignin = async () => {
+        try {
+            setEmailError(null);
+            setPasswordError(null);
 
-        if (!validateEmail(email)) {
-            setEmailError("Invalid email format");
-            return;
-        }
-        if (!validatePassword(password)) {
-            setPasswordError("Password must be at least 8 characters");
-            return;
+            if (!validateEmail(email)) {
+                setEmailError("Invalid email format");
+                return;
+            }
+            if (!validatePassword(password)) {
+                setPasswordError("Password must be at least 8 characters");
+                return;
+            }
+            const loginResponse = await loginUser({
+                variables: {
+                    "email": email,
+                    "password": password
+                }
+            });
+            const { status, message, token } = loginResponse.data.loginUser;
+            ToastMessage(status, message);
+            if (token) {
+                setCookie(3600, "token", `Bearer ${token}`)
+                router.push('/')
+            }
+        } catch (error) {
+            ToastMessage('error', 'Internal Server Error')
         }
     };
-    
+
     return (
         <div className='w-full lg:w-[50%] h-full  flex flex-col items-center'>
             <div className='w-[80%] sm:w-[70%] md:w-[60%] lg:w-[75%] xl:w-[65%] 2xl:w-[50%] mt-[15%]'>
@@ -183,11 +240,12 @@ export const Signin: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
                     required
                 />
                 {passwordError && <p className="text-red-500 text-sm">{passwordError}</p>}
-                <p className='text-sm font-medium  text-blue-500 flex w-full mt-1 cursor-pointer hover:underline justify-end'>Forgot Password?</p>
+                <Link href={'/auth/forgot-password'}>
+                    <p className='text-sm font-medium  text-blue-500 flex w-full mt-1 cursor-pointer hover:underline justify-end'>Forgot Password?</p>
+                </Link>
                 <button className='h-10 bg-[#8045f7] hover:bg-[#9768f3] mt-10 w-full rounded-[7px] text-white' onClick={handleSignin}>Sign in</button>
                 <p className='flex items-center justify-center w-full mt-8 mb-5'>Don't have an account? <span className='text-blue-500 cursor-pointer ml-2 hover:underline' onClick={() => setIsSignUpOpen(true)}>Sign up </span></p>
             </div>
         </div>
     )
 }
-

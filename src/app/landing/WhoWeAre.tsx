@@ -1,5 +1,5 @@
 import React from 'react';
-import Nurse from '../assets/nurse-smile.jpg'
+import Nurse from '@/assets/nurse-smile.jpg'
 import Image from "next/image";
 
 const WhoWeAre = () => {

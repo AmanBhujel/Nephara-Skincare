@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from "next/image";
-import Nurse from '../assets/nurse-smile.jpg'
+import Nurse from '@/assets/nurse-smile.jpg'
 
 const WhatWeBelieve = () => {
     return (

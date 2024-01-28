@@ -1,9 +1,9 @@
 'use client'
 import Image from "next/image";
 import React, { useEffect, useState } from 'react';
-import Profile from '../assets/Emma.png';
-import Profile1 from '../assets/profile1.jpg';
-import Profile2 from '../assets/profile2.jpg';
+import Profile from '@/assets/Emma.png';
+import Profile1 from '@/assets/profile1.jpg';
+import Profile2 from '@/assets/profile2.jpg';
 import { Navigation, Pagination, } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';

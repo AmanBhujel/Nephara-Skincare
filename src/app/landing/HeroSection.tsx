@@ -1,5 +1,5 @@
 import React from 'react';
-import Profile from '../assets/herosection.png';
+import Profile from '@/assets/herosection.png';
 import Image from "next/image";
 import { FaCircleArrowRight } from "react-icons/fa6";
 

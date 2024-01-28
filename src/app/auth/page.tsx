@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import nurse from '@/assets/girl.jpg'
-import { Signin, Signup } from './components/AuthFormComponent'
+import {  Signin, Signup } from './components/AuthFormComponent'
 
 const page = () => {
     const [isSignUpOpen, setIsSignUpOpen] = useState<boolean>(true)

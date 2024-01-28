@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 import { PaymentProvider } from '@/components/contexts/checkContext'
+import { Toaster } from 'sonner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -30,6 +31,7 @@ export default function RootLayout({
           <PaymentProvider>
             {children}
           </PaymentProvider>
+          <Toaster richColors  position="top-right"/>
         </ApolloProvider>
       </body>
     </html>

@@ -5,8 +5,8 @@ import Image from 'next/image';
 import Logo from '../assets/logo.png';
 import { FaBars } from 'react-icons/fa6';
 import { IoHomeOutline, IoSettingsOutline } from "react-icons/io5";
-import { FaMicroblog, FaQuestion, FaRegUser } from "react-icons/fa";
-import { FaUserDoctor } from "react-icons/fa6";
+import { FaMicroblog, FaQuestion } from "react-icons/fa";
+import { MdOutlineDashboardCustomize } from "react-icons/md";
 import Link from 'next/link';
 
 const Navbar = () => {
@@ -16,14 +16,13 @@ const Navbar = () => {
     const [showSidebar, setShowSidebar] = useState(false);
     const sidebarRef = useRef(null);
 
-    const menuItems = ['Home', 'Blogs', 'Appointments', 'FAQs'];
+    const menuItems = ['Home', 'Blogs', 'Dashboard', 'FAQs'];
 
     const MenuItemsMobileSidebar = [
         { icon: <IoHomeOutline />, name: 'Home' },
         { icon: <FaMicroblog />, name: 'Blogs' },
         { icon: <FaQuestion />, name: 'FAQs' },
-        { icon: <FaUserDoctor />, name: 'Appointments' },
-        { icon: <FaRegUser />, name: 'Profile' },
+        { icon: <MdOutlineDashboardCustomize />, name: 'Dashboard' },
         { icon: <IoSettingsOutline />, name: 'Settings' },
     ];
 
