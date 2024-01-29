@@ -16,14 +16,20 @@ const Navbar = () => {
     const [showSidebar, setShowSidebar] = useState(false);
     const sidebarRef = useRef(null);
 
-    const menuItems = ['Home', 'Blogs', 'Dashboard', 'FAQs'];
+    const menuItems = [
+        { name: 'Home', route: "/" },
+        { name: 'Blogs', route: "/blogs" },
+        { name: 'FAQs', routes: "faq" },
+        { name: 'Dashboard', route: "/dashboard/user-profile" },
+    ];
+
 
     const MenuItemsMobileSidebar = [
-        { icon: <IoHomeOutline />, name: 'Home' },
-        { icon: <FaMicroblog />, name: 'Blogs' },
-        { icon: <FaQuestion />, name: 'FAQs' },
-        { icon: <MdOutlineDashboardCustomize />, name: 'Dashboard' },
-        { icon: <IoSettingsOutline />, name: 'Settings' },
+        { icon: <IoHomeOutline />, name: 'Home', route: "/" },
+        { icon: <FaMicroblog />, name: 'Blogs', route: "/blogs" },
+        { icon: <FaQuestion />, name: 'FAQs', routes: "faq" },
+        { icon: <MdOutlineDashboardCustomize />, name: 'Dashboard', route: "/dashboard/user-profile" },
+        { icon: <IoSettingsOutline />, name: 'Settings', route: "/dashboard/settings" },
     ];
 
     useEffect(() => {
@@ -62,10 +68,13 @@ const Navbar = () => {
                 {windowWidth >= 1024 && (
                     <ul className="hidden lg:flex items-center justify-center gap-x-10 lg:ml-[13%] xl:ml-[27%] 2xl:ml-[37%]">
                         {menuItems.map((item, index) => (
-                            <li key={index} className={` xl:text-base cursor-pointer ${item === activeItem ? "underline underline-offset-8 text-black" : "text-gray-500"} hover:underline hover:underline-offset-8 font-medium tracking-tight hover:text-black `}
-                                onClick={() => setActiveItem(item)}>
-                                {item}
-                            </li>
+                            <Link href={item.route || "/"}>
+                           <li key={index} className={`xl:text-base cursor-pointer ${item.name === activeItem ? "underline underline-offset-8 text-black" : "text-gray-500"} hover:underline hover:underline-offset-8 font-medium tracking-tight hover:text-black `}
+                               onClick={() => setActiveItem(item.name)}>
+                             {item.name}
+                           </li>
+                         </Link>
+                         
                         ))}
                     </ul>
                 )}
