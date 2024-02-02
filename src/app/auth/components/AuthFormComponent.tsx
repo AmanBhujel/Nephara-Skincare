@@ -244,7 +244,7 @@ export const Signin: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
                     <p className='text-sm font-medium  text-blue-500 flex w-full mt-1 cursor-pointer hover:underline justify-end'>Forgot Password?</p>
                 </Link>
                 <button className='h-10 bg-[#8045f7] hover:bg-[#9768f3] mt-10 w-full rounded-[7px] text-white' onClick={handleSignin}>Sign in</button>
-                <p className='flex items-center justify-center w-full mt-8 mb-5'>Don't have an account? <span className='text-blue-500 cursor-pointer ml-2 hover:underline' onClick={() => setIsSignUpOpen(true)}>Sign up </span></p>
+                <p className='flex items-center justify-center w-full mt-8 mb-5'>Dont have an account? <span className='text-blue-500 cursor-pointer ml-2 hover:underline' onClick={() => setIsSignUpOpen(true)}>Sign up </span></p>
             </div>
         </div>
     )

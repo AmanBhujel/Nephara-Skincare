@@ -51,6 +51,7 @@ const Sidebar = () => {
         else if (pathname === "/dashboard/settings") {
             setActiveSidebarItem("Settings")
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -76,7 +77,7 @@ const Sidebar = () => {
         return () => {
             window.removeEventListener('resize', updateWindowWidth);
         };
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 

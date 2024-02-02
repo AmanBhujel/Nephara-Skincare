@@ -15,9 +15,11 @@ interface PageProps {
 const Page: NextPage<PageProps> = ({ params }) => {
     const setActiveSidebarItem = useDashboardStore((state) => state.setActiveSidebarItem);
 
-    useEffect(()=>{
+    useEffect(() => {
         setActiveSidebarItem("Appointments")
-    },[])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     const appointment = Appointments.find(appointment => appointment.appointment_id === params.id);
 
     return (

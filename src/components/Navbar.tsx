@@ -68,8 +68,8 @@ const Navbar = () => {
                 {windowWidth >= 1024 && (
                     <ul className="hidden lg:flex items-center justify-center gap-x-10 lg:ml-[13%] xl:ml-[27%] 2xl:ml-[37%]">
                         {menuItems.map((item, index) => (
-                            <Link href={item.route || "/"}>
-                           <li key={index} className={`xl:text-base cursor-pointer ${item.name === activeItem ? "underline underline-offset-8 text-black" : "text-gray-500"} hover:underline hover:underline-offset-8 font-medium tracking-tight hover:text-black `}
+                            <Link href={item.route || "/"} key={index}>
+                           <li className={`xl:text-base cursor-pointer ${item.name === activeItem ? "underline underline-offset-8 text-black" : "text-gray-500"} hover:underline hover:underline-offset-8 font-medium tracking-tight hover:text-black `}
                                onClick={() => setActiveItem(item.name)}>
                              {item.name}
                            </li>

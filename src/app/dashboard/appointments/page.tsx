@@ -17,7 +17,8 @@ const Page: NextPage<PageProps> = ({ params }) => {
     const setAppointmentSelected = useDashboardStore((state) => state.setAppointmentSelected);
 
     useEffect(() => {
-            setAppointmentSelected(false)
+        setAppointmentSelected(false)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

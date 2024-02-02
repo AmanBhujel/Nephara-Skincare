@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import nurse from '@/assets/girl.jpg'
 import {  Signin, Signup } from './components/AuthFormComponent'
 
-const page = () => {
+const Page = () => {
     const [isSignUpOpen, setIsSignUpOpen] = useState<boolean>(true)
     return (
         <div className="flex w-full justify-center items-center bg-white">
@@ -29,7 +29,7 @@ const page = () => {
                     </div>
                     <div className='z-20 flex flex-col ml-12 mb-16 '>
                         <p className='text-xl xl:text-2xl font-semibold text-white w-[90%] flex flex-wrap'>
-                            " I am so glad I gave this a try, it was an amazing experience and everything from appointment to getting report was with in 2 days just my home."
+                             I am so glad I gave this a try, it was an amazing experience and everything from appointment to getting report was with in 2 days just my home.
                         </p>
                         <p className='text-base xl:text-lg font-medium text-white mt-5'>-Kaminari Sunde, Australia</p>
                     </div>
@@ -43,4 +43,4 @@ const page = () => {
     )
 }
 
-export default page;
+export default Page;

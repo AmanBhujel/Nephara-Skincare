@@ -12,7 +12,7 @@ mutation Nodemaileremail($email: String!) {
 }
 }`
 
-const page = () => {
+const Page = () => {
     const [email, setEmail] = useState<string>("");
     const [emailSent, setEmailSent] = useState<Boolean>(false);
     const [emailError, setEmailError] = useState<string | null>(null);
@@ -51,7 +51,7 @@ const page = () => {
                         <div className='w-[80%] sm:w-[70%] md:w-[60%] lg:w-[75%] xl:w-[65%] 2xl:w-[50%] mt-[15%]'>
                             <p className='font-bold text-4xl mt-3'>Check Your Email</p>
                             <p className="text-sm text-gray-500 mt-4">
-                                We've sent you an email with further instructions. Please check your inbox and click the provided link to proceed.
+                                We have sent you an email with further instructions. Please check your inbox and click the provided link to proceed.
                             </p>
                             <Link href="/auth">
                                 <button className='h-10 bg-[#8045f7] hover:bg-[#9768f3] mt-10 w-full rounded-[7px] text-white'>
@@ -90,4 +90,4 @@ const page = () => {
     )
 }
 
-export default page;
+export default Page;

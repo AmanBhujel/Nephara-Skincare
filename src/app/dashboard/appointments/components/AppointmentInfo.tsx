@@ -51,6 +51,7 @@ const AppointmentInfo: React.FC<AppointmentInfoProps> = ({ appointmentData }) =>
         return () => {
             window.removeEventListener('resize', updateWindowWidth);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
 
     }, []);
 
