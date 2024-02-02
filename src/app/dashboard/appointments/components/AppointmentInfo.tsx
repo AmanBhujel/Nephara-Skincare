@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Profile from '@/assets/Emma.png';
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { CiLocationOn } from "react-icons/ci";
@@ -10,6 +10,7 @@ import Alphabet from '@/assets/alphabet.png';
 import { Appointments } from '@/data/AppointmentData';
 import BackgroundAppointment from '@/assets/DoctorConsulting.png'
 import Link from 'next/link';
+import { useDashboardStore } from '../../store/DashboardStore';
 interface Appointment {
     name: string;
     description: string;
@@ -29,59 +30,92 @@ interface AppointmentInfoProps {
 }
 
 const AppointmentInfo: React.FC<AppointmentInfoProps> = ({ appointmentData }) => {
+    const appointmentSelected = useDashboardStore((state) => state.appointmentSelected);
+    const setAppointmentSelected = useDashboardStore((state) => state.setAppointmentSelected);
+    const [windowWidth, setWindowWidth] = useState<number>(0);
+
+    useEffect(() => {
+        if (appointmentData) {
+            setAppointmentSelected(true)
+        }
+    }, [])
+
+    useEffect(() => {
+        setWindowWidth(window.innerWidth);
+        const updateWindowWidth = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', updateWindowWidth);
+
+        return () => {
+            window.removeEventListener('resize', updateWindowWidth);
+        };
+
+    }, []);
 
     return (
         <div className='w-full h-full flex flex-col'>
             <AppointmentPageTopDiv />
-            <div className='overflow-hidden md:px-8 lg:px-8 lg:py-8 xl:px-8 xl:py-4 2xl:px-16 2xl:py-6 '>
-                <p className='md:text-3xl mt-6 lg:text-2xl font-semibold tracking-wide flex items-center justify-center lg:block'>Appointments</p>
+            <div className='overflow-auto md:px-8 lg:px-8 lg:py-8 xl:px-8 xl:py-4 2xl:px-16 2xl:py-6 '>
+                <p className={`md:text-3xl mt-6 lg:text-2xl font-semibold tracking-wide lg:flex items-center justify-center ${appointmentSelected ? "hidden" : "flex"}`}>Appointments</p>
                 <AppointmentFilter />
                 {/* ---Appointments Infos------------ */}
                 <div className='w-full h-auto mt-6 flex items-center justify-center lg:items-start lg:justify-start gap-x-6'>
                     <AppointmentLists />
-                    <div className='lg:w-[60%]  xl:w-[60%] 2xl:w-[70%] hidden lg:flex lg:h-[600px] xl:h-[650px] overflow-auto rounded-[8px]  flex-col border-2 bg-white'>
-                        <div className='w-full h-40 min-h-40 rounded-[8px] relative' style={{ backgroundImage: `url(${BackgroundAppointment.src})`, backgroundSize: 'cover', backgroundPosition: 'center 15%' }}>
-                            <div className='absolute w-full h-full bg-gradient-to-b from-[#743bfb] via-[#743bfb] to-[#8e75c9] opacity-70 z-10'></div>
-                            <div className='z-20 absolute p-6 flex w-full justify-between h-full items-center'>
-                                <div className=' flex flex-col'>
-                                    <p className='bg-[#f2f2f9cb] px-3 py-1 w-min text-[#743bfb] rounded-[10px] font-semibold mb-2'>{appointmentData?.completed ? "Past" : "Upcoming"}</p>
-                                    <p className='text-white font-bold text-3xl'>{appointmentData?.name}</p>
-                                    <p className='text-white text-lg font-medium mt-1'>{appointmentData?.description}</p>
+                    <div className={` lg:w-[60%]  xl:w-[60%] 2xl:w-[70%] w-full lg:flex lg:h-[600px] xl:h-[650px] overflow-auto rounded-[8px] ${appointmentSelected || windowWidth > 1024 ? "flex" : "hidden"} flex-col border-2 bg-white`}>
+                        {appointmentData ?
+                            <div className='w-full'>
+                                <div className='w-full h-40 min-h-40 rounded-[8px] relative' style={{ backgroundImage: `url(${BackgroundAppointment.src})`, backgroundSize: 'cover', backgroundPosition: 'center 15%' }}>
+                                    <div className='absolute w-full h-full bg-gradient-to-b from-[#743bfb] via-[#743bfb] to-[#8e75c9] opacity-70 z-10'></div>
+                                    <div className='z-20 absolute p-6 flex w-full justify-between h-full items-center'>
+                                        <div className=' flex flex-col'>
+                                            <p className='bg-[#f2f2f9cb] px-3 py-1 w-min text-[#743bfb] rounded-[10px] font-semibold mb-2'>{appointmentData?.completed ? "Past" : "Upcoming"}</p>
+                                            <p className='text-white font-bold text-3xl'>{appointmentData?.name}</p>
+                                            <p className='text-white text-lg font-medium mt-1'>{appointmentData?.description}</p>
+                                        </div>
+                                        <div>
+                                            <p className='bg-[#ededf5e0] px-3 py-1 text-[#743bfb] rounded-[10px] font-semibold mb-2'>{appointmentData?.appointmentDate}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p className='bg-[#ededf5e0] px-3 py-1 text-[#743bfb] rounded-[10px] font-semibold mb-2'>{appointmentData?.appointmentDate}</p>
+                                <div className='h-full px-2'>
+                                    <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-medium text-[#a3a1a9] px-4'>Appointment Info</p>
+                                    <div className='px-4 '>
+                                        <p className='text-[#807c83] mt-2 '>Appointment Id</p>
+                                        <p className='text-lg font-semibold mt-1 mb-1'>{appointmentData?.appointment_id}</p>
+                                        <p className='text-[#807c83] mt-2 '>See Report</p>
+                                        <p className='text-lg font-semibold mt-1 mb-1'>{appointmentData?.report_id}</p>
+                                        <p className='text-[#807c83] mt-2 '>Appointment Date</p>
+                                        <p className='text-lg font-semibold mt-1 mb-1'>{appointmentData?.appointmentDate}</p>
+                                    </div>
+                                    <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-medium text-[#a3a1a9] px-4'>Time Info</p>
+                                    <div className='px-4 '>
+                                        <p className='text-[#807c83] mt-2 '>Timezone</p>
+                                        <p className='text-lg font-semibold mt-1 mb-1'> {appointmentData?.timezone}</p>
+                                        <p className='text-[#807c83] mt-2 '>Time</p>
+                                        <p className='text-lg font-semibold mt-1 mb-1'>{appointmentData?.time}</p>
+                                        <p className='text-[#807c83] mt-2 '>Booked Date</p>
+                                        <p className='text-lg font-semibold mt-1 mb-1'>{appointmentData?.bookedDate}</p>
+                                    </div>
+                                    <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-medium text-[#a3a1a9] px-4'>Time Info</p>
+                                    <div className='px-4 '>
+                                        <p className='text-[#807c83] mt-2 '>Timezone</p>
+                                        <p className='text-lg font-semibold mt-1 mb-1'> {appointmentData?.timezone}</p>
+                                        <p className='text-[#807c83] mt-2 '>Time</p>
+                                        <p className='text-lg font-semibold mt-1 mb-1'>{appointmentData?.time}</p>
+                                        <p className='text-[#807c83] mt-2 '>Booked Date</p>
+                                        <p className='text-lg font-semibold mt-1 mb-1'>{appointmentData?.bookedDate}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className='h-full px-2'>
-                            <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-medium text-[#a3a1a9] px-4'>Appointment Info</p>
-                            <div className='px-4 '>
-                                <p className='text-[#807c83] mt-2 '>Appointment Id</p>
-                                <p className='text-lg font-semibold mt-1 mb-1'>{appointmentData?.appointment_id}</p>
-                                <p className='text-[#807c83] mt-2 '>See Report</p>
-                                <p className='text-lg font-semibold mt-1 mb-1'>{appointmentData?.report_id}</p>
-                                <p className='text-[#807c83] mt-2 '>Appointment Date</p>
-                                <p className='text-lg font-semibold mt-1 mb-1'>{appointmentData?.appointmentDate}</p>
-                            </div>
-                            <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-medium text-[#a3a1a9] px-4'>Time Info</p>
-                            <div className='px-4 '>
-                                <p className='text-[#807c83] mt-2 '>Timezone</p>
-                                <p className='text-lg font-semibold mt-1 mb-1'> {appointmentData?.timezone}</p>
-                                <p className='text-[#807c83] mt-2 '>Time</p>
-                                <p className='text-lg font-semibold mt-1 mb-1'>{appointmentData?.time}</p>
-                                <p className='text-[#807c83] mt-2 '>Booked Date</p>
-                                <p className='text-lg font-semibold mt-1 mb-1'>{appointmentData?.bookedDate}</p>
-                            </div>
-                            <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-medium text-[#a3a1a9] px-4'>Time Info</p>
-                            <div className='px-4 '>
-                                <p className='text-[#807c83] mt-2 '>Timezone</p>
-                                <p className='text-lg font-semibold mt-1 mb-1'> {appointmentData?.timezone}</p>
-                                <p className='text-[#807c83] mt-2 '>Time</p>
-                                <p className='text-lg font-semibold mt-1 mb-1'>{appointmentData?.time}</p>
-                                <p className='text-[#807c83] mt-2 '>Booked Date</p>
-                                <p className='text-lg font-semibold mt-1 mb-1'>{appointmentData?.bookedDate}</p>
-                            </div>
-                        </div>
+                            </div> :
+                            (
+                                windowWidth > 1024 ?
+                                    <p className={`flex items-center justify-center w-full h-full`}>Click Appointments to see more</p> : ""
+
+                            )
+                        }
+
                     </div>
                 </div>
             </div>
@@ -93,7 +127,7 @@ export default AppointmentInfo;
 
 const AppointmentPageTopDiv = () => {
     return (
-        <div className='bg-[#743bfb] w-full min-h-40 h-40 hidden lg:flex justify-between items-center'>
+        <div className={`bg-[#743bfb] w-full min-h-40 h-40 hidden  lg:flex justify-between items-center `}>
             <div className='flex text-white ml-[8%] items-center justify-center'>
                 <Image src={Profile} width={300} height={300} alt='Profile Image' className='w-32 h-32 object-cover rounded-[7px]' />
                 <div className='ml-5 text-white'>
@@ -115,8 +149,9 @@ const AppointmentPageTopDiv = () => {
 }
 
 const AppointmentLists = () => {
+    const appointmentSelected = useDashboardStore((state) => state.appointmentSelected);
     return (
-        <div className='w-[90%] lg:w-96 h-auto max-h-[650px] gap-y-2 flex flex-col overflow-auto no-scrollbar'>
+        <div className={`w-[90%] lg:w-96 h-auto max-h-[650px] gap-y-2 lg:flex flex-col overflow-auto no-scrollbar ${appointmentSelected ? "hidden" : "flex"}`}>
             {Appointments.map((appointment, index) => (
                 <Link key={index} href={`/dashboard/appointments/${appointment.appointment_id}`}>
                     <div className='w-full h-40 bg-white border border-[#743bfb] rounded-[8px]'>
@@ -147,13 +182,14 @@ const AppointmentLists = () => {
 
 const AppointmentFilter = () => {
     const [filterAppointments, setFilterAppointments] = useState<string>("All");
+    const appointmentSelected = useDashboardStore((state) => state.appointmentSelected);
 
     const handleFilterClick = (filter: string) => {
         setFilterAppointments(filter);
     };
 
     return (
-        <ul className='flex items-center justify-center lg:justify-start gap-x-8 lg:gap-x-16 mt-4 text-base '>
+        <ul className={`lg:flex items-center justify-center lg:justify-start gap-x-8 lg:gap-x-16 mt-4 text-base ${appointmentSelected ? "hidden" : "flex"}`}>
             {/* filters */}
             {["Upcoming", "Past", "All",].map((filter) => (
                 <li
