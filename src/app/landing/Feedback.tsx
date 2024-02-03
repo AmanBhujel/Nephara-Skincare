@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Profile from '@/assets/Emma.png';
 import Profile1 from '@/assets/profile1.jpg';
 import Profile2 from '@/assets/profile2.jpg';
@@ -34,6 +34,27 @@ const feedbackData = [
 
 const Feedback = () => {
   const [windowWidth, setWindowWidth] = useState<number | undefined>(undefined);
+  const feedbackRef = useRef<HTMLDivElement>(null);
+  const [startAnimation, setStartAnimation] = useState<Boolean>(false);
+
+  const handleScroll = () => {
+      if (feedbackRef.current ) {
+        const elementTop = feedbackRef.current.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        setStartAnimation(elementTop < windowHeight);
+      }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -51,8 +72,8 @@ const Feedback = () => {
   }, []);
 
   return (
-    <div className="flex w-full justify-center items-center border-b-2 bg-white">
-      <div className="flex justify-center items-center w-[100%] lg:w-[63rem] xl:w-[79rem] 2xl:w-[90rem] h-auto">
+    <div ref={feedbackRef} className="flex w-full justify-center items-center border-b-2 bg-white">
+      <div className={`flex justify-center items-center w-[100%] lg:w-[63rem] xl:w-[79rem] 2xl:w-[90rem] h-auto ${startAnimation ? "animatedFromBottom" : ""}`}>
         <div className="flex flex-col w-full justify-center items-center py-6 ">
           <p className="text-[#a376ff] font-bold">Testimonials</p>
           <h1 className="text-3xl font-bold mt-1">From Our Users</h1>

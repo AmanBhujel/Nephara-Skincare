@@ -5,7 +5,7 @@ import Image from "next/image";
 const WhoWeAre = () => {
     return (
         <div className="flex w-full justify-center items-center border-b-2 bg-white">
-            <div className="flex flex-col lg:flex-row justify-center items-center w-[95%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto py-8 xl:h-[35rem]">
+            <div className="flex flex-col lg:flex-row justify-center items-center w-[95%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto py-8 xl:h-[35rem] animatedFromBottom">
                 <div className="w-[80%] lg:w-[40%] xl:w-[50%] h-full flex justify-center items-center">
                     <Image src={Nurse} width={400} height={600} className="w-[90%] bg-contain rounded-[8px] " alt="Nurse" />
                 </div>

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import nurse from '@/assets/nurse.jpg'
+import nurse from '@/assets/beautiful-nurse1.png'
 import Image from 'next/image';
 import InputForm from './components/InputForm';
 

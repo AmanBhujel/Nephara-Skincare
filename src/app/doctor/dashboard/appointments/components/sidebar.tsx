@@ -9,7 +9,7 @@ import { SlLogout } from "react-icons/sl";
 import SidebarImage from '@/assets/SidebarImage-.png';
 import { AiOutlineBars } from "react-icons/ai";
 import { usePathname, useRouter } from 'next/navigation';
-import { useDashboardStore } from '../store/DashboardStore';
+import { useDashboardStore } from '@/app/dashboard/store/DashboardStore';
 import Link from 'next/link';
 
 const Sidebar = () => {
@@ -107,18 +107,6 @@ const Sidebar = () => {
                                     </li>
                                 ))}
                             </ul>
-                            <div className='relative flex w-full justify-center items-center flex-col mt-6'>
-                                <Image src={SidebarImage} width={200} height={200} alt='Sidebar Image' className='z-20' />
-                                <div className='bg-[#f4f0fd] w-[85%] xl:w-[75%] h-48 mt-[-18px] z-10 rounded-[8px] flex flex-col items-center justify-center'>
-                                    <p className='font-medium text-2xl'>Book Appointment</p>
-                                    <p className='w-[95%] flex flex-wrap items-center justify-center text-center text-gray-600 mt-2'>
-                                        Start your skincare with a quick appointment.
-                                    </p>
-                                    <button className="bg-[#8f67e2] hover:bg-[#9c75e9] py-2 px-7 font-semibold text-white rounded-[8px] mt-5">
-                                        Book now
-                                    </button>
-                                </div>
-                            </div>
                             <div className='bottom-0 absolute flex items-center justify-center w-full'>
                                 <p
                                     className={`w-[90%] cursor-pointer text-lg font-semibold py-4 px-2 flex items-center mb-2 rounded-[10px] text-gray-600 hover:bg-[#7650e0] hover:text-white`}

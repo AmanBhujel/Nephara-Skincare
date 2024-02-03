@@ -1,12 +1,35 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useRef, useState } from 'react'
 import { MdOutlineAttachMoney } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
 import { GrSchedules } from "react-icons/gr";
 
 const Services = () => {
+    const serviceRef = useRef<HTMLDivElement>(null);
+    const [startAnimation, setStartAnimation] = useState<Boolean>(false);
+
+    const handleScroll = () => {
+        if (serviceRef.current) {
+            const elementTop = serviceRef.current.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+
+            setStartAnimation(elementTop < windowHeight);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    }, []);
+
     return (
-        <div className="flex w-full justify-center items-center border-b-2 bg-white">
-            <div className="flex justify-center items-center w-[95%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto">
+        <div ref={serviceRef} className="flex w-full justify-center items-center border-b-2 bg-white">
+            <div className={`flex justify-center items-center w-[95%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto ${startAnimation?"animatedFromBottom":""}`}>
                 <div className="flex flex-col w-full justify-center items-center py-6 ">
                     <p className="text-[#a376ff] font-bold">Features</p>
                     <h1 className="text-3xl font-bold mt-1">Our Service Features</h1>

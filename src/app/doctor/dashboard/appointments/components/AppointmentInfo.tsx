@@ -10,7 +10,7 @@ import Alphabet from '@/assets/alphabet.png';
 import { Appointments } from '@/data/AppointmentData';
 import BackgroundAppointment from '@/assets/DoctorConsulting.png'
 import Link from 'next/link';
-import { useDashboardStore } from '../../store/DashboardStore';
+import { useDashboardStore } from '@/app/dashboard/store/DashboardStore';
 interface Appointment {
     name: string;
     description: string;
@@ -57,14 +57,14 @@ const AppointmentInfo: React.FC<AppointmentInfoProps> = ({ appointmentData }) =>
 
     return (
         <div className='w-full h-full flex flex-col'>
-            <AppointmentPageTopDiv />
+            {/* <AppointmentPageTopDiv /> */}
             <div className='overflow-auto md:px-8 lg:px-8 lg:py-8 xl:px-8 xl:py-4 2xl:px-16 2xl:py-6 '>
                 <p className={`md:text-3xl mt-6 lg:text-2xl font-semibold tracking-wide lg:flex items-center justify-center lg:justify-start ${appointmentSelected ? "hidden" : "flex"}`}>Appointments</p>
                 <AppointmentFilter />
                 {/* ---Appointments Infos------------ */}
-                <div className='w-full h-auto mt-6 flex items-center justify-center lg:items-start lg:justify-start gap-x-6'>
+                <div className='w-full h-full mt-6 flex items-center justify-center lg:items-start lg:justify-start gap-x-6'>
                     <AppointmentLists />
-                    <div className={` lg:w-[60%]  xl:w-[60%] 2xl:w-[70%] w-full lg:flex  lg:h-[600px] xl:h-[650px] overflow-auto rounded-[8px] ${appointmentSelected || windowWidth > 1024 ? "flex" : "hidden"} border-2 bg-white mb-6 lg:mb-0`}>
+                    <div className={` lg:w-[60%]  xl:w-[60%] 2xl:w-[70%] w-full lg:flex  lg:h-[80%] overflow-auto rounded-[8px] ${appointmentSelected || windowWidth > 1024 ? "flex" : "hidden"} border-2 bg-white mb-6 lg:mb-0`}>
                         {appointmentData ?
                             <div className='w-full'>
                                 <div className='w-full h-40 min-h-40 rounded-[8px] relative' style={{ backgroundImage: `url(${BackgroundAppointment.src})`, backgroundSize: 'cover', backgroundPosition: 'center 15%' }}>

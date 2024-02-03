@@ -202,23 +202,40 @@ const InputForm = () => {
       <p className='text-4xl sm:text-5xl font-bold tracking-wide mt-12'>SCHEDULE AN</p>
       <p className='text-4xl sm:text-5xl font-bold text-[#a376ff] tracking-wide sm:mt-4'>APPOINTMENT</p>
       <p className='font-semibold text-gray-700 text-lg mt-6'>Can we know more about you?</p>
+
       <div className='w-full mt-2 flex flex-col sm:flex-row'>
         <input
           type='text'
           placeholder='Full name'
           className='w-[100%] sm:w-[45%] h-10 border rounded-[6px] border-gray-500 px-3 outline-none'
-          value={name}
+          value={"Aman Bhujel"}
           onChange={(e) => setName(e.target.value)}
         />
         <input
           type='text'
           placeholder='Email Address'
           className='w-[100%] sm:w-[45%] h-10 border rounded-[6px] border-gray-500 px-3 outline-none sm:ml-[5%] mt-2 sm:mt-0'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={"bhujelaman20@gmail.com"}
+          readOnly
         />
       </div>
-      <p className='mt-4 font-light text-gray-600 text-sm'>*Notifications & alerts for appointments will be sent to this email.</p>
+      <p className='mt-4 text-gray-600 text-sm'>*Notifications & alerts for appointments will be sent to this email.</p>
+
+
+      <p className='font-semibold text-gray-700 text-lg mt-6'>Reason for appointment?</p>
+
+      <div className='w-full mt-2 flex flex-col sm:flex-row'>
+        <select
+          className='w-[100%] sm:w-full h-10 border rounded-[6px] border-gray-500 px-3 outline-none bg-white mt-4 sm:mt-0'
+        >
+          <option value="routine-exam">Routine Skin Examination</option>
+          <option value="suspicious-lesions">Suspicious Moles or Lesions</option>
+          <option value="allergy-irritations">Skin Allergies or Irritations</option>
+          <option value="sun-damage">Sun Damage Assessment</option>
+        </select>
+
+      </div>
+
       <p className='font-semibold text-gray-700 text-lg mt-10'>Whats your preferred appointment?</p>
       <div className='mt-4 flex flex-col sm:flex-row'>
         <DatePickerDemo onDateChange={setSelectedDate} />
@@ -247,6 +264,7 @@ const InputForm = () => {
           Book now
         </button>
       </div>
+      <p className='mt-4 text-red-600 text-sm'>*Refunds and Rescheduling are available.</p>
     </div>
   );
 };

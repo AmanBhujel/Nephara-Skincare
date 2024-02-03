@@ -1,11 +1,33 @@
-import React from 'react';
+"use client"
+import React, { useEffect, useRef, useState } from 'react';
 import Image from "next/image";
 import Nurse from '@/assets/nurse-smile.jpg'
 
 const WhatWeBelieve = () => {
+    const WhatweBelieveRef = useRef<HTMLDivElement>(null);
+    const [startAnimation, setStartAnimation] = useState<Boolean>(false);
+
+    const handleScroll = () => {
+        if (WhatweBelieveRef.current) {
+            const elementTop = WhatweBelieveRef.current.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+
+            setStartAnimation(elementTop < windowHeight);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    }, []);
     return (
-        <div className="flex  w-full justify-center items-center border-b-2 bg-white">
-            <div className="flex flex-col lg:flex-row-reverse justify-center items-center w-[95%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto py-12 xl:h-[35rem]">
+        <div ref={WhatweBelieveRef} className="flex  w-full justify-center items-center border-b-2 bg-white">
+            <div className={`flex flex-col lg:flex-row-reverse justify-center items-center w-[95%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto py-12 xl:h-[35rem] ${startAnimation?"animatedFromBottom":""}`}>
                 <div className="w-[80%] lg:w-[40%] xl:w-[50%] h-full flex justify-center items-center">
                     <Image src={Nurse} width={400} height={600} className="w-[80%] bg-contain rounded-[8px] " alt="Nurse" />
                 </div>

@@ -65,7 +65,7 @@ const Page = () => {
                         <Link href="/auth">
                             <button className='text-4xl mt-4'><IoArrowBack /></button>
                         </Link>
-                        <p className='font-bold text-4xl mt-[15%]'> Forgot Password? </p>
+                        <p className='font-bold text-4xl mt-[5%]'> Forgot Password? </p>
                         <p className="text-sm text-gray-500 mt-4">Please provide your email for verification.</p>
                         <label htmlFor="email" className="block text-gray-700 text-sm mt-4 mb-2">
                             Email
