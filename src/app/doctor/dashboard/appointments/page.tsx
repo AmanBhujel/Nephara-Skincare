@@ -1,8 +1,8 @@
 "use client"
 import React, { useEffect } from 'react';
 import { NextPage } from 'next';
-import AppointmentInfo from '@/app/dashboard/appointments/components/AppointmentInfo';
-import Sidebar from '@/app/dashboard/components/sidebar';
+import AppointmentInfo from '@/app/doctor/dashboard/appointments/components/AppointmentInfo';
+import Sidebar from '@/app/doctor/dashboard/appointments/components/sidebar';
 import { Appointments } from '@/data/AppointmentData';
 import { useDashboardStore } from '@/app/dashboard/store/DashboardStore';
 

@@ -81,9 +81,9 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
     };
 
     return (
-        <div className="w-full lg:w-[50%] xl:w-[45%] 2xl:w-[40%] h-[60%] min-h-[50rem]  flex flex-col items-center lg:border lg:shadow-xl justify-center">
+        <div className="w-full lg:w-[50%] xl:w-[45%] 2xl:w-[40%] min-h-min flex flex-col items-center lg:border lg:shadow-xl justify-center">
             <div className="w-[80%] sm:w-[70%] md:w-[60%] lg:w-[80%] xl:w-[80%] 2xl:w-[70%] ">
-                <p className="text-4xl">Start your</p>
+                <p className="text-4xl mt-4">Start your</p>
                 <p className="font-semibold text-4xl mt-3">Journey to Clear Skin</p>
                 <button className="w-full h-12 mt-14 border rounded-[7px] flex items-center justify-center shadow-lg">
                     <i className="text-xl mr-4">
@@ -200,7 +200,7 @@ export const Signin: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
     };
 
     return (
-        <div className="w-full lg:w-[50%] xl:w-[45%] 2xl:w-[40%] h-[60%] min-h-[50rem]  flex flex-col items-center lg:border lg:shadow-xl justify-center">
+        <div className="w-full lg:w-[50%] xl:w-[45%] 2xl:w-[40%] h-[60%]   flex flex-col items-center lg:border lg:shadow-xl justify-center">
             <div className="w-[80%] sm:w-[70%] md:w-[60%] lg:w-[80%] xl:w-[80%] 2xl:w-[70%] ">
                 <p className='text-4xl'>Sign in</p>
                 <p className='font-semibold text-4xl mt-3'> 30-day free trial</p>

@@ -8,7 +8,7 @@ const Page = () => {
     const [isSignUpOpen, setIsSignUpOpen] = useState<boolean>(true)
     return (
         <div className="flex w-full justify-center items-center bg-white">
-            <div className="flex flex-col lg:flex-row justify-center items-center w-full   xl:max-w-[95rem] 2xl:w-full 2xl:max-w-[120rem] 2xl:h-scrren 2xl:max-h-[83rem]  h-screen">
+            <div className="flex flex-col lg:flex-row justify-center items-center w-full   xl:max-w-[95rem] 2xl:w-full 2xl:max-w-[120rem] 2xl:h-screen 2xl:max-h-[83rem]  h-screen">
                 {/* <div className='hidden lg:flex w-[50%] relative h-full  items-end'>
                     <Image src={nurse} width={1500} height={1500} className='w-full h-full absolute object-cover bg-red-100 z-10' alt='nurse' />
                     <div style={{

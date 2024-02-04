@@ -6,7 +6,6 @@ import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { LuCalendarDays } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
 import { SlLogout } from "react-icons/sl";
-import SidebarImage from '@/assets/SidebarImage-.png';
 import { AiOutlineBars } from "react-icons/ai";
 import { usePathname, useRouter } from 'next/navigation';
 import { useDashboardStore } from '@/app/dashboard/store/DashboardStore';
@@ -25,13 +24,13 @@ const Sidebar = () => {
     const handleSidebarItemClick = (itemName: string) => {
         setActiveSidebarItem(itemName);
         if (itemName === "Dashboard") {
-            router.push("/dashboard/user-profile")
+            router.push("/doctor/dashboard/user-profile")
         }
         else if (itemName === "Appointments") {
-            router.push("/dashboard/appointments")
+            router.push("/doctor/dashboard/appointments")
         }
         else if (itemName === "Settings") {
-            router.push("/dashboard/settings")
+            router.push("/doctor/dashboard/settings")
         }
     };
 

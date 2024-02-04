@@ -80,6 +80,16 @@ const AppointmentInfo: React.FC<AppointmentInfoProps> = ({ appointmentData }) =>
                                         </div>
                                     </div>
                                 </div>
+                                {!appointmentData.completed &&
+                                    <div className='bg-[#f1f1ff] mt-4 py-4 text-xl flex justify-between  items-center font-medium text-black px-4'>
+                                        <p className=''>Time Remaining: 01:24:56</p>
+
+                                        <a href={`http://localhost:8080/join?room=${appointmentData.appointment_id}&name=${appointmentData.name}`} target="_blank" rel="noopener noreferrer">
+                                            <button className={`text-white px-8 py-2 bg-[#743bfb] rounded-[10px] font-bold text-lg mb-2`}>Join</button>
+                                        </a>
+                                    </div>
+                                }
+
                                 <div className='h-full px-2'>
                                     <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-medium text-[#a3a1a9] px-4'>Appointment Info</p>
                                     <div className='px-4 '>
@@ -148,13 +158,24 @@ const AppointmentPageTopDiv = () => {
         </div>
     )
 }
-
 const AppointmentLists = () => {
     const appointmentSelected = useDashboardStore((state) => state.appointmentSelected);
+    const selectedAppointmentFilter = useDashboardStore((state) => state.selectedAppointmentFilter);
+
+    const filteredAppointments = Appointments.filter(appointment => {
+        if (selectedAppointmentFilter === "Upcoming") {
+            return !appointment.completed;
+        } else if (selectedAppointmentFilter === "Past") {
+            return appointment.completed;
+        } else {
+            return true;
+        }
+    });
+
     return (
         <div className={`w-[90%] lg:w-96 h-auto max-h-[650px] gap-y-2 lg:flex flex-col overflow-auto no-scrollbar ${appointmentSelected ? "hidden" : "flex"}`}>
-            {Appointments.map((appointment, index) => (
-                <Link key={index} href={`/dashboard/appointments/${appointment.appointment_id}`}>
+            {filteredAppointments.map((appointment, index) => (
+                <Link key={index} href={`/doctor/dashboard/appointments/${appointment.appointment_id}`}>
                     <div className='w-full h-40 bg-white border border-[#743bfb] rounded-[8px]'>
                         {/* ---card Top-------- */}
                         <div className='flex items-center justify-between mt-2 '>
@@ -178,15 +199,18 @@ const AppointmentLists = () => {
                 </Link>
             ))}
         </div>
-    )
-}
+    );
+};
+
 
 const AppointmentFilter = () => {
-    const [filterAppointments, setFilterAppointments] = useState<string>("All");
+    const selectedAppointmentFilter = useDashboardStore((state) => state.selectedAppointmentFilter);
+    const setSelectedAppointmentFilter = useDashboardStore((state) => state.setSelectedAppointmentFilter);
+
     const appointmentSelected = useDashboardStore((state) => state.appointmentSelected);
 
     const handleFilterClick = (filter: string) => {
-        setFilterAppointments(filter);
+        setSelectedAppointmentFilter(filter);
     };
 
     return (
@@ -195,7 +219,7 @@ const AppointmentFilter = () => {
             {["Upcoming", "Past", "All",].map((filter) => (
                 <li
                     key={filter}
-                    className={`cursor-pointer ${filterAppointments === filter ? "text-[#743bfb] underline decoration-[3px] underline-offset-8 " : ""}`}
+                    className={`cursor-pointer ${selectedAppointmentFilter === filter ? "text-[#743bfb] underline decoration-[3px] underline-offset-8 " : ""}`}
                     onClick={() => handleFilterClick(filter)}
                 >
                     {filter}
