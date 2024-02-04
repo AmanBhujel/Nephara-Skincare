@@ -1,10 +1,10 @@
 "use client"
 import React, { useEffect } from 'react';
 import { NextPage } from 'next';
-import AppointmentInfo from '@/app/dashboard/appointments/components/AppointmentInfo';
 import Sidebar from '@/app/dashboard/components/sidebar';
 import { Appointments } from '@/data/AppointmentData';
-import { useDashboardStore } from '../store/DashboardStore';
+import { useDashboardStore } from '../../../stores/DashboardStore';
+import AppointmentPageContainer from './components/AppointmentPageContainer';
 
 interface PageProps {
     params: {
@@ -24,7 +24,7 @@ const Page: NextPage<PageProps> = ({ params }) => {
     return (
         <main className='w-full h-screen flex justify-center items-center bg-[#f6f8fc] relative'>
             <Sidebar />
-            <AppointmentInfo appointmentData={appointment} />
+            <AppointmentPageContainer appointmentData={appointment} />
         </main>
     );
 }

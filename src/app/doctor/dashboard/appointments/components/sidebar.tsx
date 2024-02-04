@@ -8,8 +8,8 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { SlLogout } from "react-icons/sl";
 import { AiOutlineBars } from "react-icons/ai";
 import { usePathname, useRouter } from 'next/navigation';
-import { useDashboardStore } from '@/app/dashboard/store/DashboardStore';
 import Link from 'next/link';
+import { useDashboardStore } from '@/stores/DashboardStore';
 
 const Sidebar = () => {
     const activeSidebarItem = useDashboardStore((state) => state.activeSidebarItem);

@@ -9,7 +9,7 @@ import { SlLogout } from "react-icons/sl";
 import SidebarImage from '@/assets/SidebarImage-.png';
 import { AiOutlineBars } from "react-icons/ai";
 import { usePathname, useRouter } from 'next/navigation';
-import { useDashboardStore } from '../store/DashboardStore';
+import { useDashboardStore } from '../../../stores/DashboardStore';
 import Link from 'next/link';
 
 const Sidebar = () => {

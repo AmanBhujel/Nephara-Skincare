@@ -16,7 +16,7 @@ const Page = () => {
     const [email, setEmail] = useState<string>("");
     const [emailSent, setEmailSent] = useState<Boolean>(false);
     const [emailError, setEmailError] = useState<string | null>(null);
-    const [nodemaileremail, { data: nodemaileremailData, loading: nodemaileremailLoading, error: nodemaileremailError }] = useMutation(NODEMAILER_EMAIL);
+    const [nodemaileremail] = useMutation(NODEMAILER_EMAIL);
 
     const handleNextButtonClick = async () => {
         if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
