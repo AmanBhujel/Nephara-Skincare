@@ -5,7 +5,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 import { PaymentProvider } from '@/components/contexts/checkContext'
-import { Toaster } from 'sonner'
+import { Toaster } from 'sonner';
+import { NextUIProvider } from "@nextui-org/react";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,10 +29,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ApolloProvider client={graphqlClient}>
-          <PaymentProvider>
-            {children}
-          </PaymentProvider>
-          <Toaster richColors  position="top-right"/>
+          <NextUIProvider>
+            <PaymentProvider>
+              {children}
+            </PaymentProvider>
+          </NextUIProvider>
+          <Toaster richColors position="top-right" />
         </ApolloProvider>
       </body>
     </html>

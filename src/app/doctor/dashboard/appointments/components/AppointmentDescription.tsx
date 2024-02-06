@@ -2,6 +2,15 @@
 import { useEffect, useState } from "react";
 import BackgroundAppointment from '@/assets/DoctorConsulting.png'
 import { useDashboardStore } from "@/stores/DashboardStore";
+import { gql, useLazyQuery,  } from "@apollo/client";
+import ReportModal from "./ReportModal";
+
+
+const GET_REPORT = gql`
+query Query($appointmentId: String!) {
+    getReport(appointmentId: $appointmentId)
+  }
+`;
 
 interface Appointment {
     name: string;
@@ -17,19 +26,54 @@ interface Appointment {
     getStatus: string;
 }
 
-
 interface AppointmentInfoProps {
     appointmentData: Appointment | undefined;
 }
 const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentData }) => {
     const appointmentSelected = useDashboardStore((state) => state.appointmentSelected);
     const setAppointmentSelected = useDashboardStore((state) => state.setAppointmentSelected);
+    const [getReport] = useLazyQuery(GET_REPORT);
+    const [isReportModalOpen,setIsReportModalOpen]=useState<boolean>(false);
     useEffect(() => {
         if (appointmentData) {
             setAppointmentSelected(true)
         }
     }, []);
     const [windowWidth, setWindowWidth] = useState<number>(0);
+
+    const handleCreateReportClick = async () => {
+        setIsReportModalOpen(true);
+      
+    };
+
+    const handleSeeReportClick = async () => {
+        try {
+            const response = await getReport({
+                variables: {
+                    "appointmentId": "appoint-11"
+                }
+            });
+
+            const pdfData = response.data.getReport;
+
+            // Convert base64 to Blob
+            const byteCharacters = atob(pdfData);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: 'application/pdf' });
+
+            // Create URL for the Blob
+            const pdfUrl = URL.createObjectURL(blob);
+
+            // Open the URL in a new tab
+            window.open(pdfUrl, '_blank');
+        } catch (error) {
+            console.error("Error fetching or opening the PDF:", error);
+        }
+    };
 
     useEffect(() => {
         setWindowWidth(window.innerWidth);
@@ -46,7 +90,8 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
     }, []);
 
     return (
-        <div className={` lg:w-[60%]  xl:w-[60%] 2xl:w-[70%] w-full lg:flex lg:max-h-[700px] xl:max-h-[750px]  2xl:max-h-[770px]  overflow-auto rounded-[8px] ${appointmentSelected || windowWidth > 1024 ? "flex" : "hidden"} border-2 bg-white pb-0 mb-6 lg:mb-0`}>
+        <div className={` lg:w-[60%]  xl:w-[60%] 2xl:w-[70%] w-full lg:flex lg:h-[700px] xl:h-[750px]  2xl:h-[770px]  overflow-auto rounded-[8px] ${appointmentSelected || windowWidth > 1024 ? "flex" : "hidden"} border-2 bg-white pb-0 mb-6 lg:mb-0`}>
+            <ReportModal isReportModalOpen={isReportModalOpen} setIsReportModalOpen={setIsReportModalOpen}/>
             {appointmentData ?
                 <div className='w-full max-h-full'>
                     <div className='w-full h-40 min-h-40 rounded-[8px] relative' style={{ backgroundImage: `url(${BackgroundAppointment.src})`, backgroundSize: 'cover', backgroundPosition: 'center 15%' }}>
@@ -62,20 +107,23 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                             </div>
                         </div>
                     </div>
-                    {!appointmentData.completed &&
-                        <div className='bg-[#f1f1ff] mt-4 py-4 text-xl flex justify-between  items-center font-medium text-black px-4'>
+                    {!appointmentData.completed ?
+                        (<div className='bg-[#f1f1ff] mt-4 py-4 text-xl flex justify-between  items-center font-medium text-black px-4'>
                             <p className=''>Time Remaining: 01:24:56</p>
 
                             <a href={`http://localhost:8080/join?room=${appointmentData.appointment_id}&name=${appointmentData.name}`} target="_blank" rel="noopener noreferrer">
                                 <button className={`text-white px-8 py-2 bg-[#743bfb] rounded-[10px] font-bold text-lg mb-2`}>Join</button>
                             </a>
-                        </div>
-                    }
+                        </div>) :
+                        (<div className='bg-[#f1f1ff] mt-4 py-4 text-xl flex justify-between  items-center font-medium text-black px-4'>
+                            <p className=''>Report</p>
 
-                    <div className='bg-[#f1f1ff] mt-4 py-4 text-xl flex justify-between  items-center font-medium text-black px-4'>
-                        <p className=''>Report Details</p>
-                        <button className={`text-white px-8 py-2 bg-[#743bfb] rounded-[10px] font-bold text-lg mb-2`}>Create</button>
-                    </div>
+                            <div>
+                                <button className={`text-white px-6 py-2 bg-[#743bfb] rounded-[10px] font-bold text-lg mb-2`} onClick={handleSeeReportClick}>See Report</button>
+                                <button className={`text-white px-6 ml-4 py-2 bg-[#743bfb] rounded-[10px] font-bold text-lg mb-2`} onClick={handleCreateReportClick}>Create Report</button>
+                            </div>
+                        </div>)
+                    }
                     <div className='h-full px-2'>
                         <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-medium text-[#a3a1a9] px-4'>Appointment Info</p>
                         <div className='px-4 '>

@@ -9,7 +9,7 @@ import { useUserStore } from "@/stores/userStore";
 
 interface AuthProps {
     setIsSignUpOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
+};
 
 const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -19,6 +19,7 @@ const validateEmail = (email: string): boolean => {
 const validatePassword = (password: string): boolean => {
     return password.length >= 8;
 };
+
 const SIGNUP_USER = gql`
 mutation SignupUser($email: String!, $password: String!) {
     signupUser(email: $email, password: $password) {
@@ -27,6 +28,7 @@ mutation SignupUser($email: String!, $password: String!) {
 
   }
 `
+
 const LOGIN_USER = gql`
  mutation LoginUser($email: String!, $password: String!) {
     loginUser(email: $email, password: $password) {

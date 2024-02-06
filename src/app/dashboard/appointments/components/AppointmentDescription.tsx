@@ -2,7 +2,13 @@
 import { useEffect, useState } from "react";
 import { useDashboardStore } from "../../../../stores/DashboardStore";
 import BackgroundAppointment from '@/assets/DoctorConsulting.png'
+import { gql, useLazyQuery, useQuery } from "@apollo/client";
 
+const GET_REPORT = gql`
+query Query($appointmentId: String!) {
+    getReport(appointmentId: $appointmentId)
+  }
+`;
 interface Appointment {
     name: string;
     description: string;
@@ -19,9 +25,10 @@ interface Appointment {
 
 
 interface AppointmentInfoProps {
-    appointmentData: Appointment | undefined; 
+    appointmentData: Appointment | undefined;
 }
 const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentData }) => {
+    const [getReport]=useLazyQuery(GET_REPORT);
     const appointmentSelected = useDashboardStore((state) => state.appointmentSelected);
     const setAppointmentSelected = useDashboardStore((state) => state.setAppointmentSelected);
     useEffect(() => {
@@ -30,6 +37,36 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
         }
     }, []);
     const [windowWidth, setWindowWidth] = useState<number>(0);
+
+    const handleSeeReportClick = async () => {
+        try {
+            const response = await getReport({
+                variables: {
+                    "appointmentId": "123456"
+                }
+            });
+    
+            const pdfData = response.data.getReport; 
+    
+            // Convert base64 to Blob
+            const byteCharacters = atob(pdfData);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: 'application/pdf' });
+    
+            // Create URL for the Blob
+            const pdfUrl = URL.createObjectURL(blob);
+    
+            // Open the URL in a new tab
+            window.open(pdfUrl, '_blank');
+        } catch (error) {
+            console.error("Error fetching or opening the PDF:", error);
+        }
+    };
+    
 
     useEffect(() => {
         setWindowWidth(window.innerWidth);
@@ -63,15 +100,21 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                             </div>
                         </div>
                     </div>
-                    {!appointmentData.completed &&
-                        <div className='bg-[#f1f1ff] mt-4 py-4 text-xl flex justify-between  items-center font-medium text-black px-4'>
+                    {!appointmentData.completed ?
+                        (<div className='bg-[#f1f1ff] mt-4 py-4 text-xl flex justify-between  items-center font-medium text-black px-4'>
                             <p className=''>Time Remaining: 01:24:56</p>
 
                             <a href={`http://localhost:8080/join?room=${appointmentData.appointment_id}&name=${appointmentData.name}`} target="_blank" rel="noopener noreferrer">
                                 <button className={`text-white px-8 py-2 bg-[#743bfb] rounded-[10px] font-bold text-lg mb-2`}>Join</button>
                             </a>
-                        </div>
+                        </div>) :
+                        (<div className='bg-[#f1f1ff] mt-4 py-4 text-xl flex justify-between  items-center font-medium text-black px-4'>
+                            <p className=''>Watch your Report</p>
+
+                            <button className={`text-white px-8 py-2 bg-[#743bfb] rounded-[10px] font-bold text-lg mb-2`} onClick={handleSeeReportClick}>See Report</button>
+                        </div>)
                     }
+
                     <div className='h-full px-2'>
                         <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-medium text-[#a3a1a9] px-4'>Appointment Info</p>
                         <div className='px-4 '>
