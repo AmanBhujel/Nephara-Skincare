@@ -37,6 +37,12 @@ const LOGIN_USER = gql`
         message
         user {
           email
+          phoneNumber
+          photo
+          country
+          city
+          name
+          age
         }
     }
   }
@@ -51,7 +57,7 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
     const [emailError, setEmailError] = useState<string | null>(null);
     const [passwordError, setPasswordError] = useState<string | null>(null);
     const router = useRouter()
-  
+
     const handleSignup = async () => {
         try {
             setNameError(null);
@@ -80,7 +86,7 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
             ToastMessage(status, message);
             if (token) {
                 setCookie(3600, "token", `Bearer ${token}`)
-                router.push('/')
+                router.replace('/dashboard/appointments')
             }
         } catch (error) {
             console.log(error)
@@ -202,11 +208,11 @@ export const Signin: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
             });
             const { status, message, token, user } = loginResponse.data.loginUser;
             ToastMessage(status, message);
-            setUserInfo({email:user.email,name:"Hardcoded name"})
+            setUserInfo({ email: user.email, name: "Hardcoded name" })
             console.log("user from log in ", user)
             if (token) {
                 setCookie(3600, "token", `Bearer ${token}`)
-                router.push('/')
+                router.replace('/dashboard/appointments')
             }
         } catch (error) {
             ToastMessage('error', 'Internal Server Error')

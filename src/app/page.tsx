@@ -12,7 +12,9 @@ import { useUserStore } from "@/stores/userStore";
 const Home = () => {
   const userInfo = useUserStore((state) => state.userInfo);
 
-    console.log("useriNFO FROM STORE ", userInfo)
+
+
+  console.log("useriNFO FROM STORE ", userInfo)
   return (
     <main className="bg-white  w-full h-screen">
       <div className='w-full h-auto flex flex-col  justify-center items-center  '>

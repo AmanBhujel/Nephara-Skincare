@@ -7,12 +7,25 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 import { PaymentProvider } from '@/components/contexts/checkContext'
 import { Toaster } from 'sonner';
 import { NextUIProvider } from "@nextui-org/react";
+import LogoutModal from '@/components/LogoutModal'
 
 const inter = Inter({ subsets: ['latin'] })
 
+const token = document.cookie.split(';')
+  .map(cookie => cookie.split('='))
+  .find(([name]) => name.trim() === 'token');
+
+const headers = {
+  authorization: token ? token[1] : "", // Retrieve token from cookies
+  'client-name': 'WidgetX Ecom [web]',
+  'client-version': '1.0.0'
+};
+
+
 const graphqlClient = new ApolloClient({
   uri: "http://localhost:8000/graphql",
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  headers: headers
 });
 
 // export const metadata: Metadata = {
@@ -31,6 +44,7 @@ export default function RootLayout({
         <ApolloProvider client={graphqlClient}>
           <NextUIProvider>
             <PaymentProvider>
+              <LogoutModal />
               {children}
             </PaymentProvider>
           </NextUIProvider>

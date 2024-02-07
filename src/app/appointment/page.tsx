@@ -19,7 +19,7 @@ const Page = () => {
                     {/* ---------GENERAL INFORMATION------------- */}
                     <div className='w-[95%] sm:w-[90%] md:w-[80%] lg:w-[45%] h-full  md:pl-8 md:pt-10'>
                         <p className='text-[#0736bc] text-2xl sm:text-3xl font-medium'>General information</p>
-                        <p className='font-semibold mt-4 mb-2'>Select Timezone:</p>
+                        <p className='font-medium mt-4 mb-2'>Select Timezone:</p>
                         <TimeZoneSelector onTimeZoneChange={setSelectedTimeZone} />
                         <div className='mt-4 flex flex-row gap-x-[5%]'>
                             <div className='flex flex-col w-[45%]'>
@@ -27,7 +27,7 @@ const Page = () => {
                                 <DatePickerDemo onDateChange={setSelectedDate} />
                             </div>
                             <div className='flex flex-col w-[45%] '>
-                                <label className='font-semibold mt-2 sm:mt-4 mb-2'>Time*</label>
+                                <label className='font-medium mt-2 sm:mt-4 mb-2'>Time*</label>
                                 <select
                                     className='w-[100%] sm:w-full h-10 border rounded-[6px] border-gray-500 px-3 outline-none  bg-white '
                                     value={selectedTime}
@@ -48,9 +48,9 @@ const Page = () => {
 
                         </div>
                         <div className='mt-4 flex flex-col'>
-                            <label className='font-semibold sm:mb-2 mt-4'>Reason for appointment*</label>
+                            <label className='font-medium sm:mb-2 mt-4'>Reason for appointment*</label>
                             <select
-                                className='w-[100%] sm:w-[95%] h-10 border rounded-[6px] border-gray-500 px-3 outline-none bg-white mt-2'
+                                className='w-[100%] sm:w-[95%] h-10 border rounded-[6px] border-gray-500 px-3 outline-none bg-white'
                             >
                                 <option value="consultation">Consultation</option>
                                 <option value="routine-exam">Routine Skin Examination</option>
@@ -60,9 +60,9 @@ const Page = () => {
                             </select>
                         </div>
                         <div className='mt-4 flex flex-col'>
-                            <label className='font-semibold sm:mb-2 mt-4'>Select Doctor*</label>
+                            <label className='font-medium sm:mb-2 mt-4'>Select Doctor*</label>
                             <select
-                                className='w-[100%] sm:w-[95%] h-10 border rounded-[6px] border-gray-500 px-3 outline-none bg-white mt-2'
+                                className='w-[100%] sm:w-[95%] h-10 border rounded-[6px] border-gray-500 px-3 outline-none bg-white'
                             >
                                 <option value="consultation">Dr. Evan Sunde</option>
                                 <option value="routine-exam">Dr Sunde Evan</option>
@@ -73,14 +73,14 @@ const Page = () => {
                     {/* ------PERSONAL INFORMATION---------- */}
                     <div className='w-[95%] sm:w-[90%] md:w-[80%] lg:w-[45%] h-full md:pl-8 pt-10 flex flex-col'>
                         <p className='text-[#0736bc] text-2xl sm:text-3xl font-medium'>Personal information</p>
-                        <p className='font-semibold mt-2 sm:mt-4 mb-2'>Patient Name:</p>
+                        <p className='font-medium mt-2 sm:mt-4 mb-2'>Patient Name:</p>
                         <input
                             type='text'
                             placeholder='Enter your Name...'
                             className='w-[100%] sm:w-[95%] lg:w-[90%] h-10 border rounded-[6px] border-gray-500 px-3 outline-none mt-2 sm:mt-0'
                             // value={"Aman Bhujel"}
                         />
-                        <p className='font-semibold mt-4'>Email*</p>
+                        <p className='font-medium mt-4'>Email*</p>
                         <input
                             type='text'
                             placeholder='Email Address'
@@ -88,7 +88,7 @@ const Page = () => {
                             value={"bhujelaman20@gmail.com"}
                             readOnly
                         />
-                        <p className='font-semibold mt-8 mb-2'>Do you have allergies?</p>
+                        <p className='font-medium mt-8 mb-2'>Do you have allergies?</p>
                         <div className='flex gap-x-8 text-sm mt-0'>
                             <label>
                                 <input type="radio" name="option" value="yes" />
@@ -104,7 +104,7 @@ const Page = () => {
                             </label>
 
                         </div>
-                        <p className='font-semibold mt-4 mb-2'>Comment</p>
+                        <p className='font-medium mt-4 mb-2'>Comment</p>
                         <textarea
                             placeholder='Something that doctor should know...'
                             className='w-[100%] sm:w-[95%] lg:w-[90%] h-24 pt-2 border rounded-[6px] border-gray-500 px-3 outline-none mt-2 sm:mt-0 text-sm'
@@ -118,7 +118,7 @@ const Page = () => {
                         <button className='text-white bg-[#0736bc] hover:bg-[#0737bcda] py-2 font-medium mt-4 w-40 rounded-[8px] mb-6 lg:mb-0'>
                             Confirm
                         </button>
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>

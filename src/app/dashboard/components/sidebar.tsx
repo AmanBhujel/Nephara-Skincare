@@ -11,12 +11,14 @@ import { AiOutlineBars } from "react-icons/ai";
 import { usePathname, useRouter } from 'next/navigation';
 import { useDashboardStore } from '../../../stores/DashboardStore';
 import Link from 'next/link';
+import { useLogoutStore } from '@/stores/LogoutStore';
 
 const Sidebar = () => {
     const activeSidebarItem = useDashboardStore((state) => state.activeSidebarItem);
     const setActiveSidebarItem = useDashboardStore((state) => state.setActiveSidebarItem);
     const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
     const [windowWidth, setWindowWidth] = useState<number>(0);
+    const setIsLogoutModalOpen=useLogoutStore((state)=>state.setIsLogoutModalOpen)
     const router = useRouter();
     const pathname = usePathname();
     console.log(pathname, "router")
@@ -119,7 +121,7 @@ const Sidebar = () => {
                                     </button>
                                 </div>
                             </div>
-                            <div className='bottom-0 absolute flex items-center justify-center w-full'>
+                            <div className='bottom-0 absolute flex items-center justify-center w-full' onClick={()=>setIsLogoutModalOpen(true)}>
                                 <p
                                     className={`w-[90%] cursor-pointer text-lg font-semibold py-4 px-2 flex items-center mb-2 rounded-[10px] text-gray-600 hover:bg-[#7650e0] hover:text-white`}
                                 >
