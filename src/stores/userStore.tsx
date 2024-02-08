@@ -2,7 +2,12 @@ import { create } from 'zustand';
 
 interface UserInfo {
     email: string;
-    name: string;
+    name?: string;
+    photo?: string;
+    age?: number;
+    city?: string;
+    country?: string;
+    gender?: string;
 }
 
 interface StoreState {

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import BackgroundAppointment from '@/assets/DoctorConsulting.png'
 import { useDashboardStore } from "@/stores/DashboardStore";
-import { gql, useLazyQuery,  } from "@apollo/client";
+import { gql, useLazyQuery, } from "@apollo/client";
 import ReportModal from "./ReportModal";
 
 
@@ -32,8 +32,11 @@ interface AppointmentInfoProps {
 const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentData }) => {
     const appointmentSelected = useDashboardStore((state) => state.appointmentSelected);
     const setAppointmentSelected = useDashboardStore((state) => state.setAppointmentSelected);
-    const [getReport] = useLazyQuery(GET_REPORT);
-    const [isReportModalOpen,setIsReportModalOpen]=useState<boolean>(false);
+    const [getReport] = useLazyQuery(GET_REPORT, {
+        fetchPolicy: "no-cache"
+    });
+
+    const [isReportModalOpen, setIsReportModalOpen] = useState<boolean>(false);
     useEffect(() => {
         if (appointmentData) {
             setAppointmentSelected(true)
@@ -43,7 +46,7 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
 
     const handleCreateReportClick = async () => {
         setIsReportModalOpen(true);
-      
+
     };
 
     const handleSeeReportClick = async () => {
@@ -91,7 +94,7 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
 
     return (
         <div className={` lg:w-[60%]  xl:w-[60%] 2xl:w-[70%] w-full lg:flex lg:h-[700px] xl:h-[750px]  2xl:h-[770px]  overflow-auto rounded-[8px] ${appointmentSelected || windowWidth > 1024 ? "flex" : "hidden"} border-2 bg-white pb-0 mb-6 lg:mb-0`}>
-            <ReportModal isReportModalOpen={isReportModalOpen} setIsReportModalOpen={setIsReportModalOpen}/>
+            <ReportModal isReportModalOpen={isReportModalOpen} setIsReportModalOpen={setIsReportModalOpen} />
             {appointmentData ?
                 <div className='w-full max-h-full'>
                     <div className='w-full h-40 min-h-40 rounded-[8px] relative' style={{ backgroundImage: `url(${BackgroundAppointment.src})`, backgroundSize: 'cover', backgroundPosition: 'center 15%' }}>

@@ -3,11 +3,20 @@ export function setCookie(expireTime: number, name: string, value: string): void
   expirationDate.setTime(expirationDate.getTime() + expireTime * 1000); // Convert seconds to milliseconds
 
   const expires = "expires=" + expirationDate.toUTCString();
-  const sameSite = "SameSite=None; Secure"; // Add SameSite attribute
+  const sameSite = "SameSite=None;";
 
   document.cookie = `${name}=${value}; ${expires}; path=/; ${sameSite}`;
 }
 
+export function getCookie(name: string): string {
+  if (typeof document === 'undefined') {
+    return '';
+  }
+  const cookie = document.cookie
+    .split(';')
+    .map(cookie => cookie.trim().split('='))
+    .find(([cookieName]) => cookieName === name);
 
-//   setCookie(3600, "exampleCookie", "exampleValue");
-  
+  return cookie ? cookie[1] : '';
+}
+

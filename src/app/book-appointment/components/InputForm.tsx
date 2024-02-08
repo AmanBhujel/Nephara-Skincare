@@ -63,10 +63,10 @@ const InputForm = () => {
   }
 
   const handleBooking = async () => {
-    if (!name || !email || !selectedDate || !selectedTime || !selectedTimeZone) {
-      console.log('Please fill in all fields before booking.');
-      return;
-    }
+    // if (!name || !email || !selectedDate || !selectedTime || !selectedTimeZone) {
+    //   console.log('Please fill in all fields before booking.');
+    //   return;
+    // }
 
     try {
       // Step 1: Create Stripe Checkout Session

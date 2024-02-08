@@ -2,11 +2,125 @@
 import React, { useState } from 'react'
 import TimeZoneSelector from './components/TimeZoneSelector';
 import DatePickerDemo from '../book-appointment/components/DatePicker';
+import { gql, useMutation } from '@apollo/client';
+import { Stripe, loadStripe } from '@stripe/stripe-js';
+import { UsePaymentContext } from '@/components/contexts/checkContext';
+
+const CREATE_STRIPE_SESSION = gql`
+  mutation CreateStripeCheckoutSession($productName: String!, $productPrice: String!, $productImage: String!) {
+    createStripeCheckoutSession(productName: $productName, productPrice: $productPrice, productImage: $productImage)
+  }
+`;
+
+const CREATE_STRIPE_CLIENT_SECRET = gql`
+ mutation Mutation {
+  createStripeClientId
+}
+`;
+
+const CREATE_APPOINTMENT = gql`
+mutation CreateAppointment($fullName: String!, $email: String!, $appointmentDate: String!, $appointmentTime: String!, $comment: String!, $reasonForVisit: String!, $timezone: String!) {
+    createAppointment(fullName: $fullName, email: $email, appointmentDate: $appointmentDate, appointmentTime: $appointmentTime, comment: $comment, reasonForVisit: $reasonForVisit, timezone: $timezone)
+  }`
 
 const Page = () => {
+    const [createAppointment] = useMutation(CREATE_APPOINTMENT);
+    const [createStripeClientId, { data: stripeClientSecretData, loading: stripeClientSecretLoading, error: stripeClientSecretError }] = useMutation(CREATE_STRIPE_CLIENT_SECRET)
+    const [createStripeSession, { data: stripeSessionData, loading: stripeSessionLoading, error: stripeSessionError }] = useMutation(CREATE_STRIPE_SESSION);
     const [selectedTimeZone, setSelectedTimeZone] = useState<string>('');
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-    const [selectedTime, setSelectedTime] = useState('');
+    const [selectedTime, setSelectedTime] = useState<string>('');
+    const [reason, setReason] = useState<string>('');
+    const [selectedDoctor, setSelectedDoctor] = useState<string>("");
+    const [name, setName] = useState<string>("");
+    const [allergies, setAllergies] = useState<string>("");
+    const [comment, setComment] = useState<string>("");
+    const { clientId, setClientId, paymentIntent, setPaymentIntent } = UsePaymentContext();
+
+
+    const handleBookAppointment = async () => {
+        // const response = await createAppointment({
+        //     variables: {
+        //         "fullName": name,
+        //         "email": "bhujelaman20@gmail.com",
+        //         "appointmentDate": selectedDate,
+        //         "appointmentTime": selectedTime,
+        //         "comment": selectedTime,
+        //         "reasonForVisit": reason,
+        //         "timezone": selectedTimeZone
+        //     }
+        // }
+        // )
+
+        try {
+            // Step 1: Create Stripe Checkout Session
+            const stripeSessionResponse = await createStripeSession({
+                variables: {
+                    productName: "Aman Doctor",
+                    productPrice: '20000',
+                    productImage: "https://imgs.search.brave.com/90kY2ne8nXXveKJC7OTzLJS_GUxXKhZlhKfpXf71rrE/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9w/aHlzaWNpYW4tcmV2/aWV3aW5nLWhpcy1u/b3Rlc18xMDk4LTU0/Mi5qcGc_c2l6ZT02/MjYmZXh0PWpwZw"
+                }
+            });
+
+            const sessionId = stripeSessionResponse.data.createStripeCheckoutSession;
+
+            // Step 2: Redirect to Stripe Checkout
+            const stripe: Stripe | null = await loadStripe('pk_test_51OZ9d9Kc8LmZXQQ91uQkILNU8YMGVAfW5SfxVAg0FFP2yZCJuxjR9wLmPrSjpRRJeuBtoCR4nWE29Bj2j0B876oX00KSA2updT');
+
+            if (!stripe) {
+                console.error('Failed to load Stripe.');
+                return;
+            }
+
+            // await stripe.redirectToCheckout({
+            //     sessionId: sessionId,
+            // });
+
+            // Step 4: Get the client secret
+            const clientSecretResponse = await createStripeClientId();
+            const clientSecret = clientSecretResponse.data.createStripeClientId;
+            setClientId(`client secret ${clientSecret}`);
+            console.log("client secret",clientSecret)
+
+            // Step 5: Confirm Card Payment
+            const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret);
+            setPaymentIntent([paymentIntent])
+            console.log(paymentIntent,"payment intent")
+            // Handle payment result
+            if (error) {
+                console.log(error)
+                // Handle error here
+            } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+                // createAppointment call it 
+                createAppointment({
+                    variables: {
+                        "fullName": name,
+                        "email": "bhujelaman20@gmail.com",
+                        "appointmentDate": selectedDate,
+                        "appointmentTime": selectedTime,
+                        "comment": selectedTime,
+                        "reasonForVisit": reason,
+                        "timezone": selectedTimeZone
+                    }
+                }).then(async (res) => {
+                    console.log(res)
+                    const stripe: Stripe | null = await loadStripe('pk_test_51OZ9d9Kc8LmZXQQ91uQkILNU8YMGVAfW5SfxVAg0FFP2yZCJuxjR9wLmPrSjpRRJeuBtoCR4nWE29Bj2j0B876oX00KSA2updT');
+
+                    if (!stripe) {
+                        console.error('Failed to load Stripe.');
+                        return;
+                    }
+
+                    const { error } = await stripe.redirectToCheckout({
+                        sessionId: res.data.createAppointment,
+                    });
+                }).catch((error) => console.log(error))
+            }
+
+        } catch (error) {
+            console.error('Error during the booking process:', error);
+        }
+    }
 
     return (
         <div className='w-full h-auto lg:h-full flex justify-center'>
@@ -51,6 +165,7 @@ const Page = () => {
                             <label className='font-medium sm:mb-2 mt-4'>Reason for appointment*</label>
                             <select
                                 className='w-[100%] sm:w-[95%] h-10 border rounded-[6px] border-gray-500 px-3 outline-none bg-white'
+                                onChange={(e) => setReason(e.target.value)}
                             >
                                 <option value="consultation">Consultation</option>
                                 <option value="routine-exam">Routine Skin Examination</option>
@@ -63,9 +178,10 @@ const Page = () => {
                             <label className='font-medium sm:mb-2 mt-4'>Select Doctor*</label>
                             <select
                                 className='w-[100%] sm:w-[95%] h-10 border rounded-[6px] border-gray-500 px-3 outline-none bg-white'
+                                onChange={(e) => setSelectedDoctor(e.target.value)}
                             >
-                                <option value="consultation">Dr. Evan Sunde</option>
-                                <option value="routine-exam">Dr Sunde Evan</option>
+                                <option value="Evan Sunde">Dr. Evan Sunde</option>
+                                <option value="Sunde Evan">Dr Sunde Evan</option>
                             </select>
                         </div>
                     </div>
@@ -78,7 +194,7 @@ const Page = () => {
                             type='text'
                             placeholder='Enter your Name...'
                             className='w-[100%] sm:w-[95%] lg:w-[90%] h-10 border rounded-[6px] border-gray-500 px-3 outline-none mt-2 sm:mt-0'
-                            // value={"Aman Bhujel"}
+                            onChange={(e) => setName(e.target.value)}
                         />
                         <p className='font-medium mt-4'>Email*</p>
                         <input
@@ -91,15 +207,15 @@ const Page = () => {
                         <p className='font-medium mt-8 mb-2'>Do you have allergies?</p>
                         <div className='flex gap-x-8 text-sm mt-0'>
                             <label>
-                                <input type="radio" name="option" value="yes" />
+                                <input type="radio" name="option" value="yes" onClick={() => setAllergies('yes')} />
                                 <span className='ml-1'> Yes</span>
                             </label>
                             <label>
-                                <input type="radio" name="option" value="no" />
+                                <input type="radio" name="option" value="no" onClick={() => setAllergies('no')} />
                                 <span className='ml-1'> No</span>
                             </label>
                             <label>
-                                <input type="radio" name="option" value="notSure" />
+                                <input type="radio" name="option" value="notSure" onClick={() => setAllergies('Not Sure')} />
                                 <span className='ml-1'> Not Sure</span>
                             </label>
 
@@ -108,17 +224,18 @@ const Page = () => {
                         <textarea
                             placeholder='Something that doctor should know...'
                             className='w-[100%] sm:w-[95%] lg:w-[90%] h-24 pt-2 border rounded-[6px] border-gray-500 px-3 outline-none mt-2 sm:mt-0 text-sm'
+                            onChange={(e) => setComment(e.target.value)}
                         />
                         <label className='mt-4 text-sm'>
-                            <input type="checkbox" name="option" value="notSure" />
+                            <input type="checkbox" />
                             <span className='ml-1'>
                                 I have read and agree with <span className='text-blue-400 underline cursor-pointer'>Terms and Conditions</span>
                             </span>
                         </label>
-                        <button className='text-white bg-[#0736bc] hover:bg-[#0737bcda] py-2 font-medium mt-4 w-40 rounded-[8px] mb-6 lg:mb-0'>
+                        <button className='text-white bg-[#0736bc] hover:bg-[#0737bcda] py-2 font-medium mt-4 w-40 rounded-[8px] mb-6 lg:mb-0' onClick={handleBookAppointment}>
                             Confirm
                         </button>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>

@@ -3,24 +3,32 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 import { useLogoutStore } from "@/stores/LogoutStore";
 import { useRouter } from "next/navigation";
 import ToastMessage from "./utils/ToastMessage";
+import { useLoadingStore } from "@/stores/LoadingStore";
 
 export default function LogoutModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const isLogoutModalOpen = useLogoutStore((state) => state.isLogoutModalOpen);
   const setIsLogoutModalOpen = useLogoutStore((state) => state.setIsLogoutModalOpen);
   const router = useRouter();
-
+  const setIsLoading = useLoadingStore((state) => state.setIsLoading)
 
   const handleLogout = () => {
-    const pastDate = new Date(0);
+    const cookieName = 'token';
+    const cookiePath = '/';
+    const domain = window.location.hostname;
+    const existingCookie = document.cookie
+      .split(';')
+      .map((c) => c.trim())
+      .find((cookie) => cookie.startsWith(`${cookieName}=`));
 
-    document.cookie = `token=; expires=${pastDate.toUTCString()}; path=/; Secure; SameSite=None;`;
-    
-    ToastMessage("success","Signed Out Successfully.")
-    setIsLogoutModalOpen(false);
-    router.replace("/")
+    if (existingCookie) {
+      document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${cookiePath}; domain=${domain};`;
+      ToastMessage('success', 'Logged out successfully');
+      setIsLogoutModalOpen(false);
+      setIsLoading(true);
+      router.replace('/');
+    }
   };
-
 
   return (
     <>

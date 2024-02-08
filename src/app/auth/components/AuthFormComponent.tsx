@@ -43,6 +43,7 @@ const LOGIN_USER = gql`
           city
           name
           age
+          gender
         }
     }
   }
@@ -208,10 +209,10 @@ export const Signin: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
             });
             const { status, message, token, user } = loginResponse.data.loginUser;
             ToastMessage(status, message);
-            setUserInfo({ email: user.email, name: "Hardcoded name" })
+            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age , city: user.city , country: user.country})
             console.log("user from log in ", user)
             if (token) {
-                setCookie(3600, "token", `Bearer ${token}`)
+                 setCookie(3600, "token", `Bearer ${token}`)
                 router.replace('/dashboard/appointments')
             }
         } catch (error) {

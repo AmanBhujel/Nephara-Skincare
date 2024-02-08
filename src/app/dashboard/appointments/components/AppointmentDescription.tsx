@@ -9,6 +9,7 @@ query Query($appointmentId: String!) {
     getReport(appointmentId: $appointmentId)
   }
 `;
+
 interface Appointment {
     name: string;
     description: string;
@@ -28,7 +29,10 @@ interface AppointmentInfoProps {
     appointmentData: Appointment | undefined;
 }
 const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentData }) => {
-    const [getReport]=useLazyQuery(GET_REPORT);
+    const [getReport]=useLazyQuery(GET_REPORT, {
+        fetchPolicy: "no-cache" 
+      });
+      
     const appointmentSelected = useDashboardStore((state) => state.appointmentSelected);
     const setAppointmentSelected = useDashboardStore((state) => state.setAppointmentSelected);
     useEffect(() => {
