@@ -76,46 +76,6 @@ const Page = () => {
                 sessionId: sessionId,
             });
 
-            // Step 4: Get the client secret
-            const clientSecretResponse = await createStripeClientId();
-            const clientSecret = clientSecretResponse.data.createStripeClientId;
-            setClientId(`client secret ${clientSecret}`);
-            console.log("client secret",clientSecret)
-
-            // Step 5: Confirm Card Payment
-            const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret);
-            setPaymentIntent([paymentIntent])
-            console.log(paymentIntent,"payment intent")
-            // Handle payment result
-            if (error) {
-                console.log(error)
-                // Handle error here
-            } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-                // createAppointment call it 
-                createAppointment({
-                    variables: {
-                        "fullName": name,
-                        "email": "bhujelaman20@gmail.com",
-                        "appointmentDate": selectedDate,
-                        "appointmentTime": selectedTime,
-                        "comment": selectedTime,
-                        "reasonForVisit": reason,
-                        "timezone": selectedTimeZone
-                    }
-                }).then(async (res) => {
-                    console.log(res)
-                    const stripe: Stripe | null = await loadStripe('pk_test_51OZ9d9Kc8LmZXQQ91uQkILNU8YMGVAfW5SfxVAg0FFP2yZCJuxjR9wLmPrSjpRRJeuBtoCR4nWE29Bj2j0B876oX00KSA2updT');
-
-                    if (!stripe) {
-                        console.error('Failed to load Stripe.');
-                        return;
-                    }
-
-                    const { error } = await stripe.redirectToCheckout({
-                        sessionId: res.data.createAppointment,
-                    });
-                }).catch((error) => console.log(error))
-            }
 
         } catch (error) {
             console.error('Error during the booking process:', error);
