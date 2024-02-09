@@ -10,6 +10,8 @@ import { useUserStore } from "@/stores/userStore";
 import { gql, useLazyQuery, useQuery } from "@apollo/client";
 import { useEffect } from "react";
 import ToastMessage from "@/components/utils/ToastMessage";
+import { useLoadingStore } from "@/stores/LoadingStore";
+import Loader from "@/components/Loader";
 
 const GET_USER_INFO = gql`
   query GetUserInfoByToken {
@@ -32,9 +34,11 @@ const GET_USER_INFO = gql`
 const Home = () => {
   const userInfo = useUserStore((state) => state.userInfo);
   const setUserInfo = useUserStore((state) => state.setUserInfo);
+  const isLoading = useLoadingStore((state) => state.isLoading);
+  const setIsLoading = useLoadingStore((state) => state.setIsLoading);
 
-  const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO ,{
-    fetchPolicy: "no-cache" 
+  const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO, {
+    fetchPolicy: "no-cache"
   });
 
 
@@ -49,25 +53,31 @@ const Home = () => {
       }
     }
     getUserInfo()
-  }, [])
+    setIsLoading(false);
+  }, []);
 
-  console.log("useriNFO FROM STORE ", userInfo)
+  console.log("useriNFO FROM STORE ", userInfo);
+
   return (
     <main className="bg-white  w-full h-screen">
-      <div className='w-full h-auto flex flex-col  justify-center items-center  '>
-        <Navbar />
-        <HeroSection />
-        {/* <div className="w-full h-40"> */}
-        {/* <Link href={'http://localhost:8080/join?room=roomtest&name=test'}>
+      {isLoading ? <Loader />
+        :
+        <div className='w-full h-auto flex flex-col  justify-center items-center  '>
+          <Navbar />
+          <HeroSection />
+          {/* <div className="w-full h-40"> */}
+          {/* <Link href={'http://localhost:8080/join?room=roomtest&name=test'}>
             <button className="bg-red-400">Join appointment</button>
           </Link> */}
-        {/* </div> */}
-        <WhoWeAre />
-        <Services />
-        <WhatWeBelieve />
-        <Feedback />
-        <Footer />
-      </div>
+          {/* </div> */}
+          <WhoWeAre />
+          <Services />
+          <WhatWeBelieve />
+          <Feedback />
+          <Footer />
+        </div>
+      }
+
     </main>
   );
 };

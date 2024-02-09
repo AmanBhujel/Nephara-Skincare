@@ -29,10 +29,10 @@ const GET_USER_INFO = gql`
     }`
 
 const Page = () => {
-    const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO ,{
-        fetchPolicy: "no-cache" 
-      });
-      
+    const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO, {
+        fetchPolicy: "no-cache"
+    });
+
     const setUserInfo = useUserStore((state) => state.setUserInfo);
     const router = useRouter();
     const setIsLoading = useLoadingStore((state) => state.setIsLoading)
@@ -55,6 +55,7 @@ const Page = () => {
                 if (status === 'error' && message === 'Unauthorized Token!') {
                     router.replace('/auth')
                     ToastMessage("error", "Authorization Denied")
+                    return;
                 } else if (status === 'error' && message === 'Internal server error') {
                     ToastMessage(status, message)
                 }

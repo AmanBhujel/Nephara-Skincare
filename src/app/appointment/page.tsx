@@ -72,9 +72,9 @@ const Page = () => {
                 return;
             }
 
-            // await stripe.redirectToCheckout({
-            //     sessionId: sessionId,
-            // });
+            await stripe.redirectToCheckout({
+                sessionId: sessionId,
+            });
 
             // Step 4: Get the client secret
             const clientSecretResponse = await createStripeClientId();

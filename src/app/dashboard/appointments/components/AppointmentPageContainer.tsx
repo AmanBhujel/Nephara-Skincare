@@ -36,10 +36,10 @@ const AppointmentPageContainer: React.FC<AppointmentInfoProps> = ({ appointmentD
     return (
         <div className='w-full h-full flex flex-col'>
             <AppointmentPageTopDiv />
-            <div className='overflow-auto md:px-8 lg:px-8 lg:py-8 xl:px-8 xl:py-4 2xl:px-16 2xl:py-6 '>
-                <p className={`md:text-3xl mt-6 lg:text-2xl font-semibold tracking-wide lg:flex items-center justify-center lg:justify-start ${appointmentSelected ? "hidden" : "flex"}`}>Appointments</p>
+            <div className='overflow-auto md:px-8 lg:px-8 lg:py-2 xl:px-8 xl:py-2 2xl:px-16 2xl:py-4 '>
+                <p className={`mt-6 text-4xl font-semibold text-[#743bfb]  tracking-wide lg:flex items-center justify-center lg:justify-start ${appointmentSelected ? "hidden" : "flex"}`}>Appointments</p>
                 <AppointmentFilter />
-                <div className='w-full h-auto mt-6 flex items-center justify-center lg:items-start lg:justify-start gap-x-6'>
+                <div className='w-full h-auto lg:mt-6 flex items-center justify-center lg:items-start lg:justify-start gap-x-6'>
                     <AppointmentLists />
                     <AppointmentDescription appointmentData={appointmentData} />
                 </div>

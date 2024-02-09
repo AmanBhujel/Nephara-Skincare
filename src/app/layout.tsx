@@ -9,26 +9,11 @@ import { Toaster } from 'sonner';
 import { NextUIProvider } from "@nextui-org/react";
 import LogoutModal from '@/components/LogoutModal'
 import { getCookie } from '@/components/utils/Cookie'
+import { useTokenStore } from '@/stores/TokenStore'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
-const token = getCookie("token");
-const tokenParts = token.split(" ");
-
-const headers = {
-  authorization: tokenParts ? tokenParts[1] : "",
-  'client-name': 'WidgetX Ecom [web]',
-  'client-version': '1.0.0'
-};
-
-console.log("headers from layout", headers)
-
-
-const graphqlClient = new ApolloClient({
-  uri: "http://localhost:8000/graphql",
-  cache: new InMemoryCache(),
-  headers: headers
-});
 
 // export const metadata: Metadata = {
 //   title: 'Create Next App',
@@ -42,6 +27,25 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const tokenString = useTokenStore((state)=>state.tokenString)
+  const token = getCookie("token");
+  const tokenParts = token.split(" ");
+
+  const headers = {
+    authorization: tokenParts ? tokenParts[1] : "",
+    'client-name': 'WidgetX Ecom [web]',
+    'client-version': '1.0.0'
+  };
+
+  console.log("headers from layout", headers)
+
+
+  const graphqlClient = new ApolloClient({
+    uri: "http://localhost:8000/graphql",
+    cache: new InMemoryCache(),
+    headers: headers
+  });
+
 
 
   return (

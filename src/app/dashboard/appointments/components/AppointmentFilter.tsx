@@ -17,7 +17,7 @@ const AppointmentFilter = () => {
             {["Upcoming", "Past", "All",].map((filter) => (
                 <li
                     key={filter}
-                    className={`cursor-pointer ${selectedAppointmentFilter === filter ? "text-[#743bfb] underline decoration-[3px] underline-offset-8 " : ""}`}
+                    className={`cursor-pointer font-medium ${selectedAppointmentFilter === filter ? "text-[#743bfb] underline decoration-[3px] underline-offset-[6px] " : ""}`}
                     onClick={() => handleFilterClick(filter)}
                 >
                     {filter}

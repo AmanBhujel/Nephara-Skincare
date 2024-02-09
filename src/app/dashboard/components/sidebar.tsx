@@ -7,6 +7,8 @@ import { LuCalendarDays } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
 import { SlLogout } from "react-icons/sl";
 import SidebarImage from '@/assets/SidebarImage-.png';
+import { FaBars } from "react-icons/fa";
+
 import { AiOutlineBars } from "react-icons/ai";
 import { usePathname, useRouter } from 'next/navigation';
 import { useDashboardStore } from '../../../stores/DashboardStore';
@@ -136,7 +138,7 @@ const Sidebar = () => {
                         </div>
                     </div>
                 ) : (
-                    <p className='absolute top-8 left-4 text-white text-3xl cursor-pointer' onClick={() => setIsSidebarOpen(true)}><AiOutlineBars /> </p>
+                    <p className='absolute top-10 left-6 text-white text-3xl cursor-pointer z-50' onClick={() => setIsSidebarOpen(true)}><FaBars /> </p>
                 )}
             </>
         ) : (

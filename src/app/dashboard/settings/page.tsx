@@ -104,6 +104,7 @@ const Page = () => {
                 if (status === 'error' && message === 'Unauthorized Token!') {
                     router.replace('/auth')
                     ToastMessage("error", "Authorization Denied")
+                    return;
                 } else if (status === 'error' && message === 'Internal server error') {
                     ToastMessage(status, message)
                 }

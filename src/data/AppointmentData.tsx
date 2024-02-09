@@ -38,7 +38,5 @@ export const Appointments = [
       language: "English",
       getStatus: "missed"
     },
-
- 
   ];
   

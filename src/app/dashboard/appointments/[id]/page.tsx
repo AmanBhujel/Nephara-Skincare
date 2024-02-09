@@ -9,6 +9,8 @@ import { gql, useLazyQuery } from '@apollo/client';
 import { useUserStore } from '@/stores/userStore';
 import { useRouter } from 'next/navigation';
 import ToastMessage from '@/components/utils/ToastMessage';
+import { useLoadingStore } from '@/stores/LoadingStore';
+import Loader from '@/components/Loader';
 
 interface PageProps {
     params: {
@@ -35,15 +37,19 @@ const GET_USER_INFO = gql`
 
 const Page: NextPage<PageProps> = ({ params }) => {
     const setActiveSidebarItem = useDashboardStore((state) => state.setActiveSidebarItem);
-    const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO ,{
-        fetchPolicy: "no-cache" 
-      });
-      
+    const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO, {
+        fetchPolicy: "no-cache"
+    });
+
     const setUserInfo = useUserStore((state) => state.setUserInfo);
     const router = useRouter();
+    const setIsLoading = useLoadingStore((state) => state.setIsLoading)
+    const isLoading = useLoadingStore((state) => state.isLoading)
+    const setSelectedAppointmentId = useDashboardStore((state) => state.setSelectedAppointmentId);
 
     useEffect(() => {
         setActiveSidebarItem("Appointments")
+        setSelectedAppointmentId(params.id)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -64,13 +70,15 @@ const Page: NextPage<PageProps> = ({ params }) => {
                 if (status === 'error' && message === 'Unauthorized Token!') {
                     router.replace('/auth')
                     ToastMessage("error", "Authorization Denied")
+                    return;
                 } else if (status === 'error' && message === 'Internal server error') {
                     ToastMessage(status, message)
                 }
+                setIsLoading(false)
             } catch (error) {
                 console.error("Error fetching user info:", error);
-                // Handle any error or perform cleanup actions
             }
+
         };
 
         if (isMounted) {
@@ -85,13 +93,14 @@ const Page: NextPage<PageProps> = ({ params }) => {
         };
     }, []);
 
-
     const appointment = Appointments.find(appointment => appointment.appointment_id === params.id);
 
     return (
         <main className='w-full h-screen flex justify-center items-center bg-[#f6f8fc] relative'>
-            <Sidebar />
-            <AppointmentPageContainer appointmentData={appointment} />
+            {isLoading ? <Loader /> :
+                <>
+                    <Sidebar />
+                    <AppointmentPageContainer appointmentData={appointment} /></>}
         </main>
     );
 }
