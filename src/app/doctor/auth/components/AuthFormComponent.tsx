@@ -71,7 +71,7 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
             const { status, message, token } = signupResponse.data.signupUser;
             ToastMessage(status, message);
             if (token) {
-                setCookie(3600, "token", `Bearer ${token}`)
+                setCookie(36000, "token", `Bearer ${token}`)
                 router.push('/')
             }
         } catch (error) {
@@ -191,7 +191,7 @@ export const Signin: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
             const { status, message, token } = loginResponse.data.loginUser;
             ToastMessage(status, message);
             if (token) {
-                setCookie(3600, "token", `Bearer ${token}`)
+                setCookie(36000, "token", `Bearer ${token}`)
                 router.push('/')
             }
         } catch (error) {

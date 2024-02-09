@@ -12,6 +12,9 @@ import { useRouter } from 'next/navigation';
 import ToastMessage from '@/components/utils/ToastMessage';
 import { useLoadingStore } from '@/stores/LoadingStore';
 import Loader from '@/components/Loader';
+import Image from 'next/image';
+import Profile from '@/assets/Emma.png';
+import { TbCameraPlus } from "react-icons/tb";
 
 const UPDATE_USER = gql`
 mutation UpdateUserDetails($photo: String!, $name: String!, $age: Int!, $gender: String!, $phoneNumber: String!, $city: String!, $country: String!) {
@@ -130,16 +133,16 @@ const Page = () => {
     const handleLogout = () => {
         setIsLogoutModalOpen(true);
     }
-    return (
 
-        <main className='w-full h-screen flex  items-center bg-[#f6f8fc] relative'>
+    return (
+        <main className='w-full h-screen flex justify-center bg-[#f6f8fc] relative'>
             {
                 isLoading ? <Loader /> :
                     <>
                         <Sidebar />
-                        <div className={`${windowWidth > 1024 || activeSettingButton === "" ? "block" : "hidden"} w-[20%] min-w-[20rem] max-w-[25rem] h-full px-2 ml-8`}>
-                            <p className='text-4xl font-medium  tracking-wide mt-10'>Account Settings</p>
-                            <ul className='w-full mt-16'>
+                        <div className={`${windowWidth > 1024 || activeSettingButton === "" ? "flex" : "hidden"} ${windowWidth > 1024 ? "" : "flex w-[85%] h-full items-center flex-col overflow-auto"} lg:w-[20%]  lg:min-w-[20rem] lg:max-w-[25rem] lg:h-full px-2 lg:ml-8`}>
+                            <p className={`text-3xl sm:text-4xl lg:text-3xl font-semibold  tracking-wide mt-10 ${windowWidth > 1024?"":"text-[#743bfb]"}`}>Account Settings</p>
+                            <ul className='w-full mt-12'>
                                 <li className='border-b-2 font-medium h-16 flex justify-between items-center cursor-pointer' onClick={() => setActiveSettingButton("Edit")}>
                                     <p className='flex items-center text-lg ml-2'><span className='text-3xl mr-3'><LuUserSquare2 /></span>Edit Profile</p>
                                     <i className='text-3xl mr-2'><MdNavigateNext /></i>
@@ -154,9 +157,19 @@ const Page = () => {
                                 </li>
                             </ul>
                         </div>
-                        <div className={`${windowWidth > 1024 || activeSettingButton === "Edit" ? "flex" : "hidden"} w-full  lg:w-[70%] xl:w-[50%] h-full justify-center border-l-2 lg:ml-[5%] `}>
+
+
+                        <div className={`${windowWidth > 1024 || activeSettingButton === "Edit" ? "flex" : "hidden"} w-full h-full   lg:w-[70%] xl:w-[50%] justify-center border lg:ml-[5%] bg-[#f6f8fc] `}>
                             <div className='w-[95%] md:w-[75%] xl:w-[70%] 2xl:w-[50%]'>
-                                <p className='mt-12 text-2xl font-medium'>Edit Your Profile</p>
+                                <div className='flex w-full justify-center items-center'>
+                                    <p className='mt-8 text-4xl font-semibold text-[#743bfb]  tracking-wide'>Edit Your Profile</p>
+                                </div>
+                                <div className='flex flex-col w-full justify-center items-center mt-3'>
+                                    <Image src={Profile} width={200} height={200} alt='Profile Image' className='w-32 h-32 rounded-[8px] border' />
+                                    <div className='flex items-center justify-center border-2 border-[#7e59e4] w-40 py-2 rounded-[8px] mt-2 cursor-pointer'>
+                                        <i className='text-xl'><TbCameraPlus /></i><p className='text-sm ml-2 font-medium'>Change Avatar</p>
+                                    </div>
+                                </div>
                                 <div className='flex flex-col mt-6'>
                                     <label className='text-gray-600 font-medium mb-1 '>
                                         Full Name
@@ -219,7 +232,7 @@ const Page = () => {
                                         className='h-12 border pl-2 w-[100%] outline-none rounded-[6px] text-lg'
                                     />
                                 </div>
-                                <button className='w-full rounded-[8px] bg-[#7650e0] hover:bg-[#7e59e4] font-medium mt-8 text-lg py-2 text-white' onClick={handleUpdateUser}>Save Changes</button>
+                                <button className={`w-full rounded-[8px] bg-[#7650e0] hover:bg-[#7e59e4] font-medium mt-8 text-lg py-2 text-white mb-20 lg:mb-0`} onClick={handleUpdateUser}>Save Changes</button>
                             </div>
                         </div>
                     </>
