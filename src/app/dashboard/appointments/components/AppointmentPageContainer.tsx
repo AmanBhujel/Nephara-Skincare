@@ -31,6 +31,7 @@ const AppointmentPageContainer: React.FC<AppointmentInfoProps> = ({ appointmentD
         if (appointmentData) {
             setAppointmentSelected(true)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

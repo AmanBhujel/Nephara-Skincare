@@ -118,7 +118,7 @@ const ReportModal: React.FC<MyModalProps> = ({ isReportModalOpen, setIsReportMod
                             {/* Doctor's Feedback Input */}
                             <div className="mb-4">
                                 <label htmlFor="doctorFeedback" className="block text-sm font-medium text-gray-700">
-                                    Doctor's Feedback
+                                    Doctors Feedback
                                 </label>
                                 <input
                                     type="text"

@@ -106,6 +106,8 @@ const Page: NextPage<PageProps> = ({ params }) => {
             // Perform cleanup actions here if needed
             // For example: Clear any timers or subscriptions
         };
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const appointment = Appointments.find(appointment => appointment.appointment_id === params.id);

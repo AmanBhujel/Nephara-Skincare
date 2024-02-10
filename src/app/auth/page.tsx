@@ -86,6 +86,8 @@ const Page = () => {
             // Perform cleanup actions here if needed
             // For example: Clear any timers or subscriptions
         };
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
