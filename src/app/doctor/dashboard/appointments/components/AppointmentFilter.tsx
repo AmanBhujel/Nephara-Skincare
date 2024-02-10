@@ -1,11 +1,10 @@
 'use client'
-
 import { useDashboardStore } from "@/stores/DashboardStore";
+import Link from 'next/link';
 
 const AppointmentFilter = () => {
     const selectedAppointmentFilter = useDashboardStore((state) => state.selectedAppointmentFilter);
     const setSelectedAppointmentFilter = useDashboardStore((state) => state.setSelectedAppointmentFilter);
-
     const appointmentSelected = useDashboardStore((state) => state.appointmentSelected);
 
     const handleFilterClick = (filter: string) => {
@@ -18,7 +17,7 @@ const AppointmentFilter = () => {
             {["Upcoming", "Past", "All",].map((filter) => (
                 <li
                     key={filter}
-                    className={`cursor-pointer ${selectedAppointmentFilter === filter ? "text-[#743bfb] underline decoration-[3px] underline-offset-8 " : ""}`}
+                    className={`cursor-pointer font-medium ${selectedAppointmentFilter === filter ? "text-[#743bfb] underline decoration-[3px] underline-offset-[6px] " : ""}`}
                     onClick={() => handleFilterClick(filter)}
                 >
                     {filter}

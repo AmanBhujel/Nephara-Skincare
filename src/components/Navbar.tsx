@@ -8,6 +8,10 @@ import { IoHomeOutline, IoSettingsOutline } from "react-icons/io5";
 import { FaMicroblog, FaQuestion } from "react-icons/fa";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import Link from 'next/link';
+import { useLoadingStore } from '@/stores/LoadingStore';
+import { useAuthorizedStore } from '@/stores/AuthorizedStore';
+import Profile from '@/assets/Emma.png';
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 const Navbar = () => {
     const [windowWidth, setWindowWidth] = useState(0);
@@ -15,6 +19,8 @@ const Navbar = () => {
     const [sidebarActiveItem, setSidebarActiveItem] = useState("Home");
     const [showSidebar, setShowSidebar] = useState(false);
     const sidebarRef = useRef(null);
+    const setIsLoading = useLoadingStore((state) => state.setIsLoading);
+    const isAuthorized = useAuthorizedStore((state) => state.isAuthorized);
 
     const menuItems = [
         { name: 'Home', route: "/" },
@@ -68,19 +74,19 @@ const Navbar = () => {
                 {windowWidth >= 1024 && (
                     <ul className="hidden lg:flex items-center justify-center gap-x-10 lg:ml-[13%] xl:ml-[27%] 2xl:ml-[37%]">
                         {menuItems.map((item, index) => (
-                            <Link href={item.route || "/"} key={index}>
-                           <li className={`xl:text-base cursor-pointer ${item.name === activeItem ? "underline underline-offset-8 text-black" : "text-gray-500"} hover:underline hover:underline-offset-8 font-medium tracking-tight hover:text-black `}
-                               onClick={() => setActiveItem(item.name)}>
-                             {item.name}
-                           </li>
-                         </Link>
-                         
+                            <Link href={item.route || "/"} key={index} onClick={() => setIsLoading(true)}>
+                                <li className={`xl:text-base cursor-pointer ${item.name === activeItem ? "underline underline-offset-8 text-black" : "text-gray-500"} hover:underline hover:underline-offset-8 font-medium tracking-tight hover:text-black `}
+                                    onClick={() => setActiveItem(item.name)}>
+                                    {item.name}
+                                </li>
+                            </Link>
+
                         ))}
                     </ul>
                 )}
 
                 {/* Login/Signup Buttons */}
-                {windowWidth >= 1024 && (
+                {windowWidth >= 1024 && !isAuthorized && (
                     <div className="hidden lg:flex items-center justify-center ml-[10%]">
                         <Link href={"/auth"}>
                             <button className="border-none text-lg font-semibold hover:underline hover:underline-offset-6">Log in</button>
@@ -90,6 +96,15 @@ const Navbar = () => {
                         </Link>
                     </div>
                 )}
+                {
+                    windowWidth >= 1024 && isAuthorized &&
+                    <div className="hidden lg:flex items-center justify-center ml-[10%]">
+
+                        <Image src={Profile} alt='Profile' width={100} height={100} className='w-16 h-16 border rounded-full object-cover' />
+                        <p className='ml-3 font-semibold text-[#743bfb]'>Welcome Aman</p>
+                        <i className='text-4xl cursor-pointer hover:rotate-[180deg]'><RiArrowDropDownLine /></i>
+                    </div>
+                }
 
                 {/* Mobile Menu Button */}
                 {windowWidth < 1024 && (
@@ -117,12 +132,14 @@ const Navbar = () => {
                             ))}
                         </ul>
                         {/* ---------login CTA------------- */}
-                        <div className='flex items-center justify-center w-full flex-col mt-[15%]'>
-                            <p className="text-sm font-medium text-black  mb-2 ">Get Started Today:</p>
-                            <Link href={"/auth"}>
-                                <button className="bg-[#a376ff] py-3 px-10 font-medium text-lg text-white rounded-[7px]">Register/ Login</button>
-                            </Link>
-                        </div>
+                        {!isAuthorized &&
+                            <div className='flex items-center justify-center w-full flex-col mt-[15%]'>
+                                <p className="text-sm font-medium text-black  mb-2 ">Get Started Today:</p>
+                                <Link href={"/auth"}>
+                                    <button className="bg-[#a376ff] py-3 px-10 font-medium text-lg text-white rounded-[7px]">Register/ Login</button>
+                                </Link>
+                            </div>
+                        }
 
                     </div>
                 )}

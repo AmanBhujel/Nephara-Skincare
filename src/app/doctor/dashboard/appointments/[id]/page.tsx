@@ -24,7 +24,7 @@ const Page: NextPage<PageProps> = ({ params }) => {
 
     return (
         <main className='w-full h-screen flex justify-center items-center bg-[#f6f8fc] relative'>
-            <Sidebar />
+            {/* <Sidebar /> */}
             <AppointmentContainer appointmentData={appointment} />
         </main>
     );

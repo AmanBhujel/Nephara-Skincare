@@ -122,9 +122,11 @@ const Sidebar = () => {
                                     <p className='w-[95%] flex flex-wrap items-center justify-center text-center text-gray-600 mt-2'>
                                         Start your skincare with a quick appointment.
                                     </p>
-                                    <button className="bg-[#8f67e2] hover:bg-[#9c75e9] py-2 px-7 font-semibold text-white rounded-[8px] mt-5">
-                                        Book now
-                                    </button>
+                                    <Link href={'/appointment'}>
+                                        <button className="bg-[#8f67e2] hover:bg-[#9c75e9] py-2 px-7 font-semibold text-white rounded-[8px] mt-5">
+                                            Book now
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
                             <div className='bottom-0 absolute flex items-center justify-center w-full' onClick={() => setIsLogoutModalOpen(true)}>

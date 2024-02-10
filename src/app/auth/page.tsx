@@ -7,6 +7,8 @@ import { useUserStore } from '@/stores/userStore'
 import ToastMessage from '@/components/utils/ToastMessage'
 import { useLoadingStore } from '@/stores/LoadingStore'
 import Loader from '@/components/Loader'
+import { useAuthorizedStore } from '@/stores/AuthorizedStore'
+import { getCookie } from '@/components/utils/Cookie'
 
 
 const GET_USER_INFO = gql`
@@ -36,28 +38,36 @@ const Page = () => {
     const setIsLoading = useLoadingStore((state) => state.setIsLoading);
     const setUserInfo = useUserStore((state) => state.setUserInfo);
     const router = useRouter();
+    const isAuthorized = useAuthorizedStore((state) => state.isAuthorized);
+    const setIsAuthorized = useAuthorizedStore((state) => state.setIsAuthorized);
 
     useEffect(() => {
         let isMounted = true; // Flag to track component mount state
-
+        const token = getCookie("token");
         const getUserInfo = async () => {
             try {
-                const response = await getUserInfoByToken();
-                console.log(response, "from useeffect from landing");
+                if (token) {
+                    if (!isAuthorized) {
+                        const response = await getUserInfoByToken();
 
-                if (!isMounted) return; // Skip state updates if component is unmounted
+                        if (!isMounted) return; // Skip state updates if component is unmounted
 
-                const { status, message, user } = response.data.getUserInfoByToken;
-                if (user) {
-                    setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
-                }
-                if (status === 'success' && message === 'Authorized Token!') {
-                    router.replace('/dashboard/appointments')
-                    ToastMessage("success", "Already Signed in!")
-                    return
+                        const { status, message, user } = response.data.getUserInfoByToken;
+                        if (user) {
+                            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+                        }
+                        if (status === 'success' && message === 'Authorized Token!') {
+                            console.log("scucess auth")
+                            router.replace('/dashboard/appointments')
+                            ToastMessage("success", "Already Signed in!")
+                            setIsAuthorized(true)
+                            return
 
-                } else if (status === 'error' && message === 'Internal server error') {
-                    ToastMessage(status, message)
+                        } else if (status === 'error' && message === 'Internal server error') {
+                            console.log("unauth")
+                            ToastMessage(status, message)
+                        }
+                    }
                 }
                 setIsLoading(false)
             } catch (error) {

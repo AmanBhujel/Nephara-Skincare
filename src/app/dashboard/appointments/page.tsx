@@ -11,6 +11,8 @@ import { useUserStore } from '@/stores/userStore';
 import { useRouter } from 'next/navigation';
 import { useLoadingStore } from '@/stores/LoadingStore';
 import Loader from '@/components/Loader';
+import { useAuthorizedStore } from '@/stores/AuthorizedStore';
+import { getCookie } from '@/components/utils/Cookie';
 
 interface PageProps {
     params: {
@@ -40,13 +42,15 @@ const Page: NextPage<PageProps> = ({ params }) => {
     const appointment = Appointments.find(appointment => appointment.appointment_id === params.id);
     const setAppointmentSelected = useDashboardStore((state) => state.setAppointmentSelected);
     const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO, {
-        fetchPolicy: "no-cache" 
-      });
-      
+        fetchPolicy: "no-cache"
+    });
+
     const setUserInfo = useUserStore((state) => state.setUserInfo);
     const setIsLoading = useLoadingStore((state) => state.setIsLoading)
     const isLoading = useLoadingStore((state) => state.isLoading)
     const router = useRouter();
+    const isAuthorized = useAuthorizedStore((state) => state.isAuthorized);
+    const setIsAuthorized = useAuthorizedStore((state) => state.setIsAuthorized);
 
     useEffect(() => {
         setAppointmentSelected(false)
@@ -56,24 +60,37 @@ const Page: NextPage<PageProps> = ({ params }) => {
 
     useEffect(() => {
         let isMounted = true; // Flag to track component mount state
+        const token = getCookie("token");
 
         const getUserInfo = async () => {
             try {
-                const response = await getUserInfoByToken();
-                console.log(response, "from useeffect from appointment");
+                if (token) {
+                    if (!isAuthorized) {
 
-                if (!isMounted) return; // Skip state updates if component is unmounted
+                        const response = await getUserInfoByToken();
+                        console.log(response, "from useeffect from landing");
 
-                const { status, message, user } = response.data.getUserInfoByToken;
-                if (user) {
-                    setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+                        if (!isMounted) return; // Skip state updates if component is unmounted
+
+                        const { status, message, user } = response.data.getUserInfoByToken;
+                        if (user) {
+                            setIsAuthorized(true)
+                            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+                        }
+                        if (status === 'error' && message === 'Unauthorized Token!') {
+                            router.replace('/auth')
+                            ToastMessage("error", "Authorization Denied")
+                            return;
+                        } else if (status === 'error' && message === 'Internal server error') {
+                            ToastMessage(status, message)
+                        }
+                    }
+
                 }
-                if (status === 'error' && message === 'Unauthorized Token!') {
+                else {
                     router.replace('/auth')
                     ToastMessage("error", "Authorization Denied")
                     return;
-                } else if (status === 'error' && message === 'Internal server error') {
-                    ToastMessage(status, message)
                 }
                 setIsLoading(false);
             } catch (error) {

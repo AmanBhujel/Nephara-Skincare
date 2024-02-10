@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation';
 import ToastMessage from '@/components/utils/ToastMessage';
 import Loader from '@/components/Loader';
 import { useLoadingStore } from '@/stores/LoadingStore';
+import { useAuthorizedStore } from '@/stores/AuthorizedStore';
+import { getCookie } from '@/components/utils/Cookie';
 
 const GET_USER_INFO = gql`
   query GetUserInfoByToken {
@@ -37,27 +39,40 @@ const Page = () => {
     const router = useRouter();
     const setIsLoading = useLoadingStore((state) => state.setIsLoading)
     const isLoading = useLoadingStore((state) => state.isLoading)
+    const isAuthorized = useAuthorizedStore((state) => state.isAuthorized);
+    const setIsAuthorized = useAuthorizedStore((state) => state.setIsAuthorized);
 
     useEffect(() => {
+        const token = getCookie("token")
         let isMounted = true; // Flag to track component mount state
 
         const getUserInfo = async () => {
             try {
-                const response = await getUserInfoByToken();
-                console.log(response, "from useeffect from landing");
+                if (token) {
+                    console.log(token,"asking token ")
+                    if (!isAuthorized) {
+                        const response = await getUserInfoByToken();
 
-                if (!isMounted) return; // Skip state updates if component is unmounted
+                        if (!isMounted) return; // Skip state updates if component is unmounted
 
-                const { status, message, user } = response.data.getUserInfoByToken;
-                if (user) {
-                    setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+                        const { status, message, user } = response.data.getUserInfoByToken;
+                        if (user) {
+                            setIsAuthorized(true)
+                            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+                        }
+                        if (status === 'error' && message === 'Unauthorized Token!') {
+                            router.replace('/auth')
+                            ToastMessage("error", "Authorization Denied")
+                            return;
+                        } else if (status === 'error' && message === 'Internal server error') {
+                            ToastMessage(status, message)
+                        }
+                    }
                 }
-                if (status === 'error' && message === 'Unauthorized Token!') {
+                else {
                     router.replace('/auth')
                     ToastMessage("error", "Authorization Denied")
                     return;
-                } else if (status === 'error' && message === 'Internal server error') {
-                    ToastMessage(status, message)
                 }
                 setIsLoading(false);
             } catch (error) {

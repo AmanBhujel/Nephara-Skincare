@@ -208,13 +208,14 @@ export const Signin: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
                 }
             });
             const { status, message, token, user } = loginResponse.data.loginUser;
-            ToastMessage(status, message);
-            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+            console.log("toekn from back", token)
             console.log("user from log in ", user)
+            ToastMessage(status, message);
             if (token) {
-                setCookie(36000, "token", `Bearer ${token}`)
+                setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+                setCookie(84000, "token", `Bearer ${token}`)
                 router.replace('/dashboard/user-profile')
-                window.location.reload(); 
+                window.location.reload();
             }
         } catch (error) {
             ToastMessage('error', 'Internal Server Error')
