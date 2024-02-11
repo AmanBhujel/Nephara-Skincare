@@ -212,9 +212,9 @@ export const Signin: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
             console.log("user from log in ", user)
             ToastMessage(status, message);
             if (token) {
-                setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+                setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country ,phoneNumber:user.phoneNumber})
                 setCookie(84000, "token", `Bearer ${token}`)
-                router.replace('/dashboard/user-profile')
+                router.replace('/dashboard/profile')
                 window.location.reload();
             }
         } catch (error) {

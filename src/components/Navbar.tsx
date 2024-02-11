@@ -10,8 +10,12 @@ import { MdOutlineDashboardCustomize } from "react-icons/md";
 import Link from 'next/link';
 import { useLoadingStore } from '@/stores/LoadingStore';
 import { useAuthorizedStore } from '@/stores/AuthorizedStore';
-import Profile from '@/assets/Emma.png';
+import Profile from '@/assets/beautiful-nurse.png';
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { IoMdArrowDropdown } from 'react-icons/io';
+import { useUserStore } from '@/stores/userStore';
+import LogoutModal from '@/components/LogoutModal';
+import { useLogoutStore } from '@/stores/LogoutStore';
 
 const Navbar = () => {
     const [windowWidth, setWindowWidth] = useState(0);
@@ -21,12 +25,25 @@ const Navbar = () => {
     const sidebarRef = useRef(null);
     const setIsLoading = useLoadingStore((state) => state.setIsLoading);
     const isAuthorized = useAuthorizedStore((state) => state.isAuthorized);
+    const userInfo = useUserStore((state) => state.userInfo);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+    const setIsLogoutModalOpen = useLogoutStore((state) => state.setIsLogoutModalOpen)
+
+    const handleDropdownToggle = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleLogout = () => {
+        setIsLogoutModalOpen(true);
+    };
+
 
     const menuItems = [
         { name: 'Home', route: "/" },
         { name: 'Blogs', route: "/blogs" },
         { name: 'FAQs', routes: "faq" },
-        { name: 'Dashboard', route: "/dashboard/user-profile" },
+        { name: 'Dashboard', route: "/dashboard/profile" },
     ];
 
 
@@ -34,9 +51,24 @@ const Navbar = () => {
         { icon: <IoHomeOutline />, name: 'Home', route: "/" },
         { icon: <FaMicroblog />, name: 'Blogs', route: "/blogs" },
         { icon: <FaQuestion />, name: 'FAQs', routes: "faq" },
-        { icon: <MdOutlineDashboardCustomize />, name: 'Dashboard', route: "/dashboard/user-profile" },
+        { icon: <MdOutlineDashboardCustomize />, name: 'Dashboard', route: "/dashboard/profile" },
         { icon: <IoSettingsOutline />, name: 'Settings', route: "/dashboard/settings" },
     ];
+
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !(dropdownRef.current as any).contains(event.target)) {
+                setIsDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         const handleResize = () => {
@@ -49,6 +81,7 @@ const Navbar = () => {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -63,10 +96,12 @@ const Navbar = () => {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sidebarRef]);
 
     return (
         <nav className="w-full flex justify-center items-center border-b-2 ">
+            <LogoutModal />
             <div className='h-20 w-[95%] lg:w-[63rem] xl:w-[79rem] 2xl:w-[117rem] flex items-center justify-between lg:justify-start'>
                 <Image src={Logo} width={200} height={100} alt="Nephara" className='pl-12' />
 
@@ -96,15 +131,26 @@ const Navbar = () => {
                         </Link>
                     </div>
                 )}
-                {
-                    windowWidth >= 1024 && isAuthorized &&
-                    <div className="hidden lg:flex items-center justify-center ml-[10%]">
-
-                        <Image src={Profile} alt='Profile' width={100} height={100} className='w-16 h-16 border rounded-full object-cover' />
-                        <p className='ml-3 font-semibold text-[#743bfb]'>Welcome Aman</p>
-                        <i className='text-4xl cursor-pointer hover:rotate-[180deg]'><RiArrowDropDownLine /></i>
+                {/* -------------Profile Image---------- */}
+                {windowWidth >= 1024 && isAuthorized && (
+                    <div className="hidden lg:flex items-center justify-center ml-[10%] text-gray-700 relative cursor-pointer" onClick={handleDropdownToggle}>
+                        <div className="flex items-center">
+                            <Image src={Profile} alt='Profile' width={300} height={300} className='w-14 h-14 border border-gray-600 rounded-full object-cover' />
+                            <p className='ml-3 font-semibold'>Welcome {userInfo[0]?.name && userInfo[0].name.split(' ')[0]}</p>
+                        </div>
+                        <i className='text-xl ml-2 cursor-pointer'><IoMdArrowDropdown /></i>
+                        {isDropdownOpen && (
+                            <div className="absolute right-0 top-[80%] mt-2 bg-white border border-gray-200 shadow-xl z-40 p-1 rounded-[8px]" ref={dropdownRef}>
+                                <ul>
+                                    <Link href={'/dashboard/profile'}>
+                                        <li className="px-6 py-2 font-semibold rounded-[8px] hover:bg-[#743bfb] hover:text-white cursor-pointer" >View Profile</li>
+                                    </Link>
+                                    <li className="px-6 py-2 font-semibold rounded-[8px] hover:bg-[#743bfb] hover:text-white cursor-pointer" onClick={handleLogout}>Logout</li>
+                                </ul>
+                            </div>
+                        )}
                     </div>
-                }
+                )}
 
                 {/* Mobile Menu Button */}
                 {windowWidth < 1024 && (

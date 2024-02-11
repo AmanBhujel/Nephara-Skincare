@@ -53,12 +53,13 @@ const Home = () => {
         const { status, message, user } = response.data.getUserInfoByToken;
         if (user) {
           setIsAuthorized(true);
-          setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+          setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country,phoneNumber:user.phoneNumber })
         }
       }
     }
     getUserInfo()
     setIsLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log("useriNFO FROM STORE ", userInfo);

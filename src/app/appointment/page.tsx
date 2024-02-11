@@ -5,9 +5,10 @@ import DatePickerDemo from '../book-appointment/components/DatePicker';
 import { gql, useMutation } from '@apollo/client';
 import { Stripe, loadStripe } from '@stripe/stripe-js';
 import { UsePaymentContext } from '@/components/contexts/checkContext';
+import ToastMessage from '@/components/utils/ToastMessage';
 
 const CREATE_STRIPE_SESSION = gql`
-  mutation CreateStripeCheckoutSession($productName: String!, $productPrice: String!, $productImage: String!) {
+mutation CreateStripeCheckoutSession($productName: String!, $productPrice: String!, $productImage: String!) {
     createStripeCheckoutSession(productName: $productName, productPrice: $productPrice, productImage: $productImage)
   }
 `;
@@ -19,9 +20,10 @@ const CREATE_STRIPE_CLIENT_SECRET = gql`
 `;
 
 const CREATE_APPOINTMENT = gql`
-mutation CreateAppointment($fullName: String!, $email: String!, $appointmentDate: String!, $appointmentTime: String!, $comment: String!, $reasonForVisit: String!, $timezone: String!) {
-    createAppointment(fullName: $fullName, email: $email, appointmentDate: $appointmentDate, appointmentTime: $appointmentTime, comment: $comment, reasonForVisit: $reasonForVisit, timezone: $timezone)
-  }`
+mutation CreateAppointment($fullName: String!, $email: String!, $appointmentDate: String!, $appointmentTime: String!, $comment: String!, $reasonForVisit: String!, $allergies: String!, $timezone: String!) {
+    createAppointment(fullName: $fullName, email: $email, appointmentDate: $appointmentDate, appointmentTime: $appointmentTime, comment: $comment, reasonForVisit: $reasonForVisit, allergies: $allergies, timezone: $timezone)
+  }
+  `
 
 const Page = () => {
     const [createAppointment] = useMutation(CREATE_APPOINTMENT);
@@ -39,87 +41,106 @@ const Page = () => {
 
 
     const handleBookAppointment = async () => {
-        // const response = await createAppointment({
-        //     variables: {
-        //         "fullName": name,
-        //         "email": "bhujelaman20@gmail.com",
-        //         "appointmentDate": selectedDate,
-        //         "appointmentTime": selectedTime,
-        //         "comment": selectedTime,
-        //         "reasonForVisit": reason,
-        //         "timezone": selectedTimeZone
-        //     }
-        // }
-        // )
-
-        try {
-            // Step 1: Create Stripe Checkout Session
-            const stripeSessionResponse = await createStripeSession({
-                variables: {
-                    productName: "Aman Doctor",
-                    productPrice: '20000',
-                    productImage: "https://imgs.search.brave.com/90kY2ne8nXXveKJC7OTzLJS_GUxXKhZlhKfpXf71rrE/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9w/aHlzaWNpYW4tcmV2/aWV3aW5nLWhpcy1u/b3Rlc18xMDk4LTU0/Mi5qcGc_c2l6ZT02/MjYmZXh0PWpwZw"
-                }
-            });
-
-            const sessionId = stripeSessionResponse.data.createStripeCheckoutSession;
-
-            // Step 2: Redirect to Stripe Checkout
-            const stripe: Stripe | null = await loadStripe('pk_test_51OZ9d9Kc8LmZXQQ91uQkILNU8YMGVAfW5SfxVAg0FFP2yZCJuxjR9wLmPrSjpRRJeuBtoCR4nWE29Bj2j0B876oX00KSA2updT');
-
-            if (!stripe) {
-                console.error('Failed to load Stripe.');
-                return;
-            }
-
-            await stripe.redirectToCheckout({
-                sessionId: sessionId,
-            });
-
-            // Step 4: Get the client secret
-            const clientSecretResponse = await createStripeClientId();
-            const clientSecret = clientSecretResponse.data.createStripeClientId;
-            setClientId(`client secret ${clientSecret}`);
-            console.log("client secret",clientSecret)
-
-            // Step 5: Confirm Card Payment
-            const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret);
-            setPaymentIntent([paymentIntent])
-            console.log(paymentIntent,"payment intent")
-            // Handle payment result
-            if (error) {
-                console.log(error)
-                // Handle error here
-            } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-                // createAppointment call it 
-                createAppointment({
-                    variables: {
-                        "fullName": name,
-                        "email": "bhujelaman20@gmail.com",
-                        "appointmentDate": selectedDate,
-                        "appointmentTime": selectedTime,
-                        "comment": selectedTime,
-                        "reasonForVisit": reason,
-                        "timezone": selectedTimeZone
-                    }
-                }).then(async (res) => {
-                    console.log(res)
-                    const stripe: Stripe | null = await loadStripe('pk_test_51OZ9d9Kc8LmZXQQ91uQkILNU8YMGVAfW5SfxVAg0FFP2yZCJuxjR9wLmPrSjpRRJeuBtoCR4nWE29Bj2j0B876oX00KSA2updT');
-
-                    if (!stripe) {
-                        console.error('Failed to load Stripe.');
-                        return;
-                    }
-
-                    const { error } = await stripe.redirectToCheckout({
-                        sessionId: res.data.createAppointment,
-                    });
-                }).catch((error) => console.log(error))
-            }
-
-        } catch (error) {
-            console.error('Error during the booking process:', error);
+        if (!selectedDate || !selectedDoctor || !selectedTimeZone || !selectedTime || !allergies || !name || !reason) {
+            ToastMessage("error", "Please fill all the boxes.")
+            return;
         }
+        const response = await createAppointment({
+            variables:
+            {
+                "fullName": name,
+                "email": "bhujelaman20@gmail.com",
+                "appointmentDate": selectedDate,
+                "appointmentTime": selectedTime,
+                "comment": selectedTime,
+                "reasonForVisit": reason,
+                "timezone": selectedTimeZone,
+                "allergies": allergies
+            }
+            //          {
+            //     "fullName": "Aman Bhujel",
+            //     "email": "bhujelaman20@gmail.com",
+            //     "appointmentDate": "26th Feb",
+            //     "appointmentTime": "1pm",
+            //     "comment": "No comments for this",
+            //     "reasonForVisit": "Regular Check up",
+            //     "allergies": "no",
+            //     "timezone": "+5:45 GMT"
+            //   }
+        }
+        );
+
+        console.log(response, "response from appointment")
+
+
+        // try {
+        //     // Step 1: Create Stripe Checkout Session
+        //     const stripeSessionResponse = await createStripeSession({
+        //         variables: {
+        //             productName: "Aman Doctor",
+        //             productPrice: '20000',
+        //             productImage: "https://imgs.search.brave.com/90kY2ne8nXXveKJC7OTzLJS_GUxXKhZlhKfpXf71rrE/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9w/aHlzaWNpYW4tcmV2/aWV3aW5nLWhpcy1u/b3Rlc18xMDk4LTU0/Mi5qcGc_c2l6ZT02/MjYmZXh0PWpwZw"
+        //         }
+        //     });
+
+        //     const sessionId = stripeSessionResponse.data.createStripeCheckoutSession;
+
+        //     // Step 2: Redirect to Stripe Checkout
+        //     const stripe: Stripe | null = await loadStripe('pk_test_51OZ9d9Kc8LmZXQQ91uQkILNU8YMGVAfW5SfxVAg0FFP2yZCJuxjR9wLmPrSjpRRJeuBtoCR4nWE29Bj2j0B876oX00KSA2updT');
+
+        //     if (!stripe) {
+        //         console.error('Failed to load Stripe.');
+        //         return;
+        //     }
+
+        //     await stripe.redirectToCheckout({
+        //         sessionId: sessionId,
+        //     });
+
+        //     // Step 4: Get the client secret
+        //     const clientSecretResponse = await createStripeClientId();
+        //     const clientSecret = clientSecretResponse.data.createStripeClientId;
+        //     setClientId(`client secret ${clientSecret}`);
+        //     console.log("client secret",clientSecret)
+
+        //     // Step 5: Confirm Card Payment
+        //     const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret);
+        //     setPaymentIntent([paymentIntent])
+        //     console.log(paymentIntent,"payment intent")
+        //     // Handle payment result
+        //     if (error) {
+        //         console.log(error)
+        //         // Handle error here
+        //     } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+        //         // createAppointment call it 
+        //         createAppointment({
+        //             variables: {
+        //                 "fullName": name,
+        //                 "email": "bhujelaman20@gmail.com",
+        //                 "appointmentDate": selectedDate,
+        //                 "appointmentTime": selectedTime,
+        //                 "comment": selectedTime,
+        //                 "reasonForVisit": reason,
+        //                 "timezone": selectedTimeZone
+        //             }
+        //         }).then(async (res) => {
+        //             console.log(res)
+        //             const stripe: Stripe | null = await loadStripe('pk_test_51OZ9d9Kc8LmZXQQ91uQkILNU8YMGVAfW5SfxVAg0FFP2yZCJuxjR9wLmPrSjpRRJeuBtoCR4nWE29Bj2j0B876oX00KSA2updT');
+
+        //             if (!stripe) {
+        //                 console.error('Failed to load Stripe.');
+        //                 return;
+        //             }
+
+        //             const { error } = await stripe.redirectToCheckout({
+        //                 sessionId: res.data.createAppointment,
+        //             });
+        //         }).catch((error) => console.log(error))
+        //     }
+
+        // } catch (error) {
+        //     console.error('Error during the booking process:', error);
+        // }
     }
 
     return (
@@ -167,6 +188,7 @@ const Page = () => {
                                 className='w-[100%] sm:w-[95%] h-10 border rounded-[6px] border-gray-500 px-3 outline-none bg-white'
                                 onChange={(e) => setReason(e.target.value)}
                             >
+                                <option value="">---Select a reason---</option>
                                 <option value="consultation">Consultation</option>
                                 <option value="routine-exam">Routine Skin Examination</option>
                                 <option value="suspicious-lesions">Suspicious Moles or Lesions</option>
@@ -180,6 +202,7 @@ const Page = () => {
                                 className='w-[100%] sm:w-[95%] h-10 border rounded-[6px] border-gray-500 px-3 outline-none bg-white'
                                 onChange={(e) => setSelectedDoctor(e.target.value)}
                             >
+                                <option value="">---Select a doctor---</option>
                                 <option value="Evan Sunde">Dr. Evan Sunde</option>
                                 <option value="Sunde Evan">Dr Sunde Evan</option>
                             </select>

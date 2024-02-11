@@ -2,7 +2,6 @@
 import { useDashboardStore } from "@/stores/DashboardStore";
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { CiLocationOn } from "react-icons/ci";
 import { IoArrowForward } from "react-icons/io5";
 import { IoIosCalendar } from "react-icons/io";
 import Alphabet from '@/assets/alphabet.png';
@@ -65,9 +64,9 @@ const AppointmentLists = () => {
                         </div>
                         {/* ---card bottom-------- */}
                         <div className='border-t-[1px] border-[#a2a2a2] flex justify-between h-8 text-[#606060]'>
-                                <p className='flex items-center ml-3 text-sm font-medium '><span className='text-lg mr-1 text-[#6e6e6e]'><MdOutlineComputer /></span>Online</p>
-                                <p className='flex items-center mr-3 text-sm font-medium '><span className='text-lg  mr-1 text-[#606060]'><IoIosCalendar /></span>{appointment.appointmentDate}</p>
-                            </div>
+                            <p className='flex items-center ml-3 text-sm font-medium '><span className='text-lg mr-1 text-[#6e6e6e]'><MdOutlineComputer /></span>Online</p>
+                            <p className='flex items-center mr-3 text-sm font-medium '><span className='text-lg  mr-1 text-[#606060]'><IoIosCalendar /></span>{appointment.appointmentDate}</p>
+                        </div>
                     </div>
                     : <Link key={index} href={`doctor/dashboard/appointments/${appointment.appointment_id}`}
                         onClick={() => {

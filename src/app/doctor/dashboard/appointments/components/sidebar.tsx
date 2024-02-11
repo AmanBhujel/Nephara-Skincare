@@ -24,7 +24,7 @@ const Sidebar = () => {
     const handleSidebarItemClick = (itemName: string) => {
         setActiveSidebarItem(itemName);
         if (itemName === "Dashboard") {
-            router.push("/doctor/dashboard/user-profile")
+            router.push("/doctor/dashboard/profile")
         }
         else if (itemName === "Appointments") {
             router.push("/doctor/dashboard/appointments")
@@ -42,7 +42,7 @@ const Sidebar = () => {
     };
 
     useEffect(() => {
-        if (pathname === "/dashboard/user-profile") {
+        if (pathname === "/dashboard/profile") {
             setActiveSidebarItem("Dashboard")
         }
         else if (pathname === "/dashboard/appointments") {
@@ -91,7 +91,7 @@ const Sidebar = () => {
                                 <Image src={Logo} width={150} height={150} alt='Nephara' className='w-48 h-auto' />
                             </div>
                             <ul className='w-full flex items-center justify-center flex-col mt-10'>
-                                {[{ itemName: "Dashboard", link: "/dashboard/user-profile" }, { itemName: "Appointments", link: "/dashboard/appointments" }, { itemName: "Settings", link: "/dashboard/settings" }].map((item, index) => (
+                                {[{ itemName: "Dashboard", link: "/dashboard/profile" }, { itemName: "Appointments", link: "/dashboard/appointments" }, { itemName: "Settings", link: "/dashboard/settings" }].map((item, index) => (
                                     <li key={index}
                                         className={`w-[90%] cursor-pointer text-lg font-semibold py-4 px-2 flex items-center mb-2 rounded-[10px] 
                           ${activeSidebarItem === item.itemName ? "bg-[#7650e0] text-white" : "text-gray-600 hover:bg-[#7650e0] hover:text-white"}`}
@@ -122,7 +122,12 @@ const Sidebar = () => {
             </>
         ) : (
             <div className='absolute bottom-2 w-[95%] shadow-lg h-20 bg-white border rounded-xl flex item-center justify-center'>
-                <Link href={"/dashboard/user-profile"} className={`w-[33%] h-full flex flex-col items-center justify-center hover:text-[#ba58ff] cursor-pointer   ${activeSidebarItem === "Dashboard" ? "text-[#ba58ff]" : ""}`}>
+                <Link href={"/dashboard/profile"} className={`w-[33%] h-full flex flex-col items-center justify-center hover:text-[#ba58ff] cursor-pointer   ${activeSidebarItem === "Dashboard" ? "text-[#ba58ff]" : ""}`} 
+                onClick={()=>{
+                    if(activeSidebarItem !== "Dashboard"){
+                        // set
+                    }
+                }}>
                     <span className='text-3xl'><MdOutlineDashboardCustomize /></span>
                     <p className='text-sm hidden sm:block'>Profile</p>
                 </Link>
