@@ -27,6 +27,7 @@ export default function LogoutModal() {
       setIsLogoutModalOpen(false);
       setIsLoading(true);
       router.replace('/');
+      window.location.reload();
     }
   };
 

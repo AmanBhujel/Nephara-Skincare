@@ -40,6 +40,7 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
         if (appointmentData) {
             setAppointmentSelected(true)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const [windowWidth, setWindowWidth] = useState<number>(0);
 

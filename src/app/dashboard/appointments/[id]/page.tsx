@@ -11,6 +11,8 @@ import { useRouter } from 'next/navigation';
 import ToastMessage from '@/components/utils/ToastMessage';
 import { useLoadingStore } from '@/stores/LoadingStore';
 import Loader from '@/components/Loader';
+import { useAuthorizedStore } from '@/stores/AuthorizedStore';
+import { getCookie } from '@/components/utils/Cookie';
 
 interface PageProps {
     params: {
@@ -46,6 +48,8 @@ const Page: NextPage<PageProps> = ({ params }) => {
     const setIsLoading = useLoadingStore((state) => state.setIsLoading)
     const isLoading = useLoadingStore((state) => state.isLoading)
     const setSelectedAppointmentId = useDashboardStore((state) => state.setSelectedAppointmentId);
+    const isAuthorized = useAuthorizedStore((state) => state.isAuthorized);
+    const setIsAuthorized = useAuthorizedStore((state) => state.setIsAuthorized);
 
     useEffect(() => {
         setActiveSidebarItem("Appointments")
@@ -55,24 +59,35 @@ const Page: NextPage<PageProps> = ({ params }) => {
 
     useEffect(() => {
         let isMounted = true; // Flag to track component mount state
+        const token = getCookie("token");
 
         const getUserInfo = async () => {
             try {
-                const response = await getUserInfoByToken();
-                console.log(response, "from useeffect from landing");
+                if (token) {
+                    if (!isAuthorized) {
+                        const response = await getUserInfoByToken();
+                        console.log(response, "from useeffect from landing");
 
-                if (!isMounted) return; // Skip state updates if component is unmounted
+                        if (!isMounted) return; // Skip state updates if component is unmounted
 
-                const { status, message, user } = response.data.getUserInfoByToken;
-                if (user) {
-                    setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+                        const { status, message, user } = response.data.getUserInfoByToken;
+                        if (user) {
+                            setIsAuthorized(true)
+                            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+                        }
+                        if (status === 'error' && message === 'Unauthorized Token!') {
+                            router.replace('/auth')
+                            ToastMessage("error", "Authorization Denied")
+                            return;
+                        } else if (status === 'error' && message === 'Internal server error') {
+                            ToastMessage(status, message)
+                        }
+                    }
                 }
-                if (status === 'error' && message === 'Unauthorized Token!') {
+                else {
                     router.replace('/auth')
                     ToastMessage("error", "Authorization Denied")
                     return;
-                } else if (status === 'error' && message === 'Internal server error') {
-                    ToastMessage(status, message)
                 }
                 setIsLoading(false)
             } catch (error) {
@@ -91,6 +106,8 @@ const Page: NextPage<PageProps> = ({ params }) => {
             // Perform cleanup actions here if needed
             // For example: Clear any timers or subscriptions
         };
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const appointment = Appointments.find(appointment => appointment.appointment_id === params.id);

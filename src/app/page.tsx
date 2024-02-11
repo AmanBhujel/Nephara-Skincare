@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import ToastMessage from "@/components/utils/ToastMessage";
 import { useLoadingStore } from "@/stores/LoadingStore";
 import Loader from "@/components/Loader";
+import { useAuthorizedStore } from "@/stores/AuthorizedStore";
 
 const GET_USER_INFO = gql`
   query GetUserInfoByToken {
@@ -36,6 +37,8 @@ const Home = () => {
   const setUserInfo = useUserStore((state) => state.setUserInfo);
   const isLoading = useLoadingStore((state) => state.isLoading);
   const setIsLoading = useLoadingStore((state) => state.setIsLoading);
+  const isAuthorized = useAuthorizedStore((state) => state.isAuthorized);
+  const setIsAuthorized = useAuthorizedStore((state) => state.setIsAuthorized);
 
   const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO, {
     fetchPolicy: "no-cache"
@@ -44,16 +47,19 @@ const Home = () => {
 
   useEffect(() => {
     const getUserInfo = async () => {
-      const response = await getUserInfoByToken();
-      console.log(response, "from useeffect from landing")
-      const { status, message, user } = response.data.getUserInfoByToken;
-      // ToastMessage(status, message);
-      if (user) {
-        setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+      if (!isAuthorized) {
+        const response = await getUserInfoByToken();
+        console.log(response, "from useeffect from landing")
+        const { status, message, user } = response.data.getUserInfoByToken;
+        if (user) {
+          setIsAuthorized(true);
+          setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+        }
       }
     }
     getUserInfo()
     setIsLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log("useriNFO FROM STORE ", userInfo);
@@ -65,11 +71,6 @@ const Home = () => {
         <div className='w-full h-auto flex flex-col  justify-center items-center  '>
           <Navbar />
           <HeroSection />
-          {/* <div className="w-full h-40"> */}
-          {/* <Link href={'http://localhost:8080/join?room=roomtest&name=test'}>
-            <button className="bg-red-400">Join appointment</button>
-          </Link> */}
-          {/* </div> */}
           <WhoWeAre />
           <Services />
           <WhatWeBelieve />

@@ -2,6 +2,7 @@ import React from 'react';
 import Profile from '@/assets/herosection.png';
 import Image from "next/image";
 import { FaCircleArrowRight } from "react-icons/fa6";
+import Link from 'next/link';
 
 const HeroSection = () => {
     return (
@@ -11,7 +12,7 @@ const HeroSection = () => {
                     <p className="w-full flex flex-wrap text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-extrabold tracking-wide font-montserrat items-center justify-center lg:items-start text-center lg:text-left"> Virtual Dermatology Care</p>
                     <p className="text-sm md:text-lg xl:text-xl font-medium lg:[95%] xl:w-[90%] flex-wrap mt-2 md:mt-2 lg:mt-8 text-[#665833] text-center lg:text-left">Book appointments with top south asian dermatologists from the comfort of your home</p>
                     <div className="flex items-center mt-6 md:mt-8 lg:mt-12">
-                        <button className="bg-[#8f67e2] hover:bg-[#9c75e9] py-2 px-6 md:py-3  md:px-9 font-semibold text-lg text-white rounded-[8px] ">Book now</button>
+                        <Link href={'/appointment'}><button className="bg-[#8f67e2] hover:bg-[#9c75e9] py-2 px-6 md:py-3  md:px-9 font-semibold text-lg text-white rounded-[8px] ">Book now</button></Link>
                         <button className="ml-8 flex justify-center items-center tracking-tight hover:underline text-sm lg:text-base text-[#d25d7a]" >About Our Doctors <i className="ml-3 text-3xl"><FaCircleArrowRight /> </i></button>
                     </div>
                 </div>
