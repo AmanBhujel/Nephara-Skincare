@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useDashboardStore } from "../../../../stores/DashboardStore";
 import BackgroundAppointment from '@/assets/DoctorConsulting.png'
 import { gql, useLazyQuery, useQuery } from "@apollo/client";
-import { IoChevronBack } from "react-icons/io5";
+import { IoArrowBack, } from "react-icons/io5";
+import Link from "next/link";
 
 const GET_REPORT = gql`
 query Query($appointmentId: String!) {
@@ -97,11 +98,12 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                         <div className='absolute w-full h-full bg-gradient-to-b from-[#743bfb] via-[#743bfb] to-[#8e75c9] opacity-70 z-10'></div>
                         <div className='z-20 absolute p-6 flex w-full justify-between h-full items-center'>
                             <div className=' flex flex-col'>
-                                {/* {windowWidth < 1024 &&
+                                {windowWidth < 1024 &&
                                     <div className="flex text-white items-center ">
-                                        <i className="text-white text-3xl"><IoChevronBack /></i>
-                                        
-                                    </div>} */}
+                                        <Link href={'/dashboard/appointments'}>
+                                            <i className="text-white text-3xl cursor-pointer"><IoArrowBack /></i>
+                                        </Link>
+                                    </div>}
                                 <p className='bg-[#f2f2f9cb] px-3 py-1 w-min text-[#743bfb] rounded-[10px] font-medium mb-2'>{appointmentData?.completed ? "Past" : "Upcoming"}</p>
                                 <p className='text-white font-bold text-3xl xl:text-2xl 2xl:text-3xl'>{appointmentData?.name}</p>
                                 <p className='text-white text-lg xl:text-base 2xl:text-lg font-medium mt-1'>{appointmentData?.description}</p>

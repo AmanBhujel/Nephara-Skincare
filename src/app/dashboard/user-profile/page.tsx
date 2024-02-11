@@ -49,7 +49,7 @@ const Page = () => {
         const getUserInfo = async () => {
             try {
                 if (token) {
-                    console.log(token,"asking token ")
+                    console.log(token, "asking token ")
                     if (!isAuthorized) {
                         const response = await getUserInfoByToken();
 
@@ -58,7 +58,7 @@ const Page = () => {
                         const { status, message, user } = response.data.getUserInfoByToken;
                         if (user) {
                             setIsAuthorized(true)
-                            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+                            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country ,phoneNumber:user.phoneNumber})
                         }
                         if (status === 'error' && message === 'Unauthorized Token!') {
                             router.replace('/auth')
@@ -101,9 +101,8 @@ const Page = () => {
             {isLoading ? <Loader /> :
                 <>
                     <Sidebar />
-
-                    <div className='w-full h-full flex justify-center'>
-                        <div className='w-[90%] min-w-[70rem] min-h-[50rem] h-[80%] border flex flex-col items-center mt-4'>
+                    <div className='w-full h-full flex justify-center max-h-screen overflow-auto'>
+                        <div className=' w-[90%] lg:min-w-[70rem] min-h-[50rem] h-[80%]  flex flex-col items-center mt-4 mb-60 md:mb-0'>
                             <p className='text-5xl font-medium tracking-wide mt-8'>Account Info</p>
                             <div className='flex items-center justify-start mt-8 w-[80%] '>
                                 <Image src={Profile} alt='profile-image' width={200} height={200} className='w-32 h-32 rounded-full ' />
@@ -112,13 +111,13 @@ const Page = () => {
                                     <p className='text-[#505050]'>Lalitpur,Nepal</p>
                                 </div>
                             </div>
-                            <div className="w-[80%] grid grid-cols-2 gap-x-16 gap-y-8 mt-8">
+                            <div className="w-[90%] lg:w-[80%] grid grid-cols-1 md:grid-cols-2 gap-x-10 lg:gap-x-16 gap-y-3 lg:gap-y-8 mt-8">
                                 <div className='flex flex-col'>
                                     <label className='font-semibold mt-2 sm:mt-4 mb-2'>Full Name:</label>
                                     <input
                                         type='text'
                                         // placeholder='Enter your Name...'
-                                        className='w-[100%] sm:w-[95%] lg:w-[90%] h-14 border rounded-[6px] pl-4  text-lg border-gray-500 px-3 outline-none mt-2 sm:mt-0 bg-[#ebebeb48]'
+                                        className='w-[100%] sm:w-[95%] lg:w-[90%] h-14 border rounded-[6px] pl-4  text-lg border-gray-500 px-3 outline-none bg-[#ebebeb48]'
                                         value={"Aman Bhujel"}
                                         readOnly
                                     />
@@ -127,7 +126,7 @@ const Page = () => {
                                     <input
                                         type='text'
                                         // placeholder='Enter your Name...'
-                                        className='w-[100%] sm:w-[95%] lg:w-[90%] h-14 border rounded-[6px] pl-4  text-lg border-gray-500 px-3 outline-none mt-2 sm:mt-0 bg-[#ebebeb48]'
+                                        className='w-[100%] sm:w-[95%] lg:w-[90%] h-14 border rounded-[6px] pl-4  text-lg border-gray-500 px-3 outline-none bg-[#ebebeb48]'
                                         value={"bhujelaman20@gmail.com"}
                                         readOnly
                                     />
@@ -136,7 +135,7 @@ const Page = () => {
                                     <input
                                         type='text'
                                         // placeholder='Enter your Name...'
-                                        className='w-[100%] sm:w-[95%] lg:w-[90%] h-14 border rounded-[6px] pl-4  text-lg border-gray-500 px-3 outline-none mt-2 sm:mt-0 bg-[#ebebeb48]'
+                                        className='w-[100%] sm:w-[95%] lg:w-[90%] h-14 border rounded-[6px] pl-4  text-lg border-gray-500 px-3 outline-none bg-[#ebebeb48]'
                                         value={"Lalitpur"}
                                         readOnly
                                     />
@@ -145,7 +144,7 @@ const Page = () => {
                                     <input
                                         type='text'
                                         // placeholder='Enter your Name...'
-                                        className='w-[100%] sm:w-[95%] lg:w-[90%] h-14 border rounded-[6px] pl-4  text-lg border-gray-500 px-3 outline-none mt-2 sm:mt-0 bg-[#ebebeb48]'
+                                        className='w-[100%] sm:w-[95%] lg:w-[90%] h-14 border rounded-[6px] pl-4  text-lg border-gray-500 px-3 outline-none bg-[#ebebeb48]'
                                         value={"Nepal"}
                                         readOnly
                                     />
@@ -155,7 +154,7 @@ const Page = () => {
                                     <input
                                         type='text'
                                         // placeholder='Enter your Name...'
-                                        className='w-[100%] sm:w-[95%] lg:w-[90%] h-14 border rounded-[6px] pl-4  text-lg border-gray-500 px-3 outline-none mt-2 sm:mt-0 bg-[#ebebeb48]'
+                                        className='w-[100%] sm:w-[95%] lg:w-[90%] h-14 border rounded-[6px] pl-4  text-lg border-gray-500 px-3 outline-none bg-[#ebebeb48]'
                                         value={"Male"}
                                         readOnly
                                     />
@@ -165,7 +164,7 @@ const Page = () => {
                                     <input
                                         type='text'
                                         // placeholder='Enter your Name...'
-                                        className='w-[100%] sm:w-[95%] lg:w-[90%] h-14 border rounded-[6px] pl-4  text-lg  border-gray-500 px-3 outline-none mt-2 sm:mt-0 bg-[#ebebeb48]'
+                                        className='w-[100%] sm:w-[95%] lg:w-[90%] h-14 border rounded-[6px] pl-4  text-lg  border-gray-500 px-3 outline-none bg-[#ebebeb48]'
                                         value={"19"}
                                         readOnly
                                     />

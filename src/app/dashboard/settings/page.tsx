@@ -52,16 +52,17 @@ const Page = () => {
     const [activeSettingButton, setActiveSettingButton] = useState<string>('');
     const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO);
     const setUserInfo = useUserStore((state) => state.setUserInfo);
+    const UserInfo = useUserStore((state) => state.userInfo);
     const [windowWidth, setWindowWidth] = useState<number>(0);
 
     const router = useRouter();
 
-    const [fullName, setFullName] = useState('Aman Bhujel');
-    const [phoneNumber, setPhoneNumber] = useState('+977 98326968372');
-    const [gender, setGender] = useState('Male');
-    const [age, setAge] = useState('19');
-    const [city, setCity] = useState('Lalitpur');
-    const [country, setCountry] = useState('Nepal');
+    const [fullName, setFullName] = useState(UserInfo[0]?.name ? UserInfo[0].name : '');
+    const [phoneNumber, setPhoneNumber] = useState(UserInfo[0]?.phoneNumber ? UserInfo[0].phoneNumber : '');
+    const [gender, setGender] = useState(UserInfo[0]?.gender ? UserInfo[0].gender : '');
+    const [age, setAge] = useState(UserInfo[0]?.age ? UserInfo[0].age : '');
+    const [city, setCity] = useState(UserInfo[0]?.city ? UserInfo[0].city : '');
+    const [country, setCountry] = useState(UserInfo[0]?.country ? UserInfo[0].country : '');
     const isLoading = useLoadingStore((state) => state.isLoading)
     const setIsLoading = useLoadingStore((state) => state.setIsLoading)
     const isAuthorized = useAuthorizedStore((state) => state.isAuthorized);
@@ -101,15 +102,22 @@ const Page = () => {
         const updateUserDetailsResponse = await updateUserDetails({
             variables: {
                 "photo": "aman",
-                "name": "Aman Bhujel",
-                "age": 20,
-                "gender": "Male",
-                "phoneNumber": "9802846311",
-                "city": "Lalitpur",
-                "country": "Nepal"
+                "name": fullName,
+                "age": +age,
+                "gender": gender,
+                "phoneNumber": phoneNumber,
+                "city": city,
+                "country": country
             }
         });
-        console.log(updateUserDetailsResponse.data.updateUserDetails)
+        if(updateUserDetailsResponse.data.updateUserDetails.name){
+            ToastMessage("success","Profile Updated Successfully!")
+            router.push('/dashboard/profile')
+            window.location.reload();
+        }
+        else{
+            ToastMessage("error","Error Occured!Try again later!")
+        }
     }
 
     useEffect(() => {
@@ -143,7 +151,13 @@ const Page = () => {
                         const { status, message, user } = response.data.getUserInfoByToken;
                         if (user) {
                             setIsAuthorized(true)
-                            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+                            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country,phoneNumber:user.phoneNumber });
+                            setFullName(user.name);
+                            setGender(user.gender);
+                            setAge(user.age);
+                            setCity(user.city);
+                            setCountry(user.country);
+                            setPhoneNumber(user.phoneNumber)
                         }
                         if (status === 'error' && message === 'Unauthorized Token!') {
                             router.replace('/auth')
@@ -190,7 +204,7 @@ const Page = () => {
                     <>
                         <Sidebar />
                         <div className={`${windowWidth > 1024 || activeSettingButton === "" ? "block" : "hidden"} ${activeSettingButton === 'Edit' ? "block" : ""} ${windowWidth > 1024 ? "" : "flex w-[85%] h-full pb-20 items-center flex-col overflow-auto"} lg:w-[20%]  lg:min-w-[20rem] lg:max-w-[25rem] lg:h-full px-2 lg:ml-8`}>
-                            <p className={`text-3xl sm:text-4xl lg:text-3xl font-semibold  tracking-wide mt-10 ${windowWidth > 1024 ? "" : "text-[#743bfb]"}`}>Account Settings</p>
+                            <p className={`text-3xl sm:text-4xl lg:text-3xl font-semibold lg:mt-20  tracking-wide xl:mt-10 ${windowWidth > 1024 ? "" : "text-[#743bfb]"}`}>Account Settings</p>
                             <ul className='w-full mt-12'>
                                 <li className='border-b-2 font-medium h-16 flex justify-between items-center cursor-pointer' onClick={() => setActiveSettingButton("Edit")}>
                                     <p className='flex items-center text-lg ml-2'><span className='text-3xl mr-3'><LuUserSquare2 /></span>Edit Profile</p>

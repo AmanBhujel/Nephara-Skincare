@@ -2,7 +2,6 @@
 import { useDashboardStore } from "@/stores/DashboardStore";
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { CiLocationOn } from "react-icons/ci";
 import { IoArrowForward } from "react-icons/io5";
 import { IoIosCalendar } from "react-icons/io";
 import Alphabet from '@/assets/alphabet.png';

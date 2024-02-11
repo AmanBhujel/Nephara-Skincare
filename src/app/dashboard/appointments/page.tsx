@@ -75,7 +75,7 @@ const Page: NextPage<PageProps> = ({ params }) => {
                         const { status, message, user } = response.data.getUserInfoByToken;
                         if (user) {
                             setIsAuthorized(true)
-                            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+                            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country,phoneNumber:user.phoneNumber })
                         }
                         if (status === 'error' && message === 'Unauthorized Token!') {
                             router.replace('/auth')

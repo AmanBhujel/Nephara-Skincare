@@ -8,6 +8,7 @@ interface UserInfo {
     city?: string;
     country?: string;
     gender?: string;
+    phoneNumber?:string;
 }
 
 interface StoreState {

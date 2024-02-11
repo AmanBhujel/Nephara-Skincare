@@ -54,7 +54,7 @@ const Page = () => {
 
                         const { status, message, user } = response.data.getUserInfoByToken;
                         if (user) {
-                            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country })
+                            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country,phoneNumber:user.phoneNumber })
                         }
                         if (status === 'success' && message === 'Authorized Token!') {
                             console.log("scucess auth")

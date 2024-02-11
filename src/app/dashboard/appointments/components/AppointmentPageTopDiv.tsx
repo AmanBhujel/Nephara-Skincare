@@ -19,8 +19,8 @@ const AppointmentPageTopDiv = () => {
             <div className='flex text-white ml-[8%] items-center justify-center z-20'>
                 <Image src={Profile} width={300} height={300} alt='Profile Image' className='w-32 h-32 object-cover rounded-[7px]' />
                 <div className='ml-5 text-white'>
-                    <p className='text-2xl font-bold tracking-wide'>{userInfo[0]?.name || "Should be name"}</p>
-                    <p className='text-sm tracking-wide mt-2 flex items-center justify-center'><span className='text-2xl mr-1'><CiLocationOn /></span> Melbourne, Australia</p>
+                    <p className='text-2xl font-bold tracking-wide'>{userInfo[0]?.name}</p>
+                    <p className='text-sm tracking-wide mt-2 flex items-center '><span className='text-2xl mr-1'><CiLocationOn /></span> {userInfo[0].city}, {userInfo[0].country}</p>
                 </div>
             </div>u
             <div className='mr-[8%] text-white flex flex-col items-center justify-center z-20'>
