@@ -7,9 +7,8 @@ import Feedback from "./landing/Feedback";
 import Services from "./landing/Services";
 import Footer from "@/components/Footer";
 import { useUserStore } from "@/stores/userStore";
-import { gql, useLazyQuery, useQuery } from "@apollo/client";
+import { gql, useLazyQuery } from "@apollo/client";
 import { useEffect } from "react";
-import ToastMessage from "@/components/utils/ToastMessage";
 import { useLoadingStore } from "@/stores/LoadingStore";
 import Loader from "@/components/Loader";
 import { useAuthorizedStore } from "@/stores/AuthorizedStore";
@@ -44,7 +43,6 @@ const Home = () => {
     fetchPolicy: "no-cache"
   });
 
-
   useEffect(() => {
     const getUserInfo = async () => {
       if (!isAuthorized) {
@@ -53,7 +51,7 @@ const Home = () => {
         const { status, message, user } = response.data.getUserInfoByToken;
         if (user) {
           setIsAuthorized(true);
-          setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country,phoneNumber:user.phoneNumber })
+          setUserInfo({ email: user.email || '', name: user.name || '', photo: user.photo || '', gender: user.gender || '', age: user.age || 0, city: user.city || '', country: user.country || '', phoneNumber: user.phoneNumber || '' })
         }
       }
     }
@@ -61,8 +59,6 @@ const Home = () => {
     setIsLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log("useriNFO FROM STORE ", userInfo);
 
   return (
     <main className="bg-white  w-full h-screen">

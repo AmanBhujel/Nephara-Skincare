@@ -21,11 +21,20 @@ const validatePassword = (password: string): boolean => {
 };
 
 const SIGNUP_USER = gql`
-mutation SignupUser($email: String!, $password: String!) {
-    signupUser(email: $email, password: $password) {
+mutation SignupUser($email: String!, $password: String!, $name: String!) {
+    signupUser(email: $email, password: $password ,name: $name) {
       message,token,status
+      user {
+        email
+        phoneNumber
+        photo
+        country
+        city
+        name
+        age
+        gender
+      }
     }
-
   }
 `
 
@@ -57,7 +66,8 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
     const [nameError, setNameError] = useState<string | null>(null);
     const [emailError, setEmailError] = useState<string | null>(null);
     const [passwordError, setPasswordError] = useState<string | null>(null);
-    const router = useRouter()
+    const router = useRouter();
+    const setUserInfo = useUserStore((state) => state.setUserInfo);
 
     const handleSignup = async () => {
         try {
@@ -80,14 +90,16 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
             const signupResponse = await signupUser({
                 variables: {
                     "email": email,
+                    "name": name,
                     "password": password
                 }
             });
-            const { status, message, token } = signupResponse.data.signupUser;
+            const { status, message, token ,user} = signupResponse.data.signupUser;
             ToastMessage(status, message);
             if (token) {
                 setCookie(36000, "token", `Bearer ${token}`)
                 router.replace('/dashboard/appointments')
+                window.location.reload();
             }
         } catch (error) {
             console.log(error)
@@ -113,7 +125,7 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
                         <span className="absolute right-0 top-1/2 w-[40%] bg-gray-300 h-px transform -translate-y-1/2"></span>
                     </p>
                     <label htmlFor="name" className="block text-gray-700 text-sm mt-4 mb-2">
-                        Name
+                        Full Name
                     </label>
                     <input
                         type="text"
@@ -208,11 +220,8 @@ export const Signin: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
                 }
             });
             const { status, message, token, user } = loginResponse.data.loginUser;
-            console.log("toekn from back", token)
-            console.log("user from log in ", user)
             ToastMessage(status, message);
             if (token) {
-                setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country ,phoneNumber:user.phoneNumber})
                 setCookie(84000, "token", `Bearer ${token}`)
                 router.replace('/dashboard/profile')
                 window.location.reload();

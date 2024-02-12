@@ -99,6 +99,10 @@ const Page = () => {
 
 
     const handleUpdateUser = async () => {
+        if (!fullName || !gender || !phoneNumber || !city || !country || +age < 5) {
+            ToastMessage("error", "Please Fill all the fields correctly!")
+            return;
+        }
         const updateUserDetailsResponse = await updateUserDetails({
             variables: {
                 "photo": "aman",
@@ -110,13 +114,13 @@ const Page = () => {
                 "country": country
             }
         });
-        if(updateUserDetailsResponse.data.updateUserDetails.name){
-            ToastMessage("success","Profile Updated Successfully!")
+        if (updateUserDetailsResponse.data.updateUserDetails.name) {
+            ToastMessage("success", "Profile Updated Successfully!")
             router.push('/dashboard/profile')
             window.location.reload();
         }
-        else{
-            ToastMessage("error","Error Occured!Try again later!")
+        else {
+            ToastMessage("error", "Error Occured!Try again later!")
         }
     }
 
@@ -151,7 +155,7 @@ const Page = () => {
                         const { status, message, user } = response.data.getUserInfoByToken;
                         if (user) {
                             setIsAuthorized(true)
-                            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country,phoneNumber:user.phoneNumber });
+                            setUserInfo({ email: user.email || '', name: user.name || '', photo: user.photo || '', gender: user.gender || '', age: user.age || 0, city: user.city || '', country: user.country || '', phoneNumber: user.phoneNumber || '' })
                             setFullName(user.name);
                             setGender(user.gender);
                             setAge(user.age);
@@ -241,6 +245,7 @@ const Page = () => {
                                     <input
                                         value={fullName}
                                         onChange={(e) => setFullName(e.target.value)}
+                                        placeholder='Enter your name...'
                                         className='h-12 border pl-2 w-[100%] outline-none rounded-[6px] text-lg'
                                     />
                                 </div>
@@ -250,6 +255,7 @@ const Page = () => {
                                     </label>
                                     <input
                                         value={phoneNumber}
+                                        placeholder='Enter your number...'
                                         onChange={(e) => setPhoneNumber(e.target.value)}
                                         className='h-12 border pl-2 w-[100%] outline-none rounded-[6px] text-lg'
                                     />
@@ -259,11 +265,24 @@ const Page = () => {
                                         <label className='text-gray-600 font-medium mb-1 '>
                                             Gender
                                         </label>
-                                        <input
+                                        <select
                                             value={gender}
                                             onChange={(e) => setGender(e.target.value)}
-                                            className='h-12 border pl-2 w-[100%] outline-none rounded-[6px] text-lg'
-                                        />
+                                            className='h-12 border pl-2 w-[100%] outline-none rounded-[6px] text-lg bg-white'
+                                        >
+                                            <option value=''>
+                                                ----Select----
+                                            </option>
+                                            <option value="Male">
+                                                Male
+                                            </option>
+                                            <option value="Female">
+                                                Female
+                                            </option>
+                                            <option value="Others">
+                                                Others
+                                            </option>
+                                        </select>
                                     </div>
                                     <div className='flex flex-col mt-6 w-[47%]'>
                                         <label className='text-gray-600 font-medium mb-1 '>
@@ -271,6 +290,7 @@ const Page = () => {
                                         </label>
                                         <input
                                             value={age}
+                                            placeholder='Enter your age...'
                                             onChange={(e) => setAge(e.target.value)}
                                             className='h-12 border pl-2 w-[100%] outline-none rounded-[6px] text-lg'
                                         />
@@ -283,6 +303,7 @@ const Page = () => {
                                     <input
                                         value={city}
                                         onChange={(e) => setCity(e.target.value)}
+                                        placeholder='Enter your city...'
                                         className='h-12 border pl-2 w-[100%] outline-none rounded-[6px] text-lg'
                                     />
                                 </div>
@@ -292,6 +313,7 @@ const Page = () => {
                                     </label>
                                     <input
                                         value={country}
+                                        placeholder='Enter your country...'
                                         onChange={(e) => setCountry(e.target.value)}
                                         className='h-12 border pl-2 w-[100%] outline-none rounded-[6px] text-lg'
                                     />

@@ -15,9 +15,9 @@ const validatePassword = (password: string): boolean => {
 };
 
 const LOGIN_USER = gql`
- mutation LoginUser($email: String!, $password: String!) {
-    loginUser(email: $email, password: $password) {
-      token,message,status
+mutation LoginDoctor($email: String!, $password: String!) {
+    loginDoctor(email: $email, password: $password) {
+      status message name token
     }
   }
 `
@@ -26,7 +26,7 @@ export const Signin = () => {
     const [password, setPassword] = useState<string>("");
     const [emailError, setEmailError] = useState<string | null>(null);
     const [passwordError, setPasswordError] = useState<string | null>(null);
-    const [loginUser, { data: loginUserData, loading: loginUserLoading, error: loginUserError }] = useMutation(LOGIN_USER);
+    const [loginDoctor, { data: loginUserData, loading: loginUserLoading, error: loginUserError }] = useMutation(LOGIN_USER);
     const router = useRouter();
 
     const handleSignin = async () => {
@@ -42,17 +42,17 @@ export const Signin = () => {
                 setPasswordError("Password must be at least 8 characters");
                 return;
             }
-            const loginResponse = await loginUser({
+            const loginResponse = await loginDoctor({
                 variables: {
                     "email": email,
                     "password": password
                 }
             });
-            const { status, message, token } = loginResponse.data.loginUser;
+            const { status, message, token } = loginResponse.data.loginDoctor;
             ToastMessage(status, message);
             if (token) {
-                setCookie(36000, "token", `Bearer ${token}`)
-                router.push('/doctor/dashboard/appointments')
+                setCookie(36000, "doctor-token", `Bearer ${token}`)
+                router.push('/doctor/dashboard/appointments');
             }
         } catch (error) {
             ToastMessage('error', 'Internal Server Error')

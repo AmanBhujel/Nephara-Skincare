@@ -79,7 +79,6 @@ const Page = () => {
         const token = getCookie("token")
         let isMounted = true; // Flag to track component mount state
 
-        console.log("user info from profile", userInfo)
 
         const getUserInfo = async () => {
             try {
@@ -90,17 +89,20 @@ const Page = () => {
 
                         if (!isMounted) return; // Skip state updates if component is unmounted
 
-                        const { status, message, user } = response.data.getUserInfoByToken;
-                        if (user) {
-                            setIsAuthorized(true)
-                            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country, phoneNumber: user.phoneNumber })
-                        }
-                        if (status === 'error' && message === 'Unauthorized Token!') {
-                            router.replace('/auth')
-                            ToastMessage("error", "Authorization Denied")
-                            return;
-                        } else if (status === 'error' && message === 'Internal server error') {
-                            ToastMessage(status, message)
+                        if (response.data) {
+                            const { status, message, user } = response.data.getUserInfoByToken;
+                            if (user) {
+                                setIsAuthorized(true)
+                                setUserInfo({ email: user.email || '', name: user.name || '', photo: user.photo || '', gender: user.gender || '', age: user.age || 0, city: user.city || '', country: user.country || '', phoneNumber: user.phoneNumber || '' })
+                                console.log("user info from profile", user)
+                            }
+                            if (status === 'error' && message === 'Unauthorized Token!') {
+                                router.replace('/auth')
+                                ToastMessage("error", "Authorization Denied")
+                                return;
+                            } else if (status === 'error' && message === 'Internal server error') {
+                                ToastMessage(status, message)
+                            }
                         }
                     }
                 }
@@ -149,12 +151,13 @@ const Page = () => {
                                 </div>
                                 <div className="flex items-center justify-center ml-[10%] relative cursor-pointer" onClick={handleDropdownToggle} >
                                     <Image src={Profile} alt='Profile' width={100} height={100} className='w-14 h-14 border rounded-full object-cover' />
-                                    <p className='ml-3 font-semibold lg:text-lg'>Welcome {userInfo[0]?.name && userInfo[0].name.split(' ')[0]}</p>
+                                    {/* <p className='ml-3 font-semibold lg:text-lg'>Welcome {userInfo[0] && userInfo[0]?.name && userInfo[0].name.split(' ')[0] || ""}</p> */}
+                                    <p className='ml-3 font-semibold lg:text-lg'>Welcome {userInfo.length > 0 && userInfo[0]?.name ? userInfo[0]?.name.split(' ')[0] : ""}</p>
                                     <i className='text-2xl ml-3 cursor-pointer'><IoMdArrowDropdown /></i>
                                     {isDropdownOpen && (
                                         <div className="absolute right-0 top-[80%] mt-2 bg-white border border-gray-200 shadow-xl z-40 p-1 rounded-[8px]" ref={dropdownRef}>
                                             <ul>
-                                                <li className="px-6 py-2 font-semibold rounded-[8px] hover:bg-[#743bfb] hover:text-white cursor-pointer" >{userInfo[0].name}</li>
+                                                <li className="px-6 py-2 font-semibold rounded-[8px] hover:bg-[#743bfb] hover:text-white cursor-pointer" >{userInfo[0].name || ""}</li>
                                                 <li className="px-6 py-2 font-semibold rounded-[8px] hover:bg-[#743bfb] hover:text-white cursor-pointer" onClick={handleLogout}>Logout</li>
                                             </ul>
                                         </div>
@@ -169,13 +172,13 @@ const Page = () => {
                                 <div className='bg-white w-[90%] md:w-[85%] lg:w-[45%] 2xl:w-[43%] h-[90%] 2xl:h-[86%] border rounded-[10px] flex flex-col items-center shadow-xl' >
                                     <Image src={Profile} width={1200} height={1200} alt='profile' className='w-[20rem] h-[20rem] border object-cover rounded-[10px] mt-6' />
                                     {/* <p className='text-2xl font-bold mt-6 w-full ml-[12%]'>My Profile</p> */}
-                                    <p className='text-3xl font-medium mt-6'>{userInfo[0].name}</p>
+                                    <p className='text-3xl font-medium mt-6'>{userInfo[0].name || ""}</p>
                                     <div className='flex w-full gap-x-[5%] justify-center mt-4'>
-                                        <p className='w-[40%] py-1 border-b-1 text-lg'>{userInfo[0].name}</p>
-                                        <p className='w-[40%] py-1 border-b-1 text-lg'>{userInfo[0].phoneNumber}</p>
+                                        <p className='w-[40%] py-1 border-b-1 text-lg'>{userInfo[0].name || ""}</p>
+                                        <p className='w-[40%] py-1 border-b-1 text-lg'>{userInfo[0].phoneNumber || ""}</p>
 
                                     </div>
-                                    <p className='w-[85%] py-1 border-b-1 text-lg mt-4'>{userInfo[0].email}</p>
+                                    <p className='w-[85%] py-1 border-b-1 text-lg mt-4'>{userInfo[0].email || ""}</p>
                                     <Link href={'/dashboard/settings'}>
                                         <button className='hidden lg:block bg-[#743bfb] text-white text-lg font-medium py-2 mt-12 rounded-3xl px-8'>Edit Profile</button>
                                     </Link>
@@ -189,31 +192,31 @@ const Page = () => {
                                         {/* ------name-------- */}
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
                                             <p className=' font-semibold mt-2 w-24 text-gray-600'>Full Name</p>
-                                            <p className='w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14'>{userInfo[0].name}</p>
+                                            <p className='w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].name || ""}</p>
                                         </div>
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
                                             <p className=' font-semibold mt-2 w-24 text-gray-500'>Email</p>
-                                            <p className='w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14'>{userInfo[0].email}</p>
+                                            <p className='w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].email || ""}</p>
                                         </div>
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
                                             <p className=' font-semibold mt-2 w-24 text-gray-500'>Phone</p>
-                                            <p className='w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14'>{userInfo[0].phoneNumber}</p>
+                                            <p className='w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].phoneNumber || ""}</p>
                                         </div>
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
                                             <p className='font-semibold mt-2 w-24 text-gray-500'>Age</p>
-                                            <p className='w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14'>{userInfo[0].age}</p>
+                                            <p className='w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].age || ""}</p>
                                         </div>
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
                                             <p className=' font-semibold mt-2 w-24 text-gray-500'>Gender</p>
-                                            <p className=' w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14'>{userInfo[0].gender}</p>
+                                            <p className=' w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].gender || ""}</p>
                                         </div>
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
                                             <p className=' font-semibold mt-2 w-24 text-gray-500'>City</p>
-                                            <p className='w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14'>{userInfo[0].city}</p>
+                                            <p className='w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].city || ""}</p>
                                         </div>
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 mb-8'>
                                             <p className=' font-semibold mt-2 w-24 text-gray-500'>Country</p>
-                                            <p className=' w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14'>{userInfo[0].country}</p>
+                                            <p className=' w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].country || ""}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -229,23 +232,23 @@ const Page = () => {
                                         {/* ------name-------- */}
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
                                             <p className=' font-semibold mt-2 w-24 text-gray-500'>Full Name</p>
-                                            <p className='w-[50%] border-b-1 text-base xl:ml-6 2xl:ml-10'>{userInfo[0].name}</p>
+                                            <p className='w-[50%] border-b-1 text-base xl:ml-6 2xl:ml-10 min-h-7'>{userInfo[0].name || ""}</p>
                                         </div>
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
                                             <p className=' font-semibold mt-2 w-24 text-gray-500'>Email</p>
-                                            <p className='w-[50%] border-b-1 text-base xl:ml-6 2xl:ml-10'>{userInfo[0].email}</p>
+                                            <p className='w-[50%] border-b-1 text-base xl:ml-6 2xl:ml-10 min-h-7'>{userInfo[0].email || ""}</p>
                                         </div>
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
                                             <p className=' font-semibold mt-2 w-24 text-gray-500'>Phone</p>
-                                            <p className='w-[50%] border-b-1 text-base xl:ml-6 2xl:ml-10'>{userInfo[0].phoneNumber}</p>
+                                            <p className='w-[50%] border-b-1 text-base xl:ml-6 2xl:ml-10 min-h-7'>{userInfo[0].phoneNumber || ""}</p>
                                         </div>
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
                                             <p className=' font-semibold mt-2 w-24 text-gray-500'>Age</p>
-                                            <p className='w-[50%] border-b-1 text-base xl:ml-6 2xl:ml-10'>{userInfo[0].age}</p>
+                                            <p className='w-[50%] border-b-1 text-base xl:ml-6 2xl:ml-10 min-h-7'>{userInfo[0].age || ""}</p>
                                         </div>
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
                                             <p className=' font-semibold mt-2 w-24 text-gray-500'>Gender</p>
-                                            <p className=' w-[50%] border-b-1 text-base xl:ml-6 2xl:ml-10'>{userInfo[0].gender}</p>
+                                            <p className=' w-[50%] border-b-1 text-base xl:ml-6 2xl:ml-10 min-h-7'>{userInfo[0].gender || ""}</p>
                                         </div>
                                     </div>
 
@@ -256,11 +259,11 @@ const Page = () => {
                                         </div>
                                         <div className='flex w-[75%] items-center mt-2 '>
                                             <p className=' font-semibold mt-2 w-24 text-gray-500'>City</p>
-                                            <p className='w-[50%] border-b-1 text-base xl:ml-6 2xl:ml-10'>{userInfo[0].city}</p>
+                                            <p className='w-[50%] border-b-1 text-base xl:ml-6 2xl:ml-10 min-h-7'>{userInfo[0].city || ""}</p>
                                         </div>
                                         <div className='flex w-[75%] items-center  mt-2'>
                                             <p className='font-semibold mt-2 w-24 text-gray-500'>Country</p>
-                                            <p className=' w-[50%] border-b-1 text-base xl:ml-6 2xl:ml-10'>{userInfo[0].country}</p>
+                                            <p className=' w-[50%] border-b-1 text-base xl:ml-6 2xl:ml-10 min-h-7'>{userInfo[0].country || ""}</p>
                                         </div>
                                     </div>
                                 </div>
