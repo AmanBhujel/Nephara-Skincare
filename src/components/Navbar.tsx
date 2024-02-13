@@ -124,10 +124,10 @@ const Navbar = () => {
                 {windowWidth >= 1024 && !isAuthorized && (
                     <div className="hidden lg:flex items-center justify-center ml-[10%]">
                         <Link href={"/auth"}>
-                            <button className="border-none text-lg font-semibold hover:underline hover:underline-offset-6">Log in</button>
+                            <button className="border-none text-lg font-semibold hover:underline hover:underline-offset-6 hover:shadow-md">Log in</button>
                         </Link>
                         <Link href={"/auth"}>
-                            <button className="bg-[#19191b] lg:py-2 xl:py-3 lg:px-6 xl:px-8 font-medium text-lg text-white rounded-[7px] ml-6">Sign up</button>
+                            <button className="bg-[#19191b] lg:py-2 xl:py-3 lg:px-6 xl:px-8 font-medium text-lg text-white rounded-[7px] ml-6 hover:shadow-md">Sign up</button>
                         </Link>
                     </div>
                 )}

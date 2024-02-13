@@ -69,10 +69,20 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        slideInFromBottom: {
+          '0%': { transform: 'translateY(50px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        fadeInUp: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "slide-in": "slideInFromBottom  0.5s ease-out forwards",
+        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
       },
       fontFamily: {
         montserrat: ['Montserrat Alternates', 'sans-serif'],

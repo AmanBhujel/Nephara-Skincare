@@ -6,6 +6,7 @@ import Profile1 from '@/assets/profile1.jpg';
 import Profile2 from '@/assets/profile2.jpg';
 import { Navigation, Pagination, } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import {motion} from 'framer-motion'
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -77,12 +78,19 @@ const Feedback = () => {
         <div className="flex flex-col w-full justify-center items-center py-6 ">
           <p className="text-[#a376ff] font-bold">Testimonials</p>
           <h1 className="text-3xl font-bold mt-1">From Our Users</h1>
+
           {windowWidth && windowWidth > 1024 ? (
             <div className="hidden lg:flex w-full flex-col lg:flex-row lg:gap-x-[5%] xl:gap-x-[7%] items-center justify-center mt-10">
               {feedbackData.map((feedback, index) => (
-                <div key={index} className="shadow-2xl border mb-8 w-[80%] sm:w-[65%] md:w-[50%] lg:w-[330px] h-96 rounded-[6px] flex justify-center items-center flex-col">
+
+                <motion.div 
+                key={index} 
+                className="shadow-2xl border mb-8 w-[80%] sm:w-[65%] md:w-[50%] lg:w-[330px] h-96 rounded-[6px] flex justify-center items-center flex-col bg-white user-select-none"
+                whileHover={{ scale: 1.05 }}
+                drag
+                dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }} >
                   <div className="h-[75%] w-full flex justify-center">
-                    <p className="w-[95%] flex-wrap flex text-lg text-center tracking-wide font-medium leading-6 mt-10">
+                    <p className="w-[95%] flex-wrap flex text-lg text-center tracking-wide font-medium leading-6 mt-10 user-select-none">
                       {feedback.text}
                     </p>
                   </div>
@@ -93,7 +101,7 @@ const Feedback = () => {
                       <p className="text-sm ">{feedback.location}</p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           ) : (
