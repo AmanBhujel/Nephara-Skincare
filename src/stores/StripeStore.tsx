@@ -5,7 +5,7 @@ interface StoreState {
     setStripeSessionId: (itemName: string) => void;
 }
 
-export const useStripeStore = create<StoreState>((set) => ({
+export const UseStripeStore = create<StoreState>((set) => ({
     stripeSession: "",
     setStripeSessionId: (value) => set({ stripeSession: value }),
 }))
