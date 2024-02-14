@@ -6,7 +6,7 @@ import { gql, useMutation } from '@apollo/client';
 import { Stripe, loadStripe } from '@stripe/stripe-js';
 import { UsePaymentContext } from '@/components/contexts/checkContext';
 import ToastMessage from '@/components/utils/ToastMessage';
-import { useStripeStore } from '@/stores/StripeStore';
+import { UseStripeStore } from '@/stores/StripeStore';
 
 const CREATE_STRIPE_SESSION = gql`
 mutation CreateStripeCheckoutSession($productName: String!, $productPrice: String!, $productImage: String!) {
@@ -39,7 +39,7 @@ const Page = () => {
     const [allergies, setAllergies] = useState<string>("");
     const [comment, setComment] = useState<string>("");
     const { clientId, setClientId, paymentIntent, setPaymentIntent } = UsePaymentContext();
-    const setStripeSessionId = useStripeStore((state) => state.setStripeSessionId);
+    const setStripeSessionId = UseStripeStore((state) => state.setStripeSessionId);
 
     const handleBookAppointment = async () => {
         // if (!selectedDate || !selectedDoctor || !selectedTimeZone || !selectedTime || !allergies || !name || !reason) {
