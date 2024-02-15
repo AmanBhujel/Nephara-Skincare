@@ -63,7 +63,7 @@ const AppointmentLists = () => {
                         </div>
                         {/* ---card body-------- */}
                         <div className='flex items-center py-2 h-auto'>
-                            <Image src={Alphabet} width={200} height={200} alt='Appointment Image' className='w-[70px] h-[70px] rounded-[3px] ml-3 mr-3' />
+                            <Image src={Alphabet} width={200} height={200} alt='Appointment Image' className='w-[70px] h-[70px] rounded-[7px] ml-3 mr-3' />
                             <div className='flex flex-col items-start h-[60px]'>
                                 <p className='text-lg font-semibold'>{appointment.name}</p>
                                 <p className='text-sm font-medium text-gray-500'> {appointment.description}</p>
@@ -89,7 +89,7 @@ const AppointmentLists = () => {
                         </div>
                         {/* ---card body-------- */}
                         <div className='flex items-center py-2 h-auto'>
-                            <Image src={Alphabet} width={200} height={200} alt='Appointment Image' className='w-[70px] h-[70px] rounded-[3px] ml-3 mr-3' />
+                            <Image src={Alphabet} width={200} height={200} alt='Appointment Image' className='w-[70px] h-[70px] rounded-[8px] ml-3 mr-3' />
                             <div className='flex flex-col items-start h-[60px]'>
                                 <p className='text-lg font-semibold'>{appointment.name}</p>
                                 <p className='text-sm text-gray-500 font-medium'> {appointment.description}</p>

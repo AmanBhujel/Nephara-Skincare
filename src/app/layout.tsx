@@ -46,8 +46,6 @@ export default function RootLayout({
     headers: headers
   });
 
-
-
   return (
     <html lang="en">
       <body className={inter.className}>
