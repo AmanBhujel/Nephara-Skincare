@@ -58,68 +58,67 @@ const Page: NextPage<PageProps> = ({ params }) => {
     }, [])
 
 
-    // useEffect(() => {
-    //     let isMounted = true; // Flag to track component mount state
-    //     const token = getCookie("token");
+    useEffect(() => {
+        let isMounted = true; // Flag to track component mount state
+        const token = getCookie("token");
 
-    //     const getUserInfo = async () => {
-    //         try {
-    //             if (token) {
-    //                 if (!isAuthorized) {
+        const getUserInfo = async () => {
+            try {
+                if (token) {
+                    if (!isAuthorized) {
 
-    //                     const response = await getUserInfoByToken();
-    //                     console.log(response, "from useeffect from landing");
+                        const response = await getUserInfoByToken();
+                        console.log(response, "from useeffect from landing");
 
-    //                     if (!isMounted) return; // Skip state updates if component is unmounted
+                        if (!isMounted) return; // Skip state updates if component is unmounted
 
-    //                     const { status, message, user } = response.data.getUserInfoByToken;
-    //                     if (user) {
-    //                         setIsAuthorized(true)
-    //                         setUserInfo({ email: user.email || '', name: user.name || '', photo: user.photo || '', gender: user.gender || '', age: user.age || 0, city: user.city || '', country: user.country || '', phoneNumber: user.phoneNumber || '' })
-    //                     }
-    //                     if (status === 'error' && message === 'Unauthorized Token!') {
-    //                         router.replace('/auth')
-    //                         ToastMessage("error", "Authorization Denied")
-    //                         return;
-    //                     } else if (status === 'error' && message === 'Internal server error') {
-    //                         ToastMessage(status, message)
-    //                     }
-    //                 }
+                        const { status, message, user } = response.data.getUserInfoByToken;
+                        if (user) {
+                            setIsAuthorized(true)
+                            setUserInfo({ email: user.email || '', name: user.name || '', photo: user.photo || '', gender: user.gender || '', age: user.age || 0, city: user.city || '', country: user.country || '', phoneNumber: user.phoneNumber || '' })
+                        }
+                        if (status === 'error' && message === 'Unauthorized Token!') {
+                            router.replace('/auth')
+                            ToastMessage("error", "Authorization Denied")
+                            return;
+                        } else if (status === 'error' && message === 'Internal server error') {
+                            ToastMessage(status, message)
+                        }
+                    }
 
-    //             }
-    //             else {
-    //                 router.replace('/auth')
-    //                 ToastMessage("error", "Authorization Denied")
-    //                 return;
-    //             }
-    //             setIsLoading(false);
-    //         } catch (error) {
-    //             console.error("Error fetching user info:", error);
-    //             // Handle any error or perform cleanup actions
-    //         }
-    //     };
+                }
+                else {
+                    router.replace('/auth')
+                    ToastMessage("error", "Authorization Denied")
+                    return;
+                }
+                setIsLoading(false);
+            } catch (error) {
+                console.error("Error fetching user info:", error);
+                // Handle any error or perform cleanup actions
+            }
+        };
 
-    //     if (isMounted) {
-    //         getUserInfo();
-    //     }
+        if (isMounted) {
+            getUserInfo();
+        }
 
-    //     // Cleanup function
-    //     return () => {
-    //         isMounted = false; // Update flag to indicate component unmount
-    //         // Perform cleanup actions here if needed
-    //         // For example: Clear any timers or subscriptions
-    //     };
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, []);
+        // Cleanup function
+        return () => {
+            isMounted = false; // Update flag to indicate component unmount
+            // Perform cleanup actions here if needed
+            // For example: Clear any timers or subscriptions
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <main className='w-full h-screen flex justify-center items-center bg-[#f6f8fc] relative'>
-            {/* {isLoading ? <Loader /> : */}
+            { isLoading ? <Loader /> : 
                 <>
                     <Sidebar />
                     <AppointmentPageContainer appointmentData={appointment} />
-                </>
-            
+                </>}
         </main>
     );
 }
