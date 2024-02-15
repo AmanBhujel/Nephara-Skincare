@@ -74,11 +74,11 @@ const ReportModal: React.FC<MyModalProps> = ({ isReportModalOpen, setIsReportMod
     };
 
     return (
-        <Modal isOpen={isReportModalOpen} onClose={() => setIsReportModalOpen(false)}>
+        <Modal isOpen={isReportModalOpen} onClose={() => setIsReportModalOpen(false)} size="4xl" backdrop="blur">
             <ModalContent>
                 {(onClose) => (
                     <>
-                        <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+                        <ModalHeader className="flex flex-col gap-1">Create Report</ModalHeader>
                         <ModalBody>
                             {/* Prescriptions Section */}
                             <div className="mb-4">
@@ -108,7 +108,7 @@ const ReportModal: React.FC<MyModalProps> = ({ isReportModalOpen, setIsReportMod
                                 ))}
                                 <button
                                     type="button"
-                                    className="mt-2 p-2 bg-green-500 text-white rounded-md"
+                                    className="mt-2 p-2 bg-green-500 text-white rounded-md float-right hover:bg-green-600"
                                     onClick={handleAddPrescription}
                                 >
                                     Add Prescription

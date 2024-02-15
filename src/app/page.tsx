@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { useLoadingStore } from "@/stores/LoadingStore";
 import Loader from "@/components/Loader";
 import { useAuthorizedStore } from "@/stores/AuthorizedStore";
+import FAQ from "./landing/FAQ";
 
 const GET_USER_INFO = gql`
   query GetUserInfoByToken {
@@ -71,6 +72,7 @@ const Home = () => {
           <WhoWeAre />
           <WhatWeBelieve />
           <Feedback />
+          <FAQ />
           <Footer />
         </div>
       }
