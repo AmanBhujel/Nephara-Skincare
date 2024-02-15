@@ -111,9 +111,14 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
         <div className="w-full h-full grid place-items-center">
             <div className="w-full lg:w-[50%] xl:w-[45%] 2xl:w-[40%] min-h-fit flex flex-col items-center lg:border rounded-[10px] lg:shadow-xl justify-center">
                 <div className="w-[80%] sm:w-[70%] md:w-[60%] lg:w-[80%] xl:w-[80%] 2xl:w-[70%] ">
-                    <p className="text-4xl mt-8">Start your</p>
-                    <p className="font-semibold text-4xl mt-3">Journey to Clear Skin</p>
-                    <button className="w-full h-12 mt-14 border rounded-[7px] flex items-center justify-center shadow-lg">
+                    <p className="text-4xl mt-8 text-center">
+                        <span className="inline-block relative">
+                            <span className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 opacity-75 rounded-lg blur-3xl"></span>
+                            <span className="font-semibold text-4xl">Start</span>
+                        </span>
+                    </p>
+                    <p className="font-semibold text-4xl mt-3 text-center">Your Journey to Clear Skin</p>
+                    <button className="w-full h-12 mt-14 border rounded-[7px] flex items-center justify-center shadow-lg hover:bg-purple-300 transition duration-200">
                         <i className="text-xl mr-4">
                             <FcGoogle />
                         </i>

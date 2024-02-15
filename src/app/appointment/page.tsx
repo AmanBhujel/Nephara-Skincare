@@ -70,7 +70,7 @@ const Page = () => {
     }
 
     return (
-        <div className='w-full h-auto lg:h-full flex justify-center'>
+        <div className='w-full h-auto lg:h-full flex justify-center bg-white'>
             <div className='w-[95%] lg:w-[78rem] lg:min-w-[78rem] xl:w-[90rem] h-auto lg:h-[50rem] pb-12 sm:pb-8  xl:h-[49rem] mt-12 flex flex-col items-center p-0'>
                 <h3 className='text-4xl md:text-5xl font-semibold text-[#0736bc]'>Make an appointment</h3>
                 <p className='text-sm sm:text-base md:text-lg text-[#6e6e6e] font-medium mt-4 text-center'>By filling out the form, you automatically make an appointment with a doctor.</p>
@@ -181,7 +181,7 @@ const Page = () => {
                                 I have read and agree with <span className='text-blue-400 underline cursor-pointer'>Terms and Conditions</span>
                             </span>
                         </label>
-                        <button className='text-white bg-[#0736bc] hover:bg-[#0737bcda] py-2 font-medium mt-4 w-40 rounded-[8px] mb-6 lg:mb-0' onClick={handleBookAppointment}>
+                        <button className='text-white bg-[#0736bc] hover:bg-[#0737bcda] py-2 font-medium mt-4 w-40 rounded-[8px] mb-6 ' onClick={handleBookAppointment}>
                             Confirm
                         </button>
                     </div>

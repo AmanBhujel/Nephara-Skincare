@@ -1,7 +1,7 @@
 'use client'
 // import type { Metadata } from 'next'
 
-import { Inter } from 'next/font/google'
+import { Inter, Architects_Daughter } from 'next/font/google'
 import './globals.css'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 import { PaymentProvider } from '@/components/contexts/checkContext'
@@ -10,10 +10,24 @@ import { NextUIProvider } from "@nextui-org/react";
 import LogoutModal from '@/components/LogoutModal'
 import { getCookie } from '@/components/utils/Cookie'
 import { useTokenStore } from '@/stores/TokenStore'
+import { useEffect } from 'react'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap'
+})
 
+
+const architects_daughter = Architects_Daughter({
+  subsets: ['latin'],
+  variable: '--font-architects-daughter',
+  weight: '400',
+  display: 'swap'
+})
 
 // export const metadata: Metadata = {
 //   title: 'Create Next App',
@@ -46,9 +60,18 @@ export default function RootLayout({
     headers: headers
   });
 
+  useEffect(() => {
+    AOS.init({
+      once: false,
+      disable:'phone',
+      duration: 600,
+      easing: 'ease-out-sine',
+    })
+  })
+
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${architects_daughter.variable} font-inter antialiased bg-gray-900 tracking-tight`}>
         <ApolloProvider client={graphqlClient}>
           <NextUIProvider>
             <PaymentProvider>

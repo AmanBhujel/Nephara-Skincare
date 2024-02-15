@@ -67,8 +67,8 @@ const Home = () => {
         <div className='w-full h-auto flex flex-col  justify-center items-center  '>
           <Navbar />
           <HeroSection />
-          <WhoWeAre />
           <Services />
+          <WhoWeAre />
           <WhatWeBelieve />
           <Feedback />
           <Footer />

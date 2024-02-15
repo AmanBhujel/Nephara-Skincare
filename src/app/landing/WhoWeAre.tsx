@@ -6,7 +6,7 @@ import { useViewportScroll, useTransform, motion } from 'framer-motion';
 const WhoWeAre = () => {
 
     const { scrollYProgress } = useViewportScroll();
-    const opacity = useTransform(scrollYProgress, [0.1, 0.3], [0, 1]);
+    const opacity = useTransform(scrollYProgress, [0.1, 0.2], [0, 1]);
   
     return (
         <motion.div 

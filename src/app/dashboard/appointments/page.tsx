@@ -114,12 +114,12 @@ const Page: NextPage<PageProps> = ({ params }) => {
 
     return (
         <main className='w-full h-screen flex justify-center items-center bg-[#f6f8fc] relative'>
-            {isLoading ? <Loader /> :
-                <>
-                    <Sidebar />
-                    <AppointmentPageContainer appointmentData={appointment} />
-                </>
-            }
+            {/* {isLoading ? <Loader /> : */}
+            <>
+                <Sidebar />
+                <AppointmentPageContainer appointmentData={appointment} />
+            </>
+
         </main>
     );
 }
