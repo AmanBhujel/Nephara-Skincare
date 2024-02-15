@@ -9,6 +9,11 @@ import Image from 'next/image';
 import { useUserStore } from '@/stores/userStore';
 import { useLogoutStore } from '@/stores/LogoutStore';
 import { IoMdArrowDropdown } from 'react-icons/io';
+import { useDoctorStore } from '@/stores/DoctorStore';
+import { getCookie } from '@/components/utils/Cookie';
+import { gql, useLazyQuery } from '@apollo/client';
+import ToastMessage from '@/components/utils/ToastMessage';
+import { useRouter } from 'next/navigation';
 
 interface PageProps {
     params: {
@@ -16,12 +21,28 @@ interface PageProps {
     };
 }
 
+const GET_DOCTOR_INFO_BY_TOKEN = gql`
+query GetDoctorInfoByToken($token: String!) {
+    getDoctorInfoByToken(token: $token) {
+      name
+      email
+      status
+      message
+    }
+  }`;
+
 const Page: NextPage<PageProps> = ({ params }) => {
+    const [getDoctorInfoByToken] = useLazyQuery(GET_DOCTOR_INFO_BY_TOKEN, {
+        fetchPolicy: "no-cache"
+    });
     const setActiveSidebarItem = useDashboardStore((state) => state.setActiveSidebarItem);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
     const setIsLogoutModalOpen = useLogoutStore((state) => state.setIsLogoutModalOpen)
-    const userInfo = useUserStore((state) => state.userInfo)
+    const setName = useDoctorStore((state) => state.setName);
+    const setEmail = useDoctorStore((state) => state.setEmail);
+    const doctorName = useDoctorStore((state) => state.name)
+    const router = useRouter();
 
     const handleDropdownToggle = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -30,6 +51,37 @@ const Page: NextPage<PageProps> = ({ params }) => {
     const handleLogout = () => {
         setIsLogoutModalOpen(true);
     };
+
+    // useEffect(() => {
+
+    //     const getDoctorInfo = async () => {
+    //         const token = getCookie("doctor-token");
+    //         const tokenParts = token.split(" ");
+
+    //         if (token) {
+    //             const response = await getDoctorInfoByToken({
+    //                 variables: {
+    //                     token: tokenParts[1] || ''
+    //                 }
+    //             });
+    //             console.log(response, "from useeffect from landing")
+    //             const { status, message, name, email } = response.data.getDoctorInfoByToken;
+    //             if (name && email) {
+    //                 setName(name);
+    //                 setEmail(email)
+    //                 return;
+    //             }
+    //             else {
+    //                 ToastMessage(status, message)
+    //                 router.replace("/")
+    //             }
+    //         }
+    //         router.replace("/")
+    //     }
+    //     getDoctorInfo()
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, []);
+
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -56,12 +108,12 @@ const Page: NextPage<PageProps> = ({ params }) => {
         <main className='w-full h-auto flex flex-col justify-center overflow-auto items-center bg-[#f6f8fc] relative'>
             <div className='w-full  min-h-20 lg:mt-4 xl:mt-0 2xl:min-h-24 flex items-center justify-between border-b-2'>
                 <div className='lg:ml-16 xl:ml-14 '>
-                    <p className='text-2xl lg:text-3xl font-semibold'>Profile dashboard</p>
+                    <p className='text-2xl lg:text-3xl font-semibold'>Dr {doctorName} dashboard</p>
                     <p className='text-sm lg:text-base text-gray-700'>Welcome to Nephara Skincare!</p>
                 </div>
                 <div className="flex items-center justify-center mr-[10%] relative cursor-pointer" onClick={handleDropdownToggle} >
                     <Image src={Profile} alt='Profile' width={100} height={100} className='w-14 h-14 border rounded-full object-cover' />
-                    <p className='ml-3 font-semibold lg:text-lg'>Welcome Doctor</p>
+                    <p className='ml-3 font-semibold lg:text-lg'>Welcome {doctorName}</p>
                     <i className='text-2xl ml-3 cursor-pointer'><IoMdArrowDropdown /></i>
                     {isDropdownOpen && (
                         <div className="absolute right-0 top-[80%] mt-2 bg-white border border-gray-200 shadow-xl z-40 p-1 rounded-[8px]" ref={dropdownRef}>

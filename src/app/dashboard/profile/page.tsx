@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Sidebar from '../components/sidebar';
 import Image from 'next/image';
-import Profile from '@/assets/beautiful-nurse.png'
+import Profile from '@/assets/Emma.png'
 import { gql, useLazyQuery } from '@apollo/client';
 import { useUserStore } from '@/stores/userStore';
 import { useRouter } from 'next/navigation';
