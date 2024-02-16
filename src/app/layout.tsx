@@ -9,7 +9,6 @@ import { Toaster } from 'sonner';
 import { NextUIProvider } from "@nextui-org/react";
 import LogoutModal from '@/components/LogoutModal'
 import { getCookie } from '@/components/utils/Cookie'
-import { useTokenStore } from '@/stores/TokenStore'
 import { useEffect } from 'react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -41,7 +40,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const tokenString = useTokenStore((state)=>state.tokenString)
   const token = getCookie("token");
   const tokenParts = token.split(" ");
 
@@ -67,10 +65,11 @@ export default function RootLayout({
       duration: 600,
       easing: 'ease-out-sine',
     })
-  })
+  },[])
 
   return (
     <html lang="en">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <body className={`${inter.variable} ${architects_daughter.variable} font-inter antialiased bg-gray-900 tracking-tight`}>
         <ApolloProvider client={graphqlClient}>
           <NextUIProvider>

@@ -65,7 +65,7 @@ const Home = () => {
     <main className="bg-white  w-full h-screen">
       {isLoading ? <Loader />
         :
-        <div className='w-full h-auto flex flex-col  justify-center items-center  '>
+        <div className='w-full h-auto flex flex-col  justify-center items-center'>
           <Navbar />
           <HeroSection />
           <Services />
