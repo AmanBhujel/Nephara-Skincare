@@ -63,7 +63,7 @@ export default function RootLayout({
   useEffect(() => {
     AOS.init({
       once: false,
-      disable:'phone',
+      // disable:'phone',
       duration: 600,
       easing: 'ease-out-sine',
     })
