@@ -18,11 +18,11 @@ const FAQ = () => {
   const Ans4 = "The fee for a single appointment is $40, reflective of the unparalleled quality of care and personalized attention delivered by our distinguished team of professional skin care specialists.";
 
   const Q5 = "I cannot attend the appointment; what should I do?";
-  const Ans5 = ( <>In the event that you are unable to attend your scheduled appointment, we appreciate advance notice. Kindly{" "} <a href="evansunde2@gamil.com">email us</a>{" "}at your earliest convenience, and our dedicated team will assist you in rescheduling or exploring refund options with the utmost professionalism.</>);
+  const Ans5 = (<>In the event that you are unable to attend your scheduled appointment, we appreciate advance notice. Kindly{" "} <a href="evansunde2@gamil.com">email us</a>{" "}at your earliest convenience, and our dedicated team will assist you in rescheduling or exploring refund options with the utmost professionalism.</>);
 
   const Q6 = "What if the Doctor does not show up at the scheduled time?";
   const Ans6 = (<> While our practitioners are committed to punctuality, unforeseen circumstances may arise. If your assigned doctor is delayed, we kindly request your understanding for a brief waiting period of up to 5 minutes. In the rare event of a prolonged delay, promptly{" "}       <a href="evansunde2@gamil.com">email us</a>
-  {" "} for expedited rescheduling.</>);
+    {" "} for expedited rescheduling.</>);
 
   const Q7 = "Are the Doctors Professionals?";
   const Ans7 = "Certainly, our esteemed doctors are eminent professionals in the field of dermatology, each possessing extensive expertise and a proven track record as skin care specialists.";
@@ -30,44 +30,51 @@ const FAQ = () => {
   const Q8 = "Can I request a specific doctor for my appointment?";
   const Ans8 = "While we cannot guarantee specific doctor requests, we strive to match you with the most suitable professional based on your needs. Each of our specialists is highly qualified and dedicated to providing exceptional care.";
 
-  // Note: Your satisfaction and well-being are paramount. Should you have any further inquiries or require assistance, please do not hesitate to reach out to us via email.
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", width: "75%" }}>    <Accordion variant="splitted">
-      <AccordionItem key="1" aria-label="Accordion 1" title={Q7}>
-        {Ans7}
-      </AccordionItem>
+    <div id = "FAQ" className = "flex w-full justify-center items-center border-b-2 bg-white" >
+    <div className={`flex justify-center items-center w-[95%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto `}>
+      <div className="flex flex-col w-full justify-center items-center py-6 ">
+        <h1 className="text-3xl font-bold mt-1">Frequently Asked Questions </h1>
+          <div className="flex justify-center w-3/4 py-10" >
+            <Accordion variant="splitted">
+              <AccordionItem key="1" aria-label="Accordion 1" title={Q7}>
+                {Ans7}
+              </AccordionItem>
 
-      <AccordionItem key="2" aria-label="Accordion 2" title={Q2}>
-        {Ans2}
-      </AccordionItem>
+              <AccordionItem key="2" aria-label="Accordion 2" title={Q2}>
+                {Ans2}
+              </AccordionItem>
 
-      <AccordionItem key="3" aria-label="Accordion 3" title={Q3}>
-        {Ans3}
-      </AccordionItem>
+              <AccordionItem key="3" aria-label="Accordion 3" title={Q3}>
+                {Ans3}
+              </AccordionItem>
 
-      <AccordionItem key="4" aria-label="Accordion 4" title={Q4}>
-        {Ans4}
-      </AccordionItem>
+              <AccordionItem key="4" aria-label="Accordion 4" title={Q4}>
+                {Ans4}
+              </AccordionItem>
 
-      <AccordionItem key="5" aria-label="Accordion 5" title={Q5}>
-        {Ans5}
-      </AccordionItem>
+              <AccordionItem key="5" aria-label="Accordion 5" title={Q5}>
+                {Ans5}
+              </AccordionItem>
 
-      <AccordionItem key="6" aria-label="Accordion 6" title={Q6}>
-        {Ans6}
-      </AccordionItem>
+              <AccordionItem key="6" aria-label="Accordion 6" title={Q6}>
+                {Ans6}
+              </AccordionItem>
 
-      <AccordionItem key="7" aria-label="Accordion 7" title={Q1}>
-        {Ans1}
-      </AccordionItem>
+              <AccordionItem key="7" aria-label="Accordion 7" title={Q1}>
+                {Ans1}
+              </AccordionItem>
 
-      <AccordionItem key="8" aria-label="Accordion 8" title={Q8}>
-        {Ans8}
-      </AccordionItem>
+              <AccordionItem key="8" aria-label="Accordion 8" title={Q8}>
+                {Ans8}
+              </AccordionItem>
 
-    </Accordion>
-    </div>
+            </Accordion>
+          </div>
+        </div>
+        </div>
+        </div>
   );
 }
 
