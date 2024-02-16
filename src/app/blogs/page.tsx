@@ -6,7 +6,7 @@ import React from 'react'
 import { IoIosArrowBack } from "react-icons/io";
 import BlogImage from '@/assets/DoctorConsulting.png'
 
-const page = () => {
+const Page = () => {
     const router = useRouter();
 
     const scrollToSection = (sectionId: string) => {
@@ -43,11 +43,11 @@ const page = () => {
                         <div className='w-[95%] sm:w-[90%] md:w-[80%] lg:w-[70%] h-auto flex flex-col gap-y-6 lg:gap-y-10'>
                             <div id="introduction" className='w-full'>
                                 <h6 className='text-2xl xl:text-3xl font-medium  lg:mb-2'>Introduction</h6>
-                                <p className='text-[#666666] xl:text-lg'>Welcome to Nephara, your premier destination for comprehensive online dermatology healthcare. At Nephara, we are dedicated to revolutionizing the way individuals receive skin care by offering virtual consultations from the convenience of their homes. Our platform connects users with expert dermatologists who provide personalized assessments and treatment plans tailored to each individual's unique needs. With our commitment to excellence and innovation, Nephara aims to empower users to prioritize their skin health and achieve optimal results, all through seamless and accessible virtual appointments.</p>
+                                <p className='text-[#666666] xl:text-lg'>Welcome to Nephara, your premier destination for comprehensive online dermatology healthcare. At Nephara, we are dedicated to revolutionizing the way individuals receive skin care by offering virtual consultations from the convenience of their homes. Our platform connects users with expert dermatologists who provide personalized assessments and treatment plans tailored to each individual&aposs unique needs. With our commitment to excellence and innovation, Nephara aims to empower users to prioritize their skin health and achieve optimal results, all through seamless and accessible virtual appointments.</p>
                             </div>
                             <div id="affordable" className='w-full'>
                                 <h6 className='text-2xl xl:text-3xl font-medium  lg:mb-2'>How do we provide online skin appointment so affordable?</h6>
-                                <p className='text-[#666666] xl:text-lg'>At Nephara, we've harnessed the power of globalization to deliver high-quality dermatological care at remarkably affordable rates. By leveraging the expertise of skilled dermatologists from South Asia, where the cost of living is comparatively lower than in first-world countries like Australia, we're able to offer our services at a fraction of the cost. Through our innovative online platform, we connect users with top-tier dermatologists from the region, ensuring that quality care is accessible to all, regardless of geographical barriers. This approach not only makes dermatological care more affordable but also expands access to expertise and promotes global collaboration in healthcare.</p>
+                                <p className='text-[#666666] xl:text-lg'>At Nephara, we&apos ve harnessed the power of globalization to deliver high-quality dermatological care at remarkably affordable rates. By leveraging the expertise of skilled dermatologists from South Asia, where the cost of living is comparatively lower than in first-world countries like Australia, we&aposre able to offer our services at a fraction of the cost. Through our innovative online platform, we connect users with top-tier dermatologists from the region, ensuring that quality care is accessible to all, regardless of geographical barriers. This approach not only makes dermatological care more affordable but also expands access to expertise and promotes global collaboration in healthcare.</p>
                             </div>
                             <div id="appointment" className='w-full'>
                                 <h6 className='text-2xl xl:text-3xl font-medium  lg:mb-2'>Streamlined Appointment Process</h6>
@@ -77,4 +77,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
