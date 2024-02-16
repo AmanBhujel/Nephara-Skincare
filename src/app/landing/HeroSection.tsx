@@ -24,13 +24,15 @@ const HeroSection = () => {
       </div>
 
       <div className="text-center pb-12 md:pb-16 flex flex-col-reverse justify-between lg:flex-row lg:pt-10">
-      <div className="w-[90%] lg:w-[45%] xl:w-[40%] 2xl:w-[35%] flex flex-col items-center z-30 mr-12" >
+        <div className="w-[90%] lg:w-[45%] xl:w-[40%] 2xl:w-[35%] flex flex-col items-center z-30 mr-12" >
           <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mt-20 mb-4" data-aos="zoom-y-out">Make your Skin <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">WONDERFUL</span></h1>
           <p className="text-xl text-gray-600 " data-aos="zoom-y-out" data-aos-delay="150">Book appointments with top south asian dermatologists from the comfort of your home.</p>
           <div className="flex items-center mt-6 md:mt-8 lg:mt-8" data-aos="zoom-y-out" data-aos-delay="300">
             <Link href={'/appointment'}>
               <button className="bg-[#8f67e2] hover:bg-[#9c75e9] py-2 px-6 md:py-3  md:px-9 font-semibold text-lg text-white rounded-[8px] transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg">Book now</button></Link>
-            <button className="ml-8 flex justify-center items-center tracking-tight hover:underline text-sm lg:text-base text-[#d25d7a] transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg" >About Our Doctors <i className="ml-3 text-3xl"><FaCircleArrowRight /> </i></button>
+            <Link href={'/blogs'}>
+              <button className="ml-8 flex justify-center items-center tracking-wide hover:underline text-sm lg:text-base text-[#d25d7a] transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 " >About Us <i className="ml-3 text-3xl"><FaCircleArrowRight /> </i></button>
+            </Link>
           </div>
           <div className='flex justify-between mt-6'>
             <div className='w-full'>

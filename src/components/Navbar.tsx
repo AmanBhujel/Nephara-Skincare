@@ -16,6 +16,7 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 import { useUserStore } from '@/stores/userStore';
 import LogoutModal from '@/components/LogoutModal';
 import { useLogoutStore } from '@/stores/LogoutStore';
+import { usePathname, useRouter } from 'next/navigation';
 
 const Navbar = () => {
     const [windowWidth, setWindowWidth] = useState(0);
@@ -29,6 +30,8 @@ const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
     const setIsLogoutModalOpen = useLogoutStore((state) => state.setIsLogoutModalOpen)
+    const router = useRouter();
+    const pathname = usePathname();
 
     const handleDropdownToggle = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -55,6 +58,18 @@ const Navbar = () => {
         { icon: <IoSettingsOutline />, name: 'Settings', route: "/dashboard/settings" },
     ];
 
+    useEffect(() => {
+        if (pathname === "/blogs") {
+            setActiveItem("Blogs")
+            setSidebarActiveItem("Blogs")
+        }
+        else if (pathname === "/faqs") {
+            setActiveItem("FAQs")
+            setSidebarActiveItem("FAQs")
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {

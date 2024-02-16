@@ -97,7 +97,7 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
             const { status, message, token ,user} = signupResponse.data.signupUser;
             ToastMessage(status, message);
             if (token) {
-                setCookie(36000, "token", `Bearer ${token}`)
+                setCookie(604800, "token", `Bearer ${token}`)
                 router.replace('/dashboard/appointments')
                 window.location.reload();
             }
@@ -227,7 +227,7 @@ export const Signin: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
             const { status, message, token, user } = loginResponse.data.loginUser;
             ToastMessage(status, message);
             if (token) {
-                setCookie(84000, "token", `Bearer ${token}`)
+                setCookie(604800, "token", `Bearer ${token}`)
                 router.replace('/dashboard/profile')
                 window.location.reload();
             }

@@ -51,7 +51,7 @@ export const Signin = () => {
             const { status, message, token } = loginResponse.data.loginDoctor;
             ToastMessage(status, message);
             if (token) {
-                setCookie(36000, "doctor-token", `Bearer ${token}`)
+                setCookie(86400, "doctor-token", `Bearer ${token}`)
                 router.push('/doctor/dashboard/appointments');
             }
         } catch (error) {
