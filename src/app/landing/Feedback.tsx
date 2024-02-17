@@ -6,7 +6,7 @@ import Profile1 from '@/assets/profile1.jpg';
 import Profile2 from '@/assets/profile2.jpg';
 import { Navigation, Pagination, } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {motion} from 'framer-motion'
+import { motion } from 'framer-motion'
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -39,12 +39,12 @@ const Feedback = () => {
   const [startAnimation, setStartAnimation] = useState<Boolean>(false);
 
   const handleScroll = () => {
-      if (feedbackRef.current ) {
-        const elementTop = feedbackRef.current.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
+    if (feedbackRef.current) {
+      const elementTop = feedbackRef.current.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
 
-        setStartAnimation(elementTop < windowHeight);
-      }
+      setStartAnimation(elementTop < windowHeight);
+    }
   };
 
   useEffect(() => {
@@ -83,12 +83,12 @@ const Feedback = () => {
             <div className="hidden lg:flex w-full flex-col lg:flex-row lg:gap-x-[5%] xl:gap-x-[7%] items-center justify-center mt-10">
               {feedbackData.map((feedback, index) => (
 
-                <motion.div 
-                key={index} 
-                className="shadow-2xl border mb-8 w-[80%] sm:w-[65%] md:w-[50%] lg:w-[330px] h-96 rounded-[6px] flex justify-center items-center flex-col bg-white user-select-none"
-                whileHover={{ scale: 1.05 }}
-                drag
-                dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }} >
+                <motion.div
+                  key={index}
+                  className="shadow-2xl border mb-8 w-[80%] sm:w-[65%] md:w-[50%] lg:w-[330px] h-96 rounded-[6px] flex justify-center items-center flex-col bg-white user-select-none"
+                  whileHover={{ scale: 1.05 }}
+                  drag
+                  dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }} >
                   <div className="h-[75%] w-full flex justify-center">
                     <p className="w-[95%] flex-wrap flex text-lg text-center tracking-wide font-medium leading-6 mt-10 user-select-none">
                       {feedback.text}
@@ -109,7 +109,7 @@ const Feedback = () => {
               <Swiper
                 effect={"coverflow"}
                 className='h-auto w-full'
-                {...(windowWidth && windowWidth < 640 ? { navigation: true } : '')}
+                // {...(windowWidth && windowWidth < 640 ? { navigation: true } : '')}
                 modules={[Pagination, Navigation]}
                 pagination={{ clickable: true }}
                 grabCursor={true}
@@ -126,7 +126,7 @@ const Feedback = () => {
               >
                 {feedbackData.map((feedback, index) => (
                   <SwiperSlide key={index} className="w-full flex justify-center items-center mb-3">
-                    <div className="shadow-xl border mb-8 w-[300px] sm:w-[290px] md:w-[350px] ml-[50%] translate-x-[-50%] h-96 rounded-[6px] flex justify-center items-center flex-col">
+                    <div className="shadow-xl border mb-8 w-[300px] sm:w-[290px] md:w-[350px] ml-[50%] translate-x-[-50%] h-96 rounded-[6px] flex justify-center items-center flex-col bg-white">
                       <div className="h-[75%] w-full flex justify-center">
                         <p className="w-[95%] flex-wrap flex text-lg text-center tracking-wide font-medium leading-6 mt-10">
                           {feedback.text}
