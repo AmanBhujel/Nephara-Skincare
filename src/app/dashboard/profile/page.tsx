@@ -150,7 +150,7 @@ const Page = () => {
                                     <p className='text-sm lg:text-base text-gray-700'>Welcome to Nephara Skincare!</p>
                                 </div>
                                 <div className="flex items-center justify-center ml-[10%] relative cursor-pointer" onClick={handleDropdownToggle} >
-                                    <Image src={Profile} alt='Profile' width={100} height={100} className='w-14 h-14 border rounded-full object-cover' />
+                                    <img src={userInfo[0]?.photo ? userInfo[0].photo : ''} alt='Profile' width={100} height={100} className='w-14 h-14 border rounded-full object-cover' />
                                     {/* <p className='ml-3 font-semibold lg:text-lg'>Welcome {userInfo[0] && userInfo[0]?.name && userInfo[0].name.split(' ')[0] || ""}</p> */}
                                     <p className='ml-3 font-semibold lg:text-lg'>Welcome {userInfo.length > 0 && userInfo[0]?.name ? userInfo[0]?.name.split(' ')[0] : ""}</p>
                                     <i className='text-2xl ml-3 cursor-pointer'><IoMdArrowDropdown /></i>
@@ -170,7 +170,7 @@ const Page = () => {
 
                                 {/* -------Profile-------- */}
                                 <div className='bg-white w-[90%] md:w-[85%] lg:w-[45%] 2xl:w-[43%] h-[90%] 2xl:h-[86%] border rounded-[10px] flex flex-col items-center shadow-xl' >
-                                    <Image src={Profile} width={1200} height={1200} alt='profile' className='w-[20rem] h-[20rem] border object-cover rounded-[10px] mt-6' />
+                                    <img src={userInfo[0]?.photo ? userInfo[0].photo : ''} width={1200} height={1200} alt='profile' className='w-[20rem] h-[20rem] border object-cover rounded-[10px] mt-6' />
                                     {/* <p className='text-2xl font-bold mt-6 w-full ml-[12%]'>My Profile</p> */}
                                     <p className='text-3xl font-medium mt-6'>{userInfo[0].name || ""}</p>
                                     <div className='flex w-full gap-x-[5%] justify-center mt-4'>

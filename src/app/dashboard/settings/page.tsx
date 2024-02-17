@@ -18,6 +18,9 @@ import { TbCameraPlus } from "react-icons/tb";
 import { useAuthorizedStore } from '@/stores/AuthorizedStore';
 import { getCookie } from '@/components/utils/Cookie';
 import { IoArrowBack } from "react-icons/io5";
+import UploadImage from './UploadImage';
+import { useUploadImageStore } from '@/stores/UploadImageStore';
+import { userInfo } from 'os';
 
 
 const UPDATE_USER = gql`
@@ -54,6 +57,7 @@ const Page = () => {
     const setUserInfo = useUserStore((state) => state.setUserInfo);
     const UserInfo = useUserStore((state) => state.userInfo);
     const [windowWidth, setWindowWidth] = useState<number>(0);
+    const setIsUploadPhotoOpen = useUploadImageStore((state)=>state.setIsUploadPhotoOpen);
 
     const router = useRouter();
 
@@ -207,6 +211,7 @@ const Page = () => {
                 isLoading ? <Loader /> :
                     <>
                         <Sidebar />
+                        <UploadImage />
                         <div className={`${windowWidth > 1024 || activeSettingButton === "" ? "block" : "hidden"} ${activeSettingButton === 'Edit' ? "block" : ""} ${windowWidth > 1024 ? "" : "flex w-[85%] h-full pb-20 items-center flex-col overflow-auto"} lg:w-[20%]  lg:min-w-[20rem] lg:max-w-[25rem] lg:h-full px-2 lg:ml-8`}>
                             <p className={`text-3xl sm:text-4xl lg:text-3xl font-semibold lg:mt-20  tracking-wide xl:mt-10 ${windowWidth > 1024 ? "" : "text-[#743bfb]"}`}>Account Settings</p>
                             <ul className='w-full mt-12'>
@@ -233,9 +238,9 @@ const Page = () => {
                                     <p className=' text-4xl font-semibold text-[#743bfb]  tracking-wide'>Edit Your Profile</p>
                                 </div>
                                 <div className='flex flex-col w-full justify-center items-center mt-3'>
-                                    <Image src={Profile} width={200} height={200} alt='Profile Image' className='w-32 h-32 rounded-[8px] border' />
+                                    <img src={UserInfo[0]?.photo ? UserInfo[0].photo : ''} width={200} height={200} alt='Profile Image' className='w-32 h-32 rounded-[8px] border' />
                                     <div className='flex items-center justify-center border-2 border-[#7e59e4] w-40 py-2 rounded-[8px] mt-2 cursor-pointer'>
-                                        <i className='text-xl'><TbCameraPlus /></i><p className='text-sm ml-2 font-medium'>Change Avatar</p>
+                                        <i className='text-xl'><TbCameraPlus /></i><p className='text-sm ml-2 font-medium' onClick={()=>setIsUploadPhotoOpen(true)}>Change Avatar</p>
                                     </div>
                                 </div>
                                 <div className='flex flex-col mt-6'>

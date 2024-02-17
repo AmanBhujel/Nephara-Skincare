@@ -13,7 +13,6 @@ import { useEffect } from 'react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
-
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
@@ -65,11 +64,14 @@ export default function RootLayout({
       duration: 600,
       easing: 'ease-out-sine',
     })
-  },[])
+  }, [])
 
   return (
     <html lang="en">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <head>
+        <title>Nephara</title>
+      </head>
       <body className={`${inter.variable} ${architects_daughter.variable} font-inter antialiased bg-gray-900 tracking-tight`}>
         <ApolloProvider client={graphqlClient}>
           <NextUIProvider>
