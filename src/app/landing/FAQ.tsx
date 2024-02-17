@@ -34,9 +34,9 @@ const FAQ = () => {
   return (
     <div id = "faq" className = "flex w-full justify-center items-center border-b-2 bg-white" >
     <div className={`flex justify-center items-center w-[95%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto `}>
-      <div className="flex flex-col w-full justify-center items-center py-6 ">
-        <h1 className="text-3xl font-bold mt-1">Frequently Asked Questions </h1>
-          <div className="flex justify-center w-3/4 py-10" >
+      <div className="flex flex-col w-full justify-center items-center py-2 sm:py-6">
+        <h1 className="text-2xl sm:text-3xl font-bold mt-1">Frequently Asked Questions </h1>
+          <div className="flex justify-center w-[95%] md:w-3/4 py-4 md:py-10" >
             <Accordion variant="splitted">
               <AccordionItem key="1" aria-label="Accordion 1" title={Q7}>
                 {Ans7}

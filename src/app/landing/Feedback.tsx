@@ -114,8 +114,7 @@ const Feedback = () => {
                 pagination={{ clickable: true }}
                 grabCursor={true}
                 centeredSlides={true}
-                slidesPerView={windowWidth && windowWidth < 640 ? 1 : 2}
-
+                slidesPerView={windowWidth && windowWidth < 700 ? 1 : 2}
                 coverflowEffect={{
                   rotate: 50,
                   stretch: 0,
