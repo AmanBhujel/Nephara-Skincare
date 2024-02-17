@@ -3,14 +3,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import { MdOutlineAttachMoney } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
 import { GrSchedules } from "react-icons/gr";
-import { useViewportScroll,useTransform,motion} from "framer-motion"
+import { useViewportScroll, useTransform, motion } from "framer-motion"
 
 const Services = () => {
     const serviceRef = useRef<HTMLDivElement>(null);
     const [startAnimation, setStartAnimation] = useState<Boolean>(false);
     const { scrollYProgress } = useViewportScroll();
     const opacity = useTransform(scrollYProgress, [0.3, 0.4], [0, 1]);
-  
+
 
     const handleScroll = () => {
         if (serviceRef.current) {
@@ -27,27 +27,26 @@ const Services = () => {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-                // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
 
     }, []);
 
-    return ( 
-        <div ref={serviceRef} 
-        // initial={{ opacity: 0, y: 100 }} 
-        // animate={{ opacity: startAnimation ? 1 : 0, y: startAnimation ? 0 : 100 }} 
-        // transition={{ duration: 1 }}
-         
-        className="flex w-full justify-center items-center border-b-2 bg-white">
+    return (
+        <div ref={serviceRef}
+            // initial={{ opacity: 0, y: 100 }} 
+            // animate={{ opacity: startAnimation ? 1 : 0, y: startAnimation ? 0 : 100 }} 
+            // transition={{ duration: 1 }}
+
+            className="flex w-full justify-center items-center border-b-2 bg-white">
             <div className={`flex justify-center items-center w-[95%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto `}>
                 <div className="flex flex-col w-full justify-center items-center py-6 ">
                     <p className="text-[#a376ff] font-bold">Features</p>
-                    <h1 className="text-3xl font-bold mt-1">Our Service Features</h1>
-                    <div className="flex w-full flex-col lg:flex-row lg:gap-x-[5%] xl:gap-x-[7%] 2xl:gap-x-[10%] items-center justify-center mt-10">
+                    <h1 className="text-3xl font-bold md:mt-1">Our Service Features</h1>
 
-
+                    <div className="flex w-full flex-col lg:flex-row lg:gap-x-[5%] xl:gap-x-[7%] 2xl:gap-x-[10%] items-center justify-center mt-4 lg:mt-10">
                         <div
-                        // style={{ opacity }} 
-                        className="border border-[#a376ff] mb-8 w-[80%] sm:w-[65%] md:w-[50%] lg:w-[300px] h-72 rounded-[10px] flex justify-center items-center flex-col transform transition-transform hover:scale-105 hover:bg-[#f8f4fe] hover:shadow-lg" data-aos="fade-up">
+                            // style={{ opacity }} 
+                            className="border border-[#a376ff] mb-8 w-[80%] sm:w-[65%] md:w-[50%] lg:w-[300px] h-72 rounded-[10px] flex justify-center items-center flex-col transform transition-transform hover:scale-105 hover:bg-[#f8f4fe] hover:shadow-lg" data-aos="fade-up">
                             <div className="bg-[#f8f4fe] w-24 h-24 rounded-full flex items-center justify-center">
                                 <i className="text-[#a376ff] text-4xl"><MdOutlineAttachMoney /></i>
                             </div>
@@ -57,8 +56,8 @@ const Services = () => {
 
 
                         <div
-                        // style={{ opacity }} 
-                         className="border border-[#a376ff] mb-8 w-[80%] sm:w-[65%] md:w-[50%] lg:w-[300px] h-72 rounded-[10px] flex justify-center items-center flex-col  transform transition-transform hover:scale-105 hover:bg-[#f8f4fe] hover:shadow-lg"data-aos="fade-up" data-aos-delay="300">
+                            // style={{ opacity }} 
+                            className="border border-[#a376ff] mb-8 w-[80%] sm:w-[65%] md:w-[50%] lg:w-[300px] h-72 rounded-[10px] flex justify-center items-center flex-col  transform transition-transform hover:scale-105 hover:bg-[#f8f4fe] hover:shadow-lg" data-aos="fade-up" data-aos-delay="300">
                             <div className="bg-[#f8f4fe] w-24 h-24 rounded-full flex items-center justify-center">
                                 <i className="text-[#a376ff] text-4xl"><FaHeart /></i>
                             </div>
@@ -68,8 +67,8 @@ const Services = () => {
 
 
                         <div
-                        // style={{ opacity }} 
-                        className="border border-[#a376ff] mb-8 w-[80%] sm:w-[65%] md:w-[50%] lg:w-[300px] h-72 rounded-[10px] flex justify-center items-center flex-col  transform transition-transform hover:scale-105 hover:bg-[#f8f4fe] hover:shadow-lg"data-aos="fade-up" data-aos-delay="600">
+                            // style={{ opacity }} 
+                            className="border border-[#a376ff] mb-8 w-[80%] sm:w-[65%] md:w-[50%] lg:w-[300px] h-72 rounded-[10px] flex justify-center items-center flex-col  transform transition-transform hover:scale-105 hover:bg-[#f8f4fe] hover:shadow-lg" data-aos="fade-up" data-aos-delay="600">
                             <div className="bg-[#f8f4fe] w-24 h-24 rounded-full flex items-center justify-center">
                                 <i className="text-[#a376ff] text-4xl"><GrSchedules /></i>
                             </div>

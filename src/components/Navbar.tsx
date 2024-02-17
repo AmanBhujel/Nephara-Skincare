@@ -45,7 +45,7 @@ const Navbar = () => {
     const menuItems = [
         { name: 'Home', route: "/" },
         { name: 'Blogs', route: "/blogs" },
-        { name: 'FAQs', routes: "faq" },
+        { name: 'FAQs', route: "#faq" },
         { name: 'Dashboard', route: "/dashboard/profile" },
     ];
 
@@ -53,19 +53,38 @@ const Navbar = () => {
     const MenuItemsMobileSidebar = [
         { icon: <IoHomeOutline />, name: 'Home', route: "/" },
         { icon: <FaMicroblog />, name: 'Blogs', route: "/blogs" },
-        { icon: <FaQuestion />, name: 'FAQs', routes: "faq" },
+        { icon: <FaQuestion />, name: 'FAQs', routes: "/landing/FAQ" },
         { icon: <MdOutlineDashboardCustomize />, name: 'Dashboard', route: "/dashboard/profile" },
         { icon: <IoSettingsOutline />, name: 'Settings', route: "/dashboard/settings" },
     ];
+
+    const handleMenuItemClick = (item: any) => {
+        setActiveItem(item.name);
+        if (item.name === 'FAQs') {
+            router.push('/');
+        } else {
+            setIsLoading(true);
+            router.push(item.route || '/');
+        }
+    };
+    
+    useEffect(() => {
+        if (activeItem === 'FAQs') {
+            const timeoutId = setTimeout(() => {
+                const faqElement = document.getElementById("faq"); 
+                if (faqElement) {
+                    faqElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 200);
+    
+            return () => clearTimeout(timeoutId);
+        }
+    }, [activeItem]);
 
     useEffect(() => {
         if (pathname === "/blogs") {
             setActiveItem("Blogs")
             setSidebarActiveItem("Blogs")
-        }
-        else if (pathname === "/faqs") {
-            setActiveItem("FAQs")
-            setSidebarActiveItem("FAQs")
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -124,9 +143,11 @@ const Navbar = () => {
                 {windowWidth >= 1024 && (
                     <ul className="hidden lg:flex items-center justify-center gap-x-10 lg:ml-[13%] xl:ml-[27%] 2xl:ml-[37%]">
                         {menuItems.map((item, index) => (
-                            <Link href={item.route || "/"} key={index} onClick={() => setIsLoading(true)}>
+                            <Link key={index} href={item.route || "/"} scroll={false}>
                                 <li className={`xl:text-base cursor-pointer ${item.name === activeItem ? "underline underline-offset-8 text-black" : "text-gray-500"} hover:underline hover:underline-offset-8 font-medium tracking-tight hover:text-black `}
-                                    onClick={() => setActiveItem(item.name)}>
+                                    onClick={() => {
+                                       handleMenuItemClick(item)
+                                    }}>
                                     {item.name}
                                 </li>
                             </Link>

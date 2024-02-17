@@ -7,6 +7,8 @@ import { Stripe, loadStripe } from '@stripe/stripe-js';
 import { UsePaymentContext } from '@/components/contexts/checkContext';
 import ToastMessage from '@/components/utils/ToastMessage';
 import { UseStripeStore } from '@/stores/StripeStore';
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { IoAddCircleOutline } from "react-icons/io5";
 
 const CREATE_APPOINTMENT_AND_STRIPE_SESSION = gql`
 mutation CreateAppointmentAndCheckoutSession($fullName: String!, $email: String!, $appointmentDate: String!, $appointmentTime: String!, $timezone: String!, $comment: String!, $reasonForVisit: String!, $allergies: String!, $checkoutSessionId: String, $productName: String!, $productPrice: Int!, $productImage: String!) {
@@ -26,6 +28,21 @@ const Page = () => {
     const [comment, setComment] = useState<string>("");
     const { clientId, setClientId, paymentIntent, setPaymentIntent } = UsePaymentContext();
     const setStripeSessionId = UseStripeStore((state) => state.setStripeSessionId);
+
+    // --------for images---------
+    const [images, setImages] = useState<File[]>([]);
+
+    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const fileList: FileList | null = event.target.files;
+        if (fileList) {
+            const selectedImages: File[] = Array.from(fileList);
+            setImages(prevImages => [...prevImages, ...selectedImages.slice(0, 3 - prevImages.length)]);
+        }
+    };
+
+    const removeImage = (index: number) => {
+        setImages(prevImages => prevImages.filter((_, i) => i !== index));
+    };
 
     const handleBookAppointment = async () => {
         try {
@@ -80,15 +97,15 @@ const Page = () => {
                     {/* ---------GENERAL INFORMATION------------- */}
                     <div className='w-[95%] sm:w-[90%] md:w-[80%] lg:w-[45%] h-full  md:pl-8 md:pt-10'>
                         <p className='text-[#0736bc] text-2xl sm:text-3xl font-medium'>General information</p>
-                        <p className='font-medium mt-4 mb-2'>Select Timezone:</p>
+                        <p className='font-medium mt-2 mb-1'>Select Timezone:</p>
                         <TimeZoneSelector onTimeZoneChange={setSelectedTimeZone} />
-                        <div className='mt-4 flex flex-row gap-x-[5%]'>
+                        <div className='mt-2 flex flex-row gap-x-[5%]'>
                             <div className='flex flex-col w-[45%]'>
-                                <label className='font-semibold mt-2 sm:mt-4 mb-2'>Date*</label>
+                                <label className='font-semibold mt-2 mb-1'>Date*</label>
                                 <DatePickerDemo onDateChange={setSelectedDate} />
                             </div>
                             <div className='flex flex-col w-[45%] '>
-                                <label className='font-medium mt-2 sm:mt-4 mb-2'>Time*</label>
+                                <label className='font-medium mt-2 mb-1'>Time*</label>
                                 <select
                                     className='w-[100%] sm:w-full h-10 border rounded-[6px] border-gray-500 px-3 outline-none  bg-white '
                                     value={selectedTime}
@@ -108,8 +125,8 @@ const Page = () => {
 
 
                         </div>
-                        <div className='mt-4 flex flex-col'>
-                            <label className='font-medium sm:mb-2 mt-4'>Reason for appointment*</label>
+                        <div className='mt-2 flex flex-col'>
+                            <label className='font-medium sm:mb-1 mt-4'>Reason for appointment*</label>
                             <select
                                 className='w-[100%] sm:w-[95%] h-10 border rounded-[6px] border-gray-500 px-3 outline-none bg-white'
                                 onChange={(e) => setReason(e.target.value)}
@@ -122,17 +139,55 @@ const Page = () => {
                                 <option value="sun-damage">Sun Damage Assessment</option>
                             </select>
                         </div>
-                        <div className='mt-4 flex flex-col'>
-                            <label className='font-medium sm:mb-2 mt-4'>Select Doctor*</label>
+                        {/* -------select doctor--------- */}
+                        {/* <div className='mt-2 flex flex-col'>
+                            <label className='font-medium sm:1 mt-4'>Select Doctor*</label>
                             <select
                                 className='w-[100%] sm:w-[95%] h-10 border rounded-[6px] border-gray-500 px-3 outline-none bg-white'
                                 onChange={(e) => setSelectedDoctor(e.target.value)}
                             >
                                 <option value="">---Select a doctor---</option>
-                                <option value="Evan Sunde">Dr. Evan Sunde</option>
-                                <option value="Sunde Evan">Dr Sunde Evan</option>
+                                <option value="Evan Sunde">Dr. Uma Keyal</option>
                             </select>
+                        </div> */}
+                        <div className='mt-2 flex flex-col'>
+                            <label className='font-medium sm:mb-1 mt-4'>Upload Images</label>
+                            <div className='flex gap-x-2'>
+                                {images.map((image, index) => (
+                                    <div key={index} style={{ position: 'relative' }}>
+                                        <img
+                                            src={URL.createObjectURL(image)}
+                                            alt={`Uploaded Image ${index + 1}`}
+                                            width={100}
+                                            height={100}
+                                            className='w-32 h-32 object-cover border'
+                                        />
+                                        <button
+                                            className="absolute top-0 right-0 text-red-500 text-2xl rounded-full"
+                                            onClick={() => removeImage(index)}
+                                        >
+                                            <AiOutlineCloseCircle />
+                                        </button>
+                                    </div>
+                                ))}
+                                {images.length < 3 && (
+                                    <label htmlFor="image-upload" className="w-32 h-32 object-cover text-gray-500 text-sm border border-dashed flex flex-col items-center font-medium justify-center cursor-pointer">
+                                        <input
+                                            id="image-upload"
+                                            type="file"
+                                            accept="image/*"
+                                            style={{ display: 'none' }}
+                                            onChange={handleImageUpload}
+                                            className=''
+                                            multiple
+                                        />
+                                        <span className=' text-2xl'> <IoAddCircleOutline /> </span>
+                                        Add Image
+                                    </label>
+                                )}
+                            </div>
                         </div>
+
                     </div>
 
                     {/* ------PERSONAL INFORMATION---------- */}

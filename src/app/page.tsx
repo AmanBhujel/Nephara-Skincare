@@ -62,7 +62,7 @@ const Home = () => {
   }, []);
 
   return (
-    <main className="bg-white  w-full h-screen">
+    <main className="bg-white  max-w-screen h-screen">
       {isLoading ? <Loader />
         :
         <div className='w-full h-auto flex flex-col  justify-center items-center'>
