@@ -147,9 +147,9 @@ const Page = () => {
                             <div className='w-full min-h-20 lg:mt-4 xl:mt-0 2xl:min-h-24 flex items-center justify-between'>
                                 <div className='lg:ml-16 xl:ml-0'>
                                     <p className='text-2xl lg:text-3xl font-semibold'>Profile dashboard</p>
-                                    <p className='text-sm lg:text-base text-gray-700'>Welcome to Nephara Skincare!</p>
+                                    <p className='text-base text-gray-700'>Welcome to Nephara Skincare!</p>
                                 </div>
-                                <div className="flex items-center justify-center ml-[10%] relative cursor-pointer" onClick={handleDropdownToggle} >
+                                <div className="items-center hidden sm:flex justify-center ml-[10%] relative cursor-pointer" onClick={handleDropdownToggle} >
                                     <img src={userInfo[0]?.photo ? userInfo[0].photo : ''} alt='Profile' width={100} height={100} className='w-14 h-14 border rounded-full object-cover' />
                                     {/* <p className='ml-3 font-semibold lg:text-lg'>Welcome {userInfo[0] && userInfo[0]?.name && userInfo[0].name.split(' ')[0] || ""}</p> */}
                                     <p className='ml-3 font-semibold lg:text-lg'>Welcome {userInfo.length > 0 && userInfo[0]?.name ? userInfo[0]?.name.split(' ')[0] : ""}</p>
@@ -170,53 +170,53 @@ const Page = () => {
 
                                 {/* -------Profile-------- */}
                                 <div className='bg-white w-[90%] md:w-[85%] lg:w-[45%] 2xl:w-[43%] h-[90%] 2xl:h-[86%] border rounded-[10px] flex flex-col items-center shadow-xl' >
-                                    <img src={userInfo[0]?.photo ? userInfo[0].photo : ''} width={1200} height={1200} alt='profile' className='w-[20rem] h-[20rem] border object-cover rounded-[10px] mt-6' />
+                                    <img src={userInfo[0]?.photo ? userInfo[0].photo : ''} width={1200} height={1200} alt='profile' className='w-[15rem] h-[15rem] sm:w-[20rem] sm:h-[20rem] border object-cover rounded-[10px] mt-6' />
                                     {/* <p className='text-2xl font-bold mt-6 w-full ml-[12%]'>My Profile</p> */}
-                                    <p className='text-3xl font-medium mt-6'>{userInfo[0].name || ""}</p>
-                                    <div className='flex w-full gap-x-[5%] justify-center mt-4'>
-                                        <p className='w-[40%] py-1 border-b-1 text-lg'>{userInfo[0].name || ""}</p>
-                                        <p className='w-[40%] py-1 border-b-1 text-lg'>{userInfo[0].phoneNumber || ""}</p>
+                                    <p className='text-2xl sm:text-3xl font-medium mt-4 sm:mt-6'>{userInfo[0].name || ""}</p>
+                                    <div className='flex w-full gap-x-[5%] justify-center mt-2 sm:mt-4'>
+                                        <p className='w-[40%] py-1 border-b-1 sm:text-lg'>{userInfo[0].name || ""}</p>
+                                        <p className='w-[40%] py-1 border-b-1 sm:text-lg'>{userInfo[0].phoneNumber || ""}</p>
 
                                     </div>
-                                    <p className='w-[85%] py-1 border-b-1 text-lg mt-4'>{userInfo[0].email || ""}</p>
+                                    <p className='w-[85%] py-1 border-b-1 sm:text-lg mt-4'>{userInfo[0].email || ""}</p>
                                     <Link href={'/dashboard/settings'}>
                                         <button className='hidden lg:block bg-[#743bfb] text-white text-lg font-medium py-2 mt-12 rounded-3xl px-8'>Edit Profile</button>
                                     </Link>
 
                                     {/* ---------------More detailed Info for mobiles-------------- */}
-                                    <div className=' lg:hidden mt-6 w-[90%] bg-white flex flex-col items-center '>
+                                    <div className=' lg:hidden mt-6 w-full sm:w-[90%] bg-white flex flex-col items-center '>
                                         <div className='w-full h-12 md:h-16 border-b-1 flex items-center justify-between'>
-                                            <p className='text-xl md:text-2xl font-semibold ml-10'>More Detailed Info</p>
-                                            <p className='mr-16 text-2xl md:text-3xl text-[#743bfb]'><TbCalendarUser /></p>
+                                            <p className='text-lg sm:text-xl md:text-2xl font-semibold ml-6 sm:ml-10'>More Detailed Info</p>
+                                            <p className='mr-6 sm:mr-16 text-2xl md:text-3xl text-[#743bfb]'><TbCalendarUser /></p>
                                         </div>
                                         {/* ------name-------- */}
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
-                                            <p className=' font-semibold mt-2 w-24 text-gray-600'>Full Name</p>
-                                            <p className='w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].name || ""}</p>
+                                            <p className=' font-semibold mt-2 w-20 sm:w-24 text-gray-600 text-sm sm:text-base'>Full Name</p>
+                                            <p className='w-[50%] border-b-1 text-base md:text-lg sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].name || ""}</p>
                                         </div>
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
-                                            <p className=' font-semibold mt-2 w-24 text-gray-500'>Email</p>
-                                            <p className='w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].email || ""}</p>
+                                            <p className=' font-semibold mt-2 w-20 sm:w-24 text-gray-500 text-sm sm:text-base'>Email</p>
+                                            <p className='w-[50%] border-b-1 text-base md:text-lg sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].email || ""}</p>
                                         </div>
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
-                                            <p className=' font-semibold mt-2 w-24 text-gray-500'>Phone</p>
-                                            <p className='w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].phoneNumber || ""}</p>
+                                            <p className=' font-semibold mt-2 w-20 sm:w-24 text-gray-500 text-sm sm:text-base'>Phone</p>
+                                            <p className='w-[50%] border-b-1 text-base md:text-lg sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].phoneNumber || ""}</p>
                                         </div>
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
-                                            <p className='font-semibold mt-2 w-24 text-gray-500'>Age</p>
-                                            <p className='w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].age || ""}</p>
+                                            <p className='font-semibold mt-2 w-20 sm:w-24 text-gray-500 text-sm sm:text-base'>Age</p>
+                                            <p className='w-[50%] border-b-1 text-base md:text-lg sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].age || ""}</p>
                                         </div>
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
-                                            <p className=' font-semibold mt-2 w-24 text-gray-500'>Gender</p>
-                                            <p className=' w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].gender || ""}</p>
+                                            <p className=' font-semibold mt-2 w-20 sm:w-24 text-gray-500 text-sm sm:text-base'>Gender</p>
+                                            <p className=' w-[50%] border-b-1 text-base md:text-lg sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].gender || ""}</p>
                                         </div>
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
-                                            <p className=' font-semibold mt-2 w-24 text-gray-500'>City</p>
-                                            <p className='w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].city || ""}</p>
+                                            <p className=' font-semibold mt-2 w-20 sm:w-24 text-gray-500 text-sm sm:text-base'>City</p>
+                                            <p className='w-[50%] border-b-1 text-base md:text-lg sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].city || ""}</p>
                                         </div>
                                         <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 mb-8'>
-                                            <p className=' font-semibold mt-2 w-24 text-gray-500'>Country</p>
-                                            <p className=' w-[50%] border-b-1 text-base md:text-lg ml-6 sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].country || ""}</p>
+                                            <p className=' font-semibold mt-2 w-20 sm:w-24 text-gray-500 text-sm sm:text-base'>Country</p>
+                                            <p className=' w-[50%] border-b-1 text-base md:text-lg sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].country || ""}</p>
                                         </div>
                                     </div>
                                 </div>

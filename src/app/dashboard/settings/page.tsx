@@ -233,9 +233,9 @@ const Page = () => {
 
                         <div className={` ${windowWidth > 1024 && activeSettingButton !== "change-password" || activeSettingButton === "Edit" ? "flex" : "hidden"} w-full h-auto   lg:w-[70%] xl:w-[50%] justify-center border lg:ml-[5%] bg-[#f6f8fc] overflow-auto max-h-screen `}>
                             <div className='w-[95%] md:w-[75%] xl:w-[70%] 2xl:w-[60%] relative'>
-                                <p className='text-4xl absolute top-2 left-3 lg:hidden cursor-pointer' onClick={() => setActiveSettingButton("")}><IoArrowBack /></p>
-                                <div className='flex w-full justify-center items-center mt-2 lg:mt-8'>
-                                    <p className=' text-4xl font-semibold text-[#743bfb]  tracking-wide'>Edit Your Profile</p>
+                                <p className='text-2xl sm:text-4xl absolute top-2 left-2 lg:hidden cursor-pointer' onClick={() => setActiveSettingButton("")}><IoArrowBack /></p>
+                                <div className='flex w-full justify-center items-center mt-6 lg:mt-8'>
+                                    <p className='text-3xl sm:text-4xl font-semibold text-[#743bfb]  tracking-wide'>Edit Your Profile</p>
                                 </div>
                                 <div className='flex flex-col w-full justify-center items-center mt-3'>
                                     <img src={UserInfo[0]?.photo ? UserInfo[0].photo : ''} width={200} height={200} alt='Profile Image' className='w-32 h-32 rounded-[8px] border' />
@@ -332,9 +332,9 @@ const Page = () => {
                         {/* -------change password------- */}
                         <div className={`${activeSettingButton === "change-password" ? "flex" : "hidden"} w-full h-auto   lg:w-[70%] xl:w-[50%] justify-center border lg:ml-[5%] bg-[#f6f8fc] overflow-auto max-h-screen `}>
                             <div className='w-[95%] md:w-[75%] xl:w-[70%] 2xl:w-[50%] relative'>
-                                <p className='text-4xl absolute top-2 left-3 lg:hidden cursor-pointer' onClick={() => setActiveSettingButton("")}><IoArrowBack /></p>
+                                <p className='text-2xl sm:text-4xl absolute top-2 left-2 lg:hidden cursor-pointer' onClick={() => setActiveSettingButton("")}><IoArrowBack /></p>
                                 <div className='flex w-full justify-center items-center'>
-                                    <p className='mt-2 lg:mt-8 text-4xl font-semibold text-[#743bfb]  tracking-wide'>Change Password</p>
+                                    <p className='mt-7 lg:mt-8 text-3xl sm:text-4xl font-semibold text-[#743bfb]  tracking-wide'>Change Password</p>
                                 </div>
 
                                 <div className='flex flex-col mt-6'>

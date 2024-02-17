@@ -3,7 +3,6 @@
 import React from "react";
 import { Accordion, AccordionItem } from "@nextui-org/react";
 
-
 const FAQ = () => {
   const Q1 = "Can I provide feedback or ask additional questions?";
   const Ans1 = (<>Certainly, we welcome and value your feedback. For any inquiries, concerns, or constructive feedback, please feel free to{" "}<a href="mailto:evansunde2@gamil.com">Email us</a>.{" "}Your input is instrumental in maintaining and enhancing our commitment to excellence.</>);
@@ -32,12 +31,12 @@ const FAQ = () => {
 
 
   return (
-    <div id = "faq" className = "flex w-full justify-center items-center border-b-2 bg-white" >
-    <div className={`flex justify-center items-center w-[95%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto `}>
-      <div className="flex flex-col w-full justify-center items-center py-2 sm:py-6">
-        <h1 className="text-2xl sm:text-3xl font-bold mt-1">Frequently Asked Questions </h1>
-          <div className="flex justify-center w-[95%] md:w-3/4 py-4 md:py-10" >
-            <Accordion variant="splitted">
+    <div id="faq" className="flex w-full justify-center items-center border-b-2 bg-white" >
+      <div className={`flex justify-center items-center w-[100%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto `}>
+        <div className="flex flex-col w-full justify-center items-center py-2 sm:py-6">
+          <h1 className="text-2xl sm:text-3xl font-bold mt-1">Frequently Asked Questions </h1>
+          <div className="flex text-sm sm:text-base justify-center w-[95%] md:w-3/4 py-4 md:py-10" >
+            <Accordion variant="splitted" >
               <AccordionItem key="1" aria-label="Accordion 1" title={Q7}>
                 {Ans7}
               </AccordionItem>
@@ -73,8 +72,8 @@ const FAQ = () => {
             </Accordion>
           </div>
         </div>
-        </div>
-        </div>
+      </div>
+    </div>
   );
 }
 

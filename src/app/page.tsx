@@ -62,10 +62,10 @@ const Home = () => {
   }, []);
 
   return (
-    <main className="bg-white  max-w-screen h-screen">
+    <main className="bg-white  w-screen h-screen">
       {isLoading ? <Loader />
         :
-        <div className='w-full h-auto flex flex-col  justify-center items-center'>
+        <div className='w-full h-auto overflow-x-hidden flex flex-col  justify-center items-center'>
           <Navbar />
           <HeroSection />
           <Services />

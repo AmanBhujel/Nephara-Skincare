@@ -101,60 +101,60 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                                 {windowWidth < 1024 &&
                                     <div className="flex text-white items-center ">
                                         <Link href={'/dashboard/appointments'}>
-                                            <i className="text-white text-3xl cursor-pointer"><IoArrowBack /></i>
+                                            <i className="text-white text-2xl md:text-3xl cursor-pointer"><IoArrowBack /></i>
                                         </Link>
                                     </div>}
-                                <p className='bg-[#f2f2f9cb] px-3 py-1 w-min text-[#743bfb] rounded-[10px] font-medium mb-2'>{appointmentData?.completed ? "Past" : "Upcoming"}</p>
-                                <p className='text-white font-bold text-3xl xl:text-2xl 2xl:text-3xl'>{appointmentData?.name}</p>
-                                <p className='text-white text-lg xl:text-base 2xl:text-lg font-medium mt-1'>{appointmentData?.description}</p>
+                                <p className='bg-[#f2f2f9cb] px-2 py-1 text-sm sm:text-base md:px-3 md:py-1 w-min text-[#743bfb] rounded-[10px] font-medium sm:mb-2'>{appointmentData?.completed ? "Past" : "Upcoming"}</p>
+                                <p className='text-white font-bold text-2xl md:text-3xl xl:text-2xl 2xl:text-3xl'>{appointmentData?.name}</p>
+                                <p className='text-white text-base md:text-lg xl:text-base 2xl:text-lg font-medium md:mt-1'>{appointmentData?.description}</p>
                             </div>
                             <div>
-                                <p className='bg-[#ededf5e0] px-3 py-1 text-[#743bfb] rounded-[10px] font-medium mb-2'>{appointmentData?.appointmentDate}</p>
+                                <p className='bg-[#ededf5e0] px-2 py-1 text-sm sm:text-base sm:px-3  text-[#743bfb] rounded-[10px] font-medium mb-2'>{appointmentData?.appointmentDate}</p>
                             </div>
                         </div>
                     </div>
                     {!appointmentData.completed ?
                         (<div className='bg-[#f1f1ff] mt-4 py-2 text-xl flex justify-between  items-center font-medium text-black px-4'>
-                            <p className='text-xl font-semibold text-[#575658] '>Time Remaining: 01:24:56</p>
+                            <p className='text-base lg:text-lg xl:text-xl font-semibold text-[#575658] '>Time Remaining: 01:24:56</p>
 
                             <a href={`http://localhost:8080/join?room=${appointmentData.appointment_id}&name=${appointmentData.name}`} target="_blank" rel="noopener noreferrer">
-                                <button className={`text-white px-8 py-2 bg-[#743bfb] hover:bg-[#753bfbde] rounded-[6px] font-bold text-lg mb-2`}>Join</button>
+                                <button className={`text-white px-4 py-1 md:px-8 md:py-2 bg-[#743bfb] hover:bg-[#753bfbde] rounded-[6px] font-bold text-lg mb-2`}>Join</button>
                             </a>
                         </div>) :
                         (<div className='bg-[#f1f1ff] mt-4 py-2 text-xl flex justify-between  items-center font-medium text-black px-4'>
-                            <p className=' text-xl font-semibold text-[#575658] '>Watch your Report</p>
+                            <p className=' text-base sm:text-lg md:text-xl font-semibold text-[#575658]'>Watch your Report</p>
 
-                            <button className={`text-white px-8 py-2 bg-[#743bfb] hover:bg-[#753bfbde] rounded-[6px] font-bold text-lg mb-2`} onClick={handleSeeReportClick}>See Report</button>
+                            <button className={`text-white px-4 py-1 md:px-8 md:py-2 bg-[#743bfb] hover:bg-[#753bfbde] rounded-[6px] font-bold text-lg`} onClick={handleSeeReportClick}>See Report</button>
                         </div>)
                     }
 
                     <div className='h-full px-2'>
                         <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-semibold text-[#a3a1a9] px-4'>Appointment Info</p>
                         <div className='px-4 '>
-                            <p className='text-[#807c83] mt-2 text-lg lg:text-base font-medium '>Appointment Id</p>
-                            <p className='font-medium text-lg lg:text-base mt-1 mb-1'>{appointmentData?.appointment_id}</p>
-                            <p className='text-[#807c83] text-lg lg:text-base mt-2 font-medium '>See Report</p>
-                            <p className='font-medium mt-1 text-lg lg:text-base mb-1'>{appointmentData?.report_id}</p>
-                            <p className='text-[#807c83] text-lg lg:text-base mt-2 font-medium '>Appointment Date</p>
-                            <p className='font-medium mt-1 text-lg lg:text-base mb-1'>{appointmentData?.appointmentDate}</p>
+                            <p className='text-[#807c83] mt-2 sm:text-lg lg:text-base font-medium '>Appointment Id</p>
+                            <p className='font-medium sm:text-lg lg:text-base mt-1 mb-1'>{appointmentData?.appointment_id}</p>
+                            <p className='text-[#807c83] sm:text-lg lg:text-base mt-2 font-medium '>See Report</p>
+                            <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'>{appointmentData?.report_id}</p>
+                            <p className='text-[#807c83] sm:text-lg lg:text-base mt-2 font-medium '>Appointment Date</p>
+                            <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'>{appointmentData?.appointmentDate}</p>
                         </div>
-                        <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-semibold text-[#a3a1a9] px-4'>Time Info</p>
+                        <p className='bg-[#f1f1ff] mt-4 py-1 sm:text-lg font-semibold text-[#a3a1a9] px-4'>Time Info</p>
                         <div className='px-4 '>
-                            <p className='text-[#807c83] mt-2 text-lg lg:text-base font-medium'>Timezone</p>
-                            <p className='font-medium mt-1 text-lg lg:text-base mb-1'> {appointmentData?.timezone}</p>
+                            <p className='text-[#807c83] mt-2 sm:text-lg lg:text-base font-medium'>Timezone</p>
+                            <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'> {appointmentData?.timezone}</p>
                             <p className='text-[#807c83] mt-2 font-medium'>Time</p>
-                            <p className='text-lg lg:text-base font-medium mt-1 mb-1'>{appointmentData?.time}</p>
+                            <p className='sm:text-lg lg:text-base font-medium mt-1 mb-1'>{appointmentData?.time}</p>
                             <p className='text-[#807c83] mt-2 font-medium'>Booked Date</p>
                             <p className='font-medium mt-1 mb-1'>{appointmentData?.bookedDate}</p>
                         </div>
                         <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-semibold text-[#a3a1a9] px-4'>Time Info</p>
                         <div className='px-4'>
-                            <p className='text-[#807c83] mt-2 text-lg lg:text-base font-medium'>Timezone</p>
-                            <p className='font-medium mt-1 text-lg lg:text-base mb-1'> {appointmentData?.timezone}</p>
-                            <p className='text-[#807c83] text-lg lg:text-base mt-2 font-medium'>Time</p>
-                            <p className='font-medium mt-1 text-lg lg:text-base mb-1'>{appointmentData?.time}</p>
-                            <p className='text-[#807c83] text-lg lg:text-base mt-2 font-medium'>Booked Date</p>
-                            <p className='font-medium mt-1  text-lg lg:text-base mb-1'>{appointmentData?.bookedDate}</p>
+                            <p className='text-[#807c83] mt-2 sm:text-lg lg:text-base font-medium'>Timezone</p>
+                            <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'> {appointmentData?.timezone}</p>
+                            <p className='text-[#807c83] sm:text-lg lg:text-base mt-2 font-medium'>Time</p>
+                            <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'>{appointmentData?.time}</p>
+                            <p className='text-[#807c83] sm:text-lg lg:text-base mt-2 font-medium'>Booked Date</p>
+                            <p className='font-medium mt-1  sm:text-lg lg:text-base mb-1'>{appointmentData?.bookedDate}</p>
                         </div>
                     </div>
                 </div> :
