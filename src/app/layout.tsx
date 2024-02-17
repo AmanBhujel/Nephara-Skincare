@@ -69,7 +69,7 @@ export default function RootLayout({
       <head>
         <title>Nephara</title>
       </head>
-      <body className={`${inter.variable} ${architects_daughter.variable} font-inter antialiased bg-gray-900 tracking-tight`}>
+      <body className={`${inter.variable} ${architects_daughter.variable} font-inter antialiased bg-gray-900 tracking-tight`} style={{ height: "-webkit-fill-available" }}>
         <ApolloProvider client={graphqlClient}>
           <NextUIProvider>
             <PaymentProvider>

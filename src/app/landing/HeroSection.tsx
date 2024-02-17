@@ -7,7 +7,7 @@ import Link from 'next/link';
 const HeroSection = () => {
   return (
     <section className='border-b-1'>
-      <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none -z-1" aria-hidden="true">
+      {/* <div className="absolute w-screen left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none -z-1" aria-hidden="true">
         <svg width="1360" height="578" viewBox="0 0 1360 578" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="illustration-01">
@@ -21,7 +21,7 @@ const HeroSection = () => {
             <circle cx="155" cy="443" r="64" />
           </g>
         </svg>
-      </div>
+      </div> */}
 
       {/* --------------Info Section----------- */}
       <div className="text-center pb-12 md:pb-16 flex flex-col-reverse justify-between items-center lg:flex-row lg:pt-10">
