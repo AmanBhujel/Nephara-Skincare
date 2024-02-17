@@ -49,7 +49,8 @@ export default function RootLayout({
   console.log("headers from layout", headers)
 
   const graphqlClient = new ApolloClient({
-    uri: "http://localhost:8000/graphql",
+     uri: "https://nephara-backend.onrender.com/graphql",
+    // uri: "http://localhost:8000/graphql",
     cache: new InMemoryCache(),
     headers: headers
   });
