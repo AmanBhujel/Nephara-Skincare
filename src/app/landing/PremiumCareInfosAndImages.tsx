@@ -28,7 +28,7 @@ const PremiumCareInfosAndImages = () => {
                 <div className="md:pr-4 lg:pr-12 xl:pr-16">
                   <div className="font-architects-daughter text-xl font-bold text-purple-600">Premium Service and spend Less</div>
                   <h3 className="h3 text-xl md:text-2xl font-medium md:mb-2">Low cost Skin care service</h3>
-                  <p className="text-base md:text-lg text-gray-500 md:mb-4">e are a service-based company dedicated to bridging the gap in skin check-ups, especially for international students in first-world countries. Recognizing the challenges posed by high medical costs, we connect individuals with expert doctors from South Asia. </p>
+                  <p className="text-base md:text-lg text-gray-500 md:mb-4">We are a service-based company dedicated to bridging the gap in skin check-ups, especially for international students in first-world countries. Recognizing the challenges posed by high medical costs, we connect individuals with expert doctors from South Asia. </p>
                 </div>
               </div>
             </div>
@@ -44,7 +44,7 @@ const PremiumCareInfosAndImages = () => {
                 <div className="md:pl-4 lg:pl-12 xl:pl-16">
                   <div className="font-architects-daughter text-xl font-bold text-purple-600">Comfort of your home</div>
                   <h3 className="h3 text-xl md:text-2xl font-medium md:mb-2">Easy Scheduleing from your home in your home</h3>
-                  <p className="text-base md:text-lg text-gray-500 md:mb-4">e are a service-based company dedicated to bridging the gap in skin check-ups, especially for international students in first-world countries. Recognizing the challenges posed by high medical costs, we connect individuals with expert doctors from South Asia. </p>
+                  <p className="text-base md:text-lg text-gray-500 md:mb-4">We are a service-based company dedicated to bridging the gap in skin check-ups, especially for international students in first-world countries. Recognizing the challenges posed by high medical costs, we connect individuals with expert doctors from South Asia. </p>
                 </div>
               </div>
             </div>
@@ -60,7 +60,7 @@ const PremiumCareInfosAndImages = () => {
                 <div className="md:pr-4 lg:pr-12 xl:pr-16">
                   <div className="font-architects-daughter text-xl font-bold text-purple-600">Our Support</div>
                   <h3 className="h3 text-xl md:text-2xl font-medium md:mb-2">Exceptional Support</h3>
-                  <p className="text-base md:text-lg text-gray-500 md:mb-4">e are a service-based company dedicated to bridging the gap in skin check-ups, especially for international students in first-world countries. Recognizing the challenges posed by high medical costs, we connect individuals with expert doctors from South Asia. </p>
+                  <p className="text-base md:text-lg text-gray-500 md:mb-4">We are a service-based company dedicated to bridging the gap in skin check-ups, especially for international students in first-world countries. Recognizing the challenges posed by high medical costs, we connect individuals with expert doctors from South Asia. </p>
                 </div>
               </div>
             </div>
