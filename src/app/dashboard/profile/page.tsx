@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect } from 'react';
 import Sidebar from '../components/sidebar';
-import { gql, useLazyQuery } from '@apollo/client';
+import {  useLazyQuery } from '@apollo/client';
 import { useUserStore } from '@/stores/userStore';
 import { useRouter } from 'next/navigation';
 import ToastMessage from '@/components/utils/ToastMessage';
@@ -12,24 +12,7 @@ import { getCookie } from '@/components/utils/Cookie';
 import ProfileBackground from '@/assets/ProfilePage.png'
 import TopProfileBar from './components/TopProfileBar';
 import FullProfileContainer from './components/FullProfileContainer';
-
-const GET_USER_INFO = gql`
-  query GetUserInfoByToken {
-    getUserInfoByToken {
-    status
-    message
-    user {
-      email
-      phoneNumber
-      photo
-      country
-      city
-      name
-      age
-      gender
-    }
-  }
-    }`
+import { GET_USER_INFO } from '@/apollo_client/Queries';
 
 const Page = () => {
     const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO, {

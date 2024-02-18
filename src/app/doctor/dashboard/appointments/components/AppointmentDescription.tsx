@@ -2,15 +2,9 @@
 import { useEffect, useState } from "react";
 import BackgroundAppointment from '@/assets/DoctorConsulting.png'
 import { useDashboardStore } from "@/stores/DashboardStore";
-import { gql, useLazyQuery, } from "@apollo/client";
+import { useLazyQuery, } from "@apollo/client";
 import ReportModal from "./ReportModal";
-
-
-const GET_REPORT = gql`
-query Query($appointmentId: String!) {
-    getReport(appointmentId: $appointmentId)
-  }
-`;
+import { GET_REPORT } from "@/apollo_client/Queries";
 
 interface Appointment {
     name: string;

@@ -2,15 +2,10 @@
 import { useEffect, useState } from "react";
 import { useDashboardStore } from "@/stores/DashboardStore";
 import BackgroundAppointment from '@/assets/DoctorConsulting.png'
-import { gql, useLazyQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { IoArrowBack, } from "react-icons/io5";
 import Link from "next/link";
-
-const GET_REPORT = gql`
-query Query($appointmentId: String!) {
-    getReport(appointmentId: $appointmentId)
-  }
-`;
+import { GET_REPORT } from "@/apollo_client/Queries";
 
 interface Appointment {
     name: string;
@@ -26,24 +21,18 @@ interface Appointment {
     getStatus: string;
 }
 
-
 interface AppointmentInfoProps {
     appointmentData: Appointment | undefined;
 }
 const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentData }) => {
+    const [windowWidth, setWindowWidth] = useState<number>(0);
+
     const [getReport] = useLazyQuery(GET_REPORT, {
         fetchPolicy: "no-cache"
     });
 
     const appointmentSelected = useDashboardStore((state) => state.appointmentSelected);
     const setAppointmentSelected = useDashboardStore((state) => state.setAppointmentSelected);
-    useEffect(() => {
-        if (appointmentData) {
-            setAppointmentSelected(true)
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-    const [windowWidth, setWindowWidth] = useState<number>(0);
 
     const handleSeeReportClick = async () => {
         try {
@@ -74,6 +63,12 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
         }
     };
 
+    useEffect(() => {
+        if (appointmentData) {
+            setAppointmentSelected(true)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         setWindowWidth(window.innerWidth);

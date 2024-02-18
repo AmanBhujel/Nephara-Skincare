@@ -6,32 +6,22 @@ import AppointmentContainer from '../components/AppointmentContainer';
 import { useDashboardStore } from '@/stores/DashboardStore';
 import Profile from '@/assets/beautiful-nurse.png'
 import Image from 'next/image';
-import { useUserStore } from '@/stores/userStore';
 import { useLogoutStore } from '@/stores/LogoutStore';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { useDoctorStore } from '@/stores/DoctorStore';
 import { getCookie } from '@/components/utils/Cookie';
-import { gql, useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import ToastMessage from '@/components/utils/ToastMessage';
 import { useRouter } from 'next/navigation';
 import { useLoadingStore } from '@/stores/LoadingStore';
 import Loader from '@/components/Loader';
+import { GET_DOCTOR_INFO_BY_TOKEN } from '@/apollo_client/Queries';
 
 interface PageProps {
     params: {
         id: string;
     };
 }
-
-const GET_DOCTOR_INFO_BY_TOKEN = gql`
-query GetDoctorInfoByToken($token: String!) {
-    getDoctorInfoByToken(token: $token) {
-      name
-      email
-      status
-      message
-    }
-  }`;
 
 const Page: NextPage<PageProps> = ({ params }) => {
     const [getDoctorInfoByToken] = useLazyQuery(GET_DOCTOR_INFO_BY_TOKEN, {

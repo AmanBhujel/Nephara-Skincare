@@ -1,26 +1,9 @@
 import React, { useState, ChangeEvent } from 'react';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import { useUploadImageStore } from '@/stores/UploadImageStore';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import ToastMessage from '@/components/utils/ToastMessage';
-
-const GET_AWS_UPDATE_LINK = gql`
-mutation UpdateUserPhoto($contentType: String!) {
-  updateUserPhoto(contentType: $contentType) {
-    status
-    message
-    url
-  }
-}
-`;
-
-const UPDATE_USER_PHOTO_PATH = gql`
-mutation UpdateUserPhotoKeyAfterUpload {
-  updateUserPhotoKeyAfterUpload {
-    message,
-    status
-  }
-}`;
+import { GET_AWS_UPDATE_LINK, UPDATE_USER_PHOTO_PATH } from '@/apollo_client/Mutation';
 
 const UploadImage: React.FC = () => {
   const [updateUserPhoto] = useMutation(GET_AWS_UPDATE_LINK);

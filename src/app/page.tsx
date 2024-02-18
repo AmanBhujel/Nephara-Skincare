@@ -6,7 +6,7 @@ import Feedback from "./landing/Feedback";
 import Features from "./landing/Features";
 import Footer from "@/components/Footer";
 import { useUserStore } from "@/stores/userStore";
-import { gql, useLazyQuery } from "@apollo/client";
+import {  useLazyQuery } from "@apollo/client";
 import { useEffect } from "react";
 import { useLoadingStore } from "@/stores/LoadingStore";
 import Loader from "@/components/Loader";
@@ -14,22 +14,7 @@ import { useAuthorizedStore } from "@/stores/AuthorizedStore";
 import FAQ from "./landing/FAQ";
 import PremiumCareInfosAndImages from "./landing/PremiumCareInfosAndImages";
 import { getUserInfo } from "@/components/utils/GetUserInfo";
-
-const GET_USER_INFO = gql`
-  query GetUserInfoByToken {
-    getUserInfoByToken {
-    user {
-      email
-      phoneNumber
-      photo
-      country
-      city
-      name
-      age
-      gender
-    }
-  }
-    }`;
+import { GET_USER_INFO } from "@/apollo_client/Queries";
 
 const Home = () => {
   const setUserInfo = useUserStore((state) => state.setUserInfo);

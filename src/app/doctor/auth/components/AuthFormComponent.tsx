@@ -1,9 +1,10 @@
 import ToastMessage from "@/components/utils/ToastMessage";
 import { setCookie } from "@/components/utils/Cookie";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { LOGIN_DOCTOR } from "@/apollo_client/Mutation";
 
 const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -14,19 +15,12 @@ const validatePassword = (password: string): boolean => {
     return password.length >= 8;
 };
 
-const LOGIN_USER = gql`
-mutation LoginDoctor($email: String!, $password: String!) {
-    loginDoctor(email: $email, password: $password) {
-      status message name token
-    }
-  }
-`
 export const Signin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [emailError, setEmailError] = useState<string | null>(null);
     const [passwordError, setPasswordError] = useState<string | null>(null);
-    const [loginDoctor, { data: loginUserData, loading: loginUserLoading, error: loginUserError }] = useMutation(LOGIN_USER);
+    const [loginDoctor, { data: loginUserData, loading: loginUserLoading, error: loginUserError }] = useMutation(LOGIN_DOCTOR);
     const router = useRouter();
 
     const handleSignin = async () => {

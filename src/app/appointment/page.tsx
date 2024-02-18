@@ -2,18 +2,13 @@
 import React, { useState } from 'react'
 import TimeZoneSelector from './components/TimeZoneSelector';
 import DatePickerDemo from '@/app/appointment/components/DatePicker';
-import { gql, useMutation } from '@apollo/client';
+import {  useMutation } from '@apollo/client';
 import { Stripe, loadStripe } from '@stripe/stripe-js';
 import ToastMessage from '@/components/utils/ToastMessage';
 import { UseStripeStore } from '@/stores/StripeStore';
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { IoAddCircleOutline } from "react-icons/io5";
-
-const CREATE_APPOINTMENT_AND_STRIPE_SESSION = gql`
-mutation CreateAppointmentAndCheckoutSession($fullName: String!, $email: String!, $appointmentDate: String!, $appointmentTime: String!, $timezone: String!, $comment: String!, $reasonForVisit: String!, $allergies: String!, $checkoutSessionId: String, $productName: String!, $productPrice: Int!, $productImage: String!) {
-    createAppointmentAndCheckoutSession(fullName: $fullName, email: $email, appointmentDate: $appointmentDate, appointmentTime: $appointmentTime, timezone: $timezone, comment: $comment, reasonForVisit: $reasonForVisit, allergies: $allergies, checkoutSessionId: $checkoutSessionId, productName: $productName, productPrice: $productPrice, productImage: $productImage)
-  }
-`;
+import { CREATE_APPOINTMENT_AND_STRIPE_SESSION } from '@/apollo_client/Mutation';
 
 const Page = () => {
     const [createAppointmentAndCheckoutSession] = useMutation(CREATE_APPOINTMENT_AND_STRIPE_SESSION);

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 import { IoIosArrowBack } from "react-icons/io";
 import BlogImage from '@/assets/DoctorConsulting.png'
-import { gql, useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { useUserStore } from '@/stores/userStore';
 import { useLoadingStore } from '@/stores/LoadingStore';
 import { useAuthorizedStore } from '@/stores/AuthorizedStore';
@@ -13,24 +13,8 @@ import Loader from '@/components/Loader';
 import BlogNavigationBox from "@/app/blogs/components/BlogNavigationBox";
 import { getUserInfo } from "@/components/utils/GetUserInfo";
 import BlogContent from "./components/BlogContent";
+import { GET_USER_INFO } from "@/apollo_client/Queries";
 
-const GET_USER_INFO = gql`
-query GetUserInfoByToken {
-  getUserInfoByToken {
-  status
-  message
-  user {
-    email
-    phoneNumber
-    photo
-    country
-    city
-    name
-    age
-    gender
-  }
-}
-  }`
 
 const Page = () => {
     const router = useRouter();

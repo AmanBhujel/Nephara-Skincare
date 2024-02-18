@@ -1,28 +1,20 @@
 'use client'
 import React, { useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
-import { gql, useMutation } from "@apollo/client";
-
+import { useMutation } from "@apollo/client";
+import { CREATE_REPORT } from "@/apollo_client/Mutation";
 
 interface MyModalProps {
     isReportModalOpen: boolean;
     setIsReportModalOpen: (isOpen: boolean) => void;
 }
 
-const CREATE_REPORT = gql`
-  mutation GeneratePdf($appointmentId: String!, $prescriptions: PrescriptionArrayInput!, $followUp: FollowUpInput!, $doctorFeedback: String!) {
-      generateReportPdf(appointmentId: $appointmentId, prescriptions: $prescriptions, followUp: $followUp, doctorFeedback: $doctorFeedback)
-    }
-  `;
-
-
 const ReportModal: React.FC<MyModalProps> = ({ isReportModalOpen, setIsReportModalOpen }) => {
-    const [prescriptions, setPrescriptions] = useState<string[]>(['']); // Initial state with one empty prescription input
-    const [followUpType, setFollowUpType] = useState<string>(''); // State to store the selected follow-up type
-    const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const [followUpDate,setFollowUpDate]=useState<string>("");
+    const [prescriptions, setPrescriptions] = useState<string[]>(['']);
+    const [followUpType, setFollowUpType] = useState<string>('');
+    const [followUpDate, setFollowUpDate] = useState<string>("");
     const [generateReportPdf] = useMutation(CREATE_REPORT);
-    const [doctorFeedback,setDoctorFeedback]=useState<string>('');
+    const [doctorFeedback, setDoctorFeedback] = useState<string>('');
 
     const handleFollowUpTypeChange = (value: string) => {
         setFollowUpType(value);
@@ -124,7 +116,7 @@ const ReportModal: React.FC<MyModalProps> = ({ isReportModalOpen, setIsReportMod
                                     type="text"
                                     id="doctorFeedback"
                                     name="doctorFeedback"
-                                    onChange={(e)=>setDoctorFeedback(e.target.value)}
+                                    onChange={(e) => setDoctorFeedback(e.target.value)}
                                     className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
                                 />
                             </div>
@@ -138,7 +130,7 @@ const ReportModal: React.FC<MyModalProps> = ({ isReportModalOpen, setIsReportMod
                                     id="followUp"
                                     name="followUp"
                                     className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-                                    onChange={(e)=>setFollowUpDate(e.target.value)}
+                                    onChange={(e) => setFollowUpDate(e.target.value)}
                                 >
                                     <option value="15-days">15 Days</option>
                                     <option value="1-month">1 Month</option>

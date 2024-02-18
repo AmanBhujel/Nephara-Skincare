@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import Sidebar from '../components/sidebar';
-import { gql, useLazyQuery } from '@apollo/client';
+import {  useLazyQuery } from '@apollo/client';
 import { useUserStore } from '@/stores/userStore';
 import { useRouter } from 'next/navigation';
 import ToastMessage from '@/components/utils/ToastMessage';
@@ -13,25 +13,7 @@ import UploadImage from './components/UploadImage';
 import ChangePassword from './components/ChangePassword';
 import EditProfile from './components/EditProfile';
 import SettingsSidebar from './components/SettingsSidebar';
-
-const GET_USER_INFO = gql`
-  query GetUserInfoByToken {
-    getUserInfoByToken {
-    status
-    message
-    user {
-      email
-      phoneNumber
-      photo
-      country
-      city
-      name
-      age
-      gender
-    }
-  }
-    }`
-
+import { GET_USER_INFO } from '@/apollo_client/Queries';
 
 const Page = () => {
     const [activeSettingButton, setActiveSettingButton] = useState<string>('');

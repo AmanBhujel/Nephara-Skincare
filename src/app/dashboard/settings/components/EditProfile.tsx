@@ -1,3 +1,5 @@
+import { UPDATE_USER } from "@/apollo_client/Mutation";
+import { GET_USER_INFO } from "@/apollo_client/Queries";
 import { getCookie } from "@/components/utils/Cookie";
 import ToastMessage from "@/components/utils/ToastMessage";
 import { useAuthorizedStore } from "@/stores/AuthorizedStore";
@@ -9,31 +11,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoArrowBack } from "react-icons/io5";
 import { TbCameraPlus } from "react-icons/tb";
-
-const UPDATE_USER = gql`
-mutation UpdateUserDetails($photo: String!, $name: String!, $age: Int!, $gender: String!, $phoneNumber: String!, $city: String!, $country: String!) {
-    updateUserDetails(photo: $photo, name: $name, age: $age, gender: $gender, phoneNumber: $phoneNumber, city: $city, country: $country) {
-      city,country,gender,phoneNumber,photo,name
-    }
-  }`;
-
-const GET_USER_INFO = gql`
-  query GetUserInfoByToken {
-    getUserInfoByToken {
-    status
-    message
-    user {
-      email
-      phoneNumber
-      photo
-      country
-      city
-      name
-      age
-      gender
-    }
-  }
-    }`
 
 interface EditProfileProps {
     activeSettingButton: string;

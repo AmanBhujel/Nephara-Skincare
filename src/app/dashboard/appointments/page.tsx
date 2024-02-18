@@ -5,37 +5,20 @@ import Sidebar from '@/app/dashboard/components/sidebar';
 import { Appointments } from '@/data/AppointmentData';
 import AppointmentPageContainer from './components/AppointmentPageContainer';
 import ToastMessage from '@/components/utils/ToastMessage';
-import { gql, useLazyQuery } from '@apollo/client';
+import {  useLazyQuery } from '@apollo/client';
 import { useUserStore } from '@/stores/userStore';
 import { useRouter } from 'next/navigation';
 import { useLoadingStore } from '@/stores/LoadingStore';
 import Loader from '@/components/Loader';
 import { useAuthorizedStore } from '@/stores/AuthorizedStore';
 import { getCookie } from '@/components/utils/Cookie';
+import { GET_USER_INFO } from '@/apollo_client/Queries';
 
 interface PageProps {
     params: {
         id: string;
     };
 }
-const GET_USER_INFO = gql`
-  query GetUserInfoByToken {
-    getUserInfoByToken {
-    status
-    message
-    user {
-      email
-      phoneNumber
-      photo
-      country
-      city
-      name
-      age
-      gender
-    }
-  }
-    }`
-
 
 const Page: NextPage<PageProps> = ({ params }) => {
     const appointment = Appointments.find(appointment => appointment.appointment_id === params.id);

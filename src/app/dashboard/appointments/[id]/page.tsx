@@ -5,7 +5,7 @@ import AppointmentPageContainer from '../components/AppointmentPageContainer';
 import Sidebar from '../../components/sidebar';
 import { Appointments } from '@/data/AppointmentData';
 import { useDashboardStore } from '../../../../stores/DashboardStore';
-import { gql, useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { useUserStore } from '@/stores/userStore';
 import { useRouter } from 'next/navigation';
 import ToastMessage from '@/components/utils/ToastMessage';
@@ -13,29 +13,13 @@ import { useLoadingStore } from '@/stores/LoadingStore';
 import Loader from '@/components/Loader';
 import { useAuthorizedStore } from '@/stores/AuthorizedStore';
 import { getCookie } from '@/components/utils/Cookie';
+import { GET_USER_INFO } from '@/apollo_client/Queries';
 
 interface PageProps {
     params: {
         id: string;
     };
 }
-const GET_USER_INFO = gql`
-  query GetUserInfoByToken {
-    getUserInfoByToken {
-    status
-    message
-    user {
-      email
-      phoneNumber
-      photo
-      country
-      city
-      name
-      age
-      gender
-    }
-  }
-    }`
 
 const Page: NextPage<PageProps> = ({ params }) => {
     const setActiveSidebarItem = useDashboardStore((state) => state.setActiveSidebarItem);

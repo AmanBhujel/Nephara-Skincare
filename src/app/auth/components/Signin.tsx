@@ -1,35 +1,16 @@
 import ToastMessage from "@/components/utils/ToastMessage";
 import { setCookie } from "@/components/utils/Cookie";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { validateEmail, validatePassword } from "./ValidateFunction";
+import { LOGIN_USER } from "@/apollo_client/Mutation";
 
 interface AuthProps {
     setIsSignUpOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
-const LOGIN_USER = gql`
- mutation LoginUser($email: String!, $password: String!) {
-    loginUser(email: $email, password: $password) {
-        status
-        token
-        message
-        user {
-          email
-          phoneNumber
-          photo
-          country
-          city
-          name
-          age
-          gender
-        }
-    }
-  }
-`
 
 export const Signin: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
     const [email, setEmail] = useState<string>("");
