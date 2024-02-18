@@ -35,11 +35,11 @@ const SidebarForLargeScreens: React.FC<SidebarForLargeScreensProps> = ({
                         <div className='w-full flex justify-center items-center mt-6'>
                             <Image src={Logo} width={150} height={150} alt='Nephara' className='w-48 h-auto' />
                         </div>
-                        <ul className='w-full flex items-center justify-center flex-col mt-10'>
+                        <ul className='w-full flex items-center justify-center flex-col mt-10 transition-all duration-500 ease-in-out'>
                             {[{ itemName: "Dashboard", link: "/dashboard/profile" }, { itemName: "Appointments", link: "/dashboard/appointments" }, { itemName: "Settings", link: "/dashboard/settings" }].map((item, index) => (
                                 <li key={index}
                                     className={`w-[90%] cursor-pointer text-lg font-semibold py-4 px-2 flex items-center mb-2 rounded-[10px] 
-                          ${activeSidebarItem === item.itemName ? "bg-[#7650e0] text-white" : "text-gray-600 hover:bg-[#7650e0] hover:text-white"}`}
+                          ${activeSidebarItem === item.itemName ? "bg-[#7650e0] text-white" : "text-gray-600 hover:bg-[#7650e0] hover:text-white transition-colors duration-300 ease-in-out"}`}
                                     onClick={() => handleSidebarItemClick(item.itemName)}
                                 >
                                     <span className='mr-4 ml-2 text-3xl'>
@@ -59,7 +59,7 @@ const SidebarForLargeScreens: React.FC<SidebarForLargeScreensProps> = ({
                                     Start your skincare with a quick appointment.
                                 </p>
                                 <Link href={'/appointment'}>
-                                    <button className="bg-[#8f67e2] hover:bg-[#9c75e9] py-2 px-7 font-semibold text-white rounded-[8px] mt-5">
+                                    <button className="bg-[#8f67e2] hover:bg-[#9c75e9] py-2 px-7 font-semibold text-white rounded-[8px] mt-5 transition-colors duration-300 ease-in-out transform hover:scale-105">
                                         Book now
                                     </button>
                                 </Link>
@@ -67,7 +67,7 @@ const SidebarForLargeScreens: React.FC<SidebarForLargeScreensProps> = ({
                         </div>
                         <div className='bottom-0 absolute flex items-center justify-center w-full' onClick={() => setIsLogoutModalOpen(true)}>
                             <p
-                                className={`w-[90%] cursor-pointer text-lg font-semibold py-4 px-2 flex items-center mb-2 rounded-[10px] text-gray-600 hover:bg-[#7650e0] hover:text-white`}
+                                className={`w-[90%] cursor-pointer text-lg font-semibold py-4 px-2 flex items-center mb-2 rounded-[10px] text-gray-600 hover:bg-[#7650e0] hover:text-white transition-colors duration-300 ease-in-out`}
                             >
                                 <span className='mr-4 ml-2 text-2xl'><SlLogout /></span>
                                 Logout
