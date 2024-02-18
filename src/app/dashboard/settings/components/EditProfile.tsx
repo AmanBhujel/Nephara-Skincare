@@ -114,7 +114,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ activeSettingButton, setActiv
                     <p className='text-3xl sm:text-4xl font-semibold text-[#743bfb]  tracking-wide'>Edit Your Profile</p>
                 </div>
                 <div className='flex flex-col w-full justify-center items-center mt-3'>
-                    <img src={UserInfo[0]?.photo ? UserInfo[0].photo : ''} width={200} height={200} alt='Profile Image' className='w-32 h-32 rounded-[8px] border' />
+                    <img src={UserInfo[0]?.photo ? UserInfo[0].photo : ''} width={200} height={200} alt='Profile Image' className='w-32 h-32 rounded-[8px] border object-cover' />
                     <div className='flex items-center justify-center border-2 border-[#7e59e4] w-40 py-2 rounded-[8px] mt-2 cursor-pointer'>
                         <i className='text-xl'><TbCameraPlus /></i><p className='text-sm ml-2 font-medium' onClick={() => setIsUploadPhotoOpen(true)}>Change Avatar</p>
                     </div>
