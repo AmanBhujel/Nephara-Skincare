@@ -96,10 +96,10 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                                 {windowWidth < 1024 &&
                                     <div className="flex text-white items-center ">
                                         <Link href={'/dashboard/appointments'}>
-                                            <i className="text-white text-2xl md:text-3xl cursor-pointer"><IoArrowBack /></i>
+                                            <i className="text-white text-2xl md:text-3xl cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg"><IoArrowBack /></i>
                                         </Link>
                                     </div>}
-                                <p className='bg-[#f2f2f9cb] px-2 py-1 text-sm sm:text-base md:px-3 md:py-1 w-min text-[#743bfb] rounded-[10px] font-medium sm:mb-2'>{appointmentData?.completed ? "Past" : "Upcoming"}</p>
+                                <p className='bg-[#f2f2f9cb] px-2 py-1 text-sm sm:text-base md:px-3 md:py-1 w-min text-[#743bfb] rounded-[10px] font-medium sm:mb-2 '>{appointmentData?.completed ? "Past" : "Upcoming"}</p>
                                 <p className='text-white font-bold text-2xl md:text-3xl xl:text-2xl 2xl:text-3xl'>{appointmentData?.name}</p>
                                 <p className='text-white text-base md:text-lg xl:text-base 2xl:text-lg font-medium md:mt-1'>{appointmentData?.description}</p>
                             </div>
@@ -113,13 +113,13 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                             <p className='text-base lg:text-lg xl:text-xl font-semibold text-[#575658] '>Time Remaining: 01:24:56</p>
 
                             <a href={`http://localhost:8080/join?room=${appointmentData.appointment_id}&name=${appointmentData.name}`} target="_blank" rel="noopener noreferrer">
-                                <button className={`text-white px-4 py-1 md:px-8 md:py-2 bg-[#743bfb] hover:bg-[#753bfbde] rounded-[6px] font-bold text-lg mb-2`}>Join</button>
+                                <button className={`text-white px-4 py-1 md:px-8 md:py-2 bg-[#743bfb] hover:bg-[#753bfbde] rounded-[6px] font-bold text-lg mb-2  transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg`}>Join</button>
                             </a>
                         </div>) :
                         (<div className='bg-[#f1f1ff] mt-4 py-2 text-xl flex justify-between  items-center font-medium text-black px-4'>
                             <p className=' text-base sm:text-lg md:text-xl font-semibold text-[#575658]'>Watch your Report</p>
 
-                            <button className={`text-white px-4 py-1 md:px-8 md:py-2 bg-[#743bfb] hover:bg-[#753bfbde] rounded-[6px] font-bold text-lg`} onClick={handleSeeReportClick}>See Report</button>
+                            <button className={`text-white px-4 py-1 md:px-8 md:py-2 bg-[#743bfb] hover:bg-[#753bfbde] rounded-[6px] font-bold text-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg`} onClick={handleSeeReportClick}>See Report</button>
                         </div>)
                     }
 

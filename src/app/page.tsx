@@ -20,7 +20,7 @@ const Home = () => {
   const setUserInfo = useUserStore((state) => state.setUserInfo);
   const isLoading = useLoadingStore((state) => state.isLoading);
   const setIsLoading = useLoadingStore((state) => state.setIsLoading);
-  const isAuthorized = useAuthorizedStore((state) => state.isAuthorized);
+  const isAuthorized = useAuthorizedStore((state) => state.isAuthorized);            //----------------------- Cause of Call Stack error in line 31
   const setIsAuthorized = useAuthorizedStore((state) => state.setIsAuthorized);
 
   const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO, {
