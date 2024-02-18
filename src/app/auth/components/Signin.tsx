@@ -39,12 +39,12 @@ export const Signin: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
                     "password": password
                 }
             });
-            const { status, message, token, user } = loginResponse.data.loginUser;
+            const { status, message, token } = loginResponse.data.loginUser;
             ToastMessage(status, message);
             if (token) {
                 setCookie(604800, "token", `Bearer ${token}`)
-                router.replace('/dashboard/profile')
                 window.location.reload();
+                router.replace('/dashboard/profile');
             }
         } catch (error) {
             ToastMessage('error', 'Internal Server Error')

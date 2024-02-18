@@ -14,7 +14,7 @@ import BlogNavigationBox from "@/app/blogs/components/BlogNavigationBox";
 import { getUserInfo } from "@/components/utils/GetUserInfo";
 import BlogContent from "./components/BlogContent";
 import { GET_USER_INFO } from "@/apollo_client/Queries";
-
+import Head from 'next/head'
 
 const Page = () => {
     const router = useRouter();
@@ -35,6 +35,9 @@ const Page = () => {
 
     return (
         <main className='bg-white'>
+            <Head>
+                <title>My new cool app</title>
+            </Head>
             {isLoading ?
                 <div className='w-full h-screen flex items-center justify-center'>
                     <Loader />

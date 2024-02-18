@@ -18,7 +18,6 @@ const inter = Inter({
   display: 'swap'
 })
 
-
 const architects_daughter = Architects_Daughter({
   subsets: ['latin'],
   variable: '--font-architects-daughter',
@@ -45,11 +44,9 @@ export default function RootLayout({
     'client-version': '1.0.0'
   };
 
-  console.log("headers from layout", headers)
-
   const graphqlClient = new ApolloClient({
-    //  uri: "https://nephara-backend.onrender.com/graphql",
-    uri: "http://localhost:8000/graphql",
+     uri: "https://nephara-backend.onrender.com/graphql",
+    // uri: "http://localhost:8000/graphql",
     cache: new InMemoryCache(),
     headers: headers
   });
@@ -65,15 +62,15 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Nephara</title>
       </head>
       <body className={`${inter.variable} ${architects_daughter.variable} font-inter antialiased bg-gray-900 tracking-tight`} style={{ height: "100dvh" }}>
         <ApolloProvider client={graphqlClient}>
           <NextUIProvider>
-              <LogoutModal />
-              {children}
+            <LogoutModal />
+            {children}
           </NextUIProvider>
           <Toaster richColors position="top-right" />
         </ApolloProvider>
