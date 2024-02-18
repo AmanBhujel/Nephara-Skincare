@@ -10,7 +10,7 @@ mutation Nodemaileremail($email: String!) {
     nodemaileremail(email: $email) {
     message,status
 }
-}`
+}`;
 
 const Page = () => {
     const [email, setEmail] = useState<string>("");

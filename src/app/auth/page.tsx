@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Signin, Signup } from './components/AuthFormComponent'
+import { Signin } from './components/Signin'
 import { gql, useLazyQuery } from '@apollo/client'
 import { useRouter } from 'next/navigation'
 import { useUserStore } from '@/stores/userStore'
@@ -9,6 +9,7 @@ import { useLoadingStore } from '@/stores/LoadingStore'
 import Loader from '@/components/Loader'
 import { useAuthorizedStore } from '@/stores/AuthorizedStore'
 import { getCookie } from '@/components/utils/Cookie'
+import { Signup } from './components/SignUp'
 
 
 const GET_USER_INFO = gql`
@@ -42,19 +43,18 @@ const Page = () => {
     const setIsAuthorized = useAuthorizedStore((state) => state.setIsAuthorized);
 
     useEffect(() => {
-        let isMounted = true; // Flag to track component mount state
-        const token = getCookie("token");
+        let isMounted = true;
         const getUserInfo = async () => {
             try {
+                const token = getCookie("token");
                 if (token) {
                     if (!isAuthorized) {
                         const response = await getUserInfoByToken();
-
-                        if (!isMounted) return; // Skip state updates if component is unmounted
+                        if (!isMounted) return;
 
                         const { status, message, user } = response.data.getUserInfoByToken;
                         if (user) {
-                            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country,phoneNumber:user.phoneNumber })
+                            setUserInfo({ email: user.email, name: user.name, photo: user.photo, gender: user.gender, age: user.age, city: user.city, country: user.country, phoneNumber: user.phoneNumber })
                         }
                         if (status === 'success' && message === 'Authorized Token!') {
                             console.log("scucess auth")
@@ -72,21 +72,14 @@ const Page = () => {
                 setIsLoading(false)
             } catch (error) {
                 console.error("Error fetching user info:", error);
-                // Handle any error or perform cleanup actions
             }
         };
-
         if (isMounted) {
             getUserInfo();
         }
-
-        // Cleanup function
         return () => {
-            isMounted = false; // Update flag to indicate component unmount
-            // Perform cleanup actions here if needed
-            // For example: Clear any timers or subscriptions
+            isMounted = false;
         };
-        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

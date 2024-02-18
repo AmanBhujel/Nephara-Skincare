@@ -58,7 +58,7 @@ const Page: NextPage<PageProps> = ({ params }) => {
     }, [])
 
     useEffect(() => {
-        let isMounted = true; // Flag to track component mount state
+        let isMounted = true; 
         const token = getCookie("token");
 
         const getUserInfo = async () => {
@@ -102,9 +102,7 @@ const Page: NextPage<PageProps> = ({ params }) => {
 
         // Cleanup function
         return () => {
-            isMounted = false; // Update flag to indicate component unmount
-            // Perform cleanup actions here if needed
-            // For example: Clear any timers or subscriptions
+            isMounted = false; 
         };
 
         // eslint-disable-next-line react-hooks/exhaustive-deps

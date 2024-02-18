@@ -1,6 +1,5 @@
 'use client'
-import { useDashboardStore } from "../../../../stores/DashboardStore";
-import Link from 'next/link';
+import { useDashboardStore } from "@/stores/DashboardStore";
 
 const AppointmentFilter = () => {
     const selectedAppointmentFilter = useDashboardStore((state) => state.selectedAppointmentFilter);

@@ -4,16 +4,12 @@ import Image from "next/image";
 import { useViewportScroll, useTransform, motion } from 'framer-motion';
 
 const WhoWeAre = () => {
-
     const { scrollYProgress } = useViewportScroll();
     const opacity = useTransform(scrollYProgress, [0.1, 0.2], [0, 1]);
   
     return (
         <motion.div 
         style={{ opacity }}
-        // initial={{ opacity: 0 }} 
-        // whileInView={{ opacity: 1 }}
-        // viewport={{ once: false }}          
         className="flex w-full justify-center items-center border-b-2 bg-white">
             <div className="flex flex-col lg:flex-row justify-center items-center w-[95%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto py-4 sm:py-8 xl:h-[35rem] ">
                 <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[40%] xl:w-[50%] h-full flex justify-center items-center">
@@ -25,6 +21,6 @@ const WhoWeAre = () => {
                 </div>
             </div>
         </motion.div>)
-}
+};
 
-export default WhoWeAre
+export default WhoWeAre;

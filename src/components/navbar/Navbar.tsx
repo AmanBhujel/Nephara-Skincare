@@ -2,26 +2,22 @@
 import React, { useRef } from 'react'
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Logo from '../assets/logo.png';
+import Logo from '@/assets/logo.png';
 import { FaBars } from 'react-icons/fa6';
-import { IoHomeOutline, IoSettingsOutline } from "react-icons/io5";
-import { FaMicroblog, FaQuestion } from "react-icons/fa";
-import { MdOutlineDashboardCustomize } from "react-icons/md";
 import Link from 'next/link';
 import { useLoadingStore } from '@/stores/LoadingStore';
 import { useAuthorizedStore } from '@/stores/AuthorizedStore';
 import Profile from '@/assets/beautiful-nurse.png';
-import { RiArrowDropDownLine } from "react-icons/ri";
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { useUserStore } from '@/stores/userStore';
 import LogoutModal from '@/components/LogoutModal';
 import { useLogoutStore } from '@/stores/LogoutStore';
 import { usePathname, useRouter } from 'next/navigation';
+import MobileNavbar from './MobileNavbar';
 
 const Navbar = () => {
     const [windowWidth, setWindowWidth] = useState(0);
     const [activeItem, setActiveItem] = useState("Home");
-    const [sidebarActiveItem, setSidebarActiveItem] = useState("Home");
     const [showSidebar, setShowSidebar] = useState(false);
     const sidebarRef = useRef(null);
     const setIsLoading = useLoadingStore((state) => state.setIsLoading);
@@ -41,21 +37,11 @@ const Navbar = () => {
         setIsLogoutModalOpen(true);
     };
 
-
     const menuItems = [
         { name: 'Home', route: "/" },
         { name: 'Blogs', route: "/blogs" },
         { name: 'FAQs', route: "#faq" },
         { name: 'Dashboard', route: "/dashboard/profile" },
-    ];
-
-
-    const MenuItemsMobileSidebar = [
-        { icon: <IoHomeOutline />, name: 'Home', route: "/" },
-        { icon: <FaMicroblog />, name: 'Blogs', route: "/blogs" },
-        { icon: <FaQuestion />, name: 'FAQs', routes: "/landing/FAQ" },
-        { icon: <MdOutlineDashboardCustomize />, name: 'Dashboard', route: "/dashboard/profile" },
-        { icon: <IoSettingsOutline />, name: 'Settings', route: "/dashboard/settings" },
     ];
 
     const handleMenuItemClick = (item: any) => {
@@ -67,16 +53,16 @@ const Navbar = () => {
             router.push(item.route || '/');
         }
     };
-    
+
     useEffect(() => {
         if (activeItem === 'FAQs') {
             const timeoutId = setTimeout(() => {
-                const faqElement = document.getElementById("faq"); 
+                const faqElement = document.getElementById("faq");
                 if (faqElement) {
                     faqElement.scrollIntoView({ behavior: 'smooth' });
                 }
             }, 200);
-    
+
             return () => clearTimeout(timeoutId);
         }
     }, [activeItem]);
@@ -84,9 +70,10 @@ const Navbar = () => {
     useEffect(() => {
         if (pathname === "/blogs") {
             setActiveItem("Blogs")
-            setSidebarActiveItem("Blogs")
         }
-
+        if (pathname === "/") {
+            setActiveItem("Home")
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -121,7 +108,6 @@ const Navbar = () => {
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (sidebarRef.current && !(sidebarRef.current as any).contains(event.target)) {
-                // Click outside the sidebar, close it
                 setShowSidebar(false);
             }
         };
@@ -139,14 +125,14 @@ const Navbar = () => {
             <div className='h-20 w-[95%] lg:w-[63rem] xl:w-[79rem] 2xl:w-[117rem] flex items-center justify-between lg:justify-start'>
                 <Image src={Logo} width={200} height={100} alt="Nephara" className='pl-12' />
 
-                {/* Large Screen Menu */}
+                {/* -----------Large Screen Navbar----------------- */}
                 {windowWidth >= 1024 && (
                     <ul className="hidden lg:flex items-center justify-center gap-x-10 lg:ml-[13%] xl:ml-[27%] 2xl:ml-[37%]">
                         {menuItems.map((item, index) => (
                             <Link key={index} href={item.route || "/"} scroll={false}>
                                 <li className={`xl:text-base cursor-pointer ${item.name === activeItem ? "underline underline-offset-8 text-black" : "text-gray-500"} hover:underline hover:underline-offset-8 font-medium tracking-tight hover:text-black `}
                                     onClick={() => {
-                                       handleMenuItemClick(item)
+                                        handleMenuItemClick(item)
                                     }}>
                                     {item.name}
                                 </li>
@@ -167,6 +153,7 @@ const Navbar = () => {
                         </Link>
                     </div>
                 )}
+
                 {/* -------------Profile Image---------- */}
                 {windowWidth >= 1024 && isAuthorized && (
                     <div className="hidden lg:flex items-center justify-center ml-[10%] text-gray-700 relative cursor-pointer" onClick={handleDropdownToggle}>
@@ -195,39 +182,10 @@ const Navbar = () => {
                     </button>
                 )}
                 {windowWidth < 1024 && showSidebar && (
-                    <div ref={sidebarRef} className='bg-white border-2 w-[350px] h-full right-0 top-0 fixed z-50'>
-                        <button className="lg:hidden p-3 absolute right-12 top-4" aria-label="Open Menu" onClick={() => setShowSidebar(!showSidebar)}>
-                            <FaBars className="text-2xl" />
-                        </button>
-                        <Image src={Logo} width={200} height={100} className='mt-[5%]' alt='Dermatologist' />
-                        {/* <p className='ml-6 text-sm mt-2'>You are not signed in yet.</p> */}
-                        <ul className='w-full flex flex-col p-2 mt-6 gap-y-1'>
-                            {MenuItemsMobileSidebar.map((item, index) => (
-                                <li
-                                    key={index}
-                                    onClick={() => setSidebarActiveItem(item.name)}
-                                    className={`flex w-full rounded-[7px] h-14 text-lg font-medium hover:bg-[#a376ff] hover:text-white items-center cursor-pointer ${sidebarActiveItem === item.name ? "bg-[#a376ff] text-white" : ""}`}
-                                >
-                                    <i className='ml-6 mr-3 text-2xl'>{item.icon}</i>
-                                    {item.name}
-                                </li>
-                            ))}
-                        </ul>
-                        {/* ---------login CTA------------- */}
-                        {!isAuthorized &&
-                            <div className='flex items-center justify-center w-full flex-col mt-[15%]'>
-                                <p className="text-sm font-medium text-black  mb-2 ">Get Started Today:</p>
-                                <Link href={"/auth"}>
-                                    <button className="bg-[#a376ff] py-3 px-10 font-medium text-lg text-white rounded-[7px]">Register/ Login</button>
-                                </Link>
-                            </div>
-                        }
-
-                    </div>
+                    <MobileNavbar sidebarRef={sidebarRef} setShowSidebar={setShowSidebar} showSidebar={showSidebar} isAuthorized={isAuthorized} />
                 )}
             </div>
-
         </nav>)
-}
+};
 
 export default Navbar;

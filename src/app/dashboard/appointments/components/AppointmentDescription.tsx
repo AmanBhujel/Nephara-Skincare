@@ -1,8 +1,8 @@
 'use client'
 import { useEffect, useState } from "react";
-import { useDashboardStore } from "../../../../stores/DashboardStore";
+import { useDashboardStore } from "@/stores/DashboardStore";
 import BackgroundAppointment from '@/assets/DoctorConsulting.png'
-import { gql, useLazyQuery, useQuery } from "@apollo/client";
+import { gql, useLazyQuery } from "@apollo/client";
 import { IoArrowBack, } from "react-icons/io5";
 import Link from "next/link";
 

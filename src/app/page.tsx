@@ -1,10 +1,9 @@
 'use client'
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/navbar/Navbar";
 import HeroSection from "./landing/HeroSection";
 import WhoWeAre from "./landing/WhoWeAre";
-import WhatWeBelieve from "./landing/WhatWeBelieve";
 import Feedback from "./landing/Feedback";
-import Services from "./landing/Services";
+import Features from "./landing/Features";
 import Footer from "@/components/Footer";
 import { useUserStore } from "@/stores/userStore";
 import { gql, useLazyQuery } from "@apollo/client";
@@ -13,12 +12,12 @@ import { useLoadingStore } from "@/stores/LoadingStore";
 import Loader from "@/components/Loader";
 import { useAuthorizedStore } from "@/stores/AuthorizedStore";
 import FAQ from "./landing/FAQ";
+import PremiumCareInfosAndImages from "./landing/PremiumCareInfosAndImages";
+import { getUserInfo } from "@/components/utils/GetUserInfo";
 
 const GET_USER_INFO = gql`
   query GetUserInfoByToken {
     getUserInfoByToken {
-    status
-    message
     user {
       email
       phoneNumber
@@ -30,10 +29,9 @@ const GET_USER_INFO = gql`
       gender
     }
   }
-    }`
+    }`;
 
 const Home = () => {
-  const userInfo = useUserStore((state) => state.userInfo);
   const setUserInfo = useUserStore((state) => state.setUserInfo);
   const isLoading = useLoadingStore((state) => state.isLoading);
   const setIsLoading = useLoadingStore((state) => state.setIsLoading);
@@ -44,21 +42,10 @@ const Home = () => {
     fetchPolicy: "no-cache"
   });
 
-  useEffect(() => {
-    const getUserInfo = async () => {
-      if (!isAuthorized) {
-        const response = await getUserInfoByToken();
-        console.log(response, "from useeffect from landing")
-        const { status, message, user } = response.data.getUserInfoByToken;
-        if (user) {
-          setIsAuthorized(true);
-          setUserInfo({ email: user.email || '', name: user.name || '', photo: user.photo || '', gender: user.gender || '', age: user.age || 0, city: user.city || '', country: user.country || '', phoneNumber: user.phoneNumber || '' })
-        }
-      }
-    }
-    getUserInfo()
-    setIsLoading(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => {
+      getUserInfo(isAuthorized, setIsAuthorized, getUserInfoByToken, setUserInfo);
+      setIsLoading(false);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -68,9 +55,9 @@ const Home = () => {
         <div className='w-full h-auto overflow-x-hidden flex flex-col  justify-center items-center'>
           <Navbar />
           <HeroSection />
-          <Services />
+          <Features />
           <WhoWeAre />
-          <WhatWeBelieve />
+          <PremiumCareInfosAndImages />
           <Feedback />
           <FAQ />
           <Footer />

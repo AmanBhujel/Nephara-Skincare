@@ -1,11 +1,8 @@
 'use client'
-import Profile from '@/assets/Emma.png';
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { CiLocationOn } from "react-icons/ci";
 import { useUserStore } from '@/stores/userStore';
 import BackgroundAppointment from '@/assets/DoctorConsulting.png'
-
-import Image from 'next/image';
 import Link from 'next/link';
 import { useLoadingStore } from '@/stores/LoadingStore';
 

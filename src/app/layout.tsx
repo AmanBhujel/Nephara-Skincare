@@ -4,7 +4,6 @@
 import { Inter, Architects_Daughter } from 'next/font/google'
 import './globals.css'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
-import { PaymentProvider } from '@/components/contexts/checkContext'
 import { Toaster } from 'sonner';
 import { NextUIProvider } from "@nextui-org/react";
 import LogoutModal from '@/components/LogoutModal'
@@ -73,10 +72,8 @@ export default function RootLayout({
       <body className={`${inter.variable} ${architects_daughter.variable} font-inter antialiased bg-gray-900 tracking-tight`} style={{ height: "100dvh" }}>
         <ApolloProvider client={graphqlClient}>
           <NextUIProvider>
-            <PaymentProvider>
               <LogoutModal />
               {children}
-            </PaymentProvider>
           </NextUIProvider>
           <Toaster richColors position="top-right" />
         </ApolloProvider>

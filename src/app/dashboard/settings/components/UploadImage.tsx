@@ -105,6 +105,6 @@ const UploadImage: React.FC = () => {
       </Modal>
     </>
   );
-}
+};
 
 export default UploadImage;

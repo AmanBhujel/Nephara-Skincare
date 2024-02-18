@@ -1,10 +1,9 @@
 'use client'
 import React, { useState } from 'react'
 import TimeZoneSelector from './components/TimeZoneSelector';
-import DatePickerDemo from '../book-appointment/components/DatePicker';
+import DatePickerDemo from '@/app/appointment/components/DatePicker';
 import { gql, useMutation } from '@apollo/client';
 import { Stripe, loadStripe } from '@stripe/stripe-js';
-import { UsePaymentContext } from '@/components/contexts/checkContext';
 import ToastMessage from '@/components/utils/ToastMessage';
 import { UseStripeStore } from '@/stores/StripeStore';
 import { AiOutlineCloseCircle } from "react-icons/ai";
@@ -26,7 +25,6 @@ const Page = () => {
     const [name, setName] = useState<string>("");
     const [allergies, setAllergies] = useState<string>("");
     const [comment, setComment] = useState<string>("");
-    const { clientId, setClientId, paymentIntent, setPaymentIntent } = UsePaymentContext();
     const setStripeSessionId = UseStripeStore((state) => state.setStripeSessionId);
 
     // --------for images---------
@@ -87,7 +85,7 @@ const Page = () => {
     }
 
     return (
-        <div className='w-full h-auto lg:h-full flex justify-center bg-white'>
+        <div className='w-full h-auto lg:h-screen flex justify-center bg-white'>
             <div className='w-[95%] lg:w-[78rem] lg:min-w-[78rem] xl:w-[90rem] h-auto lg:h-[50rem] pb-12 sm:pb-8  xl:h-[49rem] mt-12 flex flex-col items-center p-0'>
                 <h3 className='text-4xl md:text-5xl font-semibold text-[#0736bc]'>Make an appointment</h3>
                 <p className='text-sm sm:text-base md:text-lg text-[#6e6e6e] font-medium mt-4 text-center'>By filling out the form, you automatically make an appointment with a doctor.</p>

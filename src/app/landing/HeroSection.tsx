@@ -7,26 +7,10 @@ import Link from 'next/link';
 const HeroSection = () => {
   return (
     <section className='border-b-1'>
-      {/* <div className="absolute w-screen left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none -z-1" aria-hidden="true">
-        <svg width="1360" height="578" viewBox="0 0 1360 578" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="illustration-01">
-              <stop stopColor="#FFF" offset="0%" />
-              <stop stopColor="#EAEAEA" offset="77.402%" />
-              <stop stopColor="#DFDFDF" offset="100%" />
-            </linearGradient>
-          </defs>
-          <g fill="url(#illustration-01)" fillRule="evenodd">
-            <circle cx="1232" cy="128" r="128" />
-            <circle cx="155" cy="443" r="64" />
-          </g>
-        </svg>
-      </div> */}
-
       {/* --------------Info Section----------- */}
       <div className="text-center pb-12 md:pb-16 flex flex-col-reverse justify-between items-center lg:flex-row lg:pt-10">
         <div className="w-[90%] lg:w-[45%] xl:w-[40%] 2xl:w-[35%] flex flex-col items-center z-30 lg:mr-12 " >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tighter tracking-tighter lg:mt-20 md:mb-4" data-aos="zoom-y-out">Make your Skin<br /> <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">WONDERFUL</span></h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tighter tracking-tighter l md:mb-4" data-aos="zoom-y-out">Make your Skin<br /> <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">WONDERFUL</span></h1>
           <p className="md:text-lg lg:text-xl text-gray-600 " data-aos="zoom-y-out" data-aos-delay="150">Book appointments with top south asian dermatologists from the comfort of your home.</p>
           <div className="flex items-center mt-6 md:mt-8 lg:mt-8" data-aos="zoom-y-out" data-aos-delay="300">
             <Link href={'/appointment'}>

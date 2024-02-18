@@ -1,30 +1,8 @@
 "use client"
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import Image from "next/image";
-import Nurse from '@/assets/nurse-smile.jpg'
 
-const WhatWeBelieve = () => {
-  const WhatweBelieveRef = useRef<HTMLDivElement>(null);
-  const [startAnimation, setStartAnimation] = useState<Boolean>(false);
-
-  const handleScroll = () => {
-    if (WhatweBelieveRef.current) {
-      const elementTop = WhatweBelieveRef.current.getBoundingClientRect().top;
-      const windowHeight = window.innerHeight;
-
-      setStartAnimation(elementTop < windowHeight);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-
-  }, []);
+const PremiumCareInfosAndImages = () => {
   return (
     <section className='max-w-screen'>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -34,7 +12,6 @@ const WhatWeBelieve = () => {
           <div className="max-w-3xl mx-auto text-center pb-6 md:pb-12">
             <div className="inline-flex text-base font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-2 md:mb-4">Premium care for your skin</div>
             <h1 className="h2 text-lg md:text-2xl lg:text-3xl font-medium">Reach Out to our Skin care Specialist now</h1>
-            {/* <p className="md:text-lg text-gray-400">Skin Doctor with 10 years of experience with Masters Degree</p> */}
           </div>
 
           {/* Items */}
@@ -44,7 +21,7 @@ const WhatWeBelieve = () => {
             <div className="md:grid md:grid-cols-12 md:gap-6 items-center">
               {/* Image */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
-                <Image className="max-w-full mx-auto md:max-w-none object-cover h-[20rem] lg:h-[30rem] rounded-[8px]" src={"https://cdna.artstation.com/p/assets/images/images/008/265/652/large/siwoo-kim-546-max.jpg"} width={540} height={405} alt="Features 01" />
+                <Image loading='lazy' className="max-w-full mx-auto md:max-w-none object-cover h-[20rem] lg:h-[30rem] rounded-[8px]" src={"https://cdna.artstation.com/p/assets/images/images/008/265/652/large/siwoo-kim-546-max.jpg"} width={540} height={405} alt="Features 01" />
               </div>
               {/* Content */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right" data-aos-delay="150">
@@ -60,7 +37,7 @@ const WhatWeBelieve = () => {
             <div className="md:grid md:grid-cols-12 md:gap-6 items-center">
               {/* Image */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 rtl" data-aos="fade-up">
-                <Image className="max-w-full mx-auto md:max-w-none  object-cover h-[20rem] lg:h-[30rem] rounded-[8px]" src={"https://r2.starryai.com/results/376525370/0f90d74a-d037-436f-b1a2-d3844b10caf1.webp"} width={540} height={405} alt="Features 02" />
+                <Image loading='lazy' className="max-w-full mx-auto md:max-w-none  object-cover h-[20rem] lg:h-[30rem] rounded-[8px]" src={"https://r2.starryai.com/results/376525370/0f90d74a-d037-436f-b1a2-d3844b10caf1.webp"} width={540} height={405} alt="Features 02" />
               </div>
               {/* Content */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-left" data-aos-delay="150">
@@ -76,7 +53,7 @@ const WhatWeBelieve = () => {
             <div className="md:grid md:grid-cols-12 md:gap-6 items-center">
               {/* Image */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
-                <Image className="max-w-full mx-auto md:max-w-none  object-cover h-[20rem] lg:h-[30rem]  rounded-[8px]" src={"https://img.freepik.com/premium-photo/photo-cyberpunk-woman-showing-backfuturistic-clothes_740020-532.jpg"} width={540} height={405} alt="Features 03" />
+                <Image loading='lazy' className="max-w-full mx-auto md:max-w-none  object-cover h-[20rem] lg:h-[30rem]  rounded-[8px]" src={"https://img.freepik.com/premium-photo/photo-cyberpunk-woman-showing-backfuturistic-clothes_740020-532.jpg"} width={540} height={405} alt="Features 03" />
               </div>
               {/* Content */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right" data-aos-delay="150">
@@ -96,4 +73,4 @@ const WhatWeBelieve = () => {
   )
 };
 
-export default WhatWeBelieve;
+export default PremiumCareInfosAndImages;

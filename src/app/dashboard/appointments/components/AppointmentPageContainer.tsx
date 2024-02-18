@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect } from 'react'
-import { useDashboardStore } from '../../../../stores/DashboardStore';
+import { useDashboardStore } from '@/stores/DashboardStore';
 import AppointmentFilter from './AppointmentFilter';
 import AppointmentLists from './AppointmentLists';
 import AppointmentDescription from './AppointmentDescription';

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import Sidebar from '@/app/dashboard/components/sidebar';
 import { Appointments } from '@/data/AppointmentData';
-import { useDashboardStore } from '../../../stores/DashboardStore';
 import AppointmentPageContainer from './components/AppointmentPageContainer';
 import ToastMessage from '@/components/utils/ToastMessage';
 import { gql, useLazyQuery } from '@apollo/client';
@@ -40,7 +39,6 @@ const GET_USER_INFO = gql`
 
 const Page: NextPage<PageProps> = ({ params }) => {
     const appointment = Appointments.find(appointment => appointment.appointment_id === params.id);
-    const setAppointmentSelected = useDashboardStore((state) => state.setAppointmentSelected);
     const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO, {
         fetchPolicy: "no-cache"
     });
@@ -53,13 +51,7 @@ const Page: NextPage<PageProps> = ({ params }) => {
     const setIsAuthorized = useAuthorizedStore((state) => state.setIsAuthorized);
 
     useEffect(() => {
-        setAppointmentSelected(false)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-
-    useEffect(() => {
-        let isMounted = true; // Flag to track component mount state
+        let isMounted = true; 
         const token = getCookie("token");
 
         const getUserInfo = async () => {
@@ -68,9 +60,7 @@ const Page: NextPage<PageProps> = ({ params }) => {
                     if (!isAuthorized) {
 
                         const response = await getUserInfoByToken();
-                        console.log(response, "from useeffect from landing");
-
-                        if (!isMounted) return; // Skip state updates if component is unmounted
+                        if (!isMounted) return;
 
                         const { status, message, user } = response.data.getUserInfoByToken;
                         if (user) {
@@ -85,7 +75,6 @@ const Page: NextPage<PageProps> = ({ params }) => {
                             ToastMessage(status, message)
                         }
                     }
-
                 }
                 else {
                     router.replace('/auth')
@@ -95,7 +84,6 @@ const Page: NextPage<PageProps> = ({ params }) => {
                 setIsLoading(false);
             } catch (error) {
                 console.error("Error fetching user info:", error);
-                // Handle any error or perform cleanup actions
             }
         };
 
@@ -103,11 +91,8 @@ const Page: NextPage<PageProps> = ({ params }) => {
             getUserInfo();
         }
 
-        // Cleanup function
         return () => {
-            isMounted = false; // Update flag to indicate component unmount
-            // Perform cleanup actions here if needed
-            // For example: Clear any timers or subscriptions
+            isMounted = false; 
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

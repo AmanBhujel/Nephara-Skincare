@@ -1,9 +1,6 @@
 'use client'
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from 'react';
-import Profile from '@/assets/Emma.png';
-import Profile1 from '@/assets/profile1.jpg';
-import Profile2 from '@/assets/profile2.jpg';
 import { Navigation, Pagination, } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { motion } from 'framer-motion'
@@ -11,27 +8,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-
-const feedbackData = [
-  {
-    text: "I really had an awesome experience. I could not even believe I would get the appointment at this much affordable price while residing in Australia.",
-    name: "Emma Singh",
-    location: "Australia",
-    image: Profile,
-  },
-  {
-    text: "Really good experience! The appointment was so fast, and I got the report on my email right away.",
-    name: "Aman Bhujel",
-    location: "London",
-    image: Profile1,
-  },
-  {
-    text: "I have been avoiding skin checkups for the last 3 months because of the cost, but this feels like a steal – so affordable and a seamless way for appointments.",
-    name: "Evan Sunde",
-    location: "USA",
-    image: Profile2,
-  },
-];
+import { feedbackData } from "@/data/FeedbackData";
 
 const Feedback = () => {
   const [windowWidth, setWindowWidth] = useState<number | undefined>(undefined);
@@ -61,7 +38,6 @@ const Feedback = () => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
-
     if (typeof window !== 'undefined') {
       setWindowWidth(window.innerWidth);
       window.addEventListener('resize', handleResize);
@@ -69,7 +45,6 @@ const Feedback = () => {
         window.removeEventListener('resize', handleResize);
       };
     }
-
   }, []);
 
   return (
@@ -109,7 +84,6 @@ const Feedback = () => {
               <Swiper
                 effect={"coverflow"}
                 className='h-auto w-full'
-                // {...(windowWidth && windowWidth < 640 ? { navigation: true } : '')}
                 modules={[Pagination, Navigation]}
                 pagination={{ clickable: true }}
                 grabCursor={true}
@@ -142,7 +116,8 @@ const Feedback = () => {
                   </SwiperSlide>
                 ))}
               </Swiper>
-            </div>)}
+            </div>
+          )}
         </div>
       </div>
     </div>
