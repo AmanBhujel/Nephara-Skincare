@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import Sidebar from '../components/sidebar';
-import {  useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { useUserStore } from '@/stores/userStore';
 import { useRouter } from 'next/navigation';
 import ToastMessage from '@/components/utils/ToastMessage';
@@ -91,11 +91,11 @@ const Page = () => {
     }, []);
 
     return (
-        <main className='w-full h-screen flex justify-center lg:justify-start bg-[#f6f8fc] relative'>
+        <main className='w-full h-screen flex justify-center lg:justify-start bg-[#f6f8fc] relative' style={{ height: "100dvh" }}>
             {
                 isLoading ? <Loader /> :
                     <>
-                        <Sidebar />
+                        {windowWidth > 1024 || activeSettingButton === "" ? <Sidebar /> : ""}
                         <UploadImage />
                         <SettingsSidebar activeSettingButton={activeSettingButton} setActiveSettingButton={setActiveSettingButton} windowWidth={windowWidth} />
                         <EditProfile activeSettingButton={activeSettingButton} setActiveSettingButton={setActiveSettingButton} windowWidth={windowWidth} />

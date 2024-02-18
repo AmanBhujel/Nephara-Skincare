@@ -18,7 +18,7 @@ const MobileProfileDetails = () => {
             </div>
             <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
                 <p className=' font-semibold mt-2 w-20 sm:w-24 text-gray-500 text-sm sm:text-base'>Email</p>
-                <p className='w-[50%] border-b-1 text-base md:text-lg sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].email || ""}</p>
+                <p className='min-w-min w-[50%]  border-b-1 text-base md:text-lg sm:ml-10 md:ml-14 min-h-7'>{userInfo[0].email || ""}</p>
             </div>
             <div className='flex w-[85%] 2xl:w-[75%] items-center mt-3 '>
                 <p className=' font-semibold mt-2 w-20 sm:w-24 text-gray-500 text-sm sm:text-base'>Phone</p>

@@ -14,7 +14,7 @@ const SidebarForSmallDevices:  React.FC<SidebarForSmallDevicesProps> = ({
     const setIsLoading = useLoadingStore((state) => state.setIsLoading)
 
     return (
-        <div className='absolute bottom-2 w-[95%] shadow-lg h-20 bg-white border rounded-xl flex item-center justify-center z-50'>
+        <div className='absolute bottom-4 sm:bottom-2 w-[95%] shadow-lg h-16 sm:h-20 bg-white border rounded-xl flex item-center justify-center z-50'>
             <Link href={"/dashboard/profile"} className={`w-[33%] h-full flex flex-col items-center justify-center hover:text-[#ba58ff] cursor-pointer   ${activeSidebarItem === "Dashboard" ? "text-[#ba58ff]" : ""}`}
                 onClick={() => {
                     if (activeSidebarItem !== "Dashboard") {

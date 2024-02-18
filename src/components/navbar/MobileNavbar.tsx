@@ -53,7 +53,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
     }, []);
 
     return (
-        <div ref={sidebarRef} className='bg-white border-2 w-[350px] h-full right-0 top-0 fixed z-50'>
+        <div ref={sidebarRef} className='bg-white border-2 w-[310px] h-full right-0 top-0 fixed z-50' style={{ height: "100lvh" }}>
             <button className="lg:hidden p-3 absolute right-12 top-4" aria-label="Open Menu" onClick={() => setShowSidebar(!showSidebar)}>
                 <FaBars className="text-2xl" />
             </button>

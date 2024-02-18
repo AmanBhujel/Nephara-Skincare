@@ -120,7 +120,7 @@ const Navbar = () => {
     }, [sidebarRef]);
 
     return (
-        <nav className="w-full flex justify-center items-center border-b-2 ">
+        <nav className="w-full flex justify-center items-center border-b-2 " >
             <LogoutModal />
             <div className='h-20 w-[95%] lg:w-[63rem] xl:w-[79rem] 2xl:w-[117rem] flex items-center justify-between lg:justify-start'>
                 <Image src={Logo} width={200} height={100} alt="Nephara" className='pl-12' />
