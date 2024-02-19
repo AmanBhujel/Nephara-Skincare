@@ -1,6 +1,5 @@
 'use client'
 // import type { Metadata } from 'next'
-
 import { Inter, Architects_Daughter } from 'next/font/google'
 import './globals.css'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
@@ -8,7 +7,7 @@ import { Toaster } from 'sonner';
 import { NextUIProvider } from "@nextui-org/react";
 import LogoutModal from '@/components/LogoutModal'
 import { getCookie } from '@/components/utils/Cookie'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
@@ -37,6 +36,7 @@ export default function RootLayout({
 }) {
   const token = getCookie("token");
   const tokenParts = token.split(" ");
+  const [windowWidth, setWindowWidth] = useState<number>(0);
 
   const headers = {
     authorization: tokenParts ? tokenParts[1] : "",
@@ -45,20 +45,34 @@ export default function RootLayout({
   };
 
   const graphqlClient = new ApolloClient({
-    //  uri: "https://nephara-backend.onrender.com/graphql",
-    uri: "http://localhost:8000/graphql",
+     uri: "https://nephara-backend.onrender.com/graphql",
+    // uri: "http://localhost:8000/graphql",
     cache: new InMemoryCache(),
     headers: headers
   });
 
   useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    const updateWindowWidth = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', updateWindowWidth);
+
+    return () => {
+      window.removeEventListener('resize', updateWindowWidth);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     AOS.init({
       once: false,
-      // disable:'phone',
-      duration: 600,
+      // disable: 'phone',
+      duration: windowWidth > 640 ? 600 : 300,
       easing: 'ease-out-sine',
     })
-  }, [])
+  }, []);
 
   return (
     <html lang="en">
