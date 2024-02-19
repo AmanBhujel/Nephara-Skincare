@@ -19,7 +19,7 @@ const WhoWeAre = () => {
                     <p className="text-2xl sm:text-3xl text-[#a376ff] font-semibold lg:ml-6 mt-2 lg:mt-0">WHO WE ARE</p>
                     <p className=" text-sm sm:text-base md:text-lg tracking-wide lg:w-[100%] xl:w-[90%] 2xl:w-[80%] flex flex-wrap lg:ml-6 text-justify mt-1 xl:mt-4">At Nephara, we understand the frustration of navigating the complex healthcare system, especially when it comes to skin concerns. Our mission is to bridge the gap by offering online skincare services connecting individuals directly with specialist doctors. <br />
                         <p>&nbsp;</p>
-                        We've personally encountered the challenge of receiving timely referrals and experiencing the financial strain of accessing expert care. Committed to making quality dermatological expertise accessible, we've curated a platform that prioritizes affordability without compromising on the excellence of our Specialist doctors. <br />
+                        We&apos;ve personally encountered the challenge of receiving timely referrals and experiencing the financial strain of accessing expert care. Committed to making quality dermatological expertise accessible, we&apos;ve curated a platform that prioritizes affordability without compromising on the excellence of our Specialist doctors. <br />
                         <br />
                         <p>&nbsp;</p>
                         Say goodbye to long waits and exorbitant costs – experience a seamless journey towards healthier, radiant skin with Nephara.</p>
