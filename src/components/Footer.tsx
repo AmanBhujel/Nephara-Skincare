@@ -1,6 +1,7 @@
 import React from 'react'
 import Logo from '../assets/logo.png';
 import Image from "next/image";
+import Link from "next/link";
 
 const Footer = () => {
     return (
@@ -12,10 +13,10 @@ const Footer = () => {
                 <div className="mt-4 sm:mt-10">
                     <h6 className="font-bold sm:text-lg xl:text-xl">Navigate</h6>
                     <ul className="mt-1 sm:mt-3 gap-y-1 flex flex-col text-sm xl:text-base">
-                        <li className="cursor-pointer hover:underline">Home</li>
-                        <li className="cursor-pointer hover:underline">Blogs</li>
-                        <li className="cursor-pointer hover:underline">Profile</li>
-                        <li className="cursor-pointer hover:underline">Settings</li>
+                        <li className="cursor-pointer hover:underline"><Link href="/">Home </Link></li>
+                        <li className="cursor-pointer hover:underline"><Link href="/blogs"> Blogs </Link></li>
+                        <li className="cursor-pointer hover:underline">< Link href="/dashboard/profile">Profile</Link></li>
+                        <li className="cursor-pointer hover:underline"><Link href="/dashboard/settings">Settings</Link></li>
                     </ul>
                 </div>
                 <div className="mt-4 sm:mt-10 hidden sm:block">
@@ -23,13 +24,13 @@ const Footer = () => {
                     <ul className="mt-3 gap-y-1 flex flex-col text-sm xl:text-base">
                         <li className="cursor-pointer hover:underline">FAQs</li>
                         <li className="cursor-pointer hover:underline">Blogs</li>
-                        <li className="cursor-pointer hover:underline">Privacy Policy</li>
+                        <li className="cursor-pointer hover:underline"><Link href={"/terms"}> Privacy Policy</Link></li>
                     </ul>
                 </div>
                 <div className="mt-4 sm:mt-10">
                     <h6 className="font-bold sm:text-lg xl:text-xl">Social</h6>
                     <ul className="mt-1 sm:mt-3 gap-y-1 flex flex-col text-sm xl:text-base">
-                        <li className="cursor-pointer hover:underline">Email</li>
+                        <li className="cursor-pointer hover:underline"><Link href = "mailto:nephara@outlook.com">Email</Link></li>
                         <li className="cursor-pointer hover:underline">Instagram</li>
                         <li className="cursor-pointer hover:underline">Tiktok</li>
                         <li className="cursor-pointer hover:underline">Facebook</li>
