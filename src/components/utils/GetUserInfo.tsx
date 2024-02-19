@@ -9,7 +9,6 @@ export const getUserInfo = async (
 ) => {
     if (!isAuthorized) {
         const response = await getUserInfoByToken();
-        console.log(response, "from useeffect from landing");
         const {  user } = response.data.getUserInfoByToken;
         if (user) {
             setIsAuthorized(true);

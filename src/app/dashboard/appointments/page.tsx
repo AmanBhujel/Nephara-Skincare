@@ -5,7 +5,7 @@ import Sidebar from '@/app/dashboard/components/sidebar';
 import { Appointments } from '@/data/AppointmentData';
 import AppointmentPageContainer from './components/AppointmentPageContainer';
 import ToastMessage from '@/components/utils/ToastMessage';
-import {  useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { useUserStore } from '@/stores/userStore';
 import { useRouter } from 'next/navigation';
 import { useLoadingStore } from '@/stores/LoadingStore';
@@ -13,6 +13,7 @@ import Loader from '@/components/Loader';
 import { useAuthorizedStore } from '@/stores/AuthorizedStore';
 import { getCookie } from '@/components/utils/Cookie';
 import { GET_USER_INFO } from '@/apollo_client/Queries';
+import { useDashboardStore } from '@/stores/DashboardStore';
 
 interface PageProps {
     params: {
@@ -25,7 +26,7 @@ const Page: NextPage<PageProps> = ({ params }) => {
     const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO, {
         fetchPolicy: "no-cache"
     });
-
+    const setAppointmentSelected = useDashboardStore((state) => state.setAppointmentSelected)
     const setUserInfo = useUserStore((state) => state.setUserInfo);
     const setIsLoading = useLoadingStore((state) => state.setIsLoading)
     const isLoading = useLoadingStore((state) => state.isLoading)
@@ -34,9 +35,9 @@ const Page: NextPage<PageProps> = ({ params }) => {
     const setIsAuthorized = useAuthorizedStore((state) => state.setIsAuthorized);
 
     useEffect(() => {
-        let isMounted = true; 
+        let isMounted = true;
         const token = getCookie("token");
-
+        setAppointmentSelected(false);
         const getUserInfo = async () => {
             try {
                 if (token) {
@@ -75,14 +76,14 @@ const Page: NextPage<PageProps> = ({ params }) => {
         }
 
         return () => {
-            isMounted = false; 
+            isMounted = false;
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
-        <main className='w-full h-screen flex justify-center items-center bg-[#f6f8fc] relative'>
-            { isLoading ? <Loader /> : 
+        <main className='w-full h-screen flex justify-center items-center bg-[#f6f8fc] relative' style={{ height: "100dvh" }}>
+            {isLoading ? <Loader /> :
                 <>
                     <Sidebar />
                     <AppointmentPageContainer appointmentData={appointment} />

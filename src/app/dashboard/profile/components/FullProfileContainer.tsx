@@ -10,8 +10,8 @@ const FullProfileContainer = () => {
             style={{ backgroundColor: 'rgba(192, 192, 192, 0.3)', backdropFilter: 'blur(5px)' }}>
 
             {/* -------Profile-------- */}
-            <div className='bg-white w-[90%] md:w-[85%] lg:w-[45%] 2xl:w-[43%] h-[90%] 2xl:h-[86%] border rounded-[10px] flex flex-col items-center shadow-xl' >
-                <img src={userInfo[0]?.photo ? userInfo[0].photo : ''} width={1200} height={1200} alt='profile' className='w-[13rem] h-[13rem] sm:w-[20rem] sm:h-[20rem] border object-cover rounded-[10px] mt-6' />
+            <div className='bg-white w-[95%] sm:w-[90%] md:w-[85%] lg:w-[45%] 2xl:w-[43%] h-[90%] 2xl:h-[86%] border rounded-[10px] flex flex-col items-center shadow-xl' >
+                <img src={userInfo[0]?.photo ? userInfo[0].photo : ''} width={1200} height={1200} alt='profile' className='w-[11rem] h-[11rem] sm:w-[20rem] sm:h-[20rem] border object-cover rounded-[10px] mt-6' />
                 {/* <p className='text-2xl font-bold mt-6 w-full ml-[12%]'>My Profile</p> */}
                 <p className='text-2xl sm:text-3xl font-medium mt-4 sm:mt-6'>{userInfo[0].name || ""}</p>
                 <div className='flex w-full gap-x-[5%] justify-center mt-2 sm:mt-4'>

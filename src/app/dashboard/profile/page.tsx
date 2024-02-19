@@ -74,7 +74,7 @@ const Page = () => {
     }, []);
 
     return (
-        <main className='w-full h-screen flex  items-center justify-center bg-[#f6f8fc] relative'>
+        <main className='w-full h-screen flex  items-center justify-center bg-[#f6f8fc] relative' style={{ height: "100dvh" }}>
             {isLoading ? <Loader /> :
                 <>
                     <Sidebar />

@@ -64,21 +64,21 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
     return (
         <div className="w-full h-full grid place-items-center">
             <div className="w-full lg:w-[50%] xl:w-[45%] 2xl:w-[40%] min-h-fit flex flex-col items-center lg:border rounded-[10px] lg:shadow-xl justify-center">
-                <div className="w-[80%] sm:w-[70%] md:w-[60%] lg:w-[80%] xl:w-[80%] 2xl:w-[70%] ">
-                    <p className="text-4xl mt-8 text-center">
+                <div className="w-[90%] sm:w-[70%] md:w-[60%] lg:w-[80%] xl:w-[80%] 2xl:w-[70%] ">
+                    <p className="mt-3 sm:mt-8 text-center">
                         <span className="inline-block relative">
                             <span className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 opacity-75 rounded-lg blur-3xl"></span>
-                            <span className="font-semibold text-4xl">Start</span>
+                            <span className="font-semibold text-3xl sm:text-4xl">Start</span>
                         </span>
                     </p>
-                    <p className="font-semibold text-4xl mt-3 text-center">Your Journey to Clear Skin</p>
-                    <button className="w-full h-12 mt-14 border rounded-[7px] flex items-center justify-center shadow-lg hover:bg-purple-300 transition duration-200">
+                    <p className="font-semibold text-2xl sm:text-4xl sm:mt-3 text-center">Your Journey to Clear Skin</p>
+                    <button className="w-full h-12 mt-4 sm:mt-10 md:mt-14 border rounded-[7px] flex items-center justify-center shadow-lg hover:bg-purple-300 transition duration-200">
                         <i className="text-xl mr-4">
                             <FcGoogle />
                         </i>
                         Sign up with Google
                     </button>
-                    <p className="mt-6 mb-6 relative text-center">
+                    <p className="mt-3 sm:mt-6 mb-3 sm:mb-6 relative text-center">
                         <span className="absolute left-0 top-1/2 w-[40%] bg-gray-300 h-px transform -translate-y-1/2"></span>
                         <span className="inline-block mx-4">OR</span>
                         <span className="absolute right-0 top-1/2 w-[40%] bg-gray-300 h-px transform -translate-y-1/2"></span>

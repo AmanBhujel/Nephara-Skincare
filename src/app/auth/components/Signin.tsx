@@ -54,16 +54,16 @@ export const Signin: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
     return (
         <div className="w-full h-full grid place-items-center">
             <div className="w-full lg:w-[50%] xl:w-[45%] 2xl:w-[40%] min-h-fit flex flex-col items-center lg:border rounded-[10px] lg:shadow-xl justify-center">
-                <div className="w-[80%] sm:w-[70%] md:w-[60%] lg:w-[80%] xl:w-[80%] 2xl:w-[70%] ">
-                    <p className='text-4xl mt-8'>Sign in</p>
-                    <p className='font-semibold text-4xl mt-3'> 30-day free trial</p>
-                    <button className='w-full h-12 mt-14 border rounded-[7px] flex items-center justify-center shadow-lg'><i className='text-xl mr-4'><FcGoogle /></i>Sign in with Google</button>
-                    <p className='mt-6 mb-6 relative text-center'>
+                <div className="w-[90%] sm:w-[70%] md:w-[60%] lg:w-[80%] xl:w-[80%] 2xl:w-[70%] ">
+                    <p className='text-3xl sm:text-4xl mt-4 sm:mt-8'>Sign in</p>
+                    <p className='font-semibold text-3xl sm:text-4xl mt-1 sm:mt-3'> 30-day free trial</p>
+                    <button className='w-full h-12 mt-6 sm:mt-10 md:mt-14 border rounded-[7px] flex items-center justify-center shadow-lg'><i className='text-xl mr-4'><FcGoogle /></i>Sign in with Google</button>
+                    <p className='mt-3 sm:mt-6 mb-3 sm:mb-6 relative text-center'>
                         <span className="absolute left-0 top-1/2 w-[40%] bg-gray-300 h-px transform -translate-y-1/2"></span>
                         <span className="inline-block mx-4">OR</span>
                         <span className="absolute right-0 top-1/2 w-[40%] bg-gray-300 h-px transform -translate-y-1/2"></span>
                     </p>
-                    <label htmlFor="email" className="block text-gray-700 text-sm mt-4 mb-2">
+                    <label htmlFor="email" className="block text-gray-700 text-sm mt-2 sm:mt-4 mb-2">
                         Email
                     </label>
                     <input
