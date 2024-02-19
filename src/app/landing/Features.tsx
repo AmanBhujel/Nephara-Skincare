@@ -7,7 +7,7 @@ import { GrSchedules } from "react-icons/gr";
 const Features = () => {
     return (
         <div
-            className="flex w-full justify-center items-center border-b-2 bg-white">
+            className="flex w-full justify-center items-center border-b-2">
             <div className={`flex justify-center items-center w-[95%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto `}>
                 <div className="flex flex-col w-full justify-center items-center py-6 ">
                     <p className="text-[#a376ff] font-bold">Features</p>

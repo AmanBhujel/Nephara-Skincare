@@ -31,7 +31,7 @@ const FAQ = () => {
 
 
   return (
-    <div id="faq" className="flex w-full justify-center items-center border-b-2 bg-white" >
+    <div id="faq" className="flex w-full justify-center items-center border-b-2" >
       <div className={`flex justify-center items-center w-[100%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto `}>
         <div className="flex flex-col w-full justify-center items-center py-2 sm:py-6">
           <h1 className="text-2xl sm:text-3xl font-bold mt-1">Frequently Asked Questions </h1>

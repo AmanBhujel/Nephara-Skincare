@@ -34,7 +34,7 @@ const Page = () => {
     }, []);
 
     return (
-        <main className='bg-white'>
+        <main className='bg-[#f9fdff]'>
             <Head>
                 <title>My new cool app</title>
             </Head>
@@ -45,7 +45,7 @@ const Page = () => {
                 <>
                     <Navbar />
                     <div
-                        className="flex w-full justify-center items-center bg-white">
+                        className="flex w-full justify-center items-center bg-[#f9fdff">
                         <div className={`flex flex-col justify-center items-center w-[95%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto relative`}>
                             <div className='absolute top-4 left-4 flex items-center justify-center font-semibold cursor-pointer' onClick={() => router.back()}>
                                 <i className='text-lg sm:text-xl sm:mr-2'><IoIosArrowBack /> </i>

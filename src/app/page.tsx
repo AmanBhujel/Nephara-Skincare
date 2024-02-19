@@ -6,7 +6,7 @@ import Feedback from "./landing/Feedback";
 import Features from "./landing/Features";
 import Footer from "@/components/Footer";
 import { useUserStore } from "@/stores/userStore";
-import {  useLazyQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { useEffect } from "react";
 import { useLoadingStore } from "@/stores/LoadingStore";
 import Loader from "@/components/Loader";
@@ -27,14 +27,13 @@ const Home = () => {
     fetchPolicy: "no-cache"
   });
 
-    useEffect(() => {
-      getUserInfo(isAuthorized, setIsAuthorized, getUserInfoByToken, setUserInfo);
-      setIsLoading(false);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    getUserInfo(isAuthorized, setIsAuthorized, getUserInfoByToken, setUserInfo);
+    setIsLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
-    <main className="bg-white  w-screen h-screen">
+    <main className="bg-[#f9fdff]  w-screen h-auto min-h-screen">
       {isLoading ? <Loader />
         :
         <div className='w-full h-auto overflow-x-hidden flex flex-col  justify-center items-center'>

@@ -48,16 +48,15 @@ const Feedback = () => {
   }, []);
 
   return (
-    <div ref={feedbackRef} className="flex w-full justify-center items-center border-b-2 bg-white">
+    <div ref={feedbackRef} className="flex w-full justify-center items-center border-b-2">
       <div className={`flex justify-center items-center w-[100%] lg:w-[63rem] xl:w-[79rem] 2xl:w-[90rem] h-auto ${startAnimation ? "animatedFromBottom" : ""}`}>
         <div className="flex flex-col w-full justify-center items-center py-6 ">
-          <p className="text-[#a376ff] font-bold">Testimonials</p>
-          <h1 className="text-3xl font-bold mt-1">From Our Users</h1>
+          <p className="text-[#a376ff] text-sm sm:text-base font-bold">Testimonials</p>
+          <h1 className="text-2xl sm:text-3xl font-bold sm:mt-1">From Our Users</h1>
 
           {windowWidth && windowWidth > 1024 ? (
             <div className="hidden lg:flex w-full flex-col lg:flex-row lg:gap-x-[5%] xl:gap-x-[7%] items-center justify-center mt-10">
               {feedbackData.map((feedback, index) => (
-
                 <motion.div
                   key={index}
                   className="shadow-2xl border mb-8 w-[80%] sm:w-[65%] md:w-[50%] lg:w-[330px] h-96 rounded-[6px] flex justify-center items-center flex-col bg-white user-select-none"
@@ -101,7 +100,7 @@ const Feedback = () => {
                   <SwiperSlide key={index} className="w-full flex justify-center items-center mb-3">
                     <div className="shadow-xl border mb-8 w-[300px] sm:w-[290px] md:w-[350px] ml-[50%] translate-x-[-50%] h-96 rounded-[6px] flex justify-center items-center flex-col bg-white">
                       <div className="h-[75%] w-full flex justify-center">
-                        <p className="w-[95%] flex-wrap flex text-lg text-center tracking-wide font-medium leading-6 mt-10">
+                        <p className="w-[95%] flex-wrap flex text-base sm:text-lg text-center tracking-wide leading-6 mt-10">
                           {feedback.text}
                         </p>
                       </div>
