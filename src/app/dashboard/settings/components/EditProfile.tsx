@@ -38,7 +38,6 @@ const EditProfile: React.FC<EditProfileProps> = ({ activeSettingButton, setActiv
     const setIsUploadPhotoOpen = useUploadImageStore((state) => state.setIsUploadPhotoOpen);
     const router = useRouter();
 
-
     useEffect(() => {
         let isMounted = true;
         const token = getCookie("token");
@@ -75,7 +74,6 @@ const EditProfile: React.FC<EditProfileProps> = ({ activeSettingButton, setActiv
 
         return () => {
             isMounted = false;
-
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

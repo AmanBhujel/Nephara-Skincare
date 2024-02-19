@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import TimeZoneSelector from './components/TimeZoneSelector';
 import DatePickerDemo from '@/app/appointment/components/DatePicker';
-import {  useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { Stripe, loadStripe } from '@stripe/stripe-js';
 import ToastMessage from '@/components/utils/ToastMessage';
 import { UseStripeStore } from '@/stores/StripeStore';
@@ -16,7 +16,6 @@ const Page = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [selectedTime, setSelectedTime] = useState<string>('');
     const [reason, setReason] = useState<string>('');
-    const [selectedDoctor, setSelectedDoctor] = useState<string>("");
     const [name, setName] = useState<string>("");
     const [allergies, setAllergies] = useState<string>("");
     const [comment, setComment] = useState<string>("");
@@ -39,7 +38,7 @@ const Page = () => {
 
     const handleBookAppointment = async () => {
         try {
-            if (!selectedDate || !selectedDoctor || !selectedTimeZone || !selectedTime || !allergies || !name || !reason) {
+            if (!selectedDate || !selectedTimeZone || !selectedTime || !allergies || !name || !reason) {
                 ToastMessage("error", "Please fill all the boxes.")
                 return;
             }
@@ -61,8 +60,19 @@ const Page = () => {
                 }
             )
 
-            const sessionId = response.data.createAppointmentAndCheckoutSession;
-            setStripeSessionId(sessionId);
+            const { stripeSessionId, putImageS3BucketUrl, message, status } = response.data.createAppointmentAndCheckoutSession;
+
+            await Promise.all(images.map(async (image, index) => {
+                await fetch(`${putImageS3BucketUrl[index]}`, {
+                    method: 'PUT',
+                    body: image,
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+            }));
+
+            setStripeSessionId(stripeSessionId);
             const stripe: Stripe | null = await loadStripe('pk_test_51OZ9d9Kc8LmZXQQ91uQkILNU8YMGVAfW5SfxVAg0FFP2yZCJuxjR9wLmPrSjpRRJeuBtoCR4nWE29Bj2j0B876oX00KSA2updT');
 
             if (!stripe) {
@@ -71,7 +81,7 @@ const Page = () => {
             }
 
             await stripe.redirectToCheckout({
-                sessionId: sessionId,
+                sessionId: stripeSessionId,
             });
 
         } catch (error) {

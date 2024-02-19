@@ -53,7 +53,7 @@ export const Signin: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
 
     return (
         <div className="w-full h-full grid place-items-center">
-            <div className="w-full lg:w-[50%] xl:w-[45%] 2xl:w-[40%] min-h-fit flex flex-col items-center lg:border rounded-[10px] lg:shadow-xl justify-center">
+            <div className="w-full lg:w-[50%] xl:w-[45%] 2xl:w-[40%] min-h-fit flex flex-col  lg:border rounded-[10px] lg:shadow-xl justify-center items-center">
                 <div className="w-[90%] sm:w-[70%] md:w-[60%] lg:w-[80%] xl:w-[80%] 2xl:w-[70%] ">
                     <p className='text-3xl sm:text-4xl mt-4 sm:mt-8'>Sign in</p>
                     <p className='font-semibold text-3xl sm:text-4xl mt-1 sm:mt-3'> 30-day free trial</p>

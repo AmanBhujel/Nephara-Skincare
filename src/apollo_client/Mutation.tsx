@@ -1,9 +1,14 @@
 import { gql } from "@apollo/client";
 
 export const CREATE_APPOINTMENT_AND_STRIPE_SESSION = gql`
-mutation CreateAppointmentAndCheckoutSession($fullName: String!, $email: String!, $appointmentDate: String!, $appointmentTime: String!, $timezone: String!, $comment: String!, $reasonForVisit: String!, $allergies: String!, $checkoutSessionId: String, $productName: String!, $productPrice: Int!, $productImage: String!) {
-    createAppointmentAndCheckoutSession(fullName: $fullName, email: $email, appointmentDate: $appointmentDate, appointmentTime: $appointmentTime, timezone: $timezone, comment: $comment, reasonForVisit: $reasonForVisit, allergies: $allergies, checkoutSessionId: $checkoutSessionId, productName: $productName, productPrice: $productPrice, productImage: $productImage)
+mutation CreateAppointmentAndCheckoutSession($fullName: String!, $email: String!, $appointmentDate: String!, $appointmentTime: String!, $timezone: String!, $comment: String!, $reasonForVisit: String!, $allergies: String!, $productName: String!, $productPrice: Int!, $productImage: String!) {
+  createAppointmentAndCheckoutSession(fullName: $fullName, email: $email, appointmentDate: $appointmentDate, appointmentTime: $appointmentTime, timezone: $timezone, comment: $comment, reasonForVisit: $reasonForVisit, allergies: $allergies, productName: $productName, productPrice: $productPrice, productImage: $productImage) {
+    status,
+    message,
+    putImageS3BucketUrl,
+    stripeSessionId
   }
+}
 `;
 
 export const LOGIN_USER = gql`

@@ -29,7 +29,6 @@ const UploadImage: React.FC = () => {
 
       const awsUpdateLinkResponse = await updateUserPhoto({
         variables: {
-          // "contentType": image?.type
           "contentType": "image/png"
         }
       })
