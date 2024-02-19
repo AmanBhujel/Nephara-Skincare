@@ -6,19 +6,18 @@ import { useLazyQuery } from "@apollo/client";
 import { IoArrowBack, } from "react-icons/io5";
 import Link from "next/link";
 import { GET_REPORT } from "@/apollo_client/Queries";
-
-interface Appointment {
-    name: string;
-    description: string;
-    appointment_id: string;
-    report_id: string;
-    appointmentDate: string;
-    bookedDate: string;
-    timezone: string;
-    time: string;
+export interface Appointment {
+    _id: string;
     completed: boolean;
-    language: string;
-    getStatus: string;
+    fullName: string;
+    email: string;
+    appointmentDate: string;
+    appointmentTime: string;
+    timezone: string;
+    comment: string;
+    reasonForVisit: string;
+    allergies: string;
+    checkoutSessionId?: string;
 }
 
 interface AppointmentInfoProps {
@@ -100,8 +99,8 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                                         </Link>
                                     </div>}
                                 <p className='bg-[#f2f2f9cb] px-2 py-1 text-sm sm:text-base md:px-3 md:py-1 w-min text-[#743bfb] rounded-[10px] font-medium sm:mb-2 '>{appointmentData?.completed ? "Past" : "Upcoming"}</p>
-                                <p className='text-white font-bold text-2xl md:text-3xl xl:text-2xl 2xl:text-3xl'>{appointmentData?.name}</p>
-                                <p className='text-white text-base md:text-lg xl:text-base 2xl:text-lg font-medium md:mt-1'>{appointmentData?.description}</p>
+                                <p className='text-white font-bold text-2xl md:text-3xl xl:text-2xl 2xl:text-3xl'>{appointmentData?.fullName}</p>
+                                <p className='text-white text-base md:text-lg xl:text-base 2xl:text-lg font-medium md:mt-1'>{appointmentData?.reasonForVisit}</p>
                             </div>
                             <div>
                                 <p className='bg-[#ededf5e0] px-2 py-1 text-sm sm:text-base sm:px-3  text-[#743bfb] rounded-[10px] font-medium mb-2'>{appointmentData?.appointmentDate}</p>
@@ -112,7 +111,7 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                         (<div className='bg-[#f1f1ff] mt-4 py-2 text-xl flex justify-between  items-center font-medium text-black px-4'>
                             <p className='text-base lg:text-lg xl:text-xl font-semibold text-[#575658] '>Time Remaining: 01:24:56</p>
 
-                            <a href={`http://localhost:8080/join?room=${appointmentData.appointment_id}&name=${appointmentData.name}`} target="_blank" rel="noopener noreferrer">
+                            <a href={`http://localhost:8080/join?room=${appointmentData._id}&name=${appointmentData.fullName}`} target="_blank" rel="noopener noreferrer">
                                 <button className={`text-white px-4 py-1 md:px-8 md:py-2 bg-[#743bfb] hover:bg-[#753bfbde] rounded-[6px] font-bold text-lg mb-2  transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg`}>Join</button>
                             </a>
                         </div>) :
@@ -127,9 +126,11 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                         <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-semibold text-[#a3a1a9] px-4'>Appointment Info</p>
                         <div className='px-4 '>
                             <p className='text-[#807c83] mt-2 sm:text-lg lg:text-base font-medium '>Appointment Id</p>
-                            <p className='font-medium sm:text-lg lg:text-base mt-1 mb-1'>{appointmentData?.appointment_id}</p>
+                            <p className='font-medium sm:text-lg lg:text-base mt-1 mb-1'>{appointmentData?._id}</p>
+
                             <p className='text-[#807c83] sm:text-lg lg:text-base mt-2 font-medium '>See Report</p>
-                            <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'>{appointmentData?.report_id}</p>
+                            {/* <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'>{appointmentData?.report_id}</p> */}
+
                             <p className='text-[#807c83] sm:text-lg lg:text-base mt-2 font-medium '>Appointment Date</p>
                             <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'>{appointmentData?.appointmentDate}</p>
                         </div>
@@ -138,18 +139,14 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                             <p className='text-[#807c83] mt-2 sm:text-lg lg:text-base font-medium'>Timezone</p>
                             <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'> {appointmentData?.timezone}</p>
                             <p className='text-[#807c83] mt-2 font-medium'>Time</p>
-                            <p className='sm:text-lg lg:text-base font-medium mt-1 mb-1'>{appointmentData?.time}</p>
-                            <p className='text-[#807c83] mt-2 font-medium'>Booked Date</p>
-                            <p className='font-medium mt-1 mb-1'>{appointmentData?.bookedDate}</p>
+                            <p className='sm:text-lg lg:text-base font-medium mt-1 mb-1'>{appointmentData?.appointmentTime}</p>
                         </div>
                         <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-semibold text-[#a3a1a9] px-4'>Time Info</p>
                         <div className='px-4'>
-                            <p className='text-[#807c83] mt-2 sm:text-lg lg:text-base font-medium'>Timezone</p>
-                            <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'> {appointmentData?.timezone}</p>
-                            <p className='text-[#807c83] sm:text-lg lg:text-base mt-2 font-medium'>Time</p>
-                            <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'>{appointmentData?.time}</p>
-                            <p className='text-[#807c83] sm:text-lg lg:text-base mt-2 font-medium'>Booked Date</p>
-                            <p className='font-medium mt-1  sm:text-lg lg:text-base mb-1'>{appointmentData?.bookedDate}</p>
+                            <p className='text-[#807c83] mt-2 sm:text-lg lg:text-base font-medium'>Do you have allergies?</p>
+                            <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'> {appointmentData?.allergies}</p>
+                            <p className='text-[#807c83] sm:text-lg lg:text-base mt-2 font-medium'>Your Comment</p>
+                            <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'>{appointmentData?.comment}</p>
                         </div>
                     </div>
                 </div> :

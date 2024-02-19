@@ -3,21 +3,8 @@ import React, { useEffect } from 'react'
 import { useDashboardStore } from '@/stores/DashboardStore';
 import AppointmentFilter from './AppointmentFilter';
 import AppointmentLists from './AppointmentLists';
-import AppointmentDescription from './AppointmentDescription';
+import AppointmentDescription, { Appointment } from './AppointmentDescription';
 import AppointmentPageTopDiv from './AppointmentPageTopDiv';
-interface Appointment {
-    name: string;
-    description: string;
-    appointment_id: string;
-    report_id: string;
-    appointmentDate: string;
-    bookedDate: string;
-    timezone: string;
-    time: string;
-    completed: boolean;
-    language: string;
-    getStatus: string;
-}
 
 interface AppointmentInfoProps {
     appointmentData: Appointment | undefined;

@@ -33,7 +33,7 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <main className="bg-[#f9fdff]  w-screen h-auto min-h-screen">
+    <main className="bg-[#f9fdff]  w-screen h-auto min-h-screen flex flex-col items-center justify-center">
       {isLoading ? <Loader />
         :
         <div className='w-full h-auto overflow-x-hidden flex flex-col  justify-center items-center'>

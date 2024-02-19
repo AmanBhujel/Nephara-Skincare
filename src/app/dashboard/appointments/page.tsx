@@ -12,7 +12,7 @@ import { useLoadingStore } from '@/stores/LoadingStore';
 import Loader from '@/components/Loader';
 import { useAuthorizedStore } from '@/stores/AuthorizedStore';
 import { getCookie } from '@/components/utils/Cookie';
-import { GET_USER_INFO } from '@/apollo_client/Queries';
+import { GET_APPOINTMENT_DATA, GET_USER_INFO } from '@/apollo_client/Queries';
 import { useDashboardStore } from '@/stores/DashboardStore';
 
 interface PageProps {
@@ -21,26 +21,9 @@ interface PageProps {
     };
 }
 
-const GET_APPOINTMENT_DATA= gql`
-query GetAppointmentByEmail {
-    getAppointmentByEmail {
-      appointments {
-        appointmentDate
-        appointmentTime
-        id
-        checkoutSessionId
-        fullName
-        email
-        reasonForVisit
-        allergies
-        comment
-      }
-    }
-  }
-`
 
 const Page: NextPage<PageProps> = ({ params }) => {
-    const appointment = Appointments.find(appointment => appointment.appointment_id === params.id);
+    const [getAppointmentByEmail] = useLazyQuery(GET_APPOINTMENT_DATA);
     const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO, {
         fetchPolicy: "no-cache"
     });
@@ -51,6 +34,26 @@ const Page: NextPage<PageProps> = ({ params }) => {
     const router = useRouter();
     const isAuthorized = useAuthorizedStore((state) => state.isAuthorized);
     const setIsAuthorized = useAuthorizedStore((state) => state.setIsAuthorized);
+    const setAppointmentArray = useDashboardStore((state) => state.setAppointmentArray);
+    const appointmentArray = useDashboardStore((state) => state.appointmentArray);
+    const appointment = appointmentArray.find(appointment => appointment._id === params.id);
+
+    useEffect(() => {
+        const getAppointmentByEmailFunction = async () => {
+            try {
+                if (appointmentArray.length === 0) {
+                    const response = await getAppointmentByEmail();
+                    const appointmentsFromResponse = response.data.getAppointmentByEmail.appointments;
+                    setAppointmentArray(appointmentsFromResponse)
+                    console.log(response, "response from useeeffect ")
+                }
+            } catch (error) {
+                console.error("Error fetching appointment data:", error);
+            }
+        };
+        getAppointmentByEmailFunction();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         let isMounted = true;

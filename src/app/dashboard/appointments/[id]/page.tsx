@@ -13,7 +13,7 @@ import { useLoadingStore } from '@/stores/LoadingStore';
 import Loader from '@/components/Loader';
 import { useAuthorizedStore } from '@/stores/AuthorizedStore';
 import { getCookie } from '@/components/utils/Cookie';
-import { GET_USER_INFO } from '@/apollo_client/Queries';
+import { GET_APPOINTMENT_DATA, GET_USER_INFO } from '@/apollo_client/Queries';
 
 interface PageProps {
     params: {
@@ -23,6 +23,7 @@ interface PageProps {
 
 const Page: NextPage<PageProps> = ({ params }) => {
     const setActiveSidebarItem = useDashboardStore((state) => state.setActiveSidebarItem);
+    const [getAppointmentByEmail] = useLazyQuery(GET_APPOINTMENT_DATA);
     const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO, {
         fetchPolicy: "no-cache"
     });
@@ -34,6 +35,25 @@ const Page: NextPage<PageProps> = ({ params }) => {
     const setSelectedAppointmentId = useDashboardStore((state) => state.setSelectedAppointmentId);
     const isAuthorized = useAuthorizedStore((state) => state.isAuthorized);
     const setIsAuthorized = useAuthorizedStore((state) => state.setIsAuthorized);
+    const appointmentArray = useDashboardStore((state) => state.appointmentArray);
+    const setAppointmentArray = useDashboardStore((state) => state.setAppointmentArray);
+
+    useEffect(() => {
+        const getAppointmentByEmailFunction = async () => {
+            try {
+                if (appointmentArray.length === 0) {
+                    const response = await getAppointmentByEmail();
+                    const appointmentsFromResponse = response.data.getAppointmentByEmail.appointments;
+                    setAppointmentArray(appointmentsFromResponse)
+                    console.log(response, "response from useeeffect ")
+                }
+            } catch (error) {
+                console.error("Error fetching appointment data:", error);
+            }
+        };
+        getAppointmentByEmailFunction();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         setActiveSidebarItem("Appointments")
@@ -42,7 +62,7 @@ const Page: NextPage<PageProps> = ({ params }) => {
     }, [])
 
     useEffect(() => {
-        let isMounted = true; 
+        let isMounted = true;
         const token = getCookie("token");
 
         const getUserInfo = async () => {
@@ -86,20 +106,21 @@ const Page: NextPage<PageProps> = ({ params }) => {
 
         // Cleanup function
         return () => {
-            isMounted = false; 
+            isMounted = false;
         };
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const appointment = Appointments.find(appointment => appointment.appointment_id === params.id);
+    const appointment = appointmentArray.find(appointment => appointment._id === params.id);
 
     return (
         <main className='w-full h-screen flex justify-center items-center bg-[#f6f8fc] relative'>
             {isLoading ? <Loader /> :
                 <>
                     <Sidebar />
-                    <AppointmentPageContainer appointmentData={appointment} /></>}
+                    <AppointmentPageContainer appointmentData={appointment} />
+                </>}
         </main>
     );
 }

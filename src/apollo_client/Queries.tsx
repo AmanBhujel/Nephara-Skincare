@@ -31,3 +31,24 @@ export const GET_DOCTOR_INFO_BY_TOKEN = gql`
         message
       }
     }`;
+
+export const GET_APPOINTMENT_DATA = gql`
+    query GetAppointmentByEmail {
+        getAppointmentByEmail {
+          appointments {
+            appointmentDate
+            appointmentTime
+            id
+            checkoutSessionId
+            fullName
+            email
+            reasonForVisit
+            timezone
+            allergies
+            comment
+            _id
+            completed
+          }
+        }
+      }
+    `;
