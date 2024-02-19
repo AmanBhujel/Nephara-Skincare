@@ -30,7 +30,7 @@ const Footer = () => {
                 <div className="mt-4 sm:mt-10">
                     <h6 className="font-bold sm:text-lg xl:text-xl">Social</h6>
                     <ul className="mt-1 sm:mt-3 gap-y-1 flex flex-col text-sm xl:text-base">
-                        <li className="cursor-pointer hover:underline">Email</li>
+                        <li className="cursor-pointer hover:underline"><Link href = "mailto:nephara@outlook.com">Email</Link></li>
                         <li className="cursor-pointer hover:underline">Instagram</li>
                         <li className="cursor-pointer hover:underline">Tiktok</li>
                         <li className="cursor-pointer hover:underline">Facebook</li>
