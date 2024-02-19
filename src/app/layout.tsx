@@ -45,8 +45,8 @@ export default function RootLayout({
   };
 
   const graphqlClient = new ApolloClient({
-    //  uri: "https://nephara-backend.onrender.com/graphql",
-    uri: "http://localhost:8000/graphql",
+     uri: "https://nephara-backend.onrender.com/graphql",
+    // uri: "http://localhost:8000/graphql",
     cache: new InMemoryCache(),
     headers: headers
   });
@@ -72,7 +72,7 @@ export default function RootLayout({
       duration: windowWidth > 640 ? 600 : 300,
       easing: 'ease-out-sine',
     })
-  }, [])
+  }, []);
 
   return (
     <html lang="en">
