@@ -48,7 +48,13 @@ const HeroSection = () => {
         {/* -----------Image section-------- */}
         <div className='flex items-center justify-center w-full lg:w-[50%] '>
           <div className="w-[70%] md:w-[50%] lg:w-[95%] flex items-center justify-center h-full animatedFromRight transition duration-500 ease-in-out" >
-            <Image src={Profile} width={1000} height={1000} className="w-full" alt="Nephara" />
+            <Image 
+            src={Profile} 
+            width={1000} 
+            height={1000} 
+            className="w-full"
+            alt="Nephara"
+            placeholder="blur"            />
           </div>
         </div>
       </div>
