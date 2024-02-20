@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import Image from "next/image";
-import Skincare from '@/assets/skin-care.jpg';
+import Skincare from '@/assets/girl-cream.png';
 import Customer_Call from '@/assets/customer-service.jpg';
 import Doctor_Call from '@/assets/online-call.jpg';
 const PremiumCareInfosAndImages = () => {
@@ -23,29 +23,30 @@ const PremiumCareInfosAndImages = () => {
             <div className="md:grid md:grid-cols-12 md:gap-6 items-center">
               {/* Image */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
-                <Image loading='lazy' className="max-w-full mx-auto md:max-w-none object-cover h-[20rem] lg:h-[30rem] rounded-[8px]" src={Skincare} width={540} height={405} alt="Features 01" placeholder='blur'/>
+                <Image loading='lazy' className="max-w-full mx-auto md:max-w-none object-cover h-[20rem] lg:h-[25rem] rounded-[8px]" src={Skincare} width={540} height={405} alt="Features 01" />
               </div>
               {/* Content */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right" data-aos-delay="150">
                 <div className="md:pr-4 lg:pr-12 xl:pr-16">
                   <div className="font-architects-daughter text-xl sm:text-3xl font-bold text-purple-600">Premium Service</div>
-                  <p className="text-sm sm:text-base md:text-lg text-gray-500 md:mb-4">prioritizes your convenience and happiness through Our Support. Enjoy the convenience of easy rescheduling to fit your busy schedule. Our email assistance is available 24 hours a day, seven days a week.  Furthermore, we embrace transparency; if you ever discover the need, our simple refund method is only an email away.
-                    Your opinion is important to us; please share your views and experiences with us by email so that we may continually improve our service. </p>
+                  <p className="text-sm sm:text-base lg:text-lg text-gray-500 md:mb-4 sm:text-justify">we prioritize excellence in dermatological care, offering personalized consultations and treatments that elevate your skin health journey. Our team of experienced professionals is dedicated to providing you with the highest standard of care, ensuring that every aspect of your experience is tailored to perfection. Experience the pinnacle of skin care with our premium service – because you deserve nothing but the best.
+                  </p>
                 </div>
               </div>
             </div>
 
             {/* 2nd item */}
-            <div className="md:grid md:grid-cols-12 md:gap-6 items-center">
+
+            <div className="md:flex flex-row-reverse md:gap-6 items-center justify-center">
               {/* Image */}
-              <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 rtl" data-aos="fade-up">
-                <Image loading='lazy' className="max-w-full mx-auto md:max-w-none  object-cover h-[20rem] lg:h-[30rem]  rounded-[8px]" src={Doctor_Call} width={540} height={405} alt="Features 02" placeholder='blur' />
+              <div className="md:w-[50%] lg:max-w-xl md:max-w-none lg:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
+                <Image loading='lazy' className="md:w-[20rem] lg:w-full mx-auto md:max-w-none  object-cover h-[20rem] md:h-[23rem] lg:h-[25rem]  rounded-[8px]" src={Doctor_Call} width={540} height={405} alt="Features 03" />
               </div>
               {/* Content */}
-              <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-left" data-aos-delay="150">
+              <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right" data-aos-delay="150">
                 <div className="md:pl-4 lg:pl-12 xl:pl-16">
                   <div className="font-architects-daughter text-xl sm:text-3xl font-bold text-purple-600">Comfort of your home</div>
-                  <p className="text-sm sm:text-base md:text-lg text-gray-500 md:mb-4">We are a service-based company dedicated to bridging the gap in skin check-ups, especially for international students in first-world countries. Recognizing the challenges posed by high medical costs, we connect individuals with expert doctors from South Asia. </p>
+                  <p className="text-sm sm:text-base lg:text-lg text-gray-500 md:mb-4 sm:text-justify">At Nephara, we've redefined skin check-ups for international students in first-world countries. Our platform connects you with top dermatologists from South Asia, offering convenient consultations from anywhere. Say goodbye to high medical costs and long wait times – with just a few clicks, you can access expert care and receive comprehensive reports via email. Prioritize your health without the hassle, with Nephara. </p>
                 </div>
               </div>
             </div>
@@ -54,13 +55,13 @@ const PremiumCareInfosAndImages = () => {
             <div className="md:grid md:grid-cols-12 md:gap-6 items-center">
               {/* Image */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
-                <Image loading='lazy' className="max-w-full mx-auto md:max-w-none  object-cover h-[20rem] lg:h-[30rem]  rounded-[8px]" src={Customer_Call} width={540} height={405} alt="Features 03" placeholder='blur'/>
+                <Image loading='lazy' className="max-w-full mx-auto md:max-w-none  object-cover h-[20rem] lg:h-[25rem]  rounded-[8px]" src={Customer_Call} width={540} height={405} alt="Features 03" />
               </div>
               {/* Content */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right" data-aos-delay="150">
                 <div className="md:pr-4 lg:pr-12 xl:pr-16">
                   <div className="font-architects-daughter text-xl sm:text-3xl font-bold text-purple-600">Our Support</div>
-                  <p className="text-sm sm:text-base md:text-lg text-gray-500 md:mb-4">Nephara prioritizes your convenience and happiness through Our Support. Enjoy the convenience of easy rescheduling to fit your busy schedule. Our email assistance is available 24 hours a day, seven days a week.  Furthermore, we embrace transparency; if you ever discover the need, our simple refund method is only an email away.
+                  <p className="text-sm sm:text-base lg:text-lg text-gray-500 md:mb-4 sm:text-justify">Nephara prioritizes your convenience and happiness through Our Support. Enjoy the convenience of easy rescheduling to fit your busy schedule. Our email assistance is available 24 hours a day, seven days a week.  Furthermore, we embrace transparency; if you ever discover the need, our simple refund method is only an email away.
                     Your opinion is important to us; please share your views and experiences with us by email so that we may continually improve our service. </p>
                 </div>
               </div>
@@ -75,3 +76,17 @@ const PremiumCareInfosAndImages = () => {
 };
 
 export default PremiumCareInfosAndImages;
+
+// {/* <div className="md:grid md:grid-cols-12 md:gap-6 items-center">
+// {/* Image */}
+// <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 rtl" data-aos="fade-up">
+//   <Image loading='lazy' className="max-w-full mx-auto md:max-w-none  object-contain h-[20rem] lg:h-[30rem] rounded-[8px]" src={Doctor_Call} width={540} height={405} alt="Features 02" />
+// </div>
+// {/* Content */}
+// <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-left" data-aos-delay="150">
+//   <div className="md:pl-4 lg:pl-12 xl:pl-16">
+//     <div className="font-architects-daughter text-xl sm:text-3xl font-bold text-purple-600">Comfort of your home</div>
+//     <p className="text-sm sm:text-base md:text-lg text-gray-500 md:mb-4">We are a service-based company dedicated to bridging the gap in skin check-ups, especially for international students in first-world countries. Recognizing the challenges posed by high medical costs, we connect individuals with expert doctors from South Asia. </p>
+//   </div>
+// </div>
+// </div> */}

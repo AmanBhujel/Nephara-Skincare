@@ -5,7 +5,7 @@ import { FaBars } from "react-icons/fa";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { LuCalendarDays } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
-import Logo from '@/assets/logo.png';
+import Logo from '@/assets/logo-sidebar.png';
 import Link from "next/link";
 
 interface SidebarForLargeScreensProps {
