@@ -62,8 +62,8 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
     };
 
     return (
-        <div className="w-full h-full grid place-items-center">
-            <div className="w-full lg:w-[50%] xl:w-[45%] 2xl:w-[40%] min-h-fit flex flex-col items-center lg:border rounded-[10px] lg:shadow-xl justify-center">
+        <div className="w-full h-full flex items-start sm:items-center justify-start sm:justify-center " style={{ height: "100svh" }}>
+            <div className="w-full lg:w-[50%] xl:w-[45%] 2xl:w-[40%] min-h-fit flex flex-col items-center lg:border rounded-[10px] lg:shadow-xl mt-10 sm:mt-0 justify-center">
                 <div className="w-[90%] sm:w-[70%] md:w-[60%] lg:w-[80%] xl:w-[80%] 2xl:w-[70%] ">
                     <p className="mt-3 sm:mt-8 text-center">
                         <span className="inline-block relative">
@@ -72,7 +72,7 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
                         </span>
                     </p>
                     <p className="font-semibold text-2xl sm:text-4xl sm:mt-3 text-center">Your Journey to Clear Skin</p>
-                    <button className="w-full h-12 mt-4 sm:mt-10 md:mt-14 border rounded-[7px] flex items-center justify-center shadow-lg hover:bg-purple-300 transition duration-200">
+                    <button className="w-full h-10 sm:h-12 text-sm sm:text-base mt-4 sm:mt-10 md:mt-14 border rounded-[7px] flex items-center justify-center shadow-lg hover:bg-purple-300 transition duration-200">
                         <i className="text-xl mr-4">
                             <FcGoogle />
                         </i>
@@ -83,7 +83,7 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
                         <span className="inline-block mx-4">OR</span>
                         <span className="absolute right-0 top-1/2 w-[40%] bg-gray-300 h-px transform -translate-y-1/2"></span>
                     </p>
-                    <label htmlFor="name" className="block text-gray-700 text-sm mt-4 mb-2">
+                    <label htmlFor="name" className="block text-gray-700 text-sm mt-4 mb-1 sm:mb-2">
                         Full Name
                     </label>
                     <input
@@ -92,13 +92,13 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
                         name="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className={`w-full h-12 border rounded-[7px]  pl-2 outline-none border-gray-400 ${nameError ? "border-red-500" : ""
+                        className={`w-full text-sm sm:text-base h-10 sm:h-12 border rounded-[7px] pl-2 outline-none border-gray-400 ${nameError ? "border-red-500" : ""
                             }`}
                         placeholder="Enter your name"
                         required
                     />
                     {nameError && <p className="text-red-500 text-sm">{nameError}</p>}
-                    <label htmlFor="email" className="block text-gray-700 text-sm mt-4 mb-2">
+                    <label htmlFor="email" className="block text-gray-700 text-sm mt-4 mb-1 sm:mb-2">
                         Email
                     </label>
                     <input
@@ -107,13 +107,13 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
                         name="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className={`w-full h-12 border rounded-[7px]  pl-2 outline-none border-gray-400 ${emailError ? "border-red-500" : ""
+                        className={`w-full text-sm sm:text-base h-10 sm:h-12 border rounded-[7px]  pl-2 outline-none border-gray-400 ${emailError ? "border-red-500" : ""
                             }`}
                         placeholder="Enter your email"
                         required
                     />
                     {emailError && <p className="text-red-500 text-sm">{emailError}</p>}
-                    <label htmlFor="password" className="block text-gray-700 text-sm mt-4 mb-2">
+                    <label htmlFor="password" className="block text-gray-700 text-sm mt-4 mb-1 sm:mb-2">
                         Password
                     </label>
                     <input
@@ -122,7 +122,7 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
                         name="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className={`w-full h-12  border rounded-[7px]  pl-2 outline-none border-gray-400 ${passwordError ? "border-red-500" : ""
+                        className={`w-full text-sm sm:text-base h-10 sm:h-12  border rounded-[7px]  pl-2 outline-none border-gray-400 ${passwordError ? "border-red-500" : ""
                             }`}
                         placeholder="Your password"
                         required
@@ -134,7 +134,7 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
                     >
                         Get Started
                     </button>
-                    <p className="flex items-center justify-center w-full mt-4 mb-8">
+                    <p className="flex items-center text-sm sm:text-base justify-center w-full mt-4 mb-8">
                         Already have an account?{" "}
                         <span
                             className="text-blue-500 cursor-pointer ml-2 hover:underline"

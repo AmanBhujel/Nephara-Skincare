@@ -6,7 +6,7 @@ import { useLoadingStore } from "@/stores/LoadingStore";
 import { usePathname, useRouter } from "next/navigation";
 import { FaBars } from 'react-icons/fa6';
 import Image from "next/image";
-import Logo from '@/assets/logo.png';
+import Logo from '@/assets/logo-sidebar.png';
 import Link from "next/link";
 
 interface MobileNavbarProps {
@@ -53,11 +53,11 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
     }, []);
 
     return (
-        <div ref={sidebarRef} className='bg-white border-2 w-[310px] h-full right-0 top-0 fixed z-50' style={{ height: "100lvh" }}>
+        <div ref={sidebarRef} className='bg-white border-2 w-[310px] h-full right-0 top-0 flex flex-col items-center fixed z-50' style={{ height: "100lvh" }}>
             <button className="lg:hidden p-3 absolute right-12 top-4" aria-label="Open Menu" onClick={() => setShowSidebar(!showSidebar)}>
                 <FaBars className="text-2xl" />
             </button>
-            <Image src={Logo} width={200} height={100} className='mt-[5%]' alt='Dermatologist' />
+            <Image src={Logo} width={200} height={100} className='w-16 mt-[5%]' alt='Dermatologist' />
             <ul className='w-full flex flex-col p-2 mt-6 gap-y-1'>
                 {MenuItemsMobileSidebar.map((item, index) => (
                     <li
