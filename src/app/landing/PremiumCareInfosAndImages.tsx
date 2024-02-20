@@ -23,7 +23,7 @@ const PremiumCareInfosAndImages = () => {
             <div className="md:grid md:grid-cols-12 md:gap-6 items-center">
               {/* Image */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
-                <Image loading='lazy' className="max-w-full mx-auto md:max-w-none object-cover h-[20rem] lg:h-[30rem] rounded-[8px]" src={Skincare} width={540} height={405} alt="Features 01" />
+                <Image loading='lazy' className="max-w-full mx-auto md:max-w-none object-cover h-[20rem] lg:h-[30rem] rounded-[8px]" src={Skincare} width={540} height={405} alt="Features 01" placeholder='blur'/>
               </div>
               {/* Content */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right" data-aos-delay="150">
@@ -39,7 +39,7 @@ const PremiumCareInfosAndImages = () => {
             <div className="md:grid md:grid-cols-12 md:gap-6 items-center">
               {/* Image */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 rtl" data-aos="fade-up">
-                <Image loading='lazy' className="max-w-full mx-auto md:max-w-none  object-contain h-[20rem] lg:h-[30rem] rounded-[8px]" src={Doctor_Call} width={540} height={405} alt="Features 02" />
+                <Image loading='lazy' className="max-w-full mx-auto md:max-w-none  object-contain h-[20rem] lg:h-[30rem] rounded-[8px]" src={Doctor_Call} width={540} height={405} alt="Features 02" placeholder='blur' />
               </div>
               {/* Content */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-left" data-aos-delay="150">
@@ -54,7 +54,7 @@ const PremiumCareInfosAndImages = () => {
             <div className="md:grid md:grid-cols-12 md:gap-6 items-center">
               {/* Image */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
-                <Image loading='lazy' className="max-w-full mx-auto md:max-w-none  object-cover h-[20rem] lg:h-[30rem]  rounded-[8px]" src={Customer_Call} width={540} height={405} alt="Features 03" />
+                <Image loading='lazy' className="max-w-full mx-auto md:max-w-none  object-cover h-[20rem] lg:h-[30rem]  rounded-[8px]" src={Customer_Call} width={540} height={405} alt="Features 03" placeholder='blur'/>
               </div>
               {/* Content */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right" data-aos-delay="150">
