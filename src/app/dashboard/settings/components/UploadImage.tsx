@@ -4,6 +4,7 @@ import { useUploadImageStore } from '@/stores/UploadImageStore';
 import { useMutation } from '@apollo/client';
 import ToastMessage from '@/components/utils/ToastMessage';
 import { GET_AWS_UPDATE_LINK, UPDATE_USER_PHOTO_PATH } from '@/apollo_client/Mutation';
+import Image from 'next/image';
 
 const UploadImage: React.FC = () => {
   const [updateUserPhoto] = useMutation(GET_AWS_UPDATE_LINK);
@@ -72,7 +73,7 @@ const UploadImage: React.FC = () => {
           <ModalBody>
             <div className='h-[30rem] border py-4'>
               <input type="file" accept="image/*" onChange={handleImageChange} />
-              {preview && <img src={preview} alt="Preview" className='w-full h-full object-cover' />}
+              {preview && <Image src={preview} alt="Preview" className='w-full h-full object-cover' />}
             </div>
           </ModalBody>
           <ModalFooter>

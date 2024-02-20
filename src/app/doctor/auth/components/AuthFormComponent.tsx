@@ -88,8 +88,6 @@ export const Signin = () => {
                     required
                 />
                 {passwordError && <p className="text-red-500 text-sm">{passwordError}</p>}
-                <Link href={'/auth/forgot-password'}>
-                </Link>
                 <button className='h-10 bg-[#8045f7] hover:bg-[#9768f3] mt-10 w-full rounded-[7px] text-white' onClick={handleSignin}>Sign in</button>
             </div>
         </div>

@@ -72,6 +72,7 @@ export default function RootLayout({
       duration: windowWidth > 640 ? 600 : 300,
       easing: 'ease-out-sine',
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

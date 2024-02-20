@@ -46,7 +46,7 @@ const PremiumCareInfosAndImages = () => {
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right" data-aos-delay="150">
                 <div className="md:pl-4 lg:pl-12 xl:pl-16">
                   <div className="font-architects-daughter text-xl sm:text-3xl font-bold text-purple-600">Comfort of your home</div>
-                  <p className="text-sm sm:text-base lg:text-lg text-gray-500 md:mb-4 sm:text-justify">At Nephara, we've redefined skin check-ups for international students in first-world countries. Our platform connects you with top dermatologists from South Asia, offering convenient consultations from anywhere. Say goodbye to high medical costs and long wait times – with just a few clicks, you can access expert care and receive comprehensive reports via email. Prioritize your health without the hassle, with Nephara. </p>
+                  <p className="text-sm sm:text-base lg:text-lg text-gray-500 md:mb-4 sm:text-justify">At Nephara, we&apos;ve redefined skin check-ups for international students in first-world countries. Our platform connects you with top dermatologists from South Asia, offering convenient consultations from anywhere. Say goodbye to high medical costs and long wait times – with just a few clicks, you can access expert care and receive comprehensive reports via email. Prioritize your health without the hassle, with Nephara. </p>
                 </div>
               </div>
             </div>

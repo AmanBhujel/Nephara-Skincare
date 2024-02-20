@@ -9,6 +9,7 @@ import { UseStripeStore } from '@/stores/StripeStore';
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { CREATE_APPOINTMENT_AND_STRIPE_SESSION } from '@/apollo_client/Mutation';
+import Image from 'next/image';
 
 const Page = () => {
     const [createAppointmentAndCheckoutSession] = useMutation(CREATE_APPOINTMENT_AND_STRIPE_SESSION);
@@ -158,7 +159,7 @@ const Page = () => {
                             <div className='flex gap-x-2'>
                                 {images.map((image, index) => (
                                     <div key={index} style={{ position: 'relative' }}>
-                                        <img
+                                        <Image
                                             src={URL.createObjectURL(image)}
                                             alt={`Uploaded Image ${index + 1}`}
                                             width={100}

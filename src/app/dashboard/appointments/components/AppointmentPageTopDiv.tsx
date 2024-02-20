@@ -5,6 +5,7 @@ import { useUserStore } from '@/stores/userStore';
 import BackgroundAppointment from '@/assets/DoctorConsulting.png'
 import Link from 'next/link';
 import { useLoadingStore } from '@/stores/LoadingStore';
+import Image from "next/image";
 
 const AppointmentPageTopDiv = () => {
     const userInfo = useUserStore((state) => state.userInfo)
@@ -15,7 +16,7 @@ const AppointmentPageTopDiv = () => {
             <div className='absolute w-full h-full bg-gradient-to-b from-[#743bfb] via-[#743bfb] to-[#8e75c9] opacity-90 z-10'></div>
 
             <div className='flex text-white ml-[8%] items-center justify-center z-20'>
-                <img src={userInfo[0]?.photo ? userInfo[0].photo : ''} width={300} height={300} alt='Profile Image' className='w-32 h-32 object-cover rounded-[7px]' />
+                <Image src={userInfo[0]?.photo ? userInfo[0].photo : ''} width={300} height={300} alt='Profile Image' className='w-32 h-32 object-cover rounded-[7px]' />
                 <div className='ml-5 text-white'>
                     <p className='text-2xl font-bold tracking-wide'>{userInfo[0].name && userInfo[0]?.name || ""}</p>
                     <p className='text-sm tracking-wide mt-2 flex items-center '><span className='text-2xl mr-1'><CiLocationOn /></span> {userInfo[0].city && userInfo[0].city || ""}, {userInfo[0] && userInfo[0].country || ""}</p>
