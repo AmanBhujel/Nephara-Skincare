@@ -33,9 +33,9 @@ const SidebarForLargeScreens: React.FC<SidebarForLargeScreensProps> = ({
                 <div ref={sidebarRef} className='h-full w-72 lg:fixed xl:static min-w-72 xl:w-80 xl:min-w-80 top-0 left-0 z-50 bg-white border-r-2'>
                     <div className='w-full h-full flex flex-col relative'>
                         <div className='w-full flex justify-center items-center mt-6'>
-                            <Image src={Logo} width={150} height={150} alt='Nephara' className='w-48 h-auto' />
+                            <Image src={Logo} width={150} height={150} alt='Nephara' className='w-24  h-auto' />
                         </div>
-                        <ul className='w-full flex items-center justify-center flex-col mt-10 transition-all duration-500 ease-in-out'>
+                        <ul className='w-full flex items-center justify-center flex-col mt-2 transition-all duration-500 ease-in-out'>
                             {[{ itemName: "Dashboard", link: "/dashboard/profile" }, { itemName: "Appointments", link: "/dashboard/appointments" }, { itemName: "Settings", link: "/dashboard/settings" }].map((item, index) => (
                                 <li key={index}
                                     className={`w-[90%] cursor-pointer text-lg font-semibold py-4 px-2 flex items-center mb-2 rounded-[10px] 
