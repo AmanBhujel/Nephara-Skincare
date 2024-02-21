@@ -134,7 +134,7 @@ const Page: NextPage<PageProps> = ({ params }) => {
                             <p className='text-sm lg:text-base text-gray-700'>Welcome to Nephara Skincare!</p>
                         </div>
                         <div className="flex items-center justify-center mr-[10%] relative cursor-pointer" onClick={handleDropdownToggle} >
-                            <Image src={Profile} alt='Profile' width={100} height={100} className='w-14 h-14 border rounded-full object-cover' />
+                            <Image src={Profile} alt='Profile' width={100} height={100} className='w-14 h-14 border rounded-full object-cover' placeholder='blur' blurDataURL={"data:image/jpeg;base64,/9j//gAQTGF2YzYwLjMxLjEwMgD/2wBDAAgEBAQEBAUFBQUFBQYGBgYGBgYGBgYGBgYHBwcICAgHBwcGBgcHCAgICAkJCQgICAgJCQoKCgwMCwsODg4RERT/xABqAAEBAQEAAAAAAAAAAAAAAAAGBAMHAQEBAQAAAAAAAAAAAAAAAAAAAQIQAAEDAwIGAwEAAAAAAAAAAAIDBAEABRIhEUExFAdREyIyBqERAAMBAAIDAQAAAAAAAAAAAAABEQISITGBQQP/wAARCAAJABQDARIAAhIAAxIA/9oADAMBAAIRAxEAPwDg7SLfOfVm4DlgSAgfnfISkf4VYRzmgAFnbhv20Wv5j+oVUNl0xYA9VcMm8q5DkUq26FVfYmnlKKZYpmX2KNIknwrX5ZzraWtLKvbdk9GS5aVqvRCq7jbRur8bYoqbCHTiGRraKk2hQvSSkbR8pT2mdI14VJV1x5a4tvNcvmfCAH//2Q=="}/>
                             <p className='ml-3 font-semibold lg:text-lg'>Welcome {doctorName}</p>
                             <i className='text-2xl ml-3 cursor-pointer'><IoMdArrowDropdown /></i>
                             {isDropdownOpen && (
