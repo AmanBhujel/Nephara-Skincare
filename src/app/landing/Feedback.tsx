@@ -106,7 +106,7 @@ const Feedback = () => {
                       </div>
                       <div className="h-[25%] w-full bg-[#4a2b8a] rounded-[6px] relative flex justify-center items-center flex-col">
                         <div className="absolute left-1/2 translate-x-[-50%] top-[-50%] flex items-center justify-center flex-col text-white">
-                          <Image src={feedback.image} width={100} height={100} className="w-16 h-16 border-2 border-white object-cover rounded-full " alt="Feedback" />
+                          <Image src={feedback.image} width={100} height={100} className="w-16 h-16 border-2 border-white object-cover rounded-full " alt="Feedback" placeholder='blur' />
                           <p className="font-semibold text-base md:text-lg leading-4 mt-2">{feedback.name}</p>
                           <p className="text-sm ">{feedback.location}</p>
                         </div>
