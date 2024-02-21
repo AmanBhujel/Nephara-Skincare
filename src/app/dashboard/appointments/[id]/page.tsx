@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { NextPage } from 'next';
 import AppointmentPageContainer from '../components/AppointmentPageContainer';
 import Sidebar from '../../components/sidebar';
-import { Appointments } from '@/data/AppointmentData';
 import { useDashboardStore } from '../../../../stores/DashboardStore';
 import { useLazyQuery } from '@apollo/client';
 import { useUserStore } from '@/stores/userStore';
@@ -104,7 +103,6 @@ const Page: NextPage<PageProps> = ({ params }) => {
             getUserInfo();
         }
 
-        // Cleanup function
         return () => {
             isMounted = false;
         };
@@ -112,7 +110,10 @@ const Page: NextPage<PageProps> = ({ params }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const appointment = appointmentArray.find(appointment => appointment._id === params.id);
+    
+
+
+    const appointment = appointmentArray.find(appointment => appointment._id === params.id); 
 
     return (
         <main className='w-full h-screen flex justify-center items-center bg-[#f6f8fc] relative'>

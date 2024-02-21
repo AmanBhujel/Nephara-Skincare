@@ -15,7 +15,8 @@ import ToastMessage from '@/components/utils/ToastMessage';
 import { useRouter } from 'next/navigation';
 import { useLoadingStore } from '@/stores/LoadingStore';
 import Loader from '@/components/Loader';
-import { GET_DOCTOR_INFO_BY_TOKEN } from '@/apollo_client/Queries';
+import { GET_DOCTOR_APPOINTMENTS, GET_DOCTOR_INFO_BY_TOKEN } from '@/apollo_client/Queries';
+import { useDoctorArrayStore } from '@/stores/DoctorAppointmentArray';
 
 interface PageProps {
     params: {
@@ -25,6 +26,9 @@ interface PageProps {
 
 const Page: NextPage<PageProps> = ({ params }) => {
     const [getDoctorInfoByToken] = useLazyQuery(GET_DOCTOR_INFO_BY_TOKEN, {
+        fetchPolicy: "no-cache"
+    });
+    const [getAllAppointmentsForDoctor] = useLazyQuery(GET_DOCTOR_APPOINTMENTS, {
         fetchPolicy: "no-cache"
     });
     const setActiveSidebarItem = useDashboardStore((state) => state.setActiveSidebarItem);
@@ -37,6 +41,9 @@ const Page: NextPage<PageProps> = ({ params }) => {
     const router = useRouter();
     const isLoading = useLoadingStore((state) => state.isLoading)
     const setIsLoading = useLoadingStore((state) => state.setIsLoading)
+    const DoctorArray = useDoctorArrayStore((state) => state.DoctorArrayStore);
+    const setDoctorArray = useDoctorArrayStore((state) => state.setDoctorArrayStore);
+    const appointment = DoctorArray.find(appointment => appointment._id === params.id);
 
     const handleDropdownToggle = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -78,6 +85,23 @@ const Page: NextPage<PageProps> = ({ params }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    useEffect(() => {
+        const getAppointments = async () => {
+            try {
+                if (DoctorArray.length === 0) {
+                    const response = await getAllAppointmentsForDoctor();
+                    const appointmentsFromResponse = response.data.getAllAppointmentsForDoctor.appointments;
+                    setDoctorArray(appointmentsFromResponse);
+                    console.log(response.data.getAllAppointmentsForDoctor.appointments, "response from get appointments");
+                }
+            } catch (error) {
+                console.error("Error fetching appointment data:", error);
+            }
+        };
+        getAppointments();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -98,7 +122,6 @@ const Page: NextPage<PageProps> = ({ params }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const appointment = Appointments.find(appointment => appointment.appointment_id === params.id);
 
     return (
         <main className='w-full h-auto flex flex-col justify-center overflow-auto items-center bg-[#f6f8fc] relative'>

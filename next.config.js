@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['cdna.artstation.com','r2.starryai.com','img.freepik.com' ]
+        domains: ["nephara-skincare.s3.us-east-1.amazonaws.com"]
       },
 }
 

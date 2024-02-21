@@ -21,7 +21,6 @@ interface PageProps {
     };
 }
 
-
 const Page: NextPage<PageProps> = ({ params }) => {
     const [getAppointmentByEmail] = useLazyQuery(GET_APPOINTMENT_DATA);
     const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO, {

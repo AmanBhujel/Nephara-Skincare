@@ -29,7 +29,7 @@ const PremiumCareInfosAndImages = () => {
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right" data-aos-delay="150">
                 <div className="md:pr-4 lg:pr-12 xl:pr-16">
                   <div className="font-architects-daughter text-xl sm:text-3xl font-bold text-purple-600">Premium Service</div>
-                  <p className="text-sm sm:text-base lg:text-lg text-gray-500 md:mb-4 sm:text-justify">we prioritize excellence in dermatological care, offering personalized consultations and treatments that elevate your skin health journey. Our team of experienced professionals is dedicated to providing you with the highest standard of care, ensuring that every aspect of your experience is tailored to perfection. Experience the pinnacle of skin care with our premium service – because you deserve nothing but the best.
+                  <p className="text-sm sm:text-base lg:text-lg text-gray-500 md:mb-4 text-justify">we prioritize excellence in dermatological care, offering personalized consultations and treatments that elevate your skin health journey. Our team of experienced professionals is dedicated to providing you with the highest standard of care, ensuring that every aspect of your experience is tailored to perfection. Experience the pinnacle of skin care with our premium service – because you deserve nothing but the best.
                   </p>
                 </div>
               </div>
@@ -46,7 +46,7 @@ const PremiumCareInfosAndImages = () => {
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right" data-aos-delay="150">
                 <div className="md:pl-4 lg:pl-12 xl:pl-16">
                   <div className="font-architects-daughter text-xl sm:text-3xl font-bold text-purple-600">Comfort of your home</div>
-                  <p className="text-sm sm:text-base lg:text-lg text-gray-500 md:mb-4 sm:text-justify">At Nephara, we&apos;ve redefined skin check-ups for international students in first-world countries. Our platform connects you with top dermatologists from South Asia, offering convenient consultations from anywhere. Say goodbye to high medical costs and long wait times – with just a few clicks, you can access expert care and receive comprehensive reports via email. Prioritize your health without the hassle, with Nephara. </p>
+                  <p className="text-sm sm:text-base lg:text-lg text-gray-500 md:mb-4 text-justify">At Nephara, we&apos;ve redefined skin check-ups for international students in first-world countries. Our platform connects you with top dermatologists from South Asia, offering convenient consultations from anywhere. Say goodbye to high medical costs and long wait times – with just a few clicks, you can access expert care and receive comprehensive reports via email. Prioritize your health without the hassle, with Nephara. </p>
                 </div>
               </div>
             </div>
@@ -61,7 +61,7 @@ const PremiumCareInfosAndImages = () => {
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right" data-aos-delay="150">
                 <div className="md:pr-4 lg:pr-12 xl:pr-16">
                   <div className="font-architects-daughter text-xl sm:text-3xl font-bold text-purple-600">Our Support</div>
-                  <p className="text-sm sm:text-base lg:text-lg text-gray-500 md:mb-4 sm:text-justify">Nephara prioritizes your convenience and happiness through Our Support. Enjoy the convenience of easy rescheduling to fit your busy schedule. Our email assistance is available 24 hours a day, seven days a week.  Furthermore, we embrace transparency; if you ever discover the need, our simple refund method is only an email away.
+                  <p className="text-sm sm:text-base lg:text-lg text-gray-500 md:mb-4 text-justify">Nephara prioritizes your convenience and happiness through Our Support. Enjoy the convenience of easy rescheduling to fit your busy schedule. Our email assistance is available 24 hours a day, seven days a week.  Furthermore, we embrace transparency; if you ever discover the need, our simple refund method is only an email away.
                     Your opinion is important to us; please share your views and experiences with us by email so that we may continually improve our service. </p>
                 </div>
               </div>

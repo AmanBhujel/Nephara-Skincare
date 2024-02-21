@@ -5,7 +5,7 @@ import BackgroundAppointment from '@/assets/DoctorConsulting.png'
 import { useLazyQuery } from "@apollo/client";
 import { IoArrowBack, } from "react-icons/io5";
 import Link from "next/link";
-import { GET_REPORT } from "@/apollo_client/Queries";
+import { GET_APPOINTMENT_IMAGES_BY_ID, GET_REPORT } from "@/apollo_client/Queries";
 export interface Appointment {
     _id: string;
     completed: boolean;
@@ -15,6 +15,7 @@ export interface Appointment {
     appointmentTime: string;
     timezone: string;
     comment: string;
+    s3ImagesKey: string[];
     reasonForVisit: string;
     allergies: string;
     checkoutSessionId?: string;
@@ -25,13 +26,39 @@ interface AppointmentInfoProps {
 }
 const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentData }) => {
     const [windowWidth, setWindowWidth] = useState<number>(0);
-
+    const [getAppointmentImageById] = useLazyQuery(GET_APPOINTMENT_IMAGES_BY_ID, {
+        fetchPolicy: "no-cache"
+    });
     const [getReport] = useLazyQuery(GET_REPORT, {
         fetchPolicy: "no-cache"
     });
 
     const appointmentSelected = useDashboardStore((state) => state.appointmentSelected);
     const setAppointmentSelected = useDashboardStore((state) => state.setAppointmentSelected);
+
+    const [imagesArray, setImagesArray] = useState([]);
+
+    const getImagesUrl = async () => {
+        console.log("its runnong ")
+        const response = await getAppointmentImageById({
+            variables: {
+                appointmentId: appointmentData?._id
+            }
+        })
+        setImagesArray(response.data.getAppointmentImageById.imagesUrl)
+    }
+
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+    // Function to handle image click
+    const handleImageClick = (imageUrl: string) => {
+        setSelectedImage(imageUrl);
+    };
+
+    // Function to close the modal
+    const handleCloseModal = () => {
+        setSelectedImage(null);
+    };
 
     const handleSeeReportClick = async () => {
         try {
@@ -64,6 +91,7 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
 
     useEffect(() => {
         if (appointmentData) {
+            getImagesUrl();
             setAppointmentSelected(true)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -83,6 +111,15 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
         // eslint-disable-next-line react-hooks/exhaustive-deps
 
     }, []);
+
+
+    //      const getImagesLink = appointmentData?.s3ImagesKey.map(()=>{
+    //       const command = new GetObjectCommand({
+    //     Bucket: "nephara-skincare",
+    //     Key: key
+    // });
+    // const url = await getSignedUrl(s3Client, command);
+    // })
 
     return (
         <div className={` lg:w-[65%]  xl:w-[60%] 2xl:w-[70%] w-full lg:flex lg:h-[600px] xl:h-[650px] overflow-auto rounded-[8px] ${appointmentSelected || windowWidth > 1024 ? "flex" : "hidden"} border-2 mb-24 lg:mb-0 h-screen bg-white`}>
@@ -121,7 +158,34 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                             <button className={`text-white px-4 py-1 md:px-8 md:py-2 bg-[#743bfb] hover:bg-[#753bfbde] rounded-[6px] font-bold text-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg`} onClick={handleSeeReportClick}>See Report</button>
                         </div>)
                     }
+                    {/* // Render the modal if an image is selected */}
+                    {selectedImage && (
+                        <div className="fixed top-0 left-0 w-full h-max-screen h-full object-contain bg-black bg-opacity-75 flex justify-center items-center z-50">
+                            <div className="relative">
+                                <button
+                                    className="absolute top-3 right-3 m-4 text-red-400 font-medium text-xl"
+                                    onClick={handleCloseModal}
+                                >
+                                    Close
+                                </button>
+                                <img src={selectedImage} alt="Selected Image" className="w-[40rem] max-w-screen object-contain" />
+                            </div>
+                        </div>
+                    )}
 
+                    {/* // Map through images and render them */}
+                    <div className="flex flex-wrap">
+                        {imagesArray &&
+                            imagesArray.map((imageUrl, index) => (
+                                <img
+                                    key={index}
+                                    src={imageUrl}
+                                    alt={`Image ${index}`}
+                                    className="w-24 h-24 cursor-pointer"
+                                    onClick={() => handleImageClick(imageUrl)}
+                                />
+                            ))}
+                    </div>
                     <div className='h-full px-2'>
                         <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-semibold text-[#a3a1a9] px-4'>Appointment Info</p>
                         <div className='px-4 '>

@@ -38,7 +38,7 @@ export const GET_APPOINTMENT_DATA = gql`
           appointments {
             appointmentDate
             appointmentTime
-            id
+            s3ImagesKey
             checkoutSessionId
             fullName
             email
@@ -52,3 +52,31 @@ export const GET_APPOINTMENT_DATA = gql`
         }
       }
     `;
+
+export const GET_DOCTOR_APPOINTMENTS = gql`
+    query GetAllAppointmentsForDoctor {
+      getAllAppointmentsForDoctor {
+        appointments {
+          appointmentDate
+          appointmentTime
+          id
+          checkoutSessionId
+          fullName
+          email
+          reasonForVisit
+          timezone
+          allergies
+          comment
+          _id
+          completed
+        }
+      }
+    }
+    `
+
+export const GET_APPOINTMENT_IMAGES_BY_ID = gql`
+    query GetAppointmentImageById($appointmentId: String!) {
+      getAppointmentImageById(appointmentId: $appointmentId) {
+        imagesUrl
+      }
+    }`;

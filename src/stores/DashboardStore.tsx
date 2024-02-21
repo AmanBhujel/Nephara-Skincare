@@ -1,7 +1,6 @@
 import { Appointment } from '@/app/dashboard/appointments/components/AppointmentDescription';
 import { create } from 'zustand';
 
-
 interface StoreState {
   activeSidebarItem: string;
   appointmentSelected: boolean;
@@ -13,7 +12,7 @@ interface StoreState {
   setSelectedAppointmentId: (itemName: string) => void;
   setSelectedAppointmentFilter: (itemName: string) => void;
   setAppointmentSelected: (value: boolean) => void;
-}
+};
 
 export const useDashboardStore = create<StoreState>((set) => ({
   activeSidebarItem: "",

@@ -5,7 +5,11 @@ mutation CreateAppointmentAndCheckoutSession($fullName: String!, $email: String!
   createAppointmentAndCheckoutSession(fullName: $fullName, email: $email, appointmentDate: $appointmentDate, appointmentTime: $appointmentTime, timezone: $timezone, comment: $comment, reasonForVisit: $reasonForVisit, allergies: $allergies, productName: $productName, productPrice: $productPrice, productImage: $productImage) {
     status,
     message,
-    putImageS3BucketUrl,
+    putImageS3BucketUrl {
+      key
+      url
+    },
+    appointmentId,
     stripeSessionId
   }
 }
@@ -101,3 +105,11 @@ mutation ResetPassword($newPassword: String!, $sentToken: String!) {
 }
 }
 `;
+
+export const UPDATE_IMAGES_AFTER_S3_UPLOAD = gql`
+mutation UpdateAppointmentAfterS3Upload($imageKey: [String!]!, $appointmentId: String!) {
+  updateAppointmentAfterS3Upload(imageKey: $imageKey, appointmentId: $appointmentId) {
+    status
+    message
+  }
+}`;

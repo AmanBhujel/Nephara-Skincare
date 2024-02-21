@@ -8,11 +8,13 @@ import ToastMessage from '@/components/utils/ToastMessage';
 import { UseStripeStore } from '@/stores/StripeStore';
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { IoAddCircleOutline } from "react-icons/io5";
-import { CREATE_APPOINTMENT_AND_STRIPE_SESSION } from '@/apollo_client/Mutation';
+import { CREATE_APPOINTMENT_AND_STRIPE_SESSION, UPDATE_IMAGES_AFTER_S3_UPLOAD } from '@/apollo_client/Mutation';
 import Image from 'next/image';
+import { useUserStore } from '@/stores/userStore';
 
 const Page = () => {
     const [createAppointmentAndCheckoutSession] = useMutation(CREATE_APPOINTMENT_AND_STRIPE_SESSION);
+    const [updateAppointmentAfterS3Upload] = useMutation(UPDATE_IMAGES_AFTER_S3_UPLOAD);
     const [selectedTimeZone, setSelectedTimeZone] = useState<string>('');
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [selectedTime, setSelectedTime] = useState<string>('');
@@ -21,7 +23,7 @@ const Page = () => {
     const [allergies, setAllergies] = useState<string>("");
     const [comment, setComment] = useState<string>("");
     const setStripeSessionId = UseStripeStore((state) => state.setStripeSessionId);
-
+    const userInfo = useUserStore((state)=>state.userInfo);
     // --------for images---------
     const [images, setImages] = useState<File[]>([]);
 
@@ -47,7 +49,7 @@ const Page = () => {
                 {
                     variables: {
                         "fullName": name,
-                        "email": "bhujelaman20@gmail.com",
+                        "email": userInfo[0]?.email,
                         "appointmentDate": selectedDate?.toDateString(),
                         "appointmentTime": selectedTime,
                         "timezone": selectedTimeZone,
@@ -61,17 +63,30 @@ const Page = () => {
                 }
             )
 
-            const { stripeSessionId, putImageS3BucketUrl, message, status } = response.data.createAppointmentAndCheckoutSession;
+            const { stripeSessionId, putImageS3BucketUrl, message, status, appointmentId } = response.data.createAppointmentAndCheckoutSession;
+
+            let imageKey: string[] = [];
 
             await Promise.all(images.map(async (image, index) => {
-                await fetch(`${putImageS3BucketUrl[index]}`, {
+                await fetch(`${putImageS3BucketUrl[index].url}`, {
                     method: 'PUT',
                     body: image,
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
                 });
+                imageKey.push(putImageS3BucketUrl[index].key);
             }));
+
+            // -----After images uploaded in s3 bucket , updating path in db-------
+            await updateAppointmentAfterS3Upload(
+                {
+                    variables: {
+                        imageKey,
+                        appointmentId
+                    }
+                }
+            )
 
             setStripeSessionId(stripeSessionId);
             const stripe: Stripe | null = await loadStripe('pk_test_51OZ9d9Kc8LmZXQQ91uQkILNU8YMGVAfW5SfxVAg0FFP2yZCJuxjR9wLmPrSjpRRJeuBtoCR4nWE29Bj2j0B876oX00KSA2updT');
@@ -209,7 +224,7 @@ const Page = () => {
                             type='text'
                             placeholder='Email Address'
                             className='w-[100%] sm:w-[95%] lg:w-[90%] h-10 border rounded-[6px] border-gray-500 px-3 outline-none mt-2 sm:mt-0'
-                            value={"bhujelaman20@gmail.com"}
+                            value={userInfo[0]?.email}
                             readOnly
                         />
                         <p className='font-medium mt-8 mb-2'>Do you have allergies?</p>
