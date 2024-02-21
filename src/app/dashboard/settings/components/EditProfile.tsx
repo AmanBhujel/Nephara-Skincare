@@ -113,7 +113,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ activeSettingButton, setActiv
                     <p className='text-3xl sm:text-4xl font-semibold text-[#743bfb]  tracking-wide'>Edit Your Profile</p>
                 </div>
                 <div className='flex flex-col w-full justify-center items-center mt-3'>
-                    <Image src={UserInfo[0]?.photo ? UserInfo[0].photo : ''} width={200} height={200} alt='Profile Image' className='w-32 h-32 rounded-[8px] border object-cover' />
+                    <Image src={UserInfo[0]?.photo ? UserInfo[0].photo : ''} width={200} height={200} alt='Profile Image' className='w-32 h-32 rounded-[8px] border object-cover' placeholder="blur" blurDataURL={' data:image/jpeg;base64,/9j//gAQTGF2YzYwLjMxLjEwMgD/2wBDAAgEBAQEBAUFBQUFBQYGBgYGBgYGBgYGBgYHBwcICAgHBwcGBgcHCAgICAkJCQgICAgJCQoKCgwMCwsODg4RERT/xABqAAEBAQEAAAAAAAAAAAAAAAAGBAMHAQEBAQAAAAAAAAAAAAAAAAAAAQIQAAEDAwIGAwEAAAAAAAAAAAIDBAEABRIhEUExFAdREyIyBqERAAMBAAIDAQAAAAAAAAAAAAABEQISITGBQQP/wAARCAAJABQDARIAAhIAAxIA/9oADAMBAAIRAxEAPwDg7SLfOfVm4DlgSAgfnfISkf4VYRzmgAFnbhv20Wv5j+oVUNl0xYA9VcMm8q5DkUq26FVfYmnlKKZYpmX2KNIknwrX5ZzraWtLKvbdk9GS5aVqvRCq7jbRur8bYoqbCHTiGRraKk2hQvSSkbR8pT2mdI14VJV1x5a4tvNcvmfCAH//2Q=='} />
                     <div className='flex items-center justify-center border-2 border-[#7e59e4] w-40 py-2 rounded-[8px] mt-2 cursor-pointer'>
                         <i className='text-xl'><TbCameraPlus /></i><p className='text-sm ml-2 font-medium' onClick={() => setIsUploadPhotoOpen(true)}>Change Avatar</p>
                     </div>
