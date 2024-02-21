@@ -106,7 +106,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ activeSettingButton, setActiv
     }
 
     return (
-        <div className={` ${windowWidth > 1024 && activeSettingButton !== "change-password" || activeSettingButton === "Edit" ? "flex" : "hidden"} w-full h-auto   lg:w-[70%] xl:w-[50%] justify-center border lg:ml-[5%] bg-[#f6f8fc] overflow-auto max-h-screen `}>
+        <div className={` ${windowWidth > 1024 && activeSettingButton !== "change-password" || activeSettingButton === "Edit" ? "flex" : "hidden"} w-full h-auto   lg:w-[70%] xl:w-[50%] justify-center  lg:ml-[5%] bg-[#f6f8fc] overflow-auto max-h-screen `}>
             <div className='w-[95%] md:w-[75%] xl:w-[70%] 2xl:w-[60%] relative'>
                 <p className='text-2xl sm:text-4xl absolute top-2 left-2 lg:hidden cursor-pointer' onClick={() => setActiveSettingButton("")}><IoArrowBack /></p>
                 <div className='flex w-full justify-center items-center mt-6 lg:mt-8'>

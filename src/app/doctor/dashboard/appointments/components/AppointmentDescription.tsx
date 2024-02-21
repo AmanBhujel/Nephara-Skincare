@@ -6,6 +6,8 @@ import { useLazyQuery, } from "@apollo/client";
 import ReportModal from "./ReportModal";
 import { GET_APPOINTMENT_IMAGES_BY_ID, GET_REPORT } from "@/apollo_client/Queries";
 import { Appointment } from "./AppointmentContainer";
+import ToggleAppointmentModal from "./ToggleAppointmentModal";
+import { useToggleModalStore } from "@/stores/ToggleAppointmentStatus";
 interface AppointmentInfoProps {
     appointmentData: Appointment | undefined;
 }
@@ -20,6 +22,7 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
         fetchPolicy: "no-cache"
     });
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const setIsToggleModalOpen = useToggleModalStore((state) => state.setIsToggleModalOpen);
 
     // Function to handle image click
     const handleImageClick = (imageUrl: string) => {
@@ -101,6 +104,8 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
     return (
         <div className={` lg:w-[60%]  xl:w-[60%] 2xl:w-[70%] w-full lg:flex lg:h-[700px] xl:h-[750px]  2xl:h-[770px]  overflow-auto rounded-[8px] ${appointmentSelected || windowWidth > 1024 ? "flex" : "hidden"} border-2 bg-white pb-0 mb-6 lg:mb-0`}>
             <ReportModal isReportModalOpen={isReportModalOpen} setIsReportModalOpen={setIsReportModalOpen} />
+            <ToggleAppointmentModal appointmentId={appointmentData?._id} completedStatus={appointmentData?.completed} />
+
             {appointmentData ?
                 <div className='w-full max-h-full'>
                     <div className='w-full h-40 min-h-40 rounded-[8px] relative' style={{ backgroundImage: `url(${BackgroundAppointment.src})`, backgroundSize: 'cover', backgroundPosition: 'center 15%' }}>
@@ -118,7 +123,7 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                     </div>
                     {!appointmentData.completed ?
                         (<div className='bg-[#f1f1ff] mt-4 py-4 text-xl flex justify-between  items-center font-medium text-black px-4'>
-                            <p className=''>Time Remaining: 01:24:56</p>
+                            <p className='text-[#807c83]'>Time Remaining: 01:24:56</p>
 
                             <a href={`http://localhost:8080/join?room=${appointmentData._id}&name=${appointmentData.fullName}`} target="_blank" rel="noopener noreferrer">
                                 <button className={`text-white px-8 py-2 bg-[#743bfb] rounded-[10px] font-bold text-lg mb-2`}>Join</button>
@@ -133,6 +138,19 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                             </div>
                         </div>)
                     }
+
+                    {/* type is completed or not */}
+                    <div className='bg-[#f1f1ff] mt-4 py-4 text-xl flex justify-between  items-center font-medium text-black px-4'>
+                        <p className='text-[#807c83] font-medium'>Completed : <span className="text-black">{appointmentData.completed ? "Completed" : "Upcoming"}</span></p>
+                        <div>
+                            <button className={`text-white px-6 ml-4 py-1 bg-[#7f56dd] rounded-xl  mb-2`} onClick={() => setIsToggleModalOpen(true)}>Toggle</button>
+                        </div>
+                    </div>
+
+
+
+
+                    {/* a button where if doctor clicks will  give a modal where it will ask change the completed true or false */}
 
                     {/* // Render the modal if an image is selected */}
                     {selectedImage && (

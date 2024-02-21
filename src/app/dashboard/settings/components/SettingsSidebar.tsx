@@ -38,3 +38,5 @@ const SettingsSidebar: React.FC<SettingsSidebarProps> = ({ activeSettingButton, 
 };
 
 export default SettingsSidebar;
+
+// shadow-[3px_0px_7px_-7px_rgba(0,0,0,0.5)] 
