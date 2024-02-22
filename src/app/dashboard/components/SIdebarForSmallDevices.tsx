@@ -21,8 +21,8 @@ const SidebarForSmallDevices:  React.FC<SidebarForSmallDevicesProps> = ({
                         setIsLoading(true)
                     }
                 }}>
-                <span className='text-3xl'><MdOutlineDashboardCustomize /></span>
-                <p className='text-sm hidden sm:block'>Profile</p>
+                <span className='text-[1.65rem] sm:text-3xl'><MdOutlineDashboardCustomize /></span>
+                <p className='text-[11px] font-medium sm:text-sm '>Profile</p>
             </Link>
             <Link href={"/dashboard/appointments"} className={`w-[33%] h-full flex flex-col items-center justify-center hover:text-[#ba58ff] cursor-pointer   ${activeSidebarItem === "Appointments" ? "text-[#ba58ff]" : ""}`}
                 onClick={() => {
@@ -30,8 +30,8 @@ const SidebarForSmallDevices:  React.FC<SidebarForSmallDevicesProps> = ({
                         setIsLoading(true)
                     }
                 }}>
-                <span className='text-3xl'><LuCalendarDays /></span>
-                <p className='text-sm hidden sm:block'>Appointments</p>
+                <span className='text-[1.65rem] sm:text-3xl'><LuCalendarDays /></span>
+                <p className='text-[11px] font-medium sm:text-sm '>Appointments</p>
             </Link>
             <Link href={"/dashboard/settings"} className={`w-[33%] h-full flex flex-col items-center justify-center hover:text-[#ba58ff] cursor-pointer   ${activeSidebarItem === "Settings" ? "text-[#ba58ff]" : ""}`}
                 onClick={() => {
@@ -39,8 +39,8 @@ const SidebarForSmallDevices:  React.FC<SidebarForSmallDevicesProps> = ({
                         setIsLoading(true)
                     }
                 }}>
-                <span className='text-3xl'><IoSettingsOutline /></span>
-                <p className='text-sm hidden sm:block'>Settings</p>
+                <span className='text-[1.65rem] sm:text-3xl'><IoSettingsOutline /></span>
+                <p className='text-[11px] font-medium sm:text-sm '>Settings</p>
             </Link>
         </div>
     )

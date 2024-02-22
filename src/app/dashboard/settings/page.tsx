@@ -9,11 +9,11 @@ import { useLoadingStore } from '@/stores/LoadingStore';
 import Loader from '@/components/Loader';
 import { useAuthorizedStore } from '@/stores/AuthorizedStore';
 import { getCookie } from '@/components/utils/Cookie';
-import UploadImage from './components/UploadImage';
-import ChangePassword from './components/ChangePassword';
-import EditProfile from './components/EditProfile';
-import SettingsSidebar from './components/SettingsSidebar';
 import { GET_USER_INFO } from '@/apollo_client/Queries';
+import TopSettingBar from './components/TopSettingBar';
+import FullSettingContainer from './components/FullSettingsContainer';
+import ProfileBackground from '@/assets/ProfilePage.png'
+import UploadImage from './components/UploadImage';
 
 const Page = () => {
     const [activeSettingButton, setActiveSettingButton] = useState<string>('');
@@ -39,6 +39,8 @@ const Page = () => {
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    console.log(activeSettingButton)
 
     useEffect(() => {
         let isMounted = true;
@@ -91,15 +93,18 @@ const Page = () => {
     }, []);
 
     return (
-        <main className='w-full h-screen flex justify-center lg:justify-start bg-[#f6f8fc] relative' style={{ height: "100dvh" }}>
+        <main className='w-full h-screen flex justify-center lg:justify-start bg-[#f6f8fc] relative' style={{ height: "100dvh" }} >
             {
                 isLoading ? <Loader /> :
                     <>
                         {windowWidth > 1024 || activeSettingButton === "" ? <Sidebar /> : ""}
                         <UploadImage />
-                        <SettingsSidebar activeSettingButton={activeSettingButton} setActiveSettingButton={setActiveSettingButton} windowWidth={windowWidth} />
-                        <EditProfile activeSettingButton={activeSettingButton} setActiveSettingButton={setActiveSettingButton} windowWidth={windowWidth} />
-                        <ChangePassword activeSettingButton={activeSettingButton} setActiveSettingButton={setActiveSettingButton} />
+                        <div className='w-full h-full flex max-h-screen justify-center xl:justify-start overflow-auto ' style={{ backgroundImage: `url(${ProfileBackground.src})`, backgroundSize: 'cover', backgroundPosition: 'right 5%' }}>
+                            <div className="w-[95%] lg:w-[63rem]  xl:w-[79rem] h-[50rem] xl:ml-1 2xl:ml-[3%] xl:mr-1 2xl:mr-4 ">
+                                <TopSettingBar />
+                                <FullSettingContainer activeSettingButton={activeSettingButton} setActiveSettingButton={setActiveSettingButton} windowWidth={windowWidth} />
+                            </div>
+                        </div>
                     </>
             }
         </main>
