@@ -11,6 +11,7 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { CREATE_APPOINTMENT_AND_STRIPE_SESSION, UPDATE_IMAGES_AFTER_S3_UPLOAD } from '@/apollo_client/Mutation';
 import Image from 'next/image';
 import { useUserStore } from '@/stores/userStore';
+import img64 from '@/assets/base64';
 
 const Page = () => {
     const [createAppointmentAndCheckoutSession] = useMutation(CREATE_APPOINTMENT_AND_STRIPE_SESSION);
@@ -181,7 +182,7 @@ const Page = () => {
                                             height={100}
                                             className='w-32 h-32 object-cover border'
                                             placeholder='blur'
-                                            blurDataURL={ 'data:image/jpeg;base64,/9j//gAQTGF2YzYwLjMxLjEwMgD/2wBDAAgEBAQEBAUFBQUFBQYGBgYGBgYGBgYGBgYHBwcICAgHBwcGBgcHCAgICAkJCQgICAgJCQoKCgwMCwsODg4RERT/xABqAAEBAQEAAAAAAAAAAAAAAAAGBAMHAQEBAQAAAAAAAAAAAAAAAAAAAQIQAAEDAwIGAwEAAAAAAAAAAAIDBAEABRIhEUExFAdREyIyBqERAAMBAAIDAQAAAAAAAAAAAAABEQISITGBQQP/wAARCAAJABQDARIAAhIAAxIA/9oADAMBAAIRAxEAPwDg7SLfOfVm4DlgSAgfnfISkf4VYRzmgAFnbhv20Wv5j+oVUNl0xYA9VcMm8q5DkUq26FVfYmnlKKZYpmX2KNIknwrX5ZzraWtLKvbdk9GS5aVqvRCq7jbRur8bYoqbCHTiGRraKk2hQvSSkbR8pT2mdI14VJV1x5a4tvNcvmfCAH//2Q=='}
+                                            blurDataURL={img64}
                                         />
                                         <button
                                             className="absolute top-0 right-0 text-red-500 text-2xl rounded-full"

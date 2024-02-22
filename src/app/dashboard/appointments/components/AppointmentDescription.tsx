@@ -5,7 +5,8 @@ import BackgroundAppointment from '@/assets/DoctorConsulting.png'
 import { useLazyQuery } from "@apollo/client";
 import { IoArrowBack, } from "react-icons/io5";
 import Link from "next/link";
-import { GET_APPOINTMENT_IMAGES_BY_ID, GET_REPORT } from "@/apollo_client/Queries";
+import { GET_APPOINTMENT_IMAGES_BY_ID, GET_REPORT,GET_APPOINTMENT_DATA } from "@/apollo_client/Queries";
+import AppointmentTimer from "./AppointmentTimer";
 export interface Appointment {
     _id: string;
     completed: boolean;
@@ -146,7 +147,12 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                     </div>
                     {!appointmentData.completed ?
                         (<div className='bg-[#f1f1ff] mt-4 py-2 text-xl flex justify-between  items-center font-medium text-black px-4'>
-                            <p className='text-base lg:text-lg xl:text-xl font-semibold text-[#575658] '>Time Remaining: 01:24:56</p>
+                            <AppointmentTimer
+                                // appointmentDate={appointmentData?.appointmentDate}
+                                // appointmentTime={appointmentData?.appointmentTime}
+                                appointmentDate="2024-05-10"
+                                appointmentTime="18:00"
+                            />
 
                             <a href={`http://localhost:8080/join?room=${appointmentData._id}&name=${appointmentData.fullName}`} target="_blank" rel="noopener noreferrer">
                                 <button className={`text-white px-4 py-1 md:px-8 md:py-2 bg-[#743bfb] hover:bg-[#753bfbde] rounded-[6px] font-bold text-lg mb-2  transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg`}>Join</button>
