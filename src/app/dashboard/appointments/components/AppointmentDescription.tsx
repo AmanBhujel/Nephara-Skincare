@@ -7,6 +7,8 @@ import { IoArrowBack, } from "react-icons/io5";
 import Link from "next/link";
 import { GET_APPOINTMENT_IMAGES_BY_ID, GET_REPORT,GET_APPOINTMENT_DATA } from "@/apollo_client/Queries";
 import AppointmentTimer from "./AppointmentTimer";
+
+
 export interface Appointment {
     _id: string;
     completed: boolean;
