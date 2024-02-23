@@ -1,13 +1,13 @@
 import ToastMessage from "@/components/utils/ToastMessage";
 import { useState } from "react";
-import { IoArrowBack } from "react-icons/io5";
+import { IoChevronBackOutline } from "react-icons/io5";
 
 interface ChangePasswordProps {
-    activeSettingButton:string;
-    setActiveSettingButton:React.Dispatch<React.SetStateAction<string>>;
+    activeSettingButton: string;
+    setActiveSettingButton: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const ChangePassword: React.FC<ChangePasswordProps>  = ({activeSettingButton,setActiveSettingButton}) => {
+const ChangePassword: React.FC<ChangePasswordProps> = ({ activeSettingButton, setActiveSettingButton }) => {
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [passwordError, setPasswordError] = useState<string | null>(null);
@@ -34,52 +34,72 @@ const ChangePassword: React.FC<ChangePasswordProps>  = ({activeSettingButton,set
     };
 
     return (
-        <div className={`${activeSettingButton === "change-password" ? "flex" : "hidden"} w-full h-auto   lg:w-[70%] xl:w-[50%] justify-center border lg:ml-[5%] bg-[#f6f8fc] overflow-auto max-h-screen `}>
-            <div className='w-[95%] md:w-[75%] xl:w-[70%] 2xl:w-[50%] relative'>
-                <p className='text-2xl sm:text-4xl absolute top-2 left-2 lg:hidden cursor-pointer' onClick={() => setActiveSettingButton("")}><IoArrowBack /></p>
-                <div className='flex w-full justify-center items-center'>
-                    <p className='mt-7 lg:mt-8 text-3xl sm:text-4xl font-semibold text-[#743bfb]  tracking-wide'>Change Password</p>
-                </div>
 
-                <div className='flex flex-col mt-6'>
-                    <label htmlFor="password" className="block text-gray-700 text-sm mt-4 mb-2">
-                        Password
-                    </label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className={`w-full h-12  border rounded-[7px]  pl-2 outline-none border-gray-400 ${passwordError ? "border-red-500" : ""
-                            }`}
-                        placeholder="Your password"
-                        required
-                    />
-                    {passwordError && <p className="text-red-500 text-sm">{passwordError}</p>}
-                </div>
-                <div className='flex flex-col mt-6'>
-                    <label htmlFor="confirmPassword" className="block text-gray-700 text-sm mt-4 mb-2">
-                        Confirm Password
-                    </label>
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        className={`w-full h-12  border rounded-[7px]  pl-2 outline-none border-gray-400 ${confirmPasswordError ? "border-red-500" : ""
-                            }`}
-                        placeholder="Confirm your password"
-                        required
-                    />
-                    {confirmPasswordError && <p className="text-red-500 text-sm">{confirmPasswordError}</p>}
-                </div>
-                {/* Change Password Button */}
-                <button className='h-10 bg-[#8045f7] hover:bg-[#9768f3] mt-10 w-full rounded-[7px] text-white' onClick={handleChangePassword}>
-                    Change Password
-                </button>
+        <div className={`${activeSettingButton === "change-password" ? "flex" : "hidden"} bg-white w-[95%] sm:w-[90%] md:w-[85%] lg:w-[65%] px-2 2xl:w-[65%] pt-4 lg:pt-0 pb-16 lg:pb-0 h-[90%] 2xl:h-[86%] border rounded-[10px] flex flex-col items-center shadow-xl relative`}>
+
+            <p className='text-xl sm:text-3xl absolute top-2 left-2 lg:hidden cursor-pointer flex items-center justify-center'
+                onClick={() => setActiveSettingButton("")}
+            ><IoChevronBackOutline /><span className="text-sm sm:text-base">Back</span></p>
+            <div className='flex flex-col w-full justify-center items-center mt-6'>
+                <p className='text-2xl sm:text-[1.8rem] font-semibold text-[#743bfb] leading-7 tracking-wide'>Change Password</p>
+                <p className="text-gray-600 text-sm font-medium">Securely update your account password</p>
             </div>
+            <div className='flex flex-col mt-8 w-[95%] sm:w-[80%] md:w-[60%]'>
+                <p className="text-gray-500 text-[12px] sm:text-sm font-medium">You are signed in as <strong> evansunde2@gmail.com </strong></p>
+                <label htmlFor="password" className="block text-gray-700 text-sm mb-1">
+                    Password
+                </label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className='h-10 sm:h-12 border pl-2 w-[100%] text-sm sm:text-base outline-none rounded-[6px]'
+                    placeholder="Your password"
+                    required
+                />
+                {passwordError && <p className="text-red-500 text-sm">{passwordError}</p>}
+            </div>
+            <div className='flex flex-col mt-4 sm:mt-6 w-[95%] sm:w-[80%] md:w-[60%]'>
+                <label htmlFor="confirmPassword" className="block text-gray-700 text-sm mb-1">
+                    Confirm Password
+                </label>
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className='h-10 sm:h-12 border pl-2 w-[100%] text-sm sm:text-base  outline-none rounded-[6px]'
+                    placeholder="Confirm your password"
+                    required
+                />
+                {confirmPasswordError && <p className="text-red-500 text-sm">{confirmPasswordError}</p>}
+            </div>
+            <div className='flex flex-col mt-4 sm:mt-6 w-[95%] sm:w-[80%] md:w-[60%]'>
+                <label htmlFor="confirmPassword" className="block text-sm sm:text-base  text-gray-700  mb-1">
+                    Confirm New Password
+                </label>
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className='h-10 sm:h-12 border pl-2 w-[100%] text-sm sm:text-base  outline-none rounded-[6px]'
+                    placeholder="Confirm your password"
+                    required
+                />
+                {confirmPasswordError && <p className="text-red-500 text-sm">{confirmPasswordError}</p>}
+            </div>
+            {/* Change Password Button */}
+            <button
+                className='h-10 bg-[#8045f7] hover:bg-[#9768f3] w-[95%] sm:w-[80%] md:w-[60%] mt-7 rounded-[7px] text-white mb-4'
+                onClick={handleChangePassword}
+            >
+                Change Password
+            </button>
         </div>
     )
 };

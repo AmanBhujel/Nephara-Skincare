@@ -113,3 +113,20 @@ mutation UpdateAppointmentAfterS3Upload($imageKey: [String!]!, $appointmentId: S
     message
   }
 }`;
+
+export const UPDATE_APPOINTMENT_STATUS = gql`
+mutation UpdateAppointmentByDoctorToken(
+  $doctorToken: String!
+  $appointmentId: String!
+  $completed: Boolean!
+) {
+  updateAppointmentByDoctorToken(
+    doctorToken: $doctorToken
+    appointmentId: $appointmentId
+    completed: $completed
+  ) {
+    status
+    message
+  }
+}
+`;

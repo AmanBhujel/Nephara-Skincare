@@ -10,7 +10,9 @@ const AppointmentTimer: React.FC<AppointmentTimerProps> = ({ appointmentDate, ap
 
   useEffect(() => {
       const timer = setInterval(() => {
-          const appointmentDateTime = new Date(`${appointmentDate}T${appointmentTime}`).getTime();
+          const formattedDate = new Date(appointmentDate).toISOString().split('T')[0];
+          const formattedTime = new Date(appointmentTime).toISOString().split('T')[1]. slice(0,5);
+          const appointmentDateTime = new Date(`${formattedDate}T${formattedTime}`).getTime();
           const now = new Date().getTime();
           const distance = appointmentDateTime - now;
 

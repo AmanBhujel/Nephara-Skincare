@@ -73,7 +73,7 @@ const UploadImage: React.FC = () => {
           <ModalBody>
             <div className='h-[30rem] border py-4'>
               <input type="file" accept="image/*" onChange={handleImageChange} />
-              {preview && <Image src={preview} alt="Preview" className='w-full h-full object-cover' />}
+              {preview && <Image src={preview} alt="Preview" width={400} height={400} className='w-full h-full object-cover' />}
             </div>
           </ModalBody>
           <ModalFooter>

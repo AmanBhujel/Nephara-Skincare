@@ -148,10 +148,10 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                     {!appointmentData.completed ?
                         (<div className='bg-[#f1f1ff] mt-4 py-2 text-xl flex justify-between  items-center font-medium text-black px-4'>
                             <AppointmentTimer
-                                // appointmentDate={appointmentData?.appointmentDate}
-                                // appointmentTime={appointmentData?.appointmentTime}
-                                appointmentDate="2024-05-10"
-                                appointmentTime="18:00"
+                                appointmentDate={appointmentData?.appointmentDate}
+                                appointmentTime={appointmentData?.appointmentTime}
+                                // appointmentDate="2024-05-10"
+                                // appointmentTime="18:00"
                             />
 
                             <a href={`http://localhost:8080/join?room=${appointmentData._id}&name=${appointmentData.fullName}`} target="_blank" rel="noopener noreferrer">
@@ -211,7 +211,7 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                             <p className='text-[#807c83] mt-2 font-medium'>Time</p>
                             <p className='sm:text-lg lg:text-base font-medium mt-1 mb-1'>{appointmentData?.appointmentTime}</p>
                         </div>
-                        <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-semibold text-[#a3a1a9] px-4'>Time Info</p>
+                        <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-semibold text-[#a3a1a9] px-4'>Other Info</p>
                         <div className='px-4'>
                             <p className='text-[#807c83] mt-2 sm:text-lg lg:text-base font-medium'>Do you have allergies?</p>
                             <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'> {appointmentData?.allergies}</p>
