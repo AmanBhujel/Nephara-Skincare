@@ -45,8 +45,8 @@ export default function RootLayout({
   };
 
   const graphqlClient = new ApolloClient({
-     uri: "https://nephara-backend.onrender.com/graphql",
-    // uri: "http://localhost:8000/graphql",
+    // uri: "https://nephara-backend.onrender.com/graphql",
+    uri: "http://localhost:8000/graphql",
     cache: new InMemoryCache(),
     headers: headers
   });
@@ -79,7 +79,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Nephara</title>
+        <title>Nephara Skincare</title>
       </head>
       <body className={`${inter.variable} ${architects_daughter.variable} font-inter antialiased bg-gray-900 tracking-tight`} style={{ height: "100dvh" }}>
         <ApolloProvider client={graphqlClient}>

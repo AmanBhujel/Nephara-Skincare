@@ -58,7 +58,7 @@ const Page = () => {
                         "reasonForVisit": reason,
                         "allergies": allergies,
                         "productName": "Dr Uma Keyal",
-                        "productPrice": 3999,
+                        "productPrice": 30000,
                         "productImage": "https://imgs.search.brave.com/90kY2ne8nXXveKJC7OTzLJS_GUxXKhZlhKfpXf71rrE/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9w/aHlzaWNpYW4tcmV2/aWV3aW5nLWhpcy1u/b3Rlc18xMDk4LTU0/Mi5qcGc_c2l6ZT02/MjYmZXh0PWpwZw"
                     }
                 }

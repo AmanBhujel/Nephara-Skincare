@@ -40,11 +40,15 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                 appointmentId: appointmentData?._id
             }
         })
-        setImagesArray(response.data.getAppointmentImageById.imagesUrl)
+        if (response.data) {
+            setImagesArray(response.data.getAppointmentImageById.imagesUrl)
+            console.log(response.data.getAppointmentImageById.imagesUrl, "rsponse imside if")
+        }
     }
 
     const [isReportModalOpen, setIsReportModalOpen] = useState<boolean>(false);
     useEffect(() => {
+        console.log("from image use effect")
         if (appointmentData) {
             getImagesUrl();
             setAppointmentSelected(true)
@@ -62,7 +66,7 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
         try {
             const response = await getReport({
                 variables: {
-                    "appointmentId": "appoint-11"
+                    "appointmentId": "65d853329f3e5087c6271925"
                 }
             });
 
@@ -103,7 +107,7 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
 
     return (
         <div className={` lg:w-[60%]  xl:w-[60%] 2xl:w-[70%] w-full lg:flex lg:h-[700px] xl:h-[750px]  2xl:h-[770px]  overflow-auto rounded-[8px] ${appointmentSelected || windowWidth > 1024 ? "flex" : "hidden"} border-2 bg-white pb-0 mb-6 lg:mb-0`}>
-            <ReportModal isReportModalOpen={isReportModalOpen} setIsReportModalOpen={setIsReportModalOpen} />
+            <ReportModal isReportModalOpen={isReportModalOpen} setIsReportModalOpen={setIsReportModalOpen} appointmentId={appointmentData?._id || ""}/>
             <ToggleAppointmentModal appointmentId={appointmentData?._id} completedStatus={appointmentData?.completed} />
 
             {appointmentData ?
@@ -174,14 +178,14 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                                 <img
                                     key={index}
                                     src={imageUrl}
+                                    width={400}
+                                    height={600}
                                     alt={`Image ${index}`}
                                     className="w-24 h-24 cursor-pointer"
                                     onClick={() => handleImageClick(imageUrl)}
                                 />
                             ))}
                     </div>
-
-
                     <div className='h-full px-2'>
                         <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-semibold text-[#a3a1a9] px-4'>Appointment Info</p>
                         <div className='px-4 '>

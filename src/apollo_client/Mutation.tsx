@@ -93,9 +93,9 @@ mutation LoginDoctor($email: String!, $password: String!) {
   }`
 
 export const CREATE_REPORT = gql`
-  mutation GeneratePdf($appointmentId: String!, $prescriptions: PrescriptionArrayInput!, $followUp: FollowUpInput!, $doctorFeedback: String!) {
-      generateReportPdf(appointmentId: $appointmentId, prescriptions: $prescriptions, followUp: $followUp, doctorFeedback: $doctorFeedback)
-    }
+mutation GenerateReportPdf($appointmentId: String!, $prescriptions: PrescriptionArrayInput!, $followUp: FollowUpInput!, $doctorFeedback: String!, $patientProblems: PatientProblemsArrayInput!, $medicalHistory: MedicalHistoryArrayInput!) {
+  generateReportPdf(appointmentId: $appointmentId, prescriptions: $prescriptions, followUp: $followUp, doctorFeedback: $doctorFeedback, patientProblems: $patientProblems, medicalHistory: $medicalHistory)
+}
   `;
 
 export const RESET_PASSWORD = gql`

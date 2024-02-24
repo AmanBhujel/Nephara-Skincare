@@ -11,7 +11,7 @@ const Features = () => {
             <div className={`flex justify-center items-center w-[95%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto `}>
                 <div className="flex flex-col w-full justify-center items-center py-6 ">
                     <p className="text-[#a376ff] font-bold">Features</p>
-                    <h1 className="text-2xl sm:text-3xl font-bold md:mt-1">Our Service Features</h1>
+                    <h2 className="text-2xl sm:text-3xl font-bold md:mt-1">Our Service Features</h2>
 
                     <div className="flex w-full flex-col lg:flex-row lg:gap-x-[5%] xl:gap-x-[7%] 2xl:gap-x-[10%] items-center justify-center mt-4 lg:mt-10">
                         <div

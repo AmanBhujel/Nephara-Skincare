@@ -35,7 +35,7 @@ const TopSettingBar = () => {
     return (
         <div className='w-full h-16 sm:min-h-20 lg:mt-4 xl:mt-0 2xl:min-h-24 flex items-center justify-between'>
             <div className='lg:ml-16 xl:ml-0'>
-                <p className='text-xl sm:text-2xl lg:text-3xl font-semibold'>Account Settings</p>
+                <p className='text-xl sm:text-2xl lg:text-2xl xl:text-3xl font-semibold'>Account Settings</p>
                 <p className='text-sm sm:text-base text-gray-700'>Welcome to Nephara Skincare!</p>
             </div>
             <div className="items-center hidden sm:flex justify-center ml-[10%] relative cursor-pointer" onClick={handleDropdownToggle} >

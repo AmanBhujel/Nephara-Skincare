@@ -5,9 +5,8 @@ import BackgroundAppointment from '@/assets/DoctorConsulting.png'
 import { useLazyQuery } from "@apollo/client";
 import { IoArrowBack, } from "react-icons/io5";
 import Link from "next/link";
-import { GET_APPOINTMENT_IMAGES_BY_ID, GET_REPORT,GET_APPOINTMENT_DATA } from "@/apollo_client/Queries";
+import { GET_APPOINTMENT_IMAGES_BY_ID, GET_REPORT } from "@/apollo_client/Queries";
 import AppointmentTimer from "./AppointmentTimer";
-
 
 export interface Appointment {
     _id: string;
@@ -42,7 +41,6 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
     const [imagesArray, setImagesArray] = useState([]);
 
     const getImagesUrl = async () => {
-        console.log("its runnong ")
         const response = await getAppointmentImageById({
             variables: {
                 appointmentId: appointmentData?._id
@@ -115,15 +113,6 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
 
     }, []);
 
-
-    //      const getImagesLink = appointmentData?.s3ImagesKey.map(()=>{
-    //       const command = new GetObjectCommand({
-    //     Bucket: "nephara-skincare",
-    //     Key: key
-    // });
-    // const url = await getSignedUrl(s3Client, command);
-    // })
-
     return (
         <div className={` lg:w-[65%]  xl:w-[60%] 2xl:w-[70%] w-full lg:flex lg:h-[600px] xl:h-[650px] overflow-auto rounded-[8px] ${appointmentSelected || windowWidth > 1024 ? "flex" : "hidden"} border-2 mb-24 lg:mb-0 h-screen bg-white`}>
             {appointmentData ?
@@ -174,7 +163,7 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                                 >
                                     Close
                                 </button>
-                                <img src={selectedImage} alt="Selected Image" className="w-[40rem] max-w-screen object-contain" />
+                                <img src={selectedImage} alt="Selected Image" width={400} height={400} className="w-[40rem] max-w-screen object-contain" />
                             </div>
                         </div>
                     )}
@@ -186,6 +175,8 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                                 <img
                                     key={index}
                                     src={imageUrl}
+                                    width={400}
+                                    height={600}
                                     alt={`Image ${index}`}
                                     className="w-24 h-24 cursor-pointer"
                                     onClick={() => handleImageClick(imageUrl)}

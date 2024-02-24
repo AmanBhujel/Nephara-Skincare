@@ -52,7 +52,7 @@ const Feedback = () => {
       <div className={`flex justify-center items-center w-[100%] lg:w-[63rem] xl:w-[79rem] 2xl:w-[90rem] h-auto ${startAnimation ? "animatedFromBottom" : ""}`}>
         <div className="flex flex-col w-full justify-center items-center py-6 ">
           <p className="text-[#a376ff] text-sm sm:text-base font-bold">Testimonials</p>
-          <h1 className="text-2xl sm:text-3xl font-bold sm:mt-1">From Our Users</h1>
+          <h3 className="text-2xl sm:text-3xl font-bold sm:mt-1">From Our Users</h3>
 
           {windowWidth && windowWidth > 1024 ? (
             <div className="hidden lg:flex w-full flex-col lg:flex-row lg:gap-x-[5%] xl:gap-x-[7%] items-center justify-center mt-10">
@@ -70,7 +70,7 @@ const Feedback = () => {
                   </div>
                   <div className="h-[25%] w-full bg-[#4a2b8a] rounded-[6px] relative flex justify-center items-center flex-col">
                     <div className="absolute left-1/2 translate-x-[-50%] top-[-50%] flex items-center justify-center flex-col text-white">
-                      <Image src={feedback.image} width={100} height={100} className="w-20 h-20 border-2 border-white object-cover rounded-full " alt="Feedback" placeholder='blur' />
+                      <Image src={feedback.image} width={100} height={100} className="w-20 h-20 border-2 border-white object-cover rounded-full " alt="NephFeedbackara Feedback" placeholder='blur' />
                       <p className="font-semibold text-lg leading-4 mt-2">{feedback.name}</p>
                       <p className="text-sm ">{feedback.location}</p>
                     </div>

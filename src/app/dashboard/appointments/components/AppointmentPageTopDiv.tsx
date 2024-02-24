@@ -31,7 +31,7 @@ const AppointmentPageTopDiv = () => {
                         Book now
                     </button>
                 </Link>
-                <p className='font-medium text-lg flex justify-center items-center mt-2'>$50 |<span className='text-sm ml-2'> per appointment </span></p>
+                <p className='font-medium text-lg flex justify-center items-center mt-2'>$30 |<span className='text-sm ml-2'> per appointment </span></p>
             </div>
         </div>
     )

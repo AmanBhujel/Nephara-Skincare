@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { SlLogout } from "react-icons/sl";
 import SidebarImage from '@/assets/SidebarImage-.png';
-import { FaBars } from "react-icons/fa";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { LuCalendarDays } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
 import Logo from '@/assets/logo-sidebar.png';
 import Link from "next/link";
+import { HiMiniBars3BottomLeft } from "react-icons/hi2";
 
 interface SidebarForLargeScreensProps {
     isSidebarOpen: boolean;
@@ -76,7 +76,7 @@ const SidebarForLargeScreens: React.FC<SidebarForLargeScreensProps> = ({
                     </div>
                 </div>
             ) : (
-                <p className={`absolute top-8 left-8 text-3xl cursor-pointer z-50 ${activeSidebarItem && activeSidebarItem === "Appointments" ? "text-white" : "text-[#743bfb]"}`} onClick={() => setIsSidebarOpen(true)}><FaBars /> </p>
+                <p className={`absolute top-8 left-8 text-3xl cursor-pointer z-50 ${activeSidebarItem && activeSidebarItem === "Appointments" ? "text-white" : "text-[#743bfb]"}`} onClick={() => setIsSidebarOpen(true)}><HiMiniBars3BottomLeft /> </p>
             )}
         </>
     )

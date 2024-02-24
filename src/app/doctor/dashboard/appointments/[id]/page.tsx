@@ -128,9 +128,9 @@ const Page: NextPage<PageProps> = ({ params }) => {
             {isLoading ?
                 <div className='w-full h-screen grid items-center'><Loader /> </div> :
                 <>
-                    <div className='w-full  min-h-20 lg:mt-4 xl:mt-0 2xl:min-h-24 flex items-center justify-between border-b-2'>
+                    <div className='w-full  hidden lg:flex min-h-20 lg:mt-4 xl:mt-0 2xl:min-h-24 items-center justify-between border-b-2'>
                         <div className='lg:ml-16 xl:ml-14 '>
-                            <p className='text-2xl lg:text-3xl font-semibold'>Dr {doctorName} dashboard</p>
+                            <p className='text-xl md:text-2xl lg:text-3xl font-semibold'>Dr {doctorName}</p>
                             <p className='text-sm lg:text-base text-gray-700'>Welcome to Nephara Skincare!</p>
                         </div>
                         <div className="flex items-center justify-center mr-[10%] relative cursor-pointer" onClick={handleDropdownToggle} >
