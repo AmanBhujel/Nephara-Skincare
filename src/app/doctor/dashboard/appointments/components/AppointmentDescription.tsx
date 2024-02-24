@@ -66,7 +66,7 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
         try {
             const response = await getReport({
                 variables: {
-                    "appointmentId": "65d853329f3e5087c6271925"
+                    "appointmentId": appointmentData?._id
                 }
             });
 

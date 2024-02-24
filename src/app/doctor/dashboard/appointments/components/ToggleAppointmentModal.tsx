@@ -33,6 +33,7 @@ const ToggleAppointmentModal: React.FC<ToggleAppointmentModalProps> = ({ appoint
                     "completed": status === 'completed' ? true : false
                 }
             });
+            window.location.reload();
             console.log("response from mutation", response);
         }
         setIsToggleModalOpen(false);

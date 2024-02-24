@@ -5,9 +5,6 @@ import React, { useEffect, useState } from 'react';
 import { IoArrowForward } from "react-icons/io5";
 import { IoIosCalendar } from "react-icons/io";
 import Alphabet from '@/assets/alphabet.png';
-import { Appointments } from '@/data/AppointmentData';
-import Link from 'next/link';
-import { useLoadingStore } from "@/stores/LoadingStore";
 import { MdOutlineComputer } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import { useDoctorArrayStore } from "@/stores/DoctorAppointmentArray";
@@ -16,7 +13,6 @@ import { useDoctorArrayStore } from "@/stores/DoctorAppointmentArray";
 const AppointmentLists = () => {
     const appointmentSelected = useDashboardStore((state) => state.appointmentSelected);
     const selectedAppointmentFilter = useDashboardStore((state) => state.selectedAppointmentFilter);
-    const setIsLoading = useLoadingStore((state) => state.setIsLoading);
     const selectedAppointmentId = useDashboardStore((state) => state.selectedAppointmentId)
     const setSelectedAppointmentId = useDashboardStore((state) => state.setSelectedAppointmentId);
     const [windowWidth, setWindowWidth] = useState<number>(0);
@@ -24,7 +20,6 @@ const AppointmentLists = () => {
     const appointmentArray = useDoctorArrayStore((state) => state.DoctorArrayStore);
 
     const handleAppointmentClicked = (id: string) => {
-        setIsLoading(true)
         setSelectedAppointmentId(id)
         router.push(`/doctor/dashboard/appointments/${id}`);
     }

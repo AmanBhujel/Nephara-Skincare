@@ -47,7 +47,7 @@ export const Signin: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
                 router.replace('/dashboard/profile');
             }
         } catch (error) {
-            ToastMessage('error', 'Internal Server Error')
+            ToastMessage('error', 'Internal Server Error');
         }
     };
 

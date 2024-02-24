@@ -13,7 +13,7 @@ const WhoWeAre = () => {
             className="flex w-full justify-center items-center border-b-2">
             <div className="flex flex-col lg:flex-row justify-center items-center w-[95%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto py-4 sm:py-8  xl:h-[35rem] ">
                 <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[40%] xl:w-[50%] h-full flex justify-center items-center">
-                    <Image src={Nurse} width={400} height={600} className="w-[90%] bg-contain rounded-[8px] " alt="Nurse" placeholder='blur'/>
+                    <Image src={Nurse} width={400} height={600} className="w-[90%] bg-contain rounded-[8px] " alt="Nephara Information" placeholder='blur'/>
                 </div>
                 <div className=" w-[95%] md:w-[90%] lg:w-[57%] xl:w-[50%] h-[95%] flex flex-col justify-center items-center lg:items-start">
                     <p className="text-2xl sm:text-3xl text-[#a376ff] font-semibold lg:ml-6 mt-2 lg:mt-0">WHO WE ARE</p>

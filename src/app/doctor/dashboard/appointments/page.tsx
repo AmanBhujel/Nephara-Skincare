@@ -68,7 +68,22 @@ const Page: NextPage<PageProps> = ({ params }) => {
     }, []);
 
     const handleLogout = () => {
-        setIsLogoutModalOpen(true);
+        const cookieName = 'doctor-token';
+        const cookiePath = '/';
+        const domain = window.location.hostname;
+        const existingCookie = document.cookie
+          .split(';')
+          .map((c) => c.trim())
+          .find((cookie) => cookie.startsWith(`${cookieName}=`));
+    
+        if (existingCookie) {
+          document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${cookiePath}; domain=${domain};`;
+          ToastMessage('success', 'Logged out successfully');
+          setIsLogoutModalOpen(false);
+          setIsLoading(true);
+          router.replace('/');
+          window.location.reload();
+        }
     };
 
     useEffect(() => {

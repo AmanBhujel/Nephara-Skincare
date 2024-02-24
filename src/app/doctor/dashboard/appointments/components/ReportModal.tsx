@@ -15,7 +15,7 @@ const ReportModal: React.FC<MyModalProps> = ({ isReportModalOpen, setIsReportMod
     const [complaints, setComplaints] = useState<string[]>(['']);
     const [medicalHistory, setMedicalHistory] = useState<string[]>(['']);
     const [followUpType, setFollowUpType] = useState<string>('');
-    const [followUpDate, setFollowUpDate] = useState<string>("");
+    const [followUpDate, setFollowUpDate] = useState<string>("15-days");
     const [generateReportPdf] = useMutation(CREATE_REPORT);
     const [doctorFeedback, setDoctorFeedback] = useState<string>('');
 

@@ -1,4 +1,5 @@
 import ToastMessage from "@/components/utils/ToastMessage";
+import { useUserStore } from "@/stores/userStore";
 import { useState } from "react";
 import { IoChevronBackOutline } from "react-icons/io5";
 
@@ -12,7 +13,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ activeSettingButton, se
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [passwordError, setPasswordError] = useState<string | null>(null);
     const [confirmPasswordError, setConfirmPasswordError] = useState<string | null>(null);
-
+    const userInfo = useUserStore((state) => state.userInfo);
     const handleChangePassword = async () => {
         try {
             setPasswordError(null);
@@ -45,7 +46,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ activeSettingButton, se
                 <p className="text-gray-600 text-sm font-medium">Securely update your account password</p>
             </div>
             <div className='flex flex-col mt-8 w-[95%] sm:w-[80%] md:w-[60%]'>
-                <p className="text-gray-500 text-[12px] sm:text-sm font-medium">You are signed in as <strong> evansunde2@gmail.com </strong></p>
+                <p className="text-gray-500 text-[12px] sm:text-sm font-medium">You are signed in as <strong> {userInfo[0]?.email} </strong></p>
                 <label htmlFor="password" className="block text-gray-700 text-sm mb-1">
                     Password
                 </label>

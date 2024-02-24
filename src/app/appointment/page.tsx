@@ -20,11 +20,10 @@ const Page = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [selectedTime, setSelectedTime] = useState<string>('');
     const [reason, setReason] = useState<string>('');
-    const [name, setName] = useState<string>("");
     const [allergies, setAllergies] = useState<string>("");
     const [comment, setComment] = useState<string>("");
     const setStripeSessionId = UseStripeStore((state) => state.setStripeSessionId);
-    const userInfo = useUserStore((state)=>state.userInfo);
+    const userInfo = useUserStore((state) => state.userInfo);
     // --------for images---------
     const [images, setImages] = useState<File[]>([]);
 
@@ -42,14 +41,14 @@ const Page = () => {
 
     const handleBookAppointment = async () => {
         try {
-            if (!selectedDate || !selectedTimeZone || !selectedTime || !allergies || !name || !reason) {
+            if (!selectedDate || !selectedTimeZone || !selectedTime || !allergies || !reason) {
                 ToastMessage("error", "Please fill all the boxes.")
                 return;
             }
             const response = await createAppointmentAndCheckoutSession(
                 {
                     variables: {
-                        "fullName": name,
+                        "fullName": userInfo[0]?.name,
                         "email": userInfo[0]?.email,
                         "appointmentDate": selectedDate?.toDateString(),
                         "appointmentTime": selectedTime,
@@ -219,8 +218,8 @@ const Page = () => {
                         <input
                             type='text'
                             placeholder='Enter your Name...'
+                            value={userInfo[0]?.name}
                             className='w-[100%] sm:w-[95%] lg:w-[90%] h-10 border rounded-[6px] border-gray-500 px-3 outline-none mt-2 sm:mt-0'
-                            onChange={(e) => setName(e.target.value)}
                         />
                         <p className='font-medium mt-4'>Email*</p>
                         <input
