@@ -16,6 +16,10 @@ import BlogContent from "./components/BlogContent";
 import { GET_USER_INFO } from "@/apollo_client/Queries";
 import Head from 'next/head'
 
+// export const metadata = {
+//     title: 'Demo - ModalJS',
+//   };
+
 const Page = () => {
     const router = useRouter();
     const isLoading = useLoadingStore((state) => state.isLoading);
@@ -36,7 +40,11 @@ const Page = () => {
     return (
         <main className='bg-[#f9fdff]'>
             <Head>
-                <title>My new cool app</title>
+                <meta charSet="UTF-8" />
+                <meta name="keywords" content="titla, meta, nextjs" />
+                <meta name="author" content="Syamlal CM" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>NOt working blog</title>
             </Head>
             {isLoading ?
                 <div className='w-full h-screen flex items-center justify-center'>

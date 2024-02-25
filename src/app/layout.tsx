@@ -1,15 +1,15 @@
 'use client'
 // import type { Metadata } from 'next'
-import { Inter, Architects_Daughter } from 'next/font/google'
-import './globals.css'
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+import { Inter, Architects_Daughter } from 'next/font/google';
+import './globals.css';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { Toaster } from 'sonner';
 import { NextUIProvider } from "@nextui-org/react";
-import LogoutModal from '@/components/LogoutModal'
-import { getCookie } from '@/components/utils/Cookie'
-import { useEffect, useState } from 'react'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
+import LogoutModal from '@/components/LogoutModal';
+import { getCookie } from '@/components/utils/Cookie';
+import { useEffect, useState } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -22,7 +22,7 @@ const architects_daughter = Architects_Daughter({
   variable: '--font-architects-daughter',
   weight: '400',
   display: 'swap'
-})
+});
 
 // export const metadata: Metadata = {
 //   title: 'Create Next App',
@@ -45,8 +45,8 @@ export default function RootLayout({
   };
 
   const graphqlClient = new ApolloClient({
-    // uri: "https://nephara-backend.onrender.com/graphql",
-    uri: "http://localhost:8000/graphql",
+    uri: "https://nephara-backend.onrender.com/graphql",
+    // uri: "http://localhost:8000/graphql",
     cache: new InMemoryCache(),
     headers: headers
   });
@@ -79,7 +79,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Nephara Skincare</title>
+        {/* <title>Nephara Skincare</title> */}
       </head>
       <body className={`${inter.variable} ${architects_daughter.variable} font-inter antialiased bg-gray-900 tracking-tight`} style={{ height: "100dvh" }}>
         <ApolloProvider client={graphqlClient}>
@@ -92,4 +92,4 @@ export default function RootLayout({
       </body>
     </html>
   )
-}
+};
