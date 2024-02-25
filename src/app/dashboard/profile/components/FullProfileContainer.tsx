@@ -19,7 +19,6 @@ const FullProfileContainer = () => {
                 <div className='flex w-full gap-x-[5%] justify-center mt-2 sm:mt-4'>
                     <p className='w-[40%] py-1 border-b-1 sm:text-lg'>{userInfo[0].name || ""}</p>
                     <p className='w-[40%] py-1 border-b-1 sm:text-lg'>{userInfo[0].phoneNumber || ""}</p>
-
                 </div>
                 <p className='w-[85%] py-1 border-b-1 sm:text-lg mt-4'>{userInfo[0].email || ""}</p>
                 <Link href={'/dashboard/settings'}>

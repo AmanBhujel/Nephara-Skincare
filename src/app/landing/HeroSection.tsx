@@ -15,7 +15,7 @@ const HeroSection = () => {
           <div className="flex items-center mt-6 md:mt-8 lg:mt-8" data-aos="zoom-y-out" data-aos-delay="300">
             <Link href={'/appointment'}>
               <button className="bg-[#8f67e2] hover:bg-[#9c75e9] py-2 px-6 md:py-3  md:px-9 font-semibold text-lg text-white rounded-[8px] transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg">Book now</button></Link>
-            <Link href={'/blogs'}>
+            <Link href={'/blogs/doctor-uma-keyal'}>
               <button className="ml-8 flex justify-center items-center tracking-wide hover:underline text-sm lg:text-base text-[#d25d7a] transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 " >About Us <i className="ml-3 text-3xl"><FaCircleArrowRight /> </i></button>
             </Link>
           </div>

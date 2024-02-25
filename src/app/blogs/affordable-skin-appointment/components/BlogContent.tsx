@@ -2,7 +2,7 @@ const BlogContent = () => {
     return (
         <div className='w-[98%] sm:w-[90%] md:w-[80%] lg:w-[70%] h-auto flex flex-col gap-y-6 lg:gap-y-10 '>
             <div id="introduction" className='w-full'>
-                <h6 className='text-xl sm:text-2xl xl:text-3xl font-medium  lg:mb-2'>Introduction</h6>
+                <h1 className='text-xl sm:text-2xl xl:text-3xl font-medium  lg:mb-2'>Online SKin Appointment</h1>
                 <p className='text-[#666666] sm:text-lg xl:text-xl text-justify '>Welcome to Nephara, your premier destination for comprehensive online dermatology healthcare. At Nephara, we are dedicated to revolutionizing the way individuals receive skin care by offering virtual consultations from the convenience of their homes. Our platform connects users with expert dermatologists who provide personalized assessments and treatment plans tailored to each individual&apos;s unique needs. With our commitment to excellence and innovation, Nephara aims to empower users to prioritize their skin health and achieve optimal results, all through seamless and accessible virtual appointments.</p>
             </div>
             <div id="affordable" className='w-full'>
