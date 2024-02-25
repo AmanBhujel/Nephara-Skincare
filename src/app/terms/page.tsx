@@ -6,7 +6,7 @@ import Link from 'next/link';
 const TermsAndConditions = () => {
     return (
         <div className='flex flex-col min-h-screen bg-white'>
-            <Navbar />
+            <Navbar item=""/>
             <main className='bg-white flex justify-center text-sm sm:text-base'>
                 <div className='w-[98%] sm:w-[90%] md:w-[75%] lg:w-[65%] xl:w-[50%] px-4 sm:px-0 mb-8'>
                     <div className='mt-8'><h2 className='text-3xl font-bold text-center'>Terms and Conditions</h2>
