@@ -39,7 +39,7 @@ const Navbar = () => {
 
     const menuItems = [
         { name: 'Home', route: "/" },
-        { name: 'Blogs', route: "/blogs" },
+        { name: 'Blogs', route: "/blogs/doctor-uma-keyal" },
         { name: 'FAQs', route: "#faq" },
         { name: 'Dashboard', route: "/dashboard/profile" },
     ];

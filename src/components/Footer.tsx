@@ -14,7 +14,7 @@ const Footer = () => {
                     <h6 className="font-bold sm:text-lg xl:text-xl">Navigate</h6>
                     <ul className="mt-1 sm:mt-3 gap-y-1 flex flex-col text-sm xl:text-base">
                         <li className="cursor-pointer hover:underline"><Link href="/">Home </Link></li>
-                        <li className="cursor-pointer hover:underline"><Link href="/blogs"> Blogs </Link></li>
+                        <li className="cursor-pointer hover:underline"><Link href="/blogs/doctor-uma-keyal"> Blogs </Link></li>
                         <li className="cursor-pointer hover:underline">< Link href="/dashboard/profile">Profile</Link></li>
                         <li className="cursor-pointer hover:underline"><Link href="/dashboard/settings">Settings</Link></li>
                     </ul>
