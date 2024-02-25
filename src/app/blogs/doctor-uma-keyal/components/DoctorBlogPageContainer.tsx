@@ -39,7 +39,7 @@ const DoctorBlogPageContainer = () => {
                     <Loader />
                 </div> :
                 <>
-                    <Navbar />
+                    <Navbar item="Blogs"/>
                     <div
                         className="flex w-full justify-center items-center bg-[#f9fdff">
                         <div className={`flex flex-col justify-center items-center w-[95%] lg:w-[63rem]  xl:w-[79rem] 2xl:w-[90rem] h-auto relative`}>

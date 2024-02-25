@@ -50,7 +50,7 @@ export default function RootLayout({
         <meta name="twitter:image" content="URL of an image to display" />
 
       </head>
-      <body className={`${inter.variable} ${architects_daughter.variable} font-inter antialiased bg-gray-900 tracking-tight`} style={{ height: "100dvh" }}>
+      <body className={`${inter.variable} ${architects_daughter.variable} font-inter antialiased bg-gray-900 tracking-tight`} style={{ height: "100dvh",overflowX:"hidden" }}>
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
