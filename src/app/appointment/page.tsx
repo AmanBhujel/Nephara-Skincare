@@ -11,7 +11,8 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { CREATE_APPOINTMENT_AND_STRIPE_SESSION, UPDATE_IMAGES_AFTER_S3_UPLOAD } from '@/apollo_client/Mutation';
 import Image from 'next/image';
 import { useUserStore } from '@/stores/userStore';
-import img64 from '@/assets/base64';
+import img64 from '@/data/base64';
+import { DateTime } from 'luxon'
 
 const Page = () => {
     const [createAppointmentAndCheckoutSession] = useMutation(CREATE_APPOINTMENT_AND_STRIPE_SESSION);
@@ -50,8 +51,8 @@ const Page = () => {
                     variables: {
                         "fullName": userInfo[0]?.name,
                         "email": userInfo[0]?.email,
-                        "appointmentDate": selectedDate?.toDateString(),
-                        "appointmentTime": selectedTime,
+                        "appointmentDate": selectedDate?.toUTCString(),
+                        "appointmentTime": DateTime.fromFormat(selectedTime, 'h:mm a', { zone: selectedTimeZone.valueOf() }).toUTC().toFormat('HH:mm'),
                         "timezone": selectedTimeZone,
                         "comment": comment,
                         "reasonForVisit": reason,

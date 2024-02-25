@@ -1,4 +1,4 @@
-import img64 from "@/assets/base64";
+import img64 from "@/data/base64";
 import { useLogoutStore } from "@/stores/LogoutStore";
 import { useUserStore } from "@/stores/userStore";
 import Image from "next/image";

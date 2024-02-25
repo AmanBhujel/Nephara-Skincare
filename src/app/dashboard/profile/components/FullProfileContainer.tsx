@@ -3,7 +3,7 @@ import MobileProfileDetails from "./MobileProfileDetails";
 import ProfileDetailsForLargeScreens from "./ProfileDetailsForLargeScreens";
 import Link from "next/link";
 import Image from "next/image";
-import img64 from "@/assets/base64";
+import img64 from "@/data/base64";
 
 const FullProfileContainer = () => {
     const userInfo = useUserStore((state) => state.userInfo)

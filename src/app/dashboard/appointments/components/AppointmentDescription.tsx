@@ -61,6 +61,17 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
         setSelectedImage(null);
     };
 
+
+    const getLocalDate = (appointmentDate: string | undefined): Date => {
+        const localDate = new Date(appointmentDate || "");
+        return localDate;
+    };
+
+    const getLocalTime = (utcTime: string | undefined): Date => {
+        const localTime = new Date(utcTime || "");
+        return localTime;
+    };
+
     const handleSeeReportClick = async () => {
         try {
             const response = await getReport({
@@ -139,8 +150,8 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                     {!appointmentData.completed ?
                         (<div className='bg-[#f1f1ff] mt-4 py-2 text-xl flex justify-between  items-center font-medium text-black px-4'>
                             <AppointmentTimer
-                                appointmentDate={appointmentData?.appointmentDate}
-                                appointmentTime={appointmentData?.appointmentTime}
+                                appointmentDate={getLocalDate(appointmentData?.appointmentDate)?.toString()} 
+                                appointmentTime={getLocalTime(appointmentData?.appointmentTime)?.toString()}
                             />
 
                             <a href={`http://localhost:8080/join?room=${appointmentData._id}&name=${appointmentData.fullName}`} target="_blank" rel="noopener noreferrer">
@@ -193,14 +204,14 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                             {/* <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'>{appointmentData?.report_id}</p> */}
 
                             <p className='text-[#807c83] sm:text-lg lg:text-base mt-2 font-medium '>Appointment Date</p>
-                            <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'>{appointmentData?.appointmentDate}</p>
+                            <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'>{getLocalDate(appointmentData?.appointmentDate)?.toDateString()} </p>
                         </div>
                         <p className='bg-[#f1f1ff] mt-4 py-1 sm:text-lg font-semibold text-[#a3a1a9] px-4'>Time Info</p>
                         <div className='px-4 '>
                             <p className='text-[#807c83] mt-2 sm:text-lg lg:text-base font-medium'>Timezone</p>
                             <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'> {appointmentData?.timezone}</p>
                             <p className='text-[#807c83] mt-2 font-medium'>Time</p>
-                            <p className='sm:text-lg lg:text-base font-medium mt-1 mb-1'>{appointmentData?.appointmentTime}</p>
+                            <p className='sm:text-lg lg:text-base font-medium mt-1 mb-1'>{getLocalTime(appointmentData?.appointmentTime)?.toString()}</p>
                         </div>
                         <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-semibold text-[#a3a1a9] px-4'>Other Info</p>
                         <div className='px-4'>

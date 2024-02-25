@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { TbCameraPlus } from "react-icons/tb";
-import img64 from "@/assets/base64";
+import img64 from "@/data/base64";
 
 interface EditProfileProps {
     activeSettingButton: string;
