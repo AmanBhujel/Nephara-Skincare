@@ -5,20 +5,20 @@ interface AppointmentTimerProps {
     appointmentTime: string;
 }
 
+export function formatDate(dateString: string): string {
+  const trimmedDateString = dateString.substring(3);
+    const date = new Date(trimmedDateString);
+    const year = date.getFullYear();
+  const month = ('0' + (date.getMonth() + 1)).slice(-2);
+  const day = ('0' + date.getDate()).slice(-2);
+
+  return `${year}-${month}-${day}`;
+}
+
 const AppointmentTimer: React.FC<AppointmentTimerProps> = ({ appointmentDate, appointmentTime }) => {
   const [timeLeft, setTimeLeft] = useState<string>('');
   const [joinEnabled,setJoinEnabled] = useState<boolean>(false);
 
-
-  function formatDate(dateString: string): string {
-    const trimmedDateString = dateString.substring(3);
-      const date = new Date(trimmedDateString);
-      const year = date.getFullYear();
-    const month = ('0' + (date.getMonth() + 1)).slice(-2);
-    const day = ('0' + date.getDate()).slice(-2);
-  
-    return `${year}-${month}-${day}`;
-  }
 
   function convertTo24Hour(time: string): string {
     const [hour, minutePart] = time.split(':');

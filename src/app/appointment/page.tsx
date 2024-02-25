@@ -46,13 +46,16 @@ const Page = () => {
                 ToastMessage("error", "Please fill all the boxes.")
                 return;
             }
+            const selectedDateTime = DateTime.fromFormat(selectedTime, 'h:mm a', { zone: selectedTimeZone.valueOf() });
+            const utcAppointmentTime = selectedDateTime.toUTC().toFormat('HH:mm');
+    
             const response = await createAppointmentAndCheckoutSession(
                 {
                     variables: {
                         "fullName": userInfo[0]?.name,
                         "email": userInfo[0]?.email,
                         "appointmentDate": selectedDate?.toUTCString(),
-                        "appointmentTime": DateTime.fromFormat(selectedTime, 'h:mm a', { zone: selectedTimeZone.valueOf() }).toUTC().toFormat('HH:mm'),
+                        "appointmentTime": utcAppointmentTime,
                         "timezone": selectedTimeZone,
                         "comment": comment,
                         "reasonForVisit": reason,

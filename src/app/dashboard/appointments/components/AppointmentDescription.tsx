@@ -6,7 +6,7 @@ import { useLazyQuery } from "@apollo/client";
 import { IoArrowBack, } from "react-icons/io5";
 import Link from "next/link";
 import { GET_APPOINTMENT_IMAGES_BY_ID, GET_REPORT } from "@/apollo_client/Queries";
-import AppointmentTimer from "./AppointmentTimer";
+import AppointmentTimer,{formatDate} from "./AppointmentTimer";
 
 export interface Appointment {
     _id: string;
@@ -67,9 +67,13 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
         return localDate;
     };
 
-    const getLocalTime = (utcTime: string | undefined): Date => {
-        const localTime = new Date(utcTime || "");
-        return localTime;
+    const getLocalTime = (utcTime: string | undefined): string => {
+        if (!utcTime) return "00:01 AM";
+        const formatedDate = formatDate(appointmentData?.appointmentDate ?? "");
+        const utcDate = new Date(`${formatedDate}T${utcTime}Z`);
+        const formattedLocalTime = utcDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+
+        return formattedLocalTime;
     };
 
     const handleSeeReportClick = async () => {
@@ -211,7 +215,7 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                             <p className='text-[#807c83] mt-2 sm:text-lg lg:text-base font-medium'>Timezone</p>
                             <p className='font-medium mt-1 sm:text-lg lg:text-base mb-1'> {appointmentData?.timezone}</p>
                             <p className='text-[#807c83] mt-2 font-medium'>Time</p>
-                            <p className='sm:text-lg lg:text-base font-medium mt-1 mb-1'>{getLocalTime(appointmentData?.appointmentTime)?.toString()}</p>
+                            <p className='sm:text-lg lg:text-base font-medium mt-1 mb-1'>{getLocalTime(appointmentData?.appointmentTime)}</p>
                         </div>
                         <p className='bg-[#f1f1ff] mt-4 py-1 text-lg font-semibold text-[#a3a1a9] px-4'>Other Info</p>
                         <div className='px-4'>
