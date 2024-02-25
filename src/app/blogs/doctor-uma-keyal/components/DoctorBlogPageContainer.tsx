@@ -10,13 +10,12 @@ import { useUserStore } from '@/stores/userStore';
 import { useLoadingStore } from '@/stores/LoadingStore';
 import { useAuthorizedStore } from '@/stores/AuthorizedStore';
 import Loader from '@/components/Loader';
-import DoctorBlogNavigationBox from "./components/DoctorBlogNavigationBox";
+import DoctorBlogNavigationBox from "./DoctorBlogNavigationBox";
 import { getUserInfo } from "@/components/utils/GetUserInfo";
-import BlogContent from "./components/DoctorBlog";
+import BlogContent from "./DoctorBlog";
 import { GET_USER_INFO } from "@/apollo_client/Queries";
-import Head from 'next/head'
 
-const Page = () => {
+const DoctorBlogPageContainer = () => {
     const router = useRouter();
     const isLoading = useLoadingStore((state) => state.isLoading);
     const setIsLoading = useLoadingStore((state) => state.setIsLoading);
@@ -35,9 +34,6 @@ const Page = () => {
 
     return (
         <main className='bg-[#f9fdff]'>
-            <Head>
-                <title>My new cool app</title>
-            </Head>
             {isLoading ?
                 <div className='w-full h-screen flex items-center justify-center'>
                     <Loader />
@@ -65,4 +61,4 @@ const Page = () => {
     )
 }
 
-export default Page;
+export default DoctorBlogPageContainer

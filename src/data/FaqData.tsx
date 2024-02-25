@@ -18,7 +18,7 @@ const faqs = [
     },
     {
       question: "What is the price for one appointment?",
-      answer: "The fee for a single appointment is $40, reflective of the unparalleled quality of care and personalized attention delivered by our distinguished team of professional skin care specialists."
+      answer: "The fee for a single appointment is $30, reflective of the unparalleled quality of care and personalized attention delivered by our distinguished team of professional skin care specialists."
     },
     {
       question: "I cannot attend the appointment; what should I do?",
