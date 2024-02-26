@@ -1,5 +1,4 @@
 'use client'
-
 import React, { useEffect, useState } from "react";
 import { Accordion, AccordionItem } from "@nextui-org/react";
 import faqs from "@/data/FaqData";

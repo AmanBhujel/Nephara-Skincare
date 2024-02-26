@@ -1,4 +1,4 @@
-// 'use client'
+'use client'
 import React from 'react'
 import { MdOutlineAttachMoney } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";

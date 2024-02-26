@@ -1,7 +1,7 @@
 import { IoHomeOutline, IoSettingsOutline } from "react-icons/io5";
 import { FaMicroblog } from "react-icons/fa";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLoadingStore } from "@/stores/LoadingStore";
 import { usePathname, useRouter } from "next/navigation";
 import { FaBars } from 'react-icons/fa6';
@@ -10,22 +10,21 @@ import Logo from '@/assets/logo-sidebar.png';
 import Link from "next/link";
 
 interface MobileNavbarProps {
-    sidebarRef: React.RefObject<HTMLDivElement>;
+    activeItem: string;
     setShowSidebar: React.Dispatch<React.SetStateAction<boolean>>;
     showSidebar: boolean;
     isAuthorized: boolean;
 }
 
 const MobileNavbar: React.FC<MobileNavbarProps> = ({
-    sidebarRef,
+    activeItem,
     setShowSidebar,
     showSidebar,
     isAuthorized,
 }) => {
-    const [sidebarActiveItem, setSidebarActiveItem] = useState("Home");
     const router = useRouter();
-    const pathname = usePathname();
     const setIsLoading = useLoadingStore((state) => state.setIsLoading);
+    const sidebarRef = useRef(null);
 
     const MenuItemsMobileSidebar = [
         { icon: <IoHomeOutline />, name: 'Home', route: "/" },
@@ -35,22 +34,25 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
     ];
 
     const handleMobileMenuButtonClick = (item: any) => {
-        if (item.name !== sidebarActiveItem) {
+        if (item.name !== activeItem) {
             router.push(item.route);
             setIsLoading(true);
         }
-        setSidebarActiveItem(item.name)
     };
 
     useEffect(() => {
-        if (pathname === "/blogs") {
-            setSidebarActiveItem("Blogs")
-        }
-        if (pathname === "/") {
-            setSidebarActiveItem("Home")
-        }
+        const handleClickOutside = (event: MouseEvent) => {
+            if (sidebarRef.current && !(sidebarRef.current as any).contains(event.target)) {
+                setShowSidebar(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [sidebarRef]);
 
     return (
         <div ref={sidebarRef} className='bg-white border-2 w-[310px] h-full right-0 top-0 flex flex-col items-center fixed z-50' style={{ height: "100lvh" }}>
@@ -63,7 +65,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
                     <li
                         key={index}
                         onClick={() => handleMobileMenuButtonClick(item)}
-                        className={`flex w-full rounded-[7px] h-14 text-lg font-medium hover:bg-[#a376ff] hover:text-white items-center cursor-pointer ${sidebarActiveItem === item.name ? "bg-[#a376ff] text-white" : ""}`}
+                        className={`flex w-full rounded-[7px] h-14 text-lg font-medium hover:bg-[#a376ff] hover:text-white items-center cursor-pointer ${activeItem === item.name ? "bg-[#a376ff] text-white" : ""}`}
                     >
                         <i className='ml-6 mr-3 text-2xl'>{item.icon}</i>
                         {item.name}
