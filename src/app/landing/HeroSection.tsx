@@ -1,5 +1,5 @@
 import React from 'react';
-import Profile from '@/assets/beautiful-nurse.png';
+import Profile from '@/assets/beautiful-nurse1.png';
 import Image from "next/image";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import Link from 'next/link';
@@ -21,7 +21,7 @@ const HeroSection = () => {
           </div>
           <div className='flex justify-between mt-6'>
             <div className='w-full'>
-              <ul className="text-base font-medium text-gray-400 -mb-2">
+              <ul className="text-base font-medium text-gray-500 -mb-2">
                 <li className="flex items-center mb-2">
                   <svg className="w-3 h-3 fill-current text-green-500 mr-2 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />

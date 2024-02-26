@@ -65,14 +65,14 @@ const LargeNavbar = ({ activeItem }: { activeItem: string }) => {
         <>
             <ul className="hidden lg:flex items-center justify-center gap-x-10 lg:ml-[13%] xl:ml-[27%] 2xl:ml-[37%]">
                 {menuItems.map((item, index) => (
-                    <Link key={index} href={item.route || "/"} scroll={false}>
-                        <li className={`xl:text-base cursor-pointer ${item.name === activeItem ? "underline underline-offset-8 text-black" : "text-gray-500"} hover:underline hover:underline-offset-8 font-medium tracking-tight hover:text-black `}
-                            onClick={() => {
-                                handleMenuItemClick(item)
-                            }}>
+                    <li key={index} className={`xl:text-base cursor-pointer ${item.name === activeItem ? "underline underline-offset-8 text-black" : "text-gray-500"} hover:underline hover:underline-offset-8 font-medium tracking-tight hover:text-black `}
+                        onClick={() => {
+                            handleMenuItemClick(item)
+                        }}>
+                        <Link href={item.route || "/"} scroll={false}>
                             {item.name}
-                        </li>
-                    </Link>
+                        </Link>
+                    </li>
                 ))}
             </ul>
 

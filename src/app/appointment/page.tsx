@@ -108,9 +108,9 @@ const Page = () => {
     return (
         <div className='w-full h-auto lg:h-screen flex justify-center bg-white'>
             <div className='w-[95%] lg:w-[78rem] lg:min-w-[78rem] xl:w-[90rem] h-auto lg:h-[50rem] pb-12 sm:pb-8  xl:h-[49rem] mt-12 flex flex-col items-center p-0'>
-                <h3 className='text-4xl md:text-5xl font-semibold text-[#0736bc]'>Make an appointment</h3>
-                <p className='text-sm sm:text-base md:text-lg text-[#6e6e6e] font-medium mt-4 text-center'>By filling out the form, you automatically make an appointment with a doctor.</p>
-                <p className='text-sm sm:text-base md:text-lg text-[#6e6e6e] font-medium text-center'>A reminder will be sent in the email.</p>
+                <h3 className='text-3xl sm:text-4xl md:text-5xl font-semibold text-[#0736bc] text-center'>Make an appointment</h3>
+                <p className='text-sm sm:text-base md:text-lg text-[#6e6e6e] font-medium mt-1 sm:mt-4 text-center'>Please provide accurate information for medical use and reporting.</p>
+                {/* <p className='text-sm sm:text-base md:text-lg text-[#6e6e6e] font-medium text-center'></p> */}
                 <div className='w-full md:w-[80%]  h-auto lg:h-[48rem] mt-8 md:border md:shadow-xl flex  items-center lg:justify-around flex-col lg:flex-row'>
 
                     {/* ---------GENERAL INFORMATION------------- */}
@@ -123,10 +123,10 @@ const Page = () => {
                                 <label className='font-semibold mt-2 mb-1'>Date*</label>
                                 <DatePickerDemo onDateChange={setSelectedDate} />
                             </div>
-                            <div className='flex flex-col w-[45%] '>
+                            <div className='flex flex-col w-[45%]'>
                                 <label className='font-medium mt-2 mb-1'>Time*</label>
                                 <select
-                                    className='w-[100%] sm:w-full h-10 border rounded-[6px] border-gray-500 px-3 outline-none  bg-white '
+                                    className='w-[100%] sm:w-full h-10 text-sm sm:text-base border rounded-[6px] border-gray-500 px-3 outline-none  bg-white '
                                     value={selectedTime}
                                     onChange={(e) => setSelectedTime(e.target.value)}
                                 >
