@@ -3,8 +3,9 @@
     "background_color": "#f9fdff",
     "display": "standalone",
     "scope": "/",
+    "orientation": "portrait",
     "start_url": "/",
-    "name": "Nephara",
+    "splash_pages": null,
     "short_name": "Nephara",
     "description": "Online Dermatologist Appointment",
     "icons": [
@@ -27,6 +28,12 @@
             "src": "/android-chrome-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
-        }
+        },
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+          }
     ]
 }

@@ -36,6 +36,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="index, follow" />
         <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#743bfb"/>
         <link rel="icon" href="/favicon.ico" sizes="32x32 64x64" />
         <meta name="robots" content="noindex, nofollow" />
         <link rel="apple-touch-icon" sizes="180x180" href={Icon.src} />
