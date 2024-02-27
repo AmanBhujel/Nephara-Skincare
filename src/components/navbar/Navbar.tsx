@@ -10,7 +10,7 @@ import LogoutModal from '@/components/LogoutModal';
 // import { GET_USER_INFO } from '@/apollo_client/Queries';
 // import { useLazyQuery } from '@apollo/client';
 // import { getUserInfo } from '../utils/GetUserInfo';
-import img64 from '@/assets/base64';
+import img64 from '@/data/base64';
 
 const LazyMobileNavbar = lazy(() => import('./MobileNavbar'));
 const LargeNavbar = lazy(() => import('./LargeNavbar'));
@@ -70,7 +70,7 @@ const Navbar = ({ item }: { item: string }) => {
 
                 {/* -----------Large Screen Navbar----------------- */}
                 {windowWidth >= 1024 ?
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<div></div>}>
                         <LargeNavbar activeItem={activeItem} />
                     </Suspense> : ""}
 
