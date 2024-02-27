@@ -9,7 +9,7 @@ import { info } from "./components/file";
 const card = () => {
     return (
         <div className='flex flex-col min-h-screen bg-white'>
-            <Navbar />
+            <Navbar item="Blogs"/>
             <div className="max-w-5xl mx-auto px-8">
             <h1 className="text-center text-4xl font-bold my-8 text-dark-silver">Learn More about us</h1>
                 <HoverEffect items={info} />

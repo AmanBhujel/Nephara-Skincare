@@ -3,7 +3,7 @@ import React from 'react';
 import Nurse from '@/assets/WhoWeAre.png'
 import Image from "next/image";
 import { useScroll, useTransform, motion } from 'framer-motion';
-import img64 from '@/assets/base64';
+import img64 from '@/data/base64';
 
 const WhoWeAre = () => {
     const { scrollYProgress } = useScroll();

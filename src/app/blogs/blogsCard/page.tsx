@@ -9,7 +9,7 @@ import { items } from "../components/blogsData";
 const card = () => {
     return (
         <div className='flex flex-col min-h-screen bg-white'>
-            <Navbar />
+            <Navbar item="Blogs"/>
             <div style={{ marginBottom: '40px' }}></div>
             <BentoGrid className="max-w-6xl mx-auto md:auto-rows-[24rem]">
                 {items.map((item, i) => (
