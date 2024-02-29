@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 import { IoIosArrowBack } from "react-icons/io";
-import BlogImage from '@/assets/dr-uma.jpg'
+import BlogImage from '@/assets/beautiful-nurse.png'
 import { useLazyQuery } from '@apollo/client';
 import { useUserStore } from '@/stores/userStore';
 import { useLoadingStore } from '@/stores/LoadingStore';
@@ -48,7 +48,7 @@ const DoctorBlogPageContainer = () => {
                                 <p className='text-base sm:text-lg'>Back</p>
                             </div>
                             <h1 className='bg-[#f6f6f6] mt-10 text-[#868585] px-3 rounded-[12px]'>Online Dermatoplogist</h1>
-                            <p className='mt-4 text-2xl md:text-3xl font-medium w-full sm:w-[85%] md::w-[75%] xl:w-[52%] flex flex-wrap text-center '> Discover the Profound Expertise of Dr. Uma Keyal </p>
+                            <p className='mt-4 text-2xl md:text-3xl font-medium w-full sm:w-[85%] md::w-[75%] xl:w-[52%] flex flex-wrap text-center '> Discover the Profound Expertise of Dr. Sara </p>
                             <Image src={BlogImage} width={1200} height={700} alt='Skin-Appointment-Blog' className='w-full sm:w-[55%] border mt-4 rounded-[12px] h-[20rem] md:h-[40rem] object-cover' />
                             <div className='w-full h-auto bg-red flex flex-col lg:flex-row items-center lg:items-start mt-10 mb-10 justify-center'>
                                 <DoctorBlogNavigationBox />

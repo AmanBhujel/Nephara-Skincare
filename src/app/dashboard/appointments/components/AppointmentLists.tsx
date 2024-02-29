@@ -8,6 +8,7 @@ import Alphabet from '@/assets/alphabet.png';
 import Link from 'next/link';
 import { useLoadingStore } from "@/stores/LoadingStore";
 import { MdOutlineComputer } from "react-icons/md";
+import SidebarImage from '@/assets/SidebarImage-.png';
 
 
 const AppointmentLists = () => {
@@ -46,7 +47,23 @@ const AppointmentLists = () => {
     return (
         <div className={`w-[90%] lg:w-96 h-auto mb-24 lg:mb-0 mt-4 lg:mt-0 lg:max-h-[650px] gap-y-5 lg:flex flex-col overflow-auto no-scrollbar ${appointmentSelected ? "hidden" : "flex"}`}>
             {filteredAppointments.length === 0 ? (
-                <p className="text-center text-gray-500 mt-6">No appointments found.</p>
+                <div>
+                    <p className="text-center text-gray-500 mt-6">No appointments found.</p>
+                    <div className='relative flex w-full justify-center items-center flex-col mt-6'>
+                            <Image src={SidebarImage} width={200} height={200} alt='Sidebar Image' className='z-20' />
+                            <div className='bg-[#f4f0fd] w-[85%] xl:w-[75%] h-48 mt-[-18px] z-10 rounded-[8px] flex flex-col items-center justify-center'>
+                                <p className='font-medium text-2xl'>Book Appointment</p>
+                                <p className='w-[95%] flex flex-wrap items-center justify-center text-center text-gray-600 mt-2'>
+                                    Start your skincare with a quick appointment.
+                                </p>
+                                <Link href={'/appointment'}>
+                                    <button className="bg-[#8f67e2] hover:bg-[#9c75e9] py-2 px-7 font-semibold text-white rounded-[8px] mt-5 transition-colors duration-300 ease-in-out transform hover:scale-105">
+                                        Book now
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
+                </div>
             ) : (
                 filteredAppointments.map((appointment, index) => (
                     windowWidth > 1024 && selectedAppointmentId === appointment._id ? (

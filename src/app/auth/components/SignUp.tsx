@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { validateEmail, validatePassword } from "./ValidateFunction";
-import { SIGNUP_USER } from "@/apollo_client/Mutation";
+import { LOGIN_USER, SIGNUP_USER } from "@/apollo_client/Mutation";
 
 interface AuthProps {
     setIsSignUpOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,6 +22,7 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
     const [passwordError, setPasswordError] = useState<string | null>(null);
     const router = useRouter();
     const setUserInfo = useUserStore((state) => state.setUserInfo);
+    const [loginUser] = useMutation(LOGIN_USER);
 
     const handleSignup = async () => {
         try {
@@ -61,6 +62,24 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
         }
     };
 
+    const handleSignInAsGuest = async () => {
+        const loginResponse = await loginUser({
+            variables: {
+                "email": "bhujelaman20@gmail.com",
+                "password": "amanamanaman"
+            }
+        });
+
+        const { status, message, token } = loginResponse.data.loginUser;
+        ToastMessage(status, message);
+        if (token) {
+            setCookie(604800, "token", `Bearer ${token}`)
+            window.location.reload();
+            router.replace('/dashboard/profile');
+        }
+
+    }
+
     return (
         <div className="w-full h-full flex items-start sm:items-center justify-start sm:justify-center " style={{ height: "100svh" }}>
             <div className="w-full lg:w-[50%] xl:w-[45%] 2xl:w-[40%] min-h-fit flex flex-col items-center lg:border rounded-[10px] lg:shadow-xl mt-10 sm:mt-0 justify-center">
@@ -72,11 +91,12 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
                         </span>
                     </p>
                     <p className="font-semibold text-2xl sm:text-4xl sm:mt-3 text-center">Your Journey to Clear Skin</p>
-                    <button className="w-full h-10 sm:h-12 text-sm sm:text-base mt-4 sm:mt-10 md:mt-14 border rounded-[7px] flex items-center justify-center shadow-lg hover:bg-purple-300 transition duration-200">
+                    <button className="w-full h-10 sm:h-12 text-sm sm:text-base mt-4 sm:mt-10 md:mt-14 border rounded-[7px] flex items-center justify-center shadow-lg hover:bg-purple-300 transition duration-200"
+                        onClick={handleSignInAsGuest}>
                         <i className="text-xl mr-4">
                             <FcGoogle />
                         </i>
-                        Sign up with Google
+                        Sign up as Guest
                     </button>
                     <p className="mt-3 sm:mt-6 mb-3 sm:mb-6 relative text-center">
                         <span className="absolute left-0 top-1/2 w-[40%] bg-gray-300 h-px transform -translate-y-1/2"></span>
@@ -149,3 +169,4 @@ export const Signup: React.FC<AuthProps> = ({ setIsSignUpOpen }) => {
 
     );
 };
+

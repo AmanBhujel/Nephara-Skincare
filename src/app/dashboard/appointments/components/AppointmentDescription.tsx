@@ -6,7 +6,7 @@ import { useLazyQuery } from "@apollo/client";
 import { IoArrowBack, } from "react-icons/io5";
 import Link from "next/link";
 import { GET_APPOINTMENT_IMAGES_BY_ID, GET_REPORT } from "@/apollo_client/Queries";
-import AppointmentTimer,{formatDate} from "./AppointmentTimer";
+import  {formatDate} from "./AppointmentTimer";
 
 export interface Appointment {
     _id: string;
@@ -153,13 +153,13 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                     </div>
                     {!appointmentData.completed ?
                         (<div className='bg-[#f1f1ff] mt-4 py-2 text-xl flex justify-between  items-center font-medium text-black px-4'>
-                            <AppointmentTimer
+                            {/* <AppointmentTimer
                                 appointmentDate={getLocalDate(appointmentData?.appointmentDate)?.toString()} 
                                 appointmentTime={getLocalTime(appointmentData?.appointmentTime)?.toString()}
-                            />
+                            /> */}
 
                             <a href={`http://localhost:8080/join?room=${appointmentData._id}&name=${appointmentData.fullName}`} target="_blank" rel="noopener noreferrer">
-                                <button className={`text-white px-4 py-1 md:px-8 md:py-2 bg-[#743bfb] hover:bg-[#753bfbde] rounded-[6px] font-bold text-lg mb-2  transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg`} >Join</button>
+                                <button className={`text-white px-4 py-1 md:px-8 md:py-2 bg-[#743bfb] hover:bg-[#753bfbde] rounded-[6px] font-bold text-lg mb-2  transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg`} >Join Room now</button>
                             </a>
                         </div>) :
                         (<div className='bg-[#f1f1ff] mt-4 py-2 text-xl flex justify-between  items-center font-medium text-black px-4'>

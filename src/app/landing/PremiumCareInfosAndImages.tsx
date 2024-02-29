@@ -2,8 +2,9 @@
 import React from 'react';
 import Image from "next/image";
 import Skincare from '@/assets/girl-cream.png';
-import Customer_Call from '@/assets/customer-service.jpg';
+import Customer_Call from '@/assets/people-discussing-43100673.png';
 import Doctor_Call from '@/assets/DoctorCall.png';
+
 const PremiumCareInfosAndImages = () => {
   return (
     <section className='max-w-screen'>

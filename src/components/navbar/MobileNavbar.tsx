@@ -28,7 +28,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
 
     const MenuItemsMobileSidebar = [
         { icon: <IoHomeOutline />, name: 'Home', route: "/" },
-        { icon: <FaMicroblog />, name: 'Blogs', route: "/blogs/doctor-uma-keyal" },
+        { icon: <FaMicroblog />, name: 'Blogs', route: "/blogs" },
         { icon: <MdOutlineDashboardCustomize />, name: 'Dashboard', route: "/dashboard/profile" },
         { icon: <IoSettingsOutline />, name: 'Settings', route: "/dashboard/settings" },
     ];

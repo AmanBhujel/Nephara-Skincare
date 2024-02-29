@@ -1,8 +1,8 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TimeZoneSelector from './components/TimeZoneSelector';
 import DatePickerDemo from '@/app/appointment/components/DatePicker';
-import { useMutation } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { Stripe, loadStripe } from '@stripe/stripe-js';
 import ToastMessage from '@/components/utils/ToastMessage';
 import { UseStripeStore } from '@/stores/StripeStore';
@@ -13,6 +13,12 @@ import Image from 'next/image';
 import { useUserStore } from '@/stores/userStore';
 import img64 from '@/data/base64';
 import { DateTime } from 'luxon'
+import { getUserInfo } from '@/components/utils/GetUserInfo';
+import { useAuthorizedStore } from '@/stores/AuthorizedStore';
+import { GET_USER_INFO } from '@/apollo_client/Queries';
+import { useRouter } from 'next/navigation';
+import { getCookie } from '@/components/utils/Cookie';
+import { useLoadingStore } from '@/stores/LoadingStore';
 
 const Page = () => {
     const [createAppointmentAndCheckoutSession] = useMutation(CREATE_APPOINTMENT_AND_STRIPE_SESSION);
@@ -27,7 +33,14 @@ const Page = () => {
     const userInfo = useUserStore((state) => state.userInfo);
     // --------for images---------
     const [images, setImages] = useState<File[]>([]);
-
+    const isAuthorized = useAuthorizedStore((state) => state.isAuthorized);
+    const setIsAuthorized = useAuthorizedStore((state) => state.setIsAuthorized);
+    const setUserInfo = useUserStore((state) => state.setUserInfo);
+    const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO, {
+        fetchPolicy: "no-cache"
+    });
+    const router = useRouter();
+    const setIsLoading = useLoadingStore((state) => state.setIsLoading);
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         const fileList: FileList | null = event.target.files;
         if (fileList) {
@@ -48,7 +61,7 @@ const Page = () => {
             }
             const selectedDateTime = DateTime.fromFormat(selectedTime, 'h:mm a', { zone: selectedTimeZone.valueOf() });
             const utcAppointmentTime = selectedDateTime.toUTC().toFormat('HH:mm');
-    
+
             const response = await createAppointmentAndCheckoutSession(
                 {
                     variables: {
@@ -60,8 +73,8 @@ const Page = () => {
                         "comment": comment,
                         "reasonForVisit": reason,
                         "allergies": allergies,
-                        "productName": "Dr Uma Keyal",
-                        "productPrice": 30000,
+                        "productName": "Dr Sara",
+                        "productPrice": 300,
                         "productImage": "https://imgs.search.brave.com/90kY2ne8nXXveKJC7OTzLJS_GUxXKhZlhKfpXf71rrE/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9w/aHlzaWNpYW4tcmV2/aWV3aW5nLWhpcy1u/b3Rlc18xMDk4LTU0/Mi5qcGc_c2l6ZT02/MjYmZXh0PWpwZw"
                     }
                 }
@@ -107,7 +120,55 @@ const Page = () => {
         } catch (error) {
             console.error('Error during the booking process:', error);
         }
-    }
+    };
+
+    useEffect(() => {
+        const token = getCookie("token")
+        let isMounted = true;
+
+        const getUserInfo = async () => {
+            try {
+                if (token) {
+                    if (!isAuthorized) {
+                        const response = await getUserInfoByToken();
+
+                        if (!isMounted) return;
+
+                        if (response.data) {
+                            const { status, message, user } = response.data.getUserInfoByToken;
+                            if (user) {
+                                setIsAuthorized(true)
+                                setUserInfo({ email: user.email || '', name: user.name || '', photo: user.photo || '', gender: user.gender || '', age: user.age || 0, city: user.city || '', country: user.country || '', phoneNumber: user.phoneNumber || '' })
+                                console.log("user info from profile", user)
+                            }
+                            if (status === 'error' && message === 'Unauthorized Token!') {
+                                router.replace('/auth')
+                                ToastMessage("error", "Authorization Denied")
+                                return;
+                            } else if (status === 'error' && message === 'Internal server error') {
+                                ToastMessage(status, message)
+                            }
+                        }
+                    }
+                }
+                else {
+                    router.replace('/auth')
+                    ToastMessage("error", "Log in required")
+                    return;
+                }
+                setIsLoading(false);
+            } catch (error) {
+                console.error("Error fetching user info:", error);
+            }
+        };
+        if (isMounted) {
+            getUserInfo();
+        }
+        return () => {
+            isMounted = false;
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className='w-full h-auto lg:h-screen flex justify-center bg-white'>

@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import { SlLogout } from "react-icons/sl";
 import SidebarImage from '@/assets/SidebarImage-.png';
@@ -7,6 +8,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import Logo from '@/assets/logo-sidebar.png';
 import Link from "next/link";
 import { HiMiniBars3BottomLeft } from "react-icons/hi2";
+import { useRouter } from "next/navigation";
 
 interface SidebarForLargeScreensProps {
     isSidebarOpen: boolean;
@@ -27,13 +29,14 @@ const SidebarForLargeScreens: React.FC<SidebarForLargeScreensProps> = ({
     handleSidebarItemClick,
     setIsSidebarOpen
 }) => {
+    const router = useRouter();
     return (
         <>
             {isSidebarOpen || windowWidth > 1281 ? (
                 <div ref={sidebarRef} className='h-full w-72 lg:fixed xl:static min-w-72 xl:w-80 xl:min-w-80 top-0 left-0 z-50 bg-white border-r-2'>
                     <div className='w-full h-full flex flex-col relative'>
                         <div className='w-full flex justify-center items-center mt-6'>
-                            <Image src={Logo} width={150} height={150} alt='Nephara' className='w-24  h-auto' />
+                            <Image src={Logo} width={150} height={150} alt='Nephara' className='w-24  h-auto cursor-pointer' onClick={() => router.push("/")} />
                         </div>
                         <ul className='w-full flex items-center justify-center flex-col mt-2 transition-all duration-500 ease-in-out'>
                             {[{ itemName: "Dashboard", link: "/dashboard/profile" }, { itemName: "Appointments", link: "/dashboard/appointments" }, { itemName: "Settings", link: "/dashboard/settings" }].map((item, index) => (

@@ -3,7 +3,7 @@ export const info = [
         title: "Meet Our Doctor",
         description:
             "She is a specialist in cosmetic skin care. She has been practicing her skin care for over 10 years.",
-        link: "/blogs/doctor-uma-keyal",
+        link: "/blogs/doctor-sara",
     },
     {
         title: "Affordable Online Skin Appointments",

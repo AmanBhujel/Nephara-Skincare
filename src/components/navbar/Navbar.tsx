@@ -21,30 +21,6 @@ const Navbar = ({ item }: { item: string }) => {
     const [activeItem, setActiveItem] = useState(item);
     const [showSidebar, setShowSidebar] = useState(false);
     const isAuthorized = useAuthorizedStore((state) => state.isAuthorized);
-    const setUserInfo = useUserStore((state) => state.setUserInfo);
-    const setIsAuthorized = useAuthorizedStore((state) => state.setIsAuthorized);
-
-    // const [getUserInfoByToken] = useLazyQuery(GET_USER_INFO, {
-    //     fetchPolicy: "no-cache"
-    // });
-
-    // useEffect(() => {
-    //     getUserInfo(isAuthorized, setIsAuthorized, getUserInfoByToken, setUserInfo);
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, []);
-
-    // useEffect(() => {
-    //     if (activeItem === 'FAQs') {
-    //         const timeoutId = setTimeout(() => {
-    //             const faqElement = document.getElementById("faq");
-    //             if (faqElement) {
-    //                 faqElement.scrollIntoView({ behavior: 'smooth' });
-    //             }
-    //         }, 200);
-
-    //         return () => clearTimeout(timeoutId);
-    //     }
-    // }, [activeItem]);
 
     useEffect(() => {
         const handleResize = () => {

@@ -138,7 +138,7 @@ const Page: NextPage<PageProps> = ({ params }) => {
     }, [])
 
     return (
-        <main className='w-full h-auto flex flex-col justify-center items-center bg-[#f6f8fc] relative'>
+        <main className='w-full h-auto min-h-screen flex flex-col  items-center bg-[#f6f8fc] relative'>
             {isLoading ?
                 <div className='w-full h-screen grid items-center'><Loader /> </div> :
                 <>

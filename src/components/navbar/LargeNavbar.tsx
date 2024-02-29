@@ -22,8 +22,8 @@ const LargeNavbar = ({ activeItem }: { activeItem: string }) => {
 
     const menuItems = [
         { name: 'Home', route: "/" },
-        { name: 'Blogs', route: "/blogs/doctor-uma-keyal" },
-        { name: 'FAQs', route: "#faq" },
+        { name: 'Blogs', route: "/blogs" },
+        // { name: 'FAQs', route: "#faq" },
         { name: 'Dashboard', route: "/dashboard/profile" },
     ];
 
