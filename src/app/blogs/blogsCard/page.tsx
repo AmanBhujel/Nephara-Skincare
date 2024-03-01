@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import React from "react";
 import Navbar from '@/components/navbar/Navbar';
 import Footer from '@/components/Footer';
@@ -8,7 +9,7 @@ import { items } from "../components/blogsData";
 const card = () => {
     return (
         <div className='flex flex-col min-h-screen bg-white'>
-            <Navbar item="Blogs"/>
+            <Navbar item="blog" />
             <div style={{ marginBottom: '40px' }}></div>
             <BentoGrid className="max-w-6xl mx-auto md:auto-rows-[24rem]">
                 {items.map((item, i) => (

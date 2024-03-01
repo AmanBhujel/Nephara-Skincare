@@ -158,7 +158,7 @@ const AppointmentDescription: React.FC<AppointmentInfoProps> = ({ appointmentDat
                                 appointmentTime={getLocalTime(appointmentData?.appointmentTime)?.toString()}
                             /> */}
 
-                            <a href={`http://localhost:8080/join?room=${appointmentData._id}&name=${appointmentData.fullName}`} target="_blank" rel="noopener noreferrer">
+                            <a href={`https://call.nephara.com/join?room=${appointmentData._id}&name=${appointmentData.fullName}`} target="_blank" rel="noopener noreferrer">
                                 <button className={`text-white px-4 py-1 md:px-8 md:py-2 bg-[#743bfb] hover:bg-[#753bfbde] rounded-[6px] font-bold text-lg mb-2  transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg`} >Join Room now</button>
                             </a>
                         </div>) :
